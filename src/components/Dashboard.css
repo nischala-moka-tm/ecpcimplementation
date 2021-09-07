@@ -23,7 +23,7 @@
 }
 
 .profile-card .row .info-card:not(:last-child) {
-  border-right: 1px solid #DEE2E8;
+  border-right: 1px #DEE2E8 solid;
   display: grid;
   font-size: 15px;
   padding: 0.75em 1.2em;
@@ -44,9 +44,14 @@
   padding: 0.75em 1.2em;
 }
 
-.profile-card .row .info-card .text-danger svg {
+.profile-card .row .info-card span {
   margin-top: 5px;
   margin-right: 5px;
+}
+
+.navbar-nav {
+  flex-direction: row;
+  display: contents;
 }
 
 .navbar {
@@ -58,14 +63,14 @@
   padding: 0;
 }
 
-.navbar-brand {
+.nav-link {
   display: inline-flex;
   width: 50%;
   margin: 0;
   padding: 1em;
 }
 
-.navbar-brand:focus {
+.nav-link.active {
   background-color: #E5E5E5;
   border-bottom: 2px solid #000;
 }
@@ -78,26 +83,99 @@
   background-color: #F1F1F1 !important;
 }
 
-.at-the-rate::after {
-  content: '\0040';
+.btn-group i::after {
+  content: "";
+  height: 20px;
+  width: 20px;
+  position: absolute;
+  left: 7px;
+  top: 7px;
+  background-size: 100% 100% !important;
 }
 
-.btn-check:active+.btn-danger, .btn-check:checked+.btn-danger, .btn-danger.active, .btn-danger:active, .show>.btn-danger.dropdown-toggle {
-  background-color: #000;
+.at-the-rate::after {
+  background: url('../assets/Group 268.svg');
+}
+
+.phone-icon::after {
+  background: url('../assets/Icon feather-phone-call.png');
+}
+
+.phone-icon-checked::after {
+  background: url('../assets/Icon feather-phone-call.png');
+}
+
+.at-the-rate-checked::after {
+  background: url('../assets/Icon simple-email.png');
+}
+
+.email-icon::after {
+  background: url('../assets/Group 264.svg');
+}
+
+.email-icon-checked::after {
+  background: url('../assets/Group 265.svg');
+}
+
+.msg-icon::after {
+  background: url('../assets/Icon material-textsms.png');
+}
+
+.msg-icon-checked::after {
+  background: url('../assets/Icon material-textsms.png');
+}
+
+.btn-check:active+.btn-dark, .btn-check:checked+.btn-dark, .btn-dark.active, .btn-dark:active, .show>.btn-dark.dropdown-toggle {
   outline: none;
-  border-color: #000;
   color: #fff;
   border-radius: 50%;
+  height: 35px;
+  width: 35px;
+  box-shadow: none;
 }
 
-.btn-check+.btn.btn-light {
+.btn-check+.btn.btn-light:not(.preferences) {
   border-radius: 50%;
   background-color: #dfdbdb;
+  width: 35px;
+  height: 35px;
+  box-shadow: none;
+}
+
+.btn-check+.btn.btn-light.preferences {
+  background-color: #dfdbdb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+}
+.options label {
+  padding-left: 20px;
+}
+.options .check-mark {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  content: url('../assets/Group 305.svg');
+  height: 11px;
+  width: 11px;
+}
+
+.edit-icon::after {
+  content: url('../assets/Icon feather-edit.svg');
+  height: 20px;
+  width: 20px;
+  position: relative;
+}
+
+.edit-mail.form-control {
+  display: inline;
 }
 
 .fontsmall {
   font-size: 0.7rem;
   font-weight: bold;
+  width: 100px;
 }
 
 .accordion-button:not(.collapsed) {
@@ -106,8 +184,8 @@
 
 .switch {
   position: relative;
-  width: 50px;
-  height: 25px;
+  width: 45px;
+  height: 23px;
   float: right;
 }
 
@@ -136,13 +214,14 @@
 .slider:before {
   position: absolute;
   content: "";
-  height: 21px;
+  height: 20px;
   width: 20px;
-  left: 2px;
   bottom: 2px;
-  background-color: white;
+  left: 2px;
+  background-color: #fff;
   -webkit-transition: .4s;
   transition: .4s;
+  border-radius: 50%;
 }
 
 input:checked+.slider {
@@ -161,43 +240,98 @@ input:checked+.slider:before {
 
 /* Rounded sliders */
 
-.slider.round {
+.slider {
   border-radius: 36px;
 }
 
-.slider.round:before {
+input:checked+.slider::before {
+  content: url('../assets/Group 305.svg');
   border-radius: 50%;
-  padding-left: 4px;
+  height: 18px;
+  width: 18px;
+  left: -1px;
+  top: 2px;
 }
 
-input:checked+.slider.round::before {
-  content: ' \2714';
-  color: #000;
-}
-
-input+.slider.round::before {
-  padding-left: 2px;
-  content: ' \2716';
-  color: #ccc;
+input+.slider::before {
+  color: #fff;
 }
 
 .plusmenu-danger {
-  width: auto;
-  height: auto;
-  padding: 0;
-  color: #000;
   cursor: pointer;
   border: none;
   border-radius: 50%;
+  padding-left: 20px;
 }
 
-.plusmenu-danger:focus {
-  color: #000;
+.plusmenu-danger i {
+  position: relative;
+}
+
+.plusmenu-danger .minus-checked::after {
+  content: "";
+  background: url('../assets/Group 162.svg');
+  width: 20px;
+  height: 22px;
+  position: absolute;
+  top: -18px;
+  left: -15px;
+  background-repeat: no-repeat;
+}
+
+.plusmenu-danger .plus-checked::after {
+  content: "";
+  background: url('../assets/Group 410.svg');
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: -18px;
+  left: -15px;
+  background-repeat: no-repeat;
+}
+
+.accordion .row .mail {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.accordion .row .mail .edit-icon {
+  padding-left: 15px;
 }
 
 .accordion-button::after {
-  background-image: url('../assets/toyota-FaChevron.svg') !important;
-  color: #000 !important;
+  content: none;
+}
+
+.accordion-button::before {
+  content: "";
+  background-image: url('../assets/Group 253.svg') !important;
+  color: #000;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-size: 100% 100%;
+}
+
+.accordion-button h5 {
+  padding-left: 40px;
+  padding-top: 8px;
+}
+
+.accordion-button:not(.collapsed)::before {
+  content: "";
+  background-image: url('../assets/Group 253.svg') !important;
+  color: #000;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-size: 100% 100%;
+  transform: rotate(180deg);
+}
+
+.accordion {
+  appearance: none;
 }
 
 .text-Color {
