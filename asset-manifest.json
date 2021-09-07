@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/ecpcimplementation/static/css/main.79d40d40.chunk.css",
+    "main.js": "/ecpcimplementation/static/js/main.bd9dc6d9.chunk.js",
+    "main.js.map": "/ecpcimplementation/static/js/main.bd9dc6d9.chunk.js.map",
+    "runtime-main.js": "/ecpcimplementation/static/js/runtime-main.8f60cc89.js",
+    "runtime-main.js.map": "/ecpcimplementation/static/js/runtime-main.8f60cc89.js.map",
+    "static/js/2.6b8202cd.chunk.js": "/ecpcimplementation/static/js/2.6b8202cd.chunk.js",
+    "static/js/2.6b8202cd.chunk.js.map": "/ecpcimplementation/static/js/2.6b8202cd.chunk.js.map",
+    "static/js/3.256e7860.chunk.js": "/ecpcimplementation/static/js/3.256e7860.chunk.js",
+    "static/js/3.256e7860.chunk.js.map": "/ecpcimplementation/static/js/3.256e7860.chunk.js.map",
+    "index.html": "/ecpcimplementation/index.html",
+    "static/css/main.79d40d40.chunk.css.map": "/ecpcimplementation/static/css/main.79d40d40.chunk.css.map",
+    "static/js/2.6b8202cd.chunk.js.LICENSE.txt": "/ecpcimplementation/static/js/2.6b8202cd.chunk.js.LICENSE.txt",
+    "static/media/Home.css": "/ecpcimplementation/static/media/Image 39.b48d00ee.svg",
+    "static/media/Dashboard.css": "/ecpcimplementation/static/media/toyota-FaChevron.b6e71f41.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.8f60cc89.js",
+    "static/js/2.6b8202cd.chunk.js",
+    "static/css/main.79d40d40.chunk.css",
+    "static/js/main.bd9dc6d9.chunk.js"
+  ]
+}
