@@ -15,7 +15,7 @@ function App() {
           <Route path="/home" component={Home}/>
           <Route path="/guest-details" component={UserForm}/>
           <Route path="/signin" component={SignIn}/>
-          <Route path="/dashboard" component={Dashboard}/>
+          <Route path="/ecpcimplementation" component={Dashboard}/>
         </Switch>
       </Router>
       );
