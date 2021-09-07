@@ -1,0 +1,160 @@
+.signin-container {
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    padding: 5em 5em;
+    ;
+}
+
+.legend-label {
+    position: absolute;
+    top: -13px;
+    left: 15px;
+    background: #ffff;
+    z-index: 30;
+    padding: 0 0.5em;
+}
+
+.signIn-sec {
+    position: relative;
+    padding: 5em;
+    border: 1px #cccaca solid;
+}
+
+label {
+    display: block;
+    width: 100%;
+    position: relative;
+    bottom: 7px;
+    font-weight: bold;
+    color: rgb(54, 53, 53);
+}
+
+.sec-left {
+    border-right: 1px #cccaca solid;
+    padding-right: 30px;
+    position: relative;
+}
+
+.sec-right {
+    padding-left: 30px;
+}
+
+.input-group {
+    margin: 0 0 3em 0;
+}
+
+.input-group .form-control {
+    height: 45px;
+    border: 2px #afaeae solid !important;
+    border-radius: 3px !important;
+}
+
+.sec-right div {
+    border: 2px #afaeae solid;
+    background-color: #fff;
+    margin: 1em 0;
+    padding: 0.4em;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-weight: bold;
+}
+
+.Sigin-btns {
+    border: none;
+    height: 45px;
+    width: 95px;
+    font-weight: bold;
+    font-size: 11px;
+    font-family: Segoe UI;
+}
+
+.Creat-acc {
+    color: #EB0A1E;
+    background-color: #fff;
+}
+
+.next-step {
+    color: #fff;
+    background: #D40511;
+    float: right;
+}
+
+.or-sep {
+    position: absolute;
+    top: 45%;
+    right: -9px;
+    padding: 7px 0;
+    background-color: #fff;
+}
+
+.signin-footer {
+    position: absolute;
+    left: 0;
+    bottom: 5px;
+    width: 100%;
+    display: flex;
+}
+
+.signin-footer-l, .signin-footer-r {
+    display: inline-grid;
+    width: 50%;
+}
+
+.signin-footer-l {
+    font-size: 0.6em;
+    justify-content: center;
+}
+
+.signin-footer-r {
+    font-size: 0.7em;
+    place-items: end;
+    align-items: flex-end;
+    justify-items: end;
+}
+
+.signin-footer-r .nav .nav-link {
+    font-weight: bold;
+    color: #000;
+    border-bottom: 1px #000 solid;
+    margin: 0.4em;
+    padding: 0;
+}
+
+@media (max-width:700px) {
+    .signin-container {
+        padding: 2em;
+    }
+    .signIn-sec {
+        height: 95%;
+        padding: 2em;
+    }
+    .sec-left {
+        border-right: 0;
+        border-bottom: 1px #cccaca solid;
+        padding: 20px 10px;
+    }
+    .sec-right {
+        padding: 20px 10px;
+    }
+    .or-sep {
+        position: absolute;
+        top: 94%;
+        right: 45%;
+        padding: 0 7px;
+        background-color: #fff;
+    }
+    .signin-footer {
+        position: relative;
+        display: inline;
+    }
+    .signin-footer-l {
+        width: 100%;
+        justify-content: left;
+    }
+    .signin-footer-r {
+        width: 100%;
+        display: grid;
+    }
+}

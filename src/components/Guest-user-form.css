@@ -1,0 +1,70 @@
+.jumbotron{ 
+    display: inline-grid;
+    justify-content: center;
+    text-align: left;
+    place-items: center;
+    box-shadow: 1px 1px 1px 1px rgba(182, 181, 181, 0.6);
+    padding: 0.8em 5em;
+}
+.jumbotron .form-container{
+    display: grid;
+    width:600px;
+    text-align: left;
+    box-shadow: none;
+    border:none;
+    background:none;
+}
+.heading{
+    position: relative;
+    top:10px;
+    font-weight: bold;
+}
+.jumbotron label{
+    position: relative;
+    display: inline;
+    padding:0 0.4em;
+    bottom:-10px;
+    left:0.6em;
+    background-color: #fff;
+    font-size:0.75em;
+}
+.jumbotron label sup{
+    position: relative;
+    color:#FF0017;
+}
+.jumbotron .form-control{
+    border:1px #000 solid;
+    border-radius: 1px;
+    margin-bottom: 0px;
+}
+.btn-danger-submit{
+    background-color: #EB0A1E ;
+    color:#fff;
+    border-radius: 1px;
+    float:right;
+    margin-top:0.5em;
+}
+.btn-danger-submit:hover{
+    color:#fff;
+}
+
+.btn-danger-submit:focus{
+    outline: none;
+    border:none;
+}
+.text-disclaimer{
+    font-size:0.9em; 
+    display: inline;
+    justify-self: center;
+    text-align: center;
+    padding-top:.9em;
+}
+@media (max-width:500px) {
+    .jumbotron .form-container{
+        width:95%;
+        margin:5px 0;
+    }
+    .jumbotron{
+        padding:0.2em 1em;
+    }
+}

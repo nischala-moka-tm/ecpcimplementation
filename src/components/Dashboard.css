@@ -1,0 +1,224 @@
+.container {
+  padding: 0.3em 13em;
+  height: 100%;
+}
+
+.dashboard-container {
+  padding: 3rem;
+}
+
+.profile-card {
+  border: 1px #DEE2E8 solid;
+  padding: .5em;
+  box-sizing: border-box;
+}
+
+.profile-card h6 {
+  position: relative;
+  top: -20px;
+  left: 5px;
+  padding: 0 1em;
+  display: inline;
+  background-color: #fff;
+}
+
+.profile-card .row .info-card:not(:last-child) {
+  border-right: 1px solid #DEE2E8;
+  display: grid;
+  font-size: 15px;
+  padding: 0.75em 1.2em;
+  line-height: 15px;
+  margin: 5px;
+}
+
+@media (min-width: 700px) {
+  .profile-card .row .info-card:not(:last-child) {
+    margin: 0px;
+    line-height: 25px;
+  }
+}
+
+.profile-card .row .info-card:last-child {
+  display: flex;
+  font-size: 15px;
+  padding: 0.75em 1.2em;
+}
+
+.profile-card .row .info-card .text-danger svg {
+  margin-top: 5px;
+  margin-right: 5px;
+}
+
+.navbar {
+  border: 1px #DEE2E8 solid;
+  margin-top: 2em;
+  background-color: #F1F1F1;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 0;
+}
+
+.navbar-brand {
+  display: inline-flex;
+  width: 50%;
+  margin: 0;
+  padding: 1em;
+}
+
+.navbar-brand:focus {
+  background-color: #E5E5E5;
+  border-bottom: 2px solid #000;
+}
+
+.accordion {
+  margin-top: 2em;
+}
+
+.accordion .accordion-button {
+  background-color: #F1F1F1 !important;
+}
+
+.at-the-rate::after {
+  content: '\0040';
+}
+
+.btn-check:active+.btn-danger, .btn-check:checked+.btn-danger, .btn-danger.active, .btn-danger:active, .show>.btn-danger.dropdown-toggle {
+  background-color: #000;
+  outline: none;
+  border-color: #000;
+  color: #fff;
+  border-radius: 50%;
+}
+
+.btn-check+.btn.btn-light {
+  border-radius: 50%;
+  background-color: #dfdbdb;
+}
+
+.fontsmall {
+  font-size: 0.7rem;
+  font-weight: bold;
+}
+
+.accordion-button:not(.collapsed) {
+  color: #000;
+}
+
+.switch {
+  position: relative;
+  width: 50px;
+  height: 25px;
+  float: right;
+}
+
+/* Hide default HTML checkbox */
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 21px;
+  width: 20px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked+.slider {
+  background-color: #000;
+}
+
+input:focus+.slider {
+  box-shadow: 0 0 1px #000;
+}
+
+input:checked+.slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+
+.slider.round {
+  border-radius: 36px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+  padding-left: 4px;
+}
+
+input:checked+.slider.round::before {
+  content: ' \2714';
+  color: #000;
+}
+
+input+.slider.round::before {
+  padding-left: 2px;
+  content: ' \2716';
+  color: #ccc;
+}
+
+.plusmenu-danger {
+  width: auto;
+  height: auto;
+  padding: 0;
+  color: #000;
+  cursor: pointer;
+  border: none;
+  border-radius: 50%;
+}
+
+.plusmenu-danger:focus {
+  color: #000;
+}
+
+.accordion-button::after {
+  background-image: url('../assets/toyota-FaChevron.svg') !important;
+  color: #000 !important;
+}
+
+.text-Color {
+  color: #000;
+}
+
+.bg-Color {
+  background-color: #000;
+  border-color: #000;
+}
+
+@media (max-width:700px) {
+  .profile-card .row .info-card {
+    width: 40%;
+    font-size: 11px !important;
+  }
+  .profile-card .row .info-card:nth-child(even) {
+    width: 50%;
+    border-right: none;
+  }
+  .dashboard-container {
+    padding: 1em;
+  }
+}

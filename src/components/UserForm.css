@@ -1,0 +1,192 @@
+.userform-header {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    padding: 2rem;
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    z-index: 10;
+}
+
+.userform-body {
+    display: grid;
+    justify-content: center;
+    place-items: center;
+    border: 1px solid #dee2e6 !important;
+    margin: 1em 13em;
+    padding: 2em 10em;
+}
+
+.disclaimer {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+.text-red {
+    color: #ee1b0c;
+}
+
+h2 {
+    text-align: left;
+    font-weight: 500;
+    width: 100%;
+}
+
+sup {
+    color: #ee1b0c;
+    position: relative;
+    left: -5px;
+    font-weight: bold;
+}
+
+label {
+    display: block;
+    font-size: 0.8rem;
+    padding: 0.4rem 0rem;
+}
+
+.block {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.block .form-group {
+    display: inline-block;
+    width: 50%;
+}
+
+.form-group.address {
+    display: block;
+    width: 100%;
+}
+
+.form-group.address .form-control {
+    width: 95%;
+}
+
+.form-control {
+    border: 1px solid #dee2e6 !important;
+    height: 35px;
+    outline: none;
+    padding: 2px 5px;
+    width: 92%;
+}
+
+.form-control:focus {
+    background-color: #f2f2f3;
+}
+
+select[name="salutation"] {
+    width: auto;
+}
+
+.userform-footer {
+    padding: 0.7em 0.2em;
+    font-weight: 500;
+    margin: 1em 3em;
+    padding: 2em 10em;
+}
+
+.footer-right, .footer-left {
+    font-size: 0.55em;
+    display: inline-block;
+    width: 50%;
+}
+
+.footer-left {
+    text-align: left;
+}
+
+.footer-right {
+    text-align: right;
+}
+
+@media (max-width:500px) {
+    .form-control {
+        display: block;
+        width: 100%;
+    }
+    .block .form-group {
+        display: block;
+        width: 100%;
+    }
+    .userform-body {
+        margin: 2em;
+        padding: 2em 2em;
+        display: grid;
+        place-items: center;
+    }
+    .form-control {
+        width: 95%;
+    }
+    .userform-footer {
+        margin: 0;
+        padding: 1em;
+    }
+}
+
+.btn-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2em;
+}
+
+.btn {
+    width: 100px;
+    padding: 10px 5px;
+    border-radius: 20px;
+    margin: 5px;
+    border: 1px rgba(245, 7, 58, 0.897) solid;
+    cursor: pointer;
+}
+
+.btn-cancel {
+    color: rgba(245, 7, 58, 0.897);
+    background-color: #fff;
+}
+
+.btn-submit {
+    color: #fff;
+    background-color: rgba(235, 8, 19, 0.89);
+}
+
+.dropdown select {
+    appearance: none;
+}
+
+.dropdown, .dropdown-salutation {
+    position: relative;
+}
+
+.dropdown::after {
+    position: absolute;
+    top: 5px;
+    right: 30px;
+    color: #ee1b0c;
+    content: "\25BC";
+}
+
+.dropdown-salutation select {
+    appearance: none;
+    padding: 5px 20px 5px 5px;
+}
+
+.dropdown-salutation {
+    width: inherit;
+}
+
+.dropdown-salutation::after {
+    position: absolute;
+    top: 6px;
+    left: 34px;
+    color: #ee1b0c;
+    content: "\25BC";
+}

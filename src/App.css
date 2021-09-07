@@ -1,0 +1,52 @@
+.home {
+  height: 100vh;
+}
+
+.header, .footer {
+  padding: 1em 3em;
+}
+
+.header {
+  box-shadow: .2px .2px 4px 0.5px #a5a4a4;
+}
+
+.logo {
+  height: 2em;
+  content: url('./assets/Group 1.png');
+}
+
+.footer {
+  font-size: 0.8rem;
+  font-weight: bold;
+  font-family: Calibri, sans-serif;
+  /* ToyotaType-Regular */
+  color: #707070;
+  background-color: #ffffff;
+  margin-bottom: 0px;
+  height: auto;
+}
+
+.footer p sup {
+  color: #707070;
+  font-family: Calibri, sans-serif;
+  /* ToyotaType-Regular */
+}
+
+.footer p {
+  margin: 1em 0;
+}
+
+.footer-r {
+  width: fit-content;
+  float: right;
+}
+
+.text-red {
+  color: #D40511;
+}
+
+@media (max-width:500px) {
+  .header {
+    padding: 1em 2em;
+  }
+}

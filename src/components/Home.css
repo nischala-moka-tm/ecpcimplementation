@@ -1,0 +1,100 @@
+.user-logo {
+  padding: 1em;
+}
+
+.user-logo::after {
+  content: url('../assets/Group 419.svg');
+}
+
+.home-body {
+  display: grid;
+  justify-content: flex-end;
+  background-image: url('../assets/Image 39.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  padding: 0 5em;
+}
+
+.Card {
+  width: 380px;
+  box-shadow: 0px 3px 6px #00000029;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 1.5em 2.5em;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 3em;
+  box-sizing: border-box;
+}
+
+.logo-container {
+  place-items: center;
+  display: grid;
+  padding: 1em;
+}
+
+.Signin-btn, .Guest-btn {
+  height: 50px;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  margin: 2em 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  /*normal normal bold 16px/16px ToyotaType-Bold */
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 1px;
+  text-decoration: none;
+}
+
+.Signin-btn:hover {
+  color: #fff;
+}
+
+.Guest-btn:hover {
+  color: #000;
+}
+
+.Guest-btn {
+  border: 1px solid #707070;
+  color: #000;
+}
+
+.Signin-btn {
+  background: #D40511 0% 0% no-repeat padding-box;
+  border: none;
+  color: #fff;
+}
+
+.or-seperation {
+  place-items: center;
+  display: flex;
+  padding: 5px 0px 2px 0px;
+}
+
+.or-seperation hr {
+  width: 43%;
+  background-color: #707070;
+}
+
+.or-seperation>span {
+  color: #707070;
+  font-size: 24px;
+  width: 14%;
+}
+
+@media (max-width:500px) {
+  .home-body {
+    display: grid;
+    place-items: center;
+  }
+  .footer-r {
+    float: left;
+  }
+  .Card {
+    width: 320px;
+  }
+}
