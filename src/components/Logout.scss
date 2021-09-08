@@ -1,12 +1,15 @@
 $breakpoint-tablet: 768px;
+
 .logout {
   p {
     cursor: pointer;
     margin-bottom: 0;
     text-align: center;
+
     @media (min-width: $breakpoint-tablet) {
       text-align: right;
     }
+
     img {
       @media (min-width: $breakpoint-tablet) {
         padding-left: 15px;

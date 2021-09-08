@@ -3,30 +3,36 @@ $breakpoint-tablet: 768px;
 .profile-exists {
   .modal-dialog {
     max-width: 700px;
+
     .modal-header,
     .modal-footer {
       border: none;
     }
+
     .modal-body {
       text-align: center;
       padding: 0 1rem;
 
       p {
         margin-bottom: 0;
+
         &.box {
           border: 1px solid #707070;
           font-size: 22px;
           line-height: 25px;
           padding: 0.73rem;
+
           &.txt-box {
             color: #000;
             background: #f7f7f7 0% 0% no-repeat padding-box;
           }
+
           &.dark-box {
             color: #fff;
             background: #58595b 0% 0% no-repeat padding-box;
             border: 1px solid #707070;
             position: relative;
+
             &::before {
               content: "";
               background: url("../assets/Group 305.svg");
@@ -36,9 +42,10 @@ $breakpoint-tablet: 768px;
               top: 14px;
               position: absolute;
               background-size: 100% 100%;
+
               @media (min-width: $breakpoint-tablet) {
                 left: 17%;
-            }
+              }
             }
           }
         }
@@ -64,31 +71,37 @@ $breakpoint-tablet: 768px;
           }
         }
       }
+
       .multi-options {
         margin: 30px auto 10px;
         max-width: 300px;
+
         .btn-group {
           display: flex;
           flex-direction: column;
         }
+
         .row {
           label {
             i {
               font-size: 14px;
               line-height: 19px;
             }
+
             &.btn-light {
               background: #f7f7f7 0% 0% no-repeat padding-box;
               border: 1px solid #707070;
               box-shadow: none;
               border-radius: 0;
             }
+
             &.btn-dark {
               background: #58595b 0% 0% no-repeat padding-box;
               border: 1px solid #707070;
               box-shadow: none;
               border-radius: 0;
               position: relative;
+
               &::before {
                 content: "";
                 background: url("../assets/Group 305.svg");
@@ -104,17 +117,21 @@ $breakpoint-tablet: 768px;
         }
       }
     }
+
     .modal-footer {
       justify-content: center;
+
       button {
         font-size: 18px;
         line-height: 24px;
         max-width: 170px;
         width: 170px;
+
         &.btn-primary {
           background: #000;
           color: #fff;
         }
+
         &.btn-secondary {
           background: #f7f7f7 0% 0% no-repeat padding-box;
           color: #000;
