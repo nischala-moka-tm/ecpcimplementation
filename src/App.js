@@ -5,6 +5,7 @@ import Home from './components/Home'
 import UserForm from './components/Guest-user-form'
 import SignIn from './components/SignIn';
 import Dashboard from './components/Dashboard';
+import ProfileAlreadyExists from './components/ProfileAlreadyExists';
 function App() {
   return (
       <Router>
@@ -16,6 +17,7 @@ function App() {
           <Route path="/guest-details" component={UserForm}/>
           <Route path="/signin" component={SignIn}/>
           <Route path="/ecpcimplementation" component={Dashboard}/>
+          <Route path="/myprofile" component={ProfileAlreadyExists}/>
         </Switch>
       </Router>
       );

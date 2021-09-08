@@ -125,7 +125,11 @@
   background: url('../assets/Icon material-textsms.png');
 }
 
-.btn-check:active+.btn-dark, .btn-check:checked+.btn-dark, .btn-dark.active, .btn-dark:active, .show>.btn-dark.dropdown-toggle {
+.dashboard-container .btn-check:active+.btn-dark,
+.dashboard-container .btn-check:checked+.btn-dark, 
+.dashboard-container .btn-dark.active, 
+.dashboard-container .btn-dark:active, 
+.dashboard-container .show>.btn-dark.dropdown-toggle {
   outline: none;
   color: #fff;
   border-radius: 50%;
@@ -134,7 +138,7 @@
   box-shadow: none;
 }
 
-.btn-check+.btn.btn-light:not(.preferences) {
+.dashboard-container .btn-check+.btn.btn-light:not(.preferences) {
   border-radius: 50%;
   background-color: #dfdbdb;
   width: 35px;
@@ -142,16 +146,18 @@
   box-shadow: none;
 }
 
-.btn-check+.btn.btn-light.preferences {
+.dashboard-container .btn-check+.btn.btn-light.preferences {
   background-color: #dfdbdb;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100px;
 }
+
 .options label {
   padding-left: 20px;
 }
+
 .options .check-mark {
   position: absolute;
   top: 8px;
