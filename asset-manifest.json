@@ -1,24 +1,26 @@
 {
   "files": {
-    "main.css": "/ecpcimplementation/static/css/main.f8fe2f8f.chunk.css",
-    "main.js": "/ecpcimplementation/static/js/main.40f501a2.chunk.js",
-    "main.js.map": "/ecpcimplementation/static/js/main.40f501a2.chunk.js.map",
-    "runtime-main.js": "/ecpcimplementation/static/js/runtime-main.d6258def.js",
-    "runtime-main.js.map": "/ecpcimplementation/static/js/runtime-main.d6258def.js.map",
-    "static/js/2.02a2b9f2.chunk.js": "/ecpcimplementation/static/js/2.02a2b9f2.chunk.js",
-    "static/js/2.02a2b9f2.chunk.js.map": "/ecpcimplementation/static/js/2.02a2b9f2.chunk.js.map",
-    "static/js/3.097d6ca8.chunk.js": "/ecpcimplementation/static/js/3.097d6ca8.chunk.js",
-    "static/js/3.097d6ca8.chunk.js.map": "/ecpcimplementation/static/js/3.097d6ca8.chunk.js.map",
+    "main.css": "/ecpcimplementation/static/css/main.39026a6f.chunk.css",
+    "main.js": "/ecpcimplementation/static/js/main.daacfd1f.chunk.js",
+    "main.js.map": "/ecpcimplementation/static/js/main.daacfd1f.chunk.js.map",
+    "runtime-main.js": "/ecpcimplementation/static/js/runtime-main.30664347.js",
+    "runtime-main.js.map": "/ecpcimplementation/static/js/runtime-main.30664347.js.map",
+    "static/js/2.c01aa219.chunk.js": "/ecpcimplementation/static/js/2.c01aa219.chunk.js",
+    "static/js/2.c01aa219.chunk.js.map": "/ecpcimplementation/static/js/2.c01aa219.chunk.js.map",
+    "static/js/3.a6cd48ad.chunk.js": "/ecpcimplementation/static/js/3.a6cd48ad.chunk.js",
+    "static/js/3.a6cd48ad.chunk.js.map": "/ecpcimplementation/static/js/3.a6cd48ad.chunk.js.map",
     "index.html": "/ecpcimplementation/index.html",
-    "static/css/main.f8fe2f8f.chunk.css.map": "/ecpcimplementation/static/css/main.f8fe2f8f.chunk.css.map",
-    "static/js/2.02a2b9f2.chunk.js.LICENSE.txt": "/ecpcimplementation/static/js/2.02a2b9f2.chunk.js.LICENSE.txt",
-    "static/media/Dashboard.css": "/ecpcimplementation/static/media/Icon feather-edit.4f0ea686.svg",
-    "static/media/Home.css": "/ecpcimplementation/static/media/Image 39.b48d00ee.svg"
+    "static/css/main.39026a6f.chunk.css.map": "/ecpcimplementation/static/css/main.39026a6f.chunk.css.map",
+    "static/js/2.c01aa219.chunk.js.LICENSE.txt": "/ecpcimplementation/static/js/2.c01aa219.chunk.js.LICENSE.txt",
+    "static/media/Dashboard.scss": "/ecpcimplementation/static/media/Icon feather-edit.bcbb855b.svg",
+    "static/media/ProfileAlreadyExists.scss": "/ecpcimplementation/static/media/Group 305.1ac8c5f8.svg",
+    "static/media/Home.css": "/ecpcimplementation/static/media/Image 39.cc1f2457.svg",
+    "static/media/logout.cd2727b8.svg": "/ecpcimplementation/static/media/logout.cd2727b8.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.d6258def.js",
-    "static/js/2.02a2b9f2.chunk.js",
-    "static/css/main.f8fe2f8f.chunk.css",
-    "static/js/main.40f501a2.chunk.js"
+    "static/js/runtime-main.30664347.js",
+    "static/js/2.c01aa219.chunk.js",
+    "static/css/main.39026a6f.chunk.css",
+    "static/js/main.daacfd1f.chunk.js"
   ]
 }
