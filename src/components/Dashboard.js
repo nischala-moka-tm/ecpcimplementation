@@ -288,7 +288,7 @@ const ForVehicleofInterest = () => {
           </Col>
         </Row>
       </ToggleButtonGroup>
-      <Container fluid>
+      <Container fluid className="car-preferences">
         {checkedStates.map((car, index) => {
           return (
             <Row key={index}>
