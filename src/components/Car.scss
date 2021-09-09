@@ -6,9 +6,10 @@ $breakpoint-tablet: 768px;
   }
 
   label {
+    pointer-events: none;
+
     &.preferences {
       max-width: max-content;
-      padding-left: 25px;
 
       i {
         &.check-mark {
@@ -16,13 +17,17 @@ $breakpoint-tablet: 768px;
           left: 8px !important;
         }
       }
+
+      &.btn-secondary {
+        margin-left: 10px;
+      }
     }
   }
 
   .Car-Card {
-    position: relative;
-    padding: 1em;
+    padding: 0.5em;
     display: inline-block;
+    margin: 10px;
 
     .car-img {
       display: grid;
@@ -33,6 +38,16 @@ $breakpoint-tablet: 768px;
     h6 {
       width: 100%;
       text-align: center;
+    }
+
+    &.not-selected {
+      background: #FFFFFF 0% 0% no-repeat padding-box;
+      border: 1px solid #DEE2E8;
+    }
+
+    &.selected {
+      background: #FFFFFF 0% 0% no-repeat padding-box;
+      border: 1px solid #000000;
     }
   }
 }

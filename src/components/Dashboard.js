@@ -11,14 +11,14 @@ import {
   Nav,
   Accordion,
   FormControl,
+  Button,
   ToggleButtonGroup,
   ToggleButton,
+  Dropdown,
 } from "react-bootstrap";
 import Header from "./Header";
 import Footer from "./Footer";
 const AccordionSelection = () => {
-  const [isCommnctonsVisible, setComunicationVisible] = useState(false);
-
   return (
     <Accordion>
       <Accordion.Item eventKey="0">
@@ -318,8 +318,8 @@ const ForVehicleofInterest = () => {
                       {...imgs}
                       isSelected={
                         checkedStates[index].images[imgindex].checked
-                          ? "border-solid"
-                          : "border"
+                          ? "selected"
+                          : "not-selected"
                       }
                       clickSelect={() =>
                         handleClickSelect(imgs.modelName, index, imgindex)
@@ -604,6 +604,51 @@ const RecallMessage = () => {
     </div>
   );
 };
+const ButtonSection = () => {
+  const [isCommnctonsVisible, setComunicationVisible] = useState(false);
+  return (
+    <div className="buttons-wrap">
+      <div className="button-options">
+        <Button variant="primary" size="sm">
+          Cancel
+        </Button>
+        <Button variant="secondary" size="sm">
+          Save
+        </Button>
+      </div>
+      <div className="manage-subscriptions">
+        <Button variant="primary" size="sm">
+          Privacy Hub
+        </Button>
+        <Button variant="secondary" size="sm">
+          Manage Telematics Subscriptions
+        </Button>
+      </div>
+      <div className="stop-notifications">
+        <p>Stop receiving all Toyota communications</p>
+        <Dropdown>
+          <Dropdown.Toggle variant="success" id="dropdown-basic">
+            Dropdown Button
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu>
+            <Dropdown.Item href="#">One Month</Dropdown.Item>
+            <Dropdown.Item href="#">One Quater</Dropdown.Item>
+            <Dropdown.Item href="#">One year</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+        <label className="switch">
+          <input
+            type="checkbox"
+            checked={isCommnctonsVisible}
+            onChange={(e) => setComunicationVisible(e.currentTarget.checked)}
+          />
+          <span className="slider"></span>
+        </label>
+      </div>
+    </div>
+  );
+};
 function Dashboard() {
   const root = document.documentElement;
 
@@ -625,6 +670,7 @@ function Dashboard() {
           </Nav>
         </Navbar>
         <AccordionSelection />
+        <ButtonSection />
       </Container>
       <Footer />
     </div>
