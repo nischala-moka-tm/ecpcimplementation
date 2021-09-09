@@ -194,6 +194,10 @@ $breakpoint-tablet: 768px;
 
         .btn-group {
           margin: 5px auto;
+
+          @media (max-width: $breakpoint-tablet) {
+            display: block;
+          }
         }
       }
     }
@@ -290,8 +294,11 @@ $breakpoint-tablet: 768px;
         display: flex;
         justify-content: center;
         align-items: center;
-        width: max-content;
         margin: 0 10px;
+
+        @media (min-width: $breakpoint-tablet) {
+          width: max-content;
+        }
 
         &:first-child {
           margin-left: 0;
@@ -330,9 +337,13 @@ $breakpoint-tablet: 768px;
         &.fontsmall {
           font-size: 0.7rem;
           font-weight: bold;
-          width: max-content;
           margin: 0 10px;
           box-shadow: none;
+          margin: 0 10px;
+
+          @media (min-width: $breakpoint-tablet) {
+            width: max-content;
+          }
 
           &:first-child {
             margin-left: 0;
