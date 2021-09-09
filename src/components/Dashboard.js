@@ -227,30 +227,32 @@ const ForVehicleofInterest = () => {
   useEffect(() => {
     setcheckedStates(carDetails);
   }, [checkedStates]);
-  const handleClickSelect = (pars, pos) => {
-    alert(pars);
-    // let updateitems =[...carDetails];
-    // console.log(updateitems);
-    // checkedStates.map((value,index) => {
-
-    //   if(index===pos){
-    //     checkedStates[index].ischecked=!checkedStates[index].ischecked;
-    //   }
-
-    // });
-
-    //setcheckedStates(updateitems);
-  };
-  const handleSelect = (position, event) => {
-    let updateitems = [...carDetails];
+  const handleClickSelect = (pars, pos, imgpos) => {
+    // alert(pars);
+    let updateitems = [...checkedStates];
     updateitems.map((value, index) => {
-      if (index === position) {
-        updateitems[index].checkedCategory = event.target.checked;
+      if (index === pos) {
+        updateitems[index].images[imgpos].checked =
+          !updateitems[index].images[imgpos].checked;
+      }
+      if (updateitems[index].images.some((d) => d.checked == true)) {
+        updateitems[index].checkedCategory = true;
+      } else {
+        updateitems[index].checkedCategory = false;
       }
     });
 
     setcheckedStates(updateitems);
-    console.log(checkedStates);
+  };
+  const handleSelect = (position, event) => {
+    // let updateitems = [...carDetails];
+    // updateitems.map((value,index) => {
+    //   if(index===position){
+    //     updateitems[index].checkedCategory=event.target.checked;
+    //   }
+    // });
+    // setcheckedStates(updateitems);
+    // console.log(checkedStates);
   };
   return (
     <div>
@@ -309,13 +311,18 @@ const ForVehicleofInterest = () => {
                 </ToggleButton>
               </Col>
               <Col md={12}>
-                {car.images.map((imgs, indexx) => {
+                {car.images.map((imgs, imgindex) => {
                   return (
                     <Car
-                      key={indexx}
+                      key={imgindex}
                       {...imgs}
+                      isSelected={
+                        checkedStates[index].images[imgindex].checked
+                          ? "border-solid"
+                          : "border"
+                      }
                       clickSelect={() =>
-                        handleClickSelect(imgs.modelName, indexx)
+                        handleClickSelect(imgs.modelName, index, imgindex)
                       }
                     />
                   );
@@ -356,10 +363,10 @@ const ForPreferences = () => {
 const ForLifeStyle = () => {
   const [submail, setsubmail] = useState(false);
   const [subpost, setsubpost] = useState(false);
-
   const [lsopt1, setlsopt1] = useState(false);
   const [lsopt2, setlsopt2] = useState(false);
   const [selectedAll, setSelectAll] = useState(false);
+
   const handleSelectAll = () => {
     setSelectAll(!selectedAll);
     setlsopt1(!selectedAll);

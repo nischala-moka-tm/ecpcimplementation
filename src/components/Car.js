@@ -1,5 +1,5 @@
 import React from "react";
-import "../components/Car.css";
+import "../components/Car.scss";
 function Car(props) {
   return (
     <span
