@@ -1,11 +1,8 @@
 $breakpoint-tablet: 768px;
 
 .dashboard-container {
-  padding: 3em;
+  padding: 1em;
 
-  @media (min-width: $breakpoint-tablet) {
-    padding: 1rem;
-  }
 
   .profile-card {
     border: 1px #dee2e8 solid;
@@ -27,6 +24,11 @@ $breakpoint-tablet: 768px;
 
     .row {
       .info-card {
+        .text-danger {
+          color: #000 !important;
+          padding-right: 10px;
+        }
+
         &:not(:last-child) {
           border-right: 1px #dee2e8 solid;
           display: grid;
@@ -37,7 +39,7 @@ $breakpoint-tablet: 768px;
 
           @media (min-width: 700px) {
             margin: 0px;
-            line-height: 25px;
+            line-height: 19px;
           }
         }
 
@@ -48,8 +50,10 @@ $breakpoint-tablet: 768px;
         }
 
         span {
-          margin-top: 5px;
-          margin-right: 5px;
+          @media (max-width: 700px) {
+            margin-top: 5px;
+            margin-right: 5px;
+          }
         }
 
         @media (max-width: 700px) {
@@ -61,7 +65,46 @@ $breakpoint-tablet: 768px;
             border-right: none;
           }
         }
+
+        i {
+          &.edit-icon {
+            background: url("../assets/Icon feather-edit.svg");
+            height: 25px;
+            width: 25px;
+            position: relative;
+            right: 0px;
+            top: -35px;
+            background-size: 100% 100%;
+            cursor: pointer;
+          }
+        }
       }
+    }
+  }
+
+  .recall-message {
+    .accordion {
+      .accordion-body {
+        p {
+          position: relative;
+          padding-left: 80px;
+          margin-bottom: 0;
+
+          &::before {
+            content: "";
+            background-image: url("../assets/Icon ionic-ios-information-circle.svg");
+            width: 25px;
+            height: 25px;
+            position: absolute;
+            top: -2px;
+            left: 45px;
+            background-size: 100% 100%;
+          }
+        }
+
+      }
+
+
     }
   }
 
@@ -127,13 +170,38 @@ $breakpoint-tablet: 768px;
         background-size: 100% 100%;
       }
 
-      h5 {
+      h5,
+      p {
         padding-left: 40px;
-        padding-top: 8px;
+        margin-bottom: 0;
+      }
+    }
+
+    .accordion-body {
+      .market-heading {
+        padding-left: 40px;
+      }
+
+      .market-communication {
+        padding-left: 15px;
+
+        .btn-selectAll {
+          border: none;
+          background: none;
+          color: #0C31E9;
+          font-size: 14px;
+          line-height: 19px;
+        }
+
+        .btn-group {
+          margin: 5px auto;
+        }
       }
     }
 
     .btn-group {
+      margin: 15px auto;
+
       i {
         &::after {
           content: "";
@@ -224,6 +292,11 @@ $breakpoint-tablet: 768px;
         justify-content: center;
         align-items: center;
         width: max-content;
+        margin: 0 10px;
+
+        &:first-child {
+          margin-left: 0;
+        }
       }
     }
 
@@ -235,6 +308,7 @@ $breakpoint-tablet: 768px;
       i {
         &.edit-icon {
           padding-left: 15px;
+          cursor: pointer;
 
           &::after {
             content: url("../assets/Icon feather-edit.svg");
@@ -254,22 +328,31 @@ $breakpoint-tablet: 768px;
 
     .options {
       label {
-        padding-left: 20px;
-
         &.fontsmall {
           font-size: 0.7rem;
           font-weight: bold;
           width: max-content;
+          margin: 0 10px;
+          box-shadow: none;
+
+          &:first-child {
+            margin-left: 0;
+          }
+
+          &:focus {
+            box-shadow: none;
+          }
         }
       }
 
       .check-mark {
-        position: absolute;
-        top: 8px;
-        left: 8px;
-        content: url("../assets/Group 305.svg");
-        height: 11px;
-        width: 11px;
+        content: "";
+        background: url("../assets/Group 305.svg");
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        background-size: 100% 100%;
+        margin-right: 5px;
       }
     }
 
@@ -286,13 +369,20 @@ $breakpoint-tablet: 768px;
         height: 0;
 
         &:checked {
-          +&.slider {
+          +.slider {
             background-color: #000;
 
             &::before {
+              content: url('../assets/Group 305.svg');
+              border-radius: 50%;
+              height: 18px;
+              width: 18px;
+              left: -1px;
+              top: 2px;
               -webkit-transform: translateX(26px);
               -ms-transform: translateX(26px);
               transform: translateX(26px);
+
             }
           }
         }

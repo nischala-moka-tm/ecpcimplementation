@@ -1,0 +1,38 @@
+$breakpoint-tablet: 768px;
+
+.car-preferences {
+  @media (max-width: $breakpoint-tablet) {
+    text-align: center;
+  }
+
+  label {
+    &.preferences {
+      max-width: max-content;
+      padding-left: 25px;
+
+      i {
+        &.check-mark {
+          top: 13px !important;
+          left: 8px !important;
+        }
+      }
+    }
+  }
+
+  .Car-Card {
+    position: relative;
+    padding: 1em;
+    display: inline-block;
+
+    .car-img {
+      display: grid;
+      width: 150px;
+      height: 60px;
+    }
+
+    h6 {
+      width: 100%;
+      text-align: center;
+    }
+  }
+}

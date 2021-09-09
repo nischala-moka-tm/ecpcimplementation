@@ -1,5 +1,8 @@
 import React, { useState } from "react";
+import Car from "./Car";
 import "./Dashboard.scss";
+import carDetails from "../Car-details";
+import { Route, Link } from "react-router-dom";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import {
   Row,
@@ -24,24 +27,13 @@ const AccordionSelection = () => {
           <h5>Marketing </h5>
         </Accordion.Header>
         <Accordion.Body>
-          <Row>
+          <Row className="market-heading">
             <Col>
               <h6>Would you like to receive marketing communications?</h6>
             </Col>
-            <Col>
-              <label className="switch">
-                <input
-                  type="checkbox"
-                  checked={isCommnctonsVisible}
-                  onChange={(e) =>
-                    setComunicationVisible(e.currentTarget.checked)
-                  }
-                />
-                <span className="slider"></span>
-              </label>
-            </Col>
           </Row>
-          {isCommnctonsVisible && <Communications />}
+
+          <Communications />
         </Accordion.Body>
       </Accordion.Item>
       <Accordion.Item eventKey="1">
@@ -81,6 +73,7 @@ const ProfileCard = () => {
             <FaMapMarkerAlt />{" "}
           </span>{" "}
           <span> 3002 carolwood LN Torrance, CA 90505-7110 </span>
+          <i class="edit-icon"></i>
         </Col>
       </Row>
     </div>
@@ -96,7 +89,7 @@ const Communications = () => {
   const [SubC3, setSubC3] = useState(false);
   const [SubC4, setSubC4] = useState(false);
   return (
-    <div>
+    <div className="market-communication">
       <Container fluid className="px-4">
         <ToggleButtonGroup type="checkbox">
           <Row>
@@ -228,19 +221,16 @@ const Communications = () => {
     </div>
   );
 };
-const ForPreferences = () => {
+const ForVehicleofInterest = () => {
   const [submail, setsubmail] = useState(false);
   const [subpost, setsubpost] = useState(false);
+  const [checkedStates, setcheckedState] = useState([]);
+
+  const handleClickSelect = (pars) => {
+    alert(pars);
+  };
   return (
-    <Container fluid>
-      <Navbar>
-        <Nav className="me-auto" defaultActiveKey="#VehicleofInterest">
-          <Nav.Link activeClassName="active" href="#VehicleofInterest">
-            Vehicle of Interest
-          </Nav.Link>
-          <Nav.Link href="#lifestyle">Life Style</Nav.Link>
-        </Nav>
-      </Navbar>
+    <div>
       <ToggleButtonGroup type="checkbox">
         <Row className="mt-2">
           <Col>
@@ -273,7 +263,139 @@ const ForPreferences = () => {
           </Col>
         </Row>
       </ToggleButtonGroup>
+      <Container fluid className="car-preferences">
+        {carDetails.map((car, index) => {
+          return (
+            <Row>
+              <Col md={12}>
+                <ToggleButton
+                  className="mt-2 fontsmall  options preferences"
+                  id={"vehicle-type-" + index}
+                  type="checkbox"
+                  variant={true ? "secondary" : "light"}
+                  checked={false}
+                  value={index}
+                >
+                  <i className="check-mark"></i> {car.category}
+                </ToggleButton>
+              </Col>
+              <Col md={12}>
+                {car.images.map((imgs) => (
+                  <Car
+                    {...imgs}
+                    clickSelect={() => handleClickSelect(imgs.modelName)}
+                  />
+                ))}
+              </Col>
+            </Row>
+          );
+        })}
+      </Container>
+    </div>
+  );
+};
+const ForPreferences = () => {
+  const [isinsteredIn, setinsteredIn] = useState(false);
+  return (
+    <Container fluid>
+      <Navbar>
+        <Nav className="me-auto" defaultActiveKey="#VehicleofInterest">
+          <Nav.Link
+            activeClassName="active"
+            href="#VehicleofInterest"
+            onClick={() => setinsteredIn(false)}
+          >
+            Vehicle of Interest
+          </Nav.Link>
+          <Nav.Link href="#lifestyle" onClick={() => setinsteredIn(true)}>
+            {" "}
+            Life Style{" "}
+          </Nav.Link>
+        </Nav>
+      </Navbar>
+      {isinsteredIn ? <ForLifeStyle /> : <ForVehicleofInterest />}
+
       <br />
+    </Container>
+  );
+};
+const ForLifeStyle = () => {
+  const [submail, setsubmail] = useState(false);
+  const [subpost, setsubpost] = useState(false);
+
+  const [lsopt1, setlsopt1] = useState(false);
+  const [lsopt2, setlsopt2] = useState(false);
+  const [selectedAll, setSelectAll] = useState(false);
+  const handleSelectAll = () => {
+    setSelectAll(!selectedAll);
+    setlsopt1(!selectedAll);
+    setlsopt2(!selectedAll);
+  };
+  return (
+    <Container fluid>
+      <ToggleButtonGroup type="checkbox">
+        <Row className="mt-2">
+          <Col>
+            <ToggleButton
+              className="mt-2"
+              id="toggle-check-submail"
+              type="checkbox"
+              variant={submail ? "dark" : "light"}
+              checked={submail}
+              value="1"
+              onChange={(e) => setsubmail(e.currentTarget.checked)}
+            >
+              <i
+                className={submail ? "at-the-rate-checked" : "at-the-rate"}
+              ></i>
+            </ToggleButton>
+          </Col>
+          <Col>
+            <ToggleButton
+              className="mt-2"
+              id="toggle-check-subpost"
+              type="checkbox"
+              variant={subpost ? "dark" : "light"}
+              checked={subpost}
+              value="1"
+              onChange={(e) => setsubpost(e.currentTarget.checked)}
+            >
+              <i className={subpost ? "email-icon-checked" : "email-icon"}></i>
+            </ToggleButton>
+          </Col>
+        </Row>
+      </ToggleButtonGroup>
+      <Container fluid>
+        <ToggleButtonGroup className="options" type="checkbox">
+          <ToggleButton
+            className="mt-2 fontsmall preferences"
+            id="toggle-check-ls-opt1"
+            type="checkbox"
+            variant={lsopt1 ? "secondary" : "light"}
+            checked={lsopt1}
+            value="1"
+            onChange={(e) => setlsopt1(e.currentTarget.checked)}
+          >
+            {lsopt1 && <i className="check-mark"></i>} Sports
+          </ToggleButton>
+
+          <ToggleButton
+            className="mt-2 fontsmall preferences"
+            id="toggle-check-ls-opt2"
+            type="checkbox"
+            variant={lsopt2 ? "secondary" : "light"}
+            checked={lsopt2}
+            value="2"
+            onChange={(e) => setlsopt2(e.currentTarget.checked)}
+          >
+            {lsopt2 && <i className="check-mark"></i>} Travel
+          </ToggleButton>
+        </ToggleButtonGroup>
+      </Container>
+      <button className="btn-selectAll" onClick={handleSelectAll}>
+        {" "}
+        {!selectedAll ? "Select All" : "Deselect All"}
+      </button>
     </Container>
   );
 };
@@ -422,6 +544,25 @@ const ForMarketing = () => {
     </Container>
   );
 };
+const RecallMessage = () => {
+  return (
+    <div className="recall-message">
+      <Accordion>
+        <Accordion.Item eventKey="0">
+          <Accordion.Header>
+            <p>Safety Recall related message</p>
+          </Accordion.Header>
+          <Accordion.Body>
+            <p>
+              Safety Recall related message Safety Recall related message Safety
+              Recall related message
+            </p>
+          </Accordion.Body>
+        </Accordion.Item>
+      </Accordion>
+    </div>
+  );
+};
 function Dashboard() {
   const root = document.documentElement;
 
@@ -433,6 +574,7 @@ function Dashboard() {
       <Header dashboard={true} />
       <Container fluid className="dashboard-container">
         <ProfileCard />
+        <RecallMessage />
         <Navbar>
           <Nav className="me-auto" defaultActiveKey="#toyota">
             <Nav.Link activeClassName="active" href="#toyota">
