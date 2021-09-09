@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Car from "./Car";
 import "./Dashboard.scss";
 import carDetails from "../Car-details";
-import { Route, Link } from "react-router-dom";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import {
   Row,
@@ -32,7 +31,6 @@ const AccordionSelection = () => {
               <h6>Would you like to receive marketing communications?</h6>
             </Col>
           </Row>
-
           <Communications />
         </Accordion.Body>
       </Accordion.Item>
@@ -224,10 +222,35 @@ const Communications = () => {
 const ForVehicleofInterest = () => {
   const [submail, setsubmail] = useState(false);
   const [subpost, setsubpost] = useState(false);
-  const [checkedStates, setcheckedState] = useState([]);
-
-  const handleClickSelect = (pars) => {
+  let [checkedStates, setcheckedStates] = useState([]);
+  checkedStates = carDetails;
+  useEffect(() => {
+    setcheckedStates(carDetails);
+  }, [checkedStates]);
+  const handleClickSelect = (pars, pos) => {
     alert(pars);
+    // let updateitems =[...carDetails];
+    // console.log(updateitems);
+    // checkedStates.map((value,index) => {
+
+    //   if(index===pos){
+    //     checkedStates[index].ischecked=!checkedStates[index].ischecked;
+    //   }
+
+    // });
+
+    //setcheckedStates(updateitems);
+  };
+  const handleSelect = (position, event) => {
+    let updateitems = [...carDetails];
+    updateitems.map((value, index) => {
+      if (index === position) {
+        updateitems[index].checkedCategory = event.target.checked;
+      }
+    });
+
+    setcheckedStates(updateitems);
+    console.log(checkedStates);
   };
   return (
     <div>
@@ -263,29 +286,40 @@ const ForVehicleofInterest = () => {
           </Col>
         </Row>
       </ToggleButtonGroup>
-      <Container fluid className="car-preferences">
-        {carDetails.map((car, index) => {
+      <Container fluid>
+        {checkedStates.map((car, index) => {
           return (
-            <Row>
+            <Row key={index}>
               <Col md={12}>
                 <ToggleButton
                   className="mt-2 fontsmall  options preferences"
                   id={"vehicle-type-" + index}
                   type="checkbox"
-                  variant={true ? "secondary" : "light"}
-                  checked={false}
+                  variant={
+                    checkedStates[index].checkedCategory ? "secondary" : "light"
+                  }
+                  checked={checkedStates[index].checkedCategory}
+                  onChange={(e) => handleSelect(index, e)}
                   value={index}
                 >
-                  <i className="check-mark"></i> {car.category}
+                  {checkedStates[index].checkedCategory && (
+                    <i className="check-mark"></i>
+                  )}{" "}
+                  {car.category}
                 </ToggleButton>
               </Col>
               <Col md={12}>
-                {car.images.map((imgs) => (
-                  <Car
-                    {...imgs}
-                    clickSelect={() => handleClickSelect(imgs.modelName)}
-                  />
-                ))}
+                {car.images.map((imgs, indexx) => {
+                  return (
+                    <Car
+                      key={indexx}
+                      {...imgs}
+                      clickSelect={() =>
+                        handleClickSelect(imgs.modelName, indexx)
+                      }
+                    />
+                  );
+                })}
               </Col>
             </Row>
           );

@@ -1,9 +1,9 @@
 import React from "react";
-import "../components/Car.scss";
+import "../components/Car.css";
 function Car(props) {
   return (
     <span
-      className="Car-Card"
+      className={"Car-Card " + props.isSelected}
       onClick={() => props.clickSelect(props.modelName)}
     >
       <img src={props.imgUrl} className="car-img"></img>
