@@ -2,6 +2,7 @@ $breakpoint-tablet: 768px;
 
 .dashboard-container {
   padding: 1em;
+  background: #F7F7F7 0% 0% no-repeat padding-box;
 
   .profile-card {
     border: 1px #dee2e8 solid;
@@ -193,7 +194,6 @@ $breakpoint-tablet: 768px;
         .select-wrap {
           text-align: left;
 
-
           .btn-selectAll,
           .btn-deselectAll {
             border: none;
@@ -207,8 +207,10 @@ $breakpoint-tablet: 768px;
         .btn-group {
           margin: 5px auto;
 
-          @media (max-width: $breakpoint-tablet) {
-            display: block;
+          @media (max-width: 767px) {
+            &.options {
+              display: block;
+            }
           }
         }
       }
@@ -307,6 +309,7 @@ $breakpoint-tablet: 768px;
         justify-content: center;
         align-items: center;
         margin: 0 10px;
+        margin-left: 0;
 
         @media (min-width: $breakpoint-tablet) {
           width: max-content;
@@ -352,6 +355,8 @@ $breakpoint-tablet: 768px;
           margin: 0 10px;
           box-shadow: none;
           margin: 0 10px;
+          margin-left: 0;
+          border-radius: 0 !important;
 
           @media (min-width: $breakpoint-tablet) {
             width: max-content;
@@ -532,7 +537,7 @@ $breakpoint-tablet: 768px;
         background: #E5E5E5 0% 0% no-repeat padding-box;
         border: 1px solid #707070;
         color: #000000;
-        min-width: 150px;
+        min-width: 110px;
 
         &:focus {
           box-shadow: none;

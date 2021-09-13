@@ -3,6 +3,7 @@ import Car from "./Car";
 import "./Dashboard.scss";
 import carDetails from "../Car-details";
 import { FaMapMarkerAlt } from "react-icons/fa";
+import Tooltip from "react-bootstrap/Tooltip";
 import {
   Row,
   Col,
@@ -181,7 +182,7 @@ const Communications = () => {
         Service Communications
       </h6>
 
-      {SubC2 && <Container>Service Communtion Section</Container>}
+      {SubC2 && <ForServiceCommunications />}
       <hr />
 
       <h6>
@@ -190,8 +191,7 @@ const Communications = () => {
         </button>{" "}
         Telematics
       </h6>
-
-      {SubC3 && <Container>Telematics Section</Container>}
+      {SubC3 && <ForTelematics />}
 
       <hr />
 
@@ -227,32 +227,55 @@ const ForVehicleofInterest = () => {
   useEffect(() => {
     setcheckedStates(carDetails);
   }, [checkedStates]);
+
   const handleClickSelect = (pars, pos, imgpos) => {
-    // alert(pars);
     let updateitems = [...checkedStates];
     updateitems.map((value, index) => {
       if (index === pos) {
         updateitems[index].images[imgpos].checked =
           !updateitems[index].images[imgpos].checked;
       }
-      if (updateitems[index].images.some((d) => d.checked == true)) {
-        updateitems[index].checkedCategory = true;
-      } else {
-        updateitems[index].checkedCategory = false;
-      }
+      checkEveryImg(value);
     });
 
     setcheckedStates(updateitems);
   };
-  const handleSelect = (position, event) => {
-    // let updateitems = [...carDetails];
-    // updateitems.map((value,index) => {
-    //   if(index===position){
-    //     updateitems[index].checkedCategory=event.target.checked;
-    //   }
-    // });
-    // setcheckedStates(updateitems);
-    // console.log(checkedStates);
+  const onSelectAll = (pos) => {
+    let updateitems = [...checkedStates];
+    updateitems.map((value, index) => {
+      if (index === pos) {
+        value.checkedAllCategory = true;
+        value.images.map((img) => (img.checked = true));
+        checkEveryImg(value);
+      }
+    });
+    setcheckedStates(updateitems);
+  };
+  const onDeselectAll = (pos) => {
+    let updateitems = [...checkedStates];
+    updateitems.map((value, index) => {
+      if (index === pos) {
+        value.checkedAllCategory = false;
+        value.images.map((img) => (img.checked = false));
+        checkEveryImg(value);
+      }
+    });
+    setcheckedStates(updateitems);
+  };
+  const checkEveryImg = (item) => {
+    const issomeSelected = item.images.some((d) => d.checked === true);
+    const iseverySelected = item.images.every((d) => d.checked === true);
+    if (issomeSelected) {
+      item.checkedCategory = true;
+      item.checkedAllCategory = true;
+    } else {
+      item.checkedCategory = false;
+    }
+    if (iseverySelected) {
+      item.checkedAllCategory = true;
+    } else {
+      item.checkedAllCategory = false;
+    }
   };
   return (
     <div>
@@ -301,19 +324,30 @@ const ForVehicleofInterest = () => {
                     checkedStates[index].checkedCategory ? "secondary" : "light"
                   }
                   checked={checkedStates[index].checkedCategory}
-                  onChange={(e) => handleSelect(index, e)}
                   value={index}
                 >
-                  {checkedStates[index].checkedCategory && (
-                    <i className="check-mark"></i>
-                  )}{" "}
+                  {car.checkedCategory && <i className="check-mark"></i>}{" "}
                   {car.category}
                 </ToggleButton>
               </Col>
               <Col md={8}>
                 <div className="select-wrap">
-                  <button className="btn-selectAll">Select All</button>
-                  <button className="btn-deselectAll">Deselect All</button>
+                  {(!car.checkedAllCategory || !car.checkedCategory) && (
+                    <button
+                      className="btn-selectAll"
+                      onClick={(e) => onSelectAll(index)}
+                    >
+                      Select All
+                    </button>
+                  )}
+                  {(car.checkedAllCategory || car.checkedCategory) && (
+                    <button
+                      className="btn-deselectAll"
+                      onClick={(e) => onDeselectAll(index)}
+                    >
+                      Deselect All
+                    </button>
+                  )}
                 </div>
               </Col>
               <Col md={12} className="vehicle-list">
@@ -439,13 +473,13 @@ const ForLifeStyle = () => {
           </ToggleButton>
         </ToggleButtonGroup>
       </Container>
-      {/* <button className="btn-selectAll" onClick={handleSelectAll}>
-        {" "}
-        {!selectedAll ? "Select All" : "Deselect All"}
-      </button> */}
       <div className="select-wrap">
-        <button className="btn-selectAll">Select All</button>
-        <button className="btn-deselectAll">Deselect All</button>
+        <button className="btn-selectAll" onClick={() => handleSelectAll()}>
+          Select All
+        </button>
+        <button className="btn-deselectAll" onClick={() => handleSelectAll()}>
+          Deselect All
+        </button>
       </div>
     </Container>
   );
@@ -467,6 +501,15 @@ const ForMarketing = () => {
     setopt3(!selectedAll);
     setopt4(!selectedAll);
     setopt5(!selectedAll);
+  };
+  const [DeSelectAll, setDeSelectAll] = useState(true);
+  const handleDeSelectAll = () => {
+    setSelectAll(!DeSelectAll);
+    setopt1(!DeSelectAll);
+    setopt2(!DeSelectAll);
+    setopt3(!DeSelectAll);
+    setopt4(!DeSelectAll);
+    setopt5(!DeSelectAll);
   };
   return (
     <Container fluid className="px-4">
@@ -526,9 +569,14 @@ const ForMarketing = () => {
         </Row>
       </ToggleButtonGroup>
       <div className="select-wrap">
-        <button className="btn-selectAll">Select All</button>
-        <button className="btn-deselectAll">Deselect All</button>
+        <button className="btn-selectAll" onClick={() => handleSelectAll()}>
+          Select All
+        </button>
+        <button className="btn-deselectAll" onClick={() => handleDeSelectAll()}>
+          Deselect All
+        </button>
       </div>
+      <br />
       <ToggleButtonGroup className="options" type="checkbox">
         <ToggleButton
           className="mt-2 fontsmall preferences"
@@ -590,10 +638,172 @@ const ForMarketing = () => {
           {opt5 && <i className="check-mark"></i>} Shopping Communications
         </ToggleButton>
       </ToggleButtonGroup>
+    </Container>
+  );
+};
+const ForServiceCommunications = () => {
+  const [subchannelAtSign, setsubchannelAtSign] = useState(false);
+  const [scopt1, setscopt1] = useState(false);
+  const [scopt2, setscopt2] = useState(false);
+
+  return (
+    <Container fluid className="px-4">
+      <ToggleButtonGroup type="checkbox">
+        <Row>
+          <Col>
+            <ToggleButton
+              className="mt-2"
+              id="toggle-service-subatsign"
+              type="checkbox"
+              variant={subchannelAtSign ? "dark" : "light"}
+              checked={subchannelAtSign}
+              value="1"
+              onChange={(e) => setsubchannelAtSign(e.currentTarget.checked)}
+            >
+              <i
+                className={
+                  subchannelAtSign ? "at-the-rate-checked" : "at-the-rate"
+                }
+              ></i>
+            </ToggleButton>
+          </Col>
+        </Row>
+      </ToggleButtonGroup>
       <br />
-      {/* <button className="btn-selectAll" onClick={handleSelectAll}>
-        {!selectedAll ? "Select All" : "Deselect All"}
-      </button> */}
+      <ToggleButtonGroup className="options" type="checkbox">
+        <ToggleButton
+          className="mt-2 fontsmall preferences"
+          id="toggle-check-scopt1"
+          type="checkbox"
+          variant={scopt1 ? "secondary" : "light"}
+          checked={scopt1}
+          value="1"
+          onChange={(e) => setscopt1(e.currentTarget.checked)}
+        >
+          {scopt1 && <i className="check-mark"></i>} Service Reminders
+        </ToggleButton>
+
+        <ToggleButton
+          className="mt-2 fontsmall preferences"
+          id="toggle-check-scopt2"
+          type="checkbox"
+          variant={scopt2 ? "secondary" : "light"}
+          checked={scopt2}
+          value="2"
+          onChange={(e) => setscopt2(e.currentTarget.checked)}
+        >
+          {scopt2 && <i className="check-mark"></i>} Service Promotions
+        </ToggleButton>
+      </ToggleButtonGroup>
+    </Container>
+  );
+};
+const ForTelematics = () => {
+  const [subchannelPhone, setsubchannelPhone] = useState(false);
+  const [subchannelTextMassage, setsubchannelTextMsg] = useState(false);
+  const [subchannelAtSign, setsubchannelAtSign] = useState(false);
+  const [tmopt1, settmopt1] = useState(false);
+  const [tmopt2, settmopt2] = useState(false);
+  const [tmopt3, settmopt3] = useState(false);
+  const [selectedAll, setSelectAll] = useState(false);
+  const handleSelectAll = () => {
+    setSelectAll(!selectedAll);
+    settmopt1(!selectedAll);
+    settmopt2(!selectedAll);
+    settmopt3(!selectedAll);
+  };
+  const [DeSelectAll, setDeSelectAll] = useState(true);
+  const handleDeSelectAll = () => {
+    setSelectAll(!DeSelectAll);
+    settmopt1(!DeSelectAll);
+    settmopt2(!DeSelectAll);
+    settmopt3(!DeSelectAll);
+  };
+  return (
+    <Container fluid className="px-4">
+      <ToggleButtonGroup type="checkbox">
+        <Row>
+          <Col>
+            <ToggleButton
+              className="mt-2"
+              id="toggle-tele-subatsign"
+              type="checkbox"
+              variant={subchannelAtSign ? "dark" : "light"}
+              checked={subchannelAtSign}
+              value="1"
+              onChange={(e) => setsubchannelAtSign(e.currentTarget.checked)}
+            >
+              <i
+                className={
+                  subchannelAtSign ? "at-the-rate-checked" : "at-the-rate"
+                }
+              ></i>
+            </ToggleButton>
+          </Col>
+          <Col>
+            <ToggleButton
+              className="mt-2"
+              id="toggle-check-subtextmsg"
+              type="checkbox"
+              variant={subchannelTextMassage ? "dark" : "light"}
+              checked={subchannelTextMassage}
+              value="4"
+              onChange={(e) => setsubchannelTextMsg(e.currentTarget.checked)}
+            >
+              <i
+                className={
+                  subchannelTextMassage ? "msg-icon-checked" : "msg-icon"
+                }
+              ></i>
+            </ToggleButton>
+          </Col>
+        </Row>
+      </ToggleButtonGroup>
+      <div className="select-wrap">
+        <button className="btn-selectAll" onClick={() => handleSelectAll()}>
+          Select All
+        </button>
+        <button className="btn-deselectAll" onClick={() => handleDeSelectAll()}>
+          Deselect All
+        </button>
+      </div>
+      <ToggleButtonGroup className="options" type="checkbox">
+        <ToggleButton
+          className="mt-2 fontsmall preferences"
+          id="toggle-check-tmopt1"
+          type="checkbox"
+          variant={tmopt1 ? "secondary" : "light"}
+          checked={tmopt1}
+          value="1"
+          onChange={(e) => settmopt1(e.currentTarget.checked)}
+        >
+          {tmopt1 && <i className="check-mark"></i>} Lorem Ipsum
+        </ToggleButton>
+
+        <ToggleButton
+          className="mt-2 fontsmall preferences"
+          id="toggle-check-tmopt2"
+          type="checkbox"
+          variant={tmopt2 ? "secondary" : "light"}
+          checked={tmopt2}
+          value="2"
+          onChange={(e) => settmopt2(e.currentTarget.checked)}
+        >
+          {tmopt2 && <i className="check-mark"></i>} Lorem Ipsum
+        </ToggleButton>
+
+        <ToggleButton
+          className="mt-2 fontsmall preferences"
+          id="toggle-check-tmopt3"
+          type="checkbox"
+          variant={tmopt3 ? "secondary" : "light"}
+          checked={tmopt3}
+          value="3"
+          onChange={(e) => settmopt3(e.currentTarget.checked)}
+        >
+          {tmopt3 && <i className="check-mark"></i>} Lorem Ipsum
+        </ToggleButton>
+      </ToggleButtonGroup>
     </Container>
   );
 };
@@ -640,13 +850,11 @@ const ButtonSection = () => {
         <p>Stop receiving all Toyota communications</p>
         <Dropdown>
           <Dropdown.Toggle variant="success" id="dropdown-basic">
-            Dropdown Button
+            One Month
           </Dropdown.Toggle>
-
           <Dropdown.Menu>
             <Dropdown.Item href="#">One Month</Dropdown.Item>
             <Dropdown.Item href="#">One Quater</Dropdown.Item>
-            <Dropdown.Item href="#">One year</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
         <label className="switch">
@@ -662,11 +870,6 @@ const ButtonSection = () => {
   );
 };
 function Dashboard() {
-  const root = document.documentElement;
-
-  // const clickedToyota = (elem)=>{
-
-  // }
   return (
     <div className="home">
       <Header dashboard={true} />
