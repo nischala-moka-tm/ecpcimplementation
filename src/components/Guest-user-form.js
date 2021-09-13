@@ -17,7 +17,7 @@ function UserForm() {
     });
   };
   const handleSubmit = () => {
-    history.push("/dashboard");
+    history.push("/ecpcimplementation");
   };
   return (
     <div className="home">

@@ -177,6 +177,12 @@ $breakpoint-tablet: 768px;
     }
 
     .accordion-body {
+      padding: 1rem 0;
+
+      @media (min-width: $breakpoint-tablet) {
+        padding: 1rem 1.25rem;
+      }
+
       .market-heading {
         padding-left: 40px;
       }
@@ -184,13 +190,18 @@ $breakpoint-tablet: 768px;
       .market-communication {
         padding-left: 15px;
 
-        .btn-selectAll,
-        .btn-deselectAll {
-          border: none;
-          background: none;
-          color: #0C31E9;
-          font-size: 14px;
-          line-height: 19px;
+        .select-wrap {
+          text-align: left;
+
+
+          .btn-selectAll,
+          .btn-deselectAll {
+            border: none;
+            background: none;
+            color: #0C31E9;
+            font-size: 14px;
+            line-height: 19px;
+          }
         }
 
         .btn-group {
