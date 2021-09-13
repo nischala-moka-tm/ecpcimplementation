@@ -292,7 +292,7 @@ const ForVehicleofInterest = () => {
         {checkedStates.map((car, index) => {
           return (
             <Row key={index}>
-              <Col md={12}>
+              <Col md={4}>
                 <ToggleButton
                   className="mt-2 fontsmall  options preferences"
                   id={"vehicle-type-" + index}
@@ -309,6 +309,12 @@ const ForVehicleofInterest = () => {
                   )}{" "}
                   {car.category}
                 </ToggleButton>
+              </Col>
+              <Col md={8}>
+                <div className="select-wrap">
+                  <button className="btn-selectAll">Select All</button>
+                  <button className="btn-deselectAll">Deselect All</button>
+                </div>
               </Col>
               <Col md={12}>
                 {car.images.map((imgs, imgindex) => {
@@ -515,6 +521,10 @@ const ForMarketing = () => {
           </Col>
         </Row>
       </ToggleButtonGroup>
+      <div className="select-wrap">
+        <button className="btn-selectAll">Select All</button>
+        <button className="btn-deselectAll">Deselect All</button>
+      </div>
       <br />
       <ToggleButtonGroup className="options" type="checkbox">
         <ToggleButton
@@ -578,10 +588,9 @@ const ForMarketing = () => {
         </ToggleButton>
       </ToggleButtonGroup>
       <br />
-      <button className="btn-selectAll" onClick={handleSelectAll}>
-        {" "}
+      {/* <button className="btn-selectAll" onClick={handleSelectAll}>
         {!selectedAll ? "Select All" : "Deselect All"}
-      </button>
+      </button> */}
     </Container>
   );
 };

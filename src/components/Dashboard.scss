@@ -184,7 +184,8 @@ $breakpoint-tablet: 768px;
       .market-communication {
         padding-left: 15px;
 
-        .btn-selectAll {
+        .btn-selectAll,
+        .btn-deselectAll {
           border: none;
           background: none;
           color: #0C31E9;
