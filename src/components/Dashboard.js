@@ -743,7 +743,7 @@ const ForTelematics = () => {
           <Col>
             <ToggleButton
               className="mt-2"
-              id="toggle-check-subtextmsg"
+              id="toggle-tm-subtextmsg"
               type="checkbox"
               variant={subchannelTextMassage ? "dark" : "light"}
               checked={subchannelTextMassage}
@@ -873,19 +873,21 @@ function Dashboard() {
   return (
     <div className="home">
       <Header dashboard={true} />
-      <Container fluid className="dashboard-container">
-        <ProfileCard />
-        <RecallMessage />
-        <Navbar>
-          <Nav className="me-auto" defaultActiveKey="#toyota">
-            <Nav.Link activeClassName="active" href="#toyota">
-              Toyota
-            </Nav.Link>
-            <Nav.Link href="#lexus">Lexus</Nav.Link>
-          </Nav>
-        </Navbar>
-        <AccordionSelection />
-        <ButtonSection />
+      <Container fluid className="dashboard-wrap">
+        <div className="dashboard-container">
+          <ProfileCard />
+          <RecallMessage />
+          <Navbar>
+            <Nav className="me-auto" defaultActiveKey="#toyota">
+              <Nav.Link activeClassName="active" href="#toyota">
+                Toyota
+              </Nav.Link>
+              <Nav.Link href="#lexus">Lexus</Nav.Link>
+            </Nav>
+          </Navbar>
+          <AccordionSelection />
+          <ButtonSection />
+        </div>
       </Container>
       <Footer />
     </div>

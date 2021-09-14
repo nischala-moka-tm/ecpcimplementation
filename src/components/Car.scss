@@ -84,7 +84,9 @@ $breakpoint-tablet: 768px;
         border: 1px solid #DEE2E8;
 
         &:first-child {
-          margin-left: 0;
+          @media (min-width: $breakpoint-tablet) {
+            margin-left: 0;
+          }
         }
       }
 
@@ -93,7 +95,9 @@ $breakpoint-tablet: 768px;
         border: 1px solid #000000;
 
         &:first-child {
-          margin-left: 0;
+          @media (min-width: $breakpoint-tablet) {
+            margin-left: 0;
+          }
         }
       }
     }
