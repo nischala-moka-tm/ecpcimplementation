@@ -12,6 +12,7 @@ import {
   Nav,
   Accordion,
   FormControl,
+  FormSelect,
   Button,
   ToggleButtonGroup,
   ToggleButton,
@@ -848,15 +849,10 @@ const ButtonSection = () => {
       </div>
       <div className="stop-notifications">
         <p>Stop receiving all Toyota communications</p>
-        <Dropdown>
-          <Dropdown.Toggle variant="success" id="dropdown-basic">
-            One Month
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
-            <Dropdown.Item href="#">One Month</Dropdown.Item>
-            <Dropdown.Item href="#">One Quater</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
+        <FormSelect className="dropdown" aria-label="stop-notifications">
+          <option value="1">One Month</option>
+          <option value="2">One Quater</option>
+        </FormSelect>
         <label className="switch">
           <input
             type="checkbox"

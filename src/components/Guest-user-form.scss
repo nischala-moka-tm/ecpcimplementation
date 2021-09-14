@@ -1,0 +1,78 @@
+.guest-information {
+  .jumbotron-wrap {
+    padding: 0 2em;
+    background: #F7F7F7 0% 0% no-repeat padding-box;
+
+    .jumbotron {
+      background: #FFFFFF 0% 0% no-repeat padding-box;
+      box-shadow: 0px 3px 6px #00000029;
+      border: 1px solid #E0E0E0;
+      padding: 0.8em 5em;
+
+      .form-container {
+        max-width: 600px;
+        margin: 0 auto;
+
+        .heading {
+          padding: 10px;
+          margin-bottom: 0;
+          text-align: center;
+          font-weight: bold;
+        }
+
+        label {
+          position: relative;
+          display: inline;
+          padding: 0 0.4em;
+          bottom: -10px;
+          left: 0.6em;
+          background-color: #fff;
+          font-size: 0.75em;
+
+          sup {
+            color: #FF0017;
+            top: -2px;
+            left: 2px;
+          }
+
+          .form-control {
+            border: 1px #000 solid;
+            border-radius: 1px;
+            margin-bottom: 0px;
+          }
+
+
+        }
+
+        .submit-btn-wrap {
+          text-align: right;
+
+          .btn-danger-submit {
+            background-color: #EB0A1E;
+            color: #fff;
+            border-radius: 1px;
+            margin-top: 1.5em;
+
+            &:hover {
+              color: #fff;
+            }
+
+            &:focus {
+              outline: none;
+              border: none;
+            }
+          }
+        }
+
+        .text-disclaimer {
+          font-size: 0.9em;
+          display: inline;
+          justify-self: center;
+          text-align: center;
+          padding-top: .9em;
+        }
+      }
+    }
+  }
+
+}

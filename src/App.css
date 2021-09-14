@@ -36,9 +36,10 @@
   margin: 1em 0;
 }
 
-.footer-r {
-  width: fit-content;
-  float: right;
+@media (min-width: 768px) {
+  .footer-r {
+    text-align: right;
+  }
 }
 
 .text-red {
