@@ -2,7 +2,7 @@ import { React } from "react";
 import { Row, Col } from "react-bootstrap";
 import Logout from "./Logout";
 
-function Header() {
+function Header(props) {
   return (
     <div className="header">
       <Row>
@@ -11,7 +11,7 @@ function Header() {
         </Col>
 
         <Col>
-          <Logout />
+        {props.dashboard && <Logout />}
         </Col>
       </Row>
     </div>

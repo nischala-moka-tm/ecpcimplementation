@@ -46,7 +46,7 @@ function UserForm() {
                   type="text"
                   name="firstname"
                   value={firstname}
-                  placeholder="First Name*"
+                  placeholder="First Name"
                   onChange={handleChange}
                 ></FormControl>
               </Col>
@@ -68,7 +68,7 @@ function UserForm() {
                   type="text"
                   name="lastname"
                   value={lastname}
-                  placeholder="Last Name*"
+                  placeholder="Last Name"
                   onChange={handleChange}
                 ></FormControl>
               </Col>
