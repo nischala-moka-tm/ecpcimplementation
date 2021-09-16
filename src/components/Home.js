@@ -2,9 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import "./Home.scss";
-import Header from "./Header";
+// import Header from "./Header";
 import Footer from "./Footer";
 function Home() {
+  const handleClick = () => {
+    window.location.href = "https://account.toyota.com/";
+  };
   return (
     <div className="home">
       {/* <Header/> */}
@@ -14,19 +17,21 @@ function Home() {
             <Row>
               <Col md={12} className="user-logo"></Col>
               <Col md={12}>
-                You can use your Lexus Drivers or Toyota Owners account
-                information to log in.
+                <p>
+                  You can use your Lexus Drivers or Toyota Owners account
+                  information to log in.
+                </p>
               </Col>
               <Col md={12}>
-                <Link to="/signin" className="Signin-btn">
+                <button onClick={handleClick} className="Signin-btn">
                   Sign In
-                </Link>
+                </button>
               </Col>
               <Col md={12}>
                 <div className="or-seperation">Or</div>
               </Col>
               <Col md={12}>
-                <Link to="/guest-details" className="Guest-btn">
+                <Link to="/guest-information" className="Guest-btn">
                   Continue as Guest
                 </Link>
               </Col>

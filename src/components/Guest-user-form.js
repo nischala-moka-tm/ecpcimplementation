@@ -4,6 +4,8 @@ import "./Guest-user-form.scss";
 import Header from "./Header";
 import Footer from "./Footer";
 import { useHistory } from "react-router-dom";
+import FloatingLabel from "react-bootstrap-floating-label";
+
 function UserForm() {
   let history = useHistory();
   const [
@@ -28,7 +30,7 @@ function UserForm() {
     });
   };
   const handleSubmit = () => {
-    history.push("/ecpcimplementation");
+    history.push("/preferences");
   };
   return (
     <div className="guest-information">
@@ -37,79 +39,79 @@ function UserForm() {
         <div className="jumbotron">
           <div className="form-container">
             <h5 className="heading">Your Contact information</h5>
+            <div className="sub-head">
+              <p>
+                All information you provide shall be held in strict accordance
+                with Toyota's <a href="/">Privacy Policy.</a>
+              </p>
+            </div>
             <Row>
               <Col md={5}>
-                <label>
-                  First Name<sup>*</sup>
-                </label>
-                <FormControl
-                  type="text"
-                  name="firstname"
-                  value={firstname}
-                  placeholder="First Name"
-                  onChange={handleChange}
-                ></FormControl>
+                <FloatingLabel
+                  className="required-field"
+                  controlId="firstname"
+                  label="First Name"
+                >
+                  <FormControl
+                    type="text"
+                    name="firstname"
+                    value={firstname}
+                    onChange={handleChange}
+                  ></FormControl>
+                </FloatingLabel>
               </Col>
               <Col md={2}>
-                <label>Mid initial</label>
-                <FormControl
-                  type="text"
-                  name="midname"
-                  value={midname}
-                  placeholder="Mid initial"
-                  onChange={handleChange}
-                ></FormControl>
+                <FloatingLabel controlId="midname" label="Mid Name">
+                  <FormControl
+                    type="text"
+                    name="midname"
+                    value={midname}
+                    onChange={handleChange}
+                  ></FormControl>
+                </FloatingLabel>
               </Col>
               <Col md={5}>
-                <label>
-                  Last Name<sup>*</sup>
-                </label>
-                <FormControl
-                  type="text"
-                  name="lastname"
-                  value={lastname}
-                  placeholder="Last Name"
-                  onChange={handleChange}
-                ></FormControl>
+                <FloatingLabel controlId="lastname" label="Last Name">
+                  <FormControl
+                    type="text"
+                    name="lastname"
+                    value={lastname}
+                    onChange={handleChange}
+                  ></FormControl>
+                </FloatingLabel>
               </Col>
               <Col md={12}>
-                <label>
-                  Address<sup>*</sup>
-                </label>
-                <FormControl
-                  type="text"
-                  name="address"
-                  value={address}
-                  placeholder="Address Line 1"
-                  onChange={handleChange}
-                ></FormControl>
+                <FloatingLabel controlId="address" label="Address Line 1">
+                  <FormControl
+                    type="text"
+                    name="address"
+                    value={address}
+                    placeholder="Address Line 1"
+                    onChange={handleChange}
+                  ></FormControl>
+                </FloatingLabel>
               </Col>
               <Col md={4}>
-                <label>
-                  Zipcode<sup>*</sup>
-                </label>
-                <FormControl
-                  type="text"
-                  name="zipcode"
-                  value={zipcode}
-                  placeholder="Zip Code"
-                  onChange={handleChange}
-                ></FormControl>
+                <FloatingLabel controlId="zipcode" label="Zip Code">
+                  <FormControl
+                    type="text"
+                    name="zipcode"
+                    value={zipcode}
+                    onChange={handleChange}
+                  ></FormControl>
+                </FloatingLabel>
               </Col>
               <Col md={4}>
-                <label>
-                  City<sup>*</sup>
-                </label>
-                <FormControl
-                  type="text"
-                  name="city"
-                  value={city}
-                  placeholder="City"
-                  onChange={handleChange}
-                ></FormControl>
+                <FloatingLabel controlId="city" label="City">
+                  <FormControl
+                    type="text"
+                    name="city"
+                    value={city}
+                    onChange={handleChange}
+                  ></FormControl>
+                </FloatingLabel>
               </Col>
               <Col md={4}>
-                <label>State</label>
                 <FormSelect aria-label="state-select" value={state}>
                   <option>State</option>
                   <option value="1">One</option>
@@ -117,41 +119,39 @@ function UserForm() {
                   <option value="3">Three</option>
                 </FormSelect>
               </Col>
-              <Col md={4}>
-                <label>Country Code</label>
-                <FormControl
-                  type="text"
-                  name="code"
-                  value={code}
-                  placeholder="+ 1"
-                  onChange={handleChange}
-                ></FormControl>
+              <Col md={2}>
+                <FloatingLabel controlId="code" label="Code">
+                  <FormControl
+                    type="text"
+                    name="code"
+                    value={code}
+                    placeholder="+ 1"
+                    pattern="[A-Za-z]{3}"
+                    onChange={handleChange}
+                  ></FormControl>
+                </FloatingLabel>
               </Col>
-              <Col md={8}>
-                <label>
-                  Phone<sup>*</sup>
-                </label>
-                <FormControl
-                  type="text"
-                  name="phone"
-                  value={phone}
-                  placeholder="Phone number"
-                  onChange={handleChange}
-                ></FormControl>
+              <Col md={10}>
+                <FloatingLabel controlId="phone" label="Phone">
+                  <FormControl
+                    type="text"
+                    name="phone"
+                    value={phone}
+                    onChange={handleChange}
+                  ></FormControl>
+                </FloatingLabel>
               </Col>
               <Col md={12}>
-                <label>
-                  Email<sup>*</sup>
-                </label>
-                <FormControl
-                  type="email"
-                  name="email"
-                  value={email}
-                  placeholder="Email*"
-                  onChange={handleChange}
-                ></FormControl>
+                <FloatingLabel controlId="email" label="Email">
+                  <FormControl
+                    type="email"
+                    name="email"
+                    value={email}
+                    onChange={handleChange}
+                    required
+                  ></FormControl>
+                </FloatingLabel>
               </Col>
-
               <Col md={12} className="submit-btn-wrap">
                 <button
                   className="btn btn-danger-submit"

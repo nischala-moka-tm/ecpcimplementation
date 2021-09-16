@@ -11,7 +11,7 @@ function Header(props) {
         </Col>
 
         <Col>
-        {props.dashboard && <Logout />}
+         {props.dashboard && <Logout />}
         </Col>
       </Row>
     </div>

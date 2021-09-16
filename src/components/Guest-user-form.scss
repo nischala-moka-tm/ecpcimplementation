@@ -1,48 +1,107 @@
+@import "./Common-Style.scss";
+
 .guest-information {
+  .sub-head {
+    p {
+      background: #F6F6F6 0% 0% no-repeat padding-box;
+      border: 1px solid #DEDEDE;
+      padding: 10px 15px;
+      text-align: center;
+
+      @media (min-width: $breakpoint-tablet) {
+        padding: 10px 30px;
+      }
+    }
+  }
+
   .jumbotron-wrap {
-    padding: 0 2em;
+    padding: 0 1em;
     background: #F7F7F7 0% 0% no-repeat padding-box;
+
+    @media (min-width: $breakpoint-tablet) {
+      padding: 0 2em;
+    }
 
     .jumbotron {
       background: #FFFFFF 0% 0% no-repeat padding-box;
       box-shadow: 0px 3px 6px #00000029;
       border: 1px solid #E0E0E0;
-      padding: 0.8em 5em;
+      padding: 1em;
+
+      @media (min-width: $breakpoint-tablet) {
+        padding: 0.8em 5em;
+      }
 
       .form-container {
-        max-width: 600px;
+        max-width: 550px;
         margin: 0 auto;
 
         .heading {
-          padding: 10px;
+          padding: 20px 0;
           margin-bottom: 0;
-          text-align: center;
           font-weight: bold;
+          font-family: $toyota-bold;
         }
 
-        label {
-          position: relative;
-          display: inline;
-          padding: 0 0.4em;
-          bottom: -10px;
-          left: 0.6em;
-          background-color: #fff;
-          font-size: 0.75em;
-
-          sup {
-            color: #FF0017;
-            top: -2px;
-            left: 2px;
+        .row {
+          >div {
+            padding: 8px;
           }
-
-          .form-control {
-            border: 1px #000 solid;
-            border-radius: 1px;
-            margin-bottom: 0px;
-          }
-
-
         }
+
+
+        .floating-label {
+          input {
+            font-size: 18px;
+            line-height: 24px;
+            padding: 0.25rem 0.75rem 0.25rem 0.75rem;
+            height: 40px;
+          }
+
+          label {
+            padding: 0.25rem 0.75rem 0.25rem 0.75rem;
+            font-size: 12px;
+            line-height: 16px;
+            color: #000000;
+
+            font-family: $toyota-regular;
+
+            &:after {
+              content: "*";
+              color: #FF0017;
+              top: 2px;
+              right: 4px;
+              position: absolute;
+            }
+
+            .form-control {
+              border: 1px #000 solid;
+              border-radius: 1px;
+              margin-bottom: 0px;
+            }
+          }
+
+          &:focus-within>label,
+          >.floating-label-active {
+            background: #fff;
+            left: 5px;
+            top: 5px;
+          }
+        }
+
+        select {
+          font-size: 12px;
+          line-height: 16px;
+          height: 40px;
+          color: #000000;
+
+          option {
+            font-size: 12px;
+            line-height: 16px;
+            color: #000000;
+          }
+        }
+
 
         .submit-btn-wrap {
           text-align: right;
@@ -51,7 +110,6 @@
             background-color: #EB0A1E;
             color: #fff;
             border-radius: 1px;
-            margin-top: 1.5em;
 
             &:hover {
               color: #fff;

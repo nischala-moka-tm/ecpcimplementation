@@ -1,4 +1,4 @@
-$breakpoint-tablet: 768px;
+@import "./Common-Style.scss";
 
 .home {
   .home-body {
@@ -9,7 +9,7 @@ $breakpoint-tablet: 768px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    padding: 2.5em;
+    padding: 3em;
 
     .Card {
       padding: 1em;
@@ -19,10 +19,12 @@ $breakpoint-tablet: 768px;
       box-shadow: 0px 3px 6px #00000029;
       opacity: 0.9;
       border-radius: 1px;
+      max-width: 360px;
+      padding: 2em;
 
       @media (min-width: $breakpoint-tablet) {
-        max-width: 380px;
-        padding: 1em 2em;
+        max-width: 360px;
+        padding: 2em;
       }
 
       .user-logo {
@@ -40,7 +42,7 @@ $breakpoint-tablet: 768px;
         display: grid;
         place-items: center;
         margin: 1em 0;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-family: $toyota-bold;
         font-size: 16px;
         line-height: 16px;
         font-weight: bold;
@@ -70,6 +72,7 @@ $breakpoint-tablet: 768px;
         flex-basis: 100%;
         align-items: center;
         margin: 8px 0;
+        font-family: $toyota-regular;
 
         &:before,
         &:after {
@@ -84,5 +87,4 @@ $breakpoint-tablet: 768px;
       }
     }
   }
-
 }

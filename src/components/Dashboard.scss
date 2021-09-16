@@ -1,8 +1,9 @@
-$breakpoint-tablet: 768px;
+@import "./Common-Style.scss";
 
 .dashboard-wrap {
   padding: 0.75em;
   background-color: #F7F7F7;
+
   @media (min-width: $breakpoint-tablet) {
     padding: 1em;
   }
@@ -195,7 +196,7 @@ $breakpoint-tablet: 768px;
       }
 
       .market-heading {
-        padding-left: 40px;
+        padding-left: 30px;
       }
 
       .market-communication {
@@ -250,7 +251,7 @@ $breakpoint-tablet: 768px;
 
         &.phone-icon {
           &::after {
-            background: url("../assets/Icon feather-phone-call.png");
+            background: url("../assets/Icon feather-phone-call-unchecked.png");
           }
         }
 
@@ -286,7 +287,7 @@ $breakpoint-tablet: 768px;
 
         &.msg-icon-checked {
           &::after {
-            background: url("../assets/Icon material-textsms.png");
+            background: url("../assets/msg-icon-checked.png");
           }
         }
       }
@@ -305,6 +306,7 @@ $breakpoint-tablet: 768px;
         height: 35px;
         width: 35px;
         box-shadow: none;
+        position: relative;
       }
 
       &.btn-check+.btn.btn-light:not(.preferences) {
@@ -313,6 +315,7 @@ $breakpoint-tablet: 768px;
         width: 35px;
         height: 35px;
         box-shadow: none;
+        position: relative;
       }
 
       &.btn-check+.btn.btn-light.preferences {
@@ -322,6 +325,7 @@ $breakpoint-tablet: 768px;
         align-items: center;
         margin: 0 10px;
         margin-left: 0;
+        font-family: $toyota-regular;
 
         @media (min-width: $breakpoint-tablet) {
           width: max-content;
@@ -330,6 +334,13 @@ $breakpoint-tablet: 768px;
         &:first-child {
           margin-left: 0;
         }
+      }
+
+      &.btn-check+.btn.btn-secondary.preferences {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: $toyota-regular;
       }
     }
 
@@ -364,6 +375,7 @@ $breakpoint-tablet: 768px;
         &.fontsmall {
           font-size: 0.7rem;
           font-weight: bold;
+          font-family: $toyota-regular;
           margin: 0 10px;
           box-shadow: none;
           margin: 0 10px;
@@ -396,8 +408,8 @@ $breakpoint-tablet: 768px;
 
     .switch {
       position: relative;
-      width: 45px;
-      height: 23px;
+      width: 40px;
+      height: 20px;
       float: right;
 
       /* Hide default HTML checkbox */
@@ -415,8 +427,8 @@ $breakpoint-tablet: 768px;
               border-radius: 50%;
               height: 18px;
               width: 18px;
-              left: -1px;
-              top: 2px;
+              left: -5px;
+              top: 1px;
               -webkit-transform: translateX(26px);
               -ms-transform: translateX(26px);
               transform: translateX(26px);
@@ -454,9 +466,9 @@ $breakpoint-tablet: 768px;
         &::before {
           position: absolute;
           content: "";
-          height: 20px;
-          width: 20px;
-          bottom: 2px;
+          height: 18px;
+          width: 18px;
+          bottom: 1px;
           left: 2px;
           background-color: #fff;
           -webkit-transition: 0.4s;

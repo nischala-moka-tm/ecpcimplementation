@@ -8,23 +8,25 @@ import {
 import "./App.css";
 import Home from "./components/Home";
 import UserForm from "./components/Guest-user-form";
-import SignIn from "./components/SignIn";
 import Dashboard from "./components/Dashboard";
-import ProfileAlreadyExists from "./components/ProfileAlreadyExists";
+import PrivateRoute from "./components/PrivateRoute";
+import AuthProvider from "./components/AuthContext";
+
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/">
-          <Redirect to="/home" />
-        </Route>
-        <Route path="/home" component={Home} />
-        <Route path="/guest-details" component={UserForm} />
-        <Route path="/signin" component={SignIn} />
-        <Route path="/ecpcimplementation" component={Dashboard} />
-        <Route path="/myprofile" component={ProfileAlreadyExists} />
-      </Switch>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <Redirect to="/login" />
+          </Route>
+          <Route path="/login" component={Home} />
+          <Route path="/guest-information" component={UserForm} />
+          <Route path="/preferences" component={Dashboard} />
+          <PrivateRoute path="/preferences" component={Dashboard} />
+        </Switch>
+      </Router>
+    </AuthProvider>
   );
 }
 

@@ -4,6 +4,7 @@ import "./Dashboard.scss";
 import carDetails from "../Car-details";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import Tooltip from "react-bootstrap/Tooltip";
+import StopNotification from "./StopNotification";
 import {
   Row,
   Col,
@@ -21,6 +22,7 @@ import {
 import Header from "./Header";
 import Footer from "./Footer";
 const AccordionSelection = () => {
+  const [isOptout, setOptInOut] = useState(false);
   return (
     <Accordion>
       <Accordion.Item eventKey="0">
@@ -28,12 +30,23 @@ const AccordionSelection = () => {
           <h5>Marketing </h5>
         </Accordion.Header>
         <Accordion.Body>
-          <Row className="market-heading">
-            <Col>
-              <h6>Would you like to receive marketing communications?</h6>
-            </Col>
-          </Row>
-          <Communications />
+          <Container fluid className="market-heading">
+            <h6>Would you like to receive marketing communications?</h6>
+          </Container>
+          {isOptout && <Communications />}
+
+          <Container fluid className="d-flex justify-content-md-end">
+            <h6>Do you want to opt out of all marketing communications</h6>
+            &nbsp;&nbsp;&nbsp;
+            <label className="switch">
+              <input
+                type="checkbox"
+                checked={isOptout}
+                onChange={(e) => setOptInOut(e.currentTarget.checked)}
+              />
+              <span className="slider"></span>
+            </label>
+          </Container>
         </Accordion.Body>
       </Accordion.Item>
       <Accordion.Item eventKey="1">
@@ -88,6 +101,7 @@ const Communications = () => {
   const [SubC2, setSubC2] = useState(false);
   const [SubC3, setSubC3] = useState(false);
   const [SubC4, setSubC4] = useState(false);
+
   return (
     <div className="market-communication">
       <Container fluid className="px-4">
@@ -204,19 +218,6 @@ const Communications = () => {
       </h6>
 
       {SubC4 && <ForPreferences />}
-      <Container fluid className="d-flex justify-content-md-end">
-        <h6>Do you want to opt out of all marketing communications</h6>
-        <label className="switch">
-          <input
-            type="checkbox"
-            checked={true} // isCommnctonsVisible
-            // onChange={(e) =>
-            //   setComunicationVisible(e.currentTarget.checked)
-            // }
-          />
-          <span className="slider"></span>
-        </label>
-      </Container>
     </div>
   );
 };
@@ -505,7 +506,7 @@ const ForMarketing = () => {
   };
   const [DeSelectAll, setDeSelectAll] = useState(true);
   const handleDeSelectAll = () => {
-    setSelectAll(!DeSelectAll);
+    setDeSelectAll(!DeSelectAll);
     setopt1(!DeSelectAll);
     setopt2(!DeSelectAll);
     setopt3(!DeSelectAll);
@@ -700,7 +701,6 @@ const ForServiceCommunications = () => {
   );
 };
 const ForTelematics = () => {
-  const [subchannelPhone, setsubchannelPhone] = useState(false);
   const [subchannelTextMassage, setsubchannelTextMsg] = useState(false);
   const [subchannelAtSign, setsubchannelAtSign] = useState(false);
   const [tmopt1, settmopt1] = useState(false);
@@ -715,7 +715,7 @@ const ForTelematics = () => {
   };
   const [DeSelectAll, setDeSelectAll] = useState(true);
   const handleDeSelectAll = () => {
-    setSelectAll(!DeSelectAll);
+    setDeSelectAll(!DeSelectAll);
     settmopt1(!DeSelectAll);
     settmopt2(!DeSelectAll);
     settmopt3(!DeSelectAll);
@@ -828,7 +828,7 @@ const RecallMessage = () => {
   );
 };
 const ButtonSection = () => {
-  const [isCommnctonsVisible, setComunicationVisible] = useState(false);
+  const [isPermissionsVisible, setPermissionsVisible] = useState(false);
   return (
     <div className="buttons-wrap">
       <div className="button-options">
@@ -851,17 +851,18 @@ const ButtonSection = () => {
         <p>Stop receiving all Toyota communications</p>
         <FormSelect className="dropdown" aria-label="stop-notifications">
           <option value="1">One Month</option>
-          <option value="2">One Quater</option>
+          <option value="2">Six Months</option>
         </FormSelect>
         <label className="switch">
           <input
             type="checkbox"
-            checked={isCommnctonsVisible}
-            onChange={(e) => setComunicationVisible(e.currentTarget.checked)}
+            checked={isPermissionsVisible}
+            onChange={(e) => setPermissionsVisible(e.currentTarget.checked)}
           />
           <span className="slider"></span>
         </label>
       </div>
+      {isPermissionsVisible && <StopNotification />}
     </div>
   );
 };
