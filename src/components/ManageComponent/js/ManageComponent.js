@@ -7,7 +7,6 @@ import AddPermissionLevel1 from "../../AddPermissionLevel1/js/AddPermissionLevel
 import AddPermissionLevel2 from "../../AddPermissionLevel2/js/AddPermissionLevel2";
 import AddPermissionLevel3 from "../../AddPermissionLevel3/js/AddPermissionLevel3";
 import AddPreferencesLevel1 from "../../AddPreferencesLevel1/js/AddPreferencesLevel1";
-import AddPreferencesLevel2 from "../../AddPreferencesLevel2/js/AddPreferencesLevel2";
 import AddPreferencesLevel4 from "../../AddPreferencesLevel4/js/AddPreferencesLevel4";
 import DetailedViewPage from "../../DetailedViewPage/js/DetailedViewPage";
 import { AxiosGet } from "../../AxiosMethods/ApiCalls";
@@ -82,37 +81,29 @@ function SelectablePopupLevel(props) {
   const LevelCondition2 = (category, optType) => {
     console.log(category.level);
     switch (category.level) {
-      case 1:
-        return (
-          <AddPreferencesLevel1
-            show={showLevelPopup}
-            onClose={() => setLevelPopup(false)}
-            category={category}
-            optionType={optType}
-          />
-        );
-      case 2:
-      case 3:
-        return (
-          <AddPreferencesLevel2
-            show={showLevelPopup}
-            onClose={() => setLevelPopup(false)}
-            category={category}
-            optionType={optType}
-          />
-        );
-      case 4:
-        return (
-          <AddPreferencesLevel4
-            show={showLevelPopup}
-            onClose={() => setLevelPopup(false)}
-            category={category}
-            optionType={optType}
-          />
-        );
-      default:
-        return "";
-    }
+			case 1:
+			case 2:
+			case 3:
+				return (
+					<AddPreferencesLevel1
+						show={showLevelPopup}
+						onClose={() => setLevelPopup(false)}
+						category={category}
+						optionType={optType}
+					/>
+				); 
+			case 4:
+				return (
+					<AddPreferencesLevel4
+						show={showLevelPopup}
+						onClose={() => setLevelPopup(false)}
+						category={category}
+						optionType={optType}
+					/>
+				);
+			default:
+				return "";
+		}
   };
 
   return (
