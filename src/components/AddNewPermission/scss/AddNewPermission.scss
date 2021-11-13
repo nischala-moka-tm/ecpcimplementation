@@ -1,0 +1,24 @@
+.modal-newcategory {
+    .modal-dialog {
+      .modal-body {
+  
+        .category-level1,
+        .category-level2,
+        .category-level3,
+        .category-level4{
+          border-bottom: 1px solid #b1b1b1;
+        }
+      }
+    }
+  }
+
+.addLevelTwo{
+  text-align: right;
+
+  .plusmenu-danger{
+    border: none;
+    background-color:#000;
+    position: relative;
+    top: 10px;
+  }
+}

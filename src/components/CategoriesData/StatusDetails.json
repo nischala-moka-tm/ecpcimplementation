@@ -1,0 +1,29 @@
+[
+	{
+        "statusId":"1",
+        "status":"Pending Approval",
+		"colorCode": "#E86D0F"
+	},
+    {
+        "statusId":"2",
+        "status":"Live",
+		"colorCode": "#00FF00"
+	},
+    {
+        "statusId":"3",
+        "status":"Approved Pending Go-Live",
+		"colorCode": "#0346FF"
+	},
+    {
+        "statusId":"4",
+        "status":"Approved Expiring Soon",
+		"colorCode": "#FFEE03"
+	},
+    {
+        "statusId":"5",
+        "status":"Inactive",
+		"colorCode": "#CECECE"
+	}
+]
+		
+

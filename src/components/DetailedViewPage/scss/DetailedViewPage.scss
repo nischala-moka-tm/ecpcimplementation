@@ -1,0 +1,73 @@
+@import "../../../shared/scss/Common-Style.scss";
+
+.modal-detailedview {
+  .modal-dialog {
+    max-width: 920px;
+
+    .modal-content {
+      @media (min-width: $breakpoint-tablet) {
+        padding: 0.375em 0.375em 1.375em 0.375em;
+      }
+    }
+
+    .modal-body {
+
+      .level1,
+      .level2,
+      .level3 {
+        border-bottom: 1px solid #6C757D3B;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        input[readonly] {
+          background: none;
+        }
+
+        .sub-wrap {
+          @media (min-width: 375px) {
+            margin-left: 10px;
+          }
+
+          @media (min-width: $breakpoint-tablet) {
+            margin-left: 30px;
+          }
+        }
+      }
+
+      .level2,
+      .level3 {
+        @media (min-width: 375px) {
+          margin-left: 10px;
+        }
+
+        @media (min-width: $breakpoint-tablet) {
+          margin-left: 30px;
+        }
+      }
+
+      p {
+        &.plusmenu-danger {
+          cursor: pointer;
+          text-transform: capitalize;
+
+          svg {
+            margin-right: 10px;
+          }
+        }
+
+        &.collapse-fun {
+          color: #0112F3;
+          text-decoration: underline;
+          font-size: 12px;
+          line-height: 14px;
+          position: absolute;
+          right: 35px;
+          top: 10px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+@import "../../../shared/scss/Common-Style.scss";
+
+.disclaimer-wrap {
+  padding: 1em 2em;
+  max-width: 1500px;
+  margin: 0 auto;
+
+  @media (min-width: $breakpoint-tablet) {
+    padding: 2em 5em;
+  }
+
+  .logo-wrap {
+    padding: 0 0 3em 0;
+    display: flex;
+    justify-content: space-between;
+
+    img {
+      max-width: 100px;
+    }
+  }
+
+  .disclaimer-inner {
+
+    p,
+    ol,
+    li {
+      font-size: 14px;
+      line-height: 20px;
+      margin-bottom: 15px;
+    }
+
+    button {
+      max-width: 120px;
+      width: 120px;
+      border-radius: 0;
+      padding: 8px 0;
+      margin: 10px 0;
+
+      &.btn-primary {
+        background: #FFFFFF 0% 0% no-repeat padding-box;
+        border: 1px solid #000000;
+        color: #000000;
+        float: right;
+      }
+    }
+  }
+}

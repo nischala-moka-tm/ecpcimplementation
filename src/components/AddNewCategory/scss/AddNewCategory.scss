@@ -1,0 +1,71 @@
+@import "../../../shared/scss/Common-Style.scss";
+
+.modal-newcategory {
+  .modal-dialog {
+    .modal-body {
+
+      .category-level1,
+      .category-level2,
+      .category-level3,
+      .category-level4{
+        border-bottom: 1px solid #b1b1b1;
+      }
+    }
+  }
+}
+
+.status-codes {
+  font-size: 12px;
+  line-height: 18px;
+  padding-left: 15px;
+
+  @media (min-width: $breakpoint-tablet) {
+    position: absolute;
+    top: 75px;
+    right: 25px;
+  }
+
+  ul {
+    padding-left: 0;
+
+    li {
+      list-style: none;
+      position: relative;
+
+      &:before {
+        content: "";
+        position: absolute;
+        left: -13px;
+        width: 6px;
+        height: 6px;
+        top: 6px;
+        background: red;
+        border-radius: 50%;
+      }
+
+      &.live {
+        &:before {
+          background: #00FF00;
+        }
+      }
+
+      &.pending-approval {
+        &:before {
+          background: #E86D0F;
+        }
+      }
+
+      &.pending-go-live {
+        &:before {
+          background: #FF0000;
+        }
+      }
+
+      &.expiring-soon {
+        &:before {
+          background: #888888;
+        }
+      }
+    }
+  }
+}

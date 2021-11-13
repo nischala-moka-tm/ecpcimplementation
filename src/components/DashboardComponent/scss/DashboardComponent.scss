@@ -1,0 +1,87 @@
+@import "../../../shared/scss/Common-Style.scss";
+
+.recent-activity,
+.recent-updates {
+  overflow-x: auto;
+  @media (max-width: $breakpoint-tablet) {
+    margin-top: 30px;
+  }
+
+  p {
+    margin-left: 15px;
+    font-weight: bold;
+  }
+
+  table {
+    width: 100%;
+    font-family: $toyota-regular;
+    // overflow: auto;
+    // white-space: nowrap;
+
+    th,
+    td {
+      text-align: left;
+      padding: 10px 5px;
+    //   td:nth-last-child(2) {
+    //     text-align: right;
+    // }
+
+      @media (min-width: $breakpoint-tablet) {
+        padding: 10px;
+      }
+    }
+
+    th {
+      background: #D4D2D2 0% 0% no-repeat padding-box;
+      font-size: 15px;
+      line-height: 16px;
+      white-space: nowrap;
+      
+      @media (min-width: $breakpoint-tablet) {
+        font-size: 15px;
+        line-height: 22px;
+      }
+    }
+
+    td {
+      font-size: 10px;
+      line-height: 12px;
+      &:nth-last-child(1) {
+        text-align: center;
+      }
+      @media (min-width: $breakpoint-tablet) {
+        font-size: 13px;
+        line-height: 20px;
+      }
+
+      &.edit,
+      &.view {
+        cursor: pointer;
+        color: #2a79fd;
+      }
+    }
+
+    tr {
+      &:nth-child(even) {
+        background: #E3E3E3 0% 0% no-repeat padding-box;
+      }
+    }
+  }
+}
+
+
+.recent-updates {
+  margin-top: 40px;
+}
+
+.recent-activity-list {
+  text-align: right;
+  padding: 0 1.5rem 0 0;
+  font-size: 14px;
+}
+.recent-activity-list-one {
+  text-align: right;
+  padding: 0 1.5rem 0 0;
+  margin-bottom: 1rem;
+  font-size: 14px;
+}

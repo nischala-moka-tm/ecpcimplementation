@@ -1,0 +1,165 @@
+[
+	{
+		"statusId": "4",
+		"id": "1",
+		"Level": "1",
+		"Type": "Permission",
+		"categoryName": "Marketing",
+		"startDate": "01-05-2021 22:35",
+        "endDate": "05-05-2021 08:28",
+		"comments":"Sample Content Level 1",
+		"alternateEmailIdFlag": false,
+		"subCategories": [
+			{
+				"statusId": "2",
+				"id": "11",
+				"Level": "2",
+				"Type": "Permission",
+				"categoryName": "Vehicle Communications",
+				"startDate": "01-05-2021 12:34",
+				"endDate": "05-05-2021 18:12",
+				"comments":"Sample Content Level 2",
+				"modeOfCommunication":{
+					"email": true,
+					"mail": true,
+					"call": false,
+					"sms": false
+				},
+				"Options": [
+					{
+						"statusId": "3",
+						"id": "111",
+						"Level": "3",
+						"Type": "Permission",
+						"optName": "News letter"
+					},
+					{
+						"statusId": "1",
+						"id": "112",
+						"Level": "3",
+						"Type": "Permission",
+						"optName": "Sales Events"
+					},
+					{
+						"statusId": "4",
+						"id": "114",
+						"Level": "3",
+						"Type": "Permission",
+						"optName": "Owner Communications"
+					}
+				]
+			},
+			{
+				"statusId": "5",
+				"id": "12",
+				"Level": "2",
+				"Type": "Permission",
+				"categoryName": "Service Communications",
+				"Options": [
+					{
+						"statusId": "2",
+						"id": "121",
+						"Level": "3",
+						"Type": "Permission",
+						"optName": "National Service Promotions"
+					}
+				]
+			},
+			{
+				"statusId": "2",
+				"id": "13",
+				"Level": "2",
+				"Type": "Permission",
+				"categoryName": "Vehicle Connected Services",
+				"Options": [
+					{
+						"statusId": "2",
+						"id": "131",
+						"Level": "3",
+						"Type": "Permission",
+						"optName": "Trial Engagement"
+					},
+					{
+						"statusId": "1",
+						"id": "132",
+						"Level": "3",
+						"Type": "Permission",
+						"optName": "New Product Launches"
+					}
+				]
+			},
+			{
+				"statusId": "1",
+				"id": "14",
+				"Level": "2",
+				"Type": "Preference",
+				"categoryName": "Preferences",
+				"subCategories": [
+					{
+						"statusId": "1",
+						"id": "141",
+						"Level": "3",
+						"Type": "Preference",
+						"categoryName": "Vehicle of Intrest",
+						"subCategories": [
+							{
+								"statusId": "5",
+								"id": "1411",
+								"Level": "4",
+								"Type": "Preference",
+								"categoryName": "Cars & minivan",
+								"Options": [
+									{
+										"statusId": "5",
+										"id": "14111",
+										"Type": "Preference",
+										"optName": "Yaris"
+									},
+									{
+										"statusId": "5",
+										"id": "14112",
+										"Type": "Preference",
+										"optName": "Corolla"
+									},
+									{
+										"statusId": "4",
+										"id": "14113",
+										"Type": "Preference",
+										"optName": "Camry"
+									},
+									{
+										"statusId": "5",
+										"id": "14114",
+										"Type": "Preference",
+										"optName": "Matrix"
+									}
+								]
+							},
+							{
+								"statusId": "1",
+								"id": "1412",
+								"Level": "4",
+								"Type": "Preference",
+								"categoryName": "Trucks",
+								"Options": [
+									{
+										"statusId": "2",
+										"id": "14121",
+										"Type": "Preference",
+										"optName": "Tacoma"
+									},
+									{
+										"statusId": "4",
+										"id": "14122",
+										"Type": "Preference",
+										"optName": "Tundra"
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		]
+	}
+]

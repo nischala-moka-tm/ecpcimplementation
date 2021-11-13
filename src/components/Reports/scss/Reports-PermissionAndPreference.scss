@@ -1,0 +1,154 @@
+@import "../../../shared/scss/Common-Style.scss";
+
+.report-permpref {
+  .report-filters {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 10px 0;
+
+    @media (min-width: $breakpoint-tablet) {
+      justify-content: space-between;
+      flex-direction: row;
+      margin: -15px 0 6px;
+    }
+
+    input,
+    select {
+      border-radius: 0;
+      font-family: $toyota-regular;
+      width: 150px;
+      cursor: pointer;
+      margin: 10px;
+      padding: 0.25rem;
+      font-size: 14px;
+      border: 1px #CED4DA solid;
+
+      @media (min-width: $breakpoint-tablet) {
+        width: 165px;
+      }
+
+      &::placeholder {
+        font-size: 14px;
+        line-height: 20px;
+        color: #1D1D1D;
+      }
+
+      &:focus,
+      &:active,
+      &:hover {
+        outline: none;
+        box-shadow: none;
+      }
+
+      &:-webkit-autofill,
+      &:-webkit-autofill:hover,
+      &:-webkit-autofill:focus,
+      &:-webkit-autofill:active {
+        box-shadow: transparent;
+        -webkit-box-shadow: 0 0 0 30px white inset !important;
+      }
+    }
+
+    input {
+
+      &.search {
+        background: url("../../../assets/search-icon.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: right;
+      }
+    }
+
+    img {
+      &.excel-icon {
+        height: 25px;
+        padding-right: 20px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  p {
+    margin-left: 15px;
+  }
+
+  .table-details {
+    overflow-x: auto;
+
+    table {
+      width: 100%;
+      font-family: $toyota-regular;
+
+      th,
+      td {
+        padding: 10px 5px;
+
+        @media (min-width: $breakpoint-tablet) {
+          padding: 10px;
+        }
+      }
+
+      th {
+        background: #d4d2d2 0% 0% no-repeat padding-box;
+        font-size: 12px;
+        line-height: 16px;
+
+        @media (min-width: $breakpoint-tablet) {
+          font-size: 15px;
+          line-height: 17px;
+        }
+      }
+
+      td {
+        font-size: 10px;
+        line-height: 12px;
+
+        @media (min-width: $breakpoint-tablet) {
+          font-size: 13px;
+          line-height: 18px;
+        }
+
+        &.edit,
+        &.view {
+          cursor: pointer;
+        }
+      }
+
+      tr {
+        &:nth-child(even) {
+          background: #e3e3e3 0% 0% no-repeat padding-box;
+        }
+      }
+    }
+  }
+
+  .pagenation {
+    text-align: right;
+    margin-right: 1em;
+
+    .noof-records {
+      display: inline-block;
+      margin: 10px 10px;
+      color: #8f8f8f;
+    }
+
+    .pagenation-numbs {
+      display: inline-block;
+      margin: 10px 10px;
+
+      button {
+        display: inline;
+        padding: 7px 15px;
+        border: 1px #dee2e6 solid;
+        background-color: #fff;
+
+        &:focus {
+          background-color: #000;
+          color: #fff;
+        }
+      }
+    }
+  }
+}

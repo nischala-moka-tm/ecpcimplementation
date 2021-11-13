@@ -1,0 +1,79 @@
+@import "../../../shared/scss/Common-Style.scss";
+
+.dashboardadmin-wrapper {
+  overflow: hidden;
+
+  .dashboardadmin {
+    background: #F7F7F7 0% 0% no-repeat padding-box;
+    padding: 1em;
+
+    @media (min-width: $breakpoint-tablet) {
+      padding: 1em 1.5em;
+    }
+  }
+
+  .dashboardadmin-inner {
+    background: #fff 0% 0% no-repeat padding-box;
+    box-shadow: 0px 5px 20px #6C757D3B;
+    max-width: 1500px;
+    margin: 0 auto;
+
+    .navbar {
+      border: 1px #dee2e8 solid;
+      background-color: #f1f1f1;
+      font-size: 16px;
+      font-weight: bold;
+      padding: 0;
+
+      @media (min-width: $breakpoint-tablet) {
+        margin-top: 1.5em;
+      }
+
+      .navbar-nav {
+        flex-direction: row;
+        display: contents;
+
+        .nav-link {
+          display: inline-flex;
+          width: 50%;
+          margin: 0;
+          padding: 0.5em 1em;
+          font-size: 18px;
+          line-height: 26px;
+
+          @media (min-width: $breakpoint-tablet) {
+            font-size: 24px;
+            line-height: 30px;
+          }
+
+          &.active {
+            background-color: #e5e5e5;
+            border-bottom: 2px solid #000;
+          }
+        }
+      }
+    }
+  }
+
+  .dashboardadmin-body {
+    @media (min-width: $breakpoint-tablet) {
+      margin-top: 25px;
+    }
+
+    .left-col {
+      margin-top: 20px;
+
+      @media (min-width: $breakpoint-tablet) {
+        margin-top: 40px;
+      }
+    }
+
+    .left-col,
+    .right-col {
+      @media (max-width: $breakpoint-tablet) {
+        flex: 0 0 auto;
+        width: 100%;
+      }
+    }
+  }
+}
