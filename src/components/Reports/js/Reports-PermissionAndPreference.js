@@ -75,33 +75,26 @@ export function ReportsPermissionAndPreference() {
 	const [fromdate, setFromDate] = useState(DateFormat());
 	const [todate, setToDate] = useState(DateFormat());
 	const [reportData, setReportData] = useState(JsonData);
-
+	
 	useEffect(() => {
 		DataFetch(searchText);
 	}, [fromdate, todate, searchText, Category, Status]);
-	const onExclClick = () => {
-		let date = new Date();
-		const dataHeader = {
-			categoryname: "Category",
-			levelTwo: "Level 2",
-			levelThree: "Level 3",
-			levelFour: "Level 4",
-			createdBy: "CreatedBy",
-			categorydate: "Category Data",
-			lastmodified: "Last Modified",
-			status: "Status",
-		};
+	const onExclClick = ()=>{
+		let date = new Date ();
+		 
+	 
 		const filename = "Recent_Activity_Data_Report_" + date.toLocaleDateString();
 		const fileType =
 			"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
 		const fileExtension = ".xlsx";
-
-		const ws = XLSX.utils.json_to_sheet([dataHeader, ...reportData]);
+		
+		const ws = XLSX.utils.json_to_sheet(reportData);
 		const wb = { Sheets: { data: ws }, SheetNames: ["data"] };
 		const excelBuffer = XLSX.write(wb, { bookType: "xlsx", type: "array" });
 		const data = new Blob([excelBuffer], { type: fileType });
 		FileSaver.saveAs(data, filename + fileExtension);
-	};
+	 
+	}
 	const onSelectable = (e) => {
 		let { name, value } = e.target;
 		if (name === "Category") {
@@ -201,7 +194,7 @@ export function ReportsPermissionAndPreference() {
 		},
 
 		{
-			Header: "Category Date",
+			Header: "Created Date",
 			accessor: "categorydate",
 		},
 		{
