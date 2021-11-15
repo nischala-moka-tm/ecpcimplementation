@@ -12,6 +12,7 @@ import {
   EnableEmailSec,
   DateSec,
   CommentSec,
+  formatParentID,
 } from "../../CommonBlocks/js/CommonBlock";
 import { AxiosPost } from "../../AxiosMethods/ApiCalls";
 function AddPermissionLevel1(props) {
@@ -44,12 +45,12 @@ function AddPermissionLevel1(props) {
     const jsondata = {
       adminMetaData: {
         brand: requestData.brand,
-        categoryName: requestData.categoryname,
+        categoryName: formatParentID(requestData.categoryname),
         level: 1,
         rank: 1,
         enableAlternateEmailId: altEmail,
-        startDate: dateFormat(requestData.startDate).toString(),
-        endDate: dateFormat(requestData.endDate).toString(),
+        startDate: dateFormat(requestData.startDate),
+        endDate: dateFormat(requestData.endDate),
         comments: [
           {
             time: dateFormat(),
@@ -59,11 +60,8 @@ function AddPermissionLevel1(props) {
         ],
       },
     };
-
     AxiosPost({ jsondata, type: "category" });
     console.log(jsondata);
-    console.log(dateFormat(requestData.startDate).toString());
-    console.log(dateFormat(requestData.endDate));
   };
 
   return (
@@ -89,21 +87,23 @@ function AddPermissionLevel1(props) {
         <CategorySec
           category={requestData.categoryname}
           onChange={(e) => handleChange(e)}
+          onlyDelete={props.optionType === "Delete"}
         />
         <EnableEmailSec
           altEmail={altEmail}
-          onChange={(e) => onChangeAltMail(e)}
+          onChange={(e) => onChangeAltMail()}
+          onlyDelete={props.optionType === "Delete"}
         />
         <DateSec
           startDate={requestData.startDate}
           endDate={requestData.endDate}
           type={editOrDelete(props.optionType) ? datevalue : "text"}
           onChange={(e) => handleChange(e)}
+          onlyDelete={props.optionType === "Delete"}
         />
         <CommentSec
           commentText={requestData.commentText}
           onChange={(e) => handleChange(e)}
-          readonly={false}
           editOrDelete={editOrDelete(props.optionType)}
         />
 

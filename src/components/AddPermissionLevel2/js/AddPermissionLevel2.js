@@ -14,6 +14,7 @@ import {
   DateSec,
   CommentSec,
   dateFormat,
+  formatParentID,
 } from "../../CommonBlocks/js/CommonBlock";
 
 function AdminCreateNewPermission2(props) {
@@ -52,12 +53,19 @@ function AdminCreateNewPermission2(props) {
     console.log(requestuserData);
     const jsondata = {
       adminMetaData: {
-        subCategoryName: requestuserData.subCategoryName,
-        parentId: requestuserData.categoryname,
+        subCategoryName: requestuserData.categoryname,
+        parentId: formatParentID(requestuserData.categoryname),
         level: 2,
         rank: 2,
-        startDate: requestuserData.startDate,
-        endDate: requestuserData.endDate,
+        startDate: dateFormat(requestuserData.startDate),
+        endDate: dateFormat(requestuserData.endDate),
+        modeOfCommunication: {
+          email: requestuserData.mail,
+          mail: requestuserData.post,
+          call: requestuserData.call,
+          sms: requestuserData.sms,
+          default: [],
+        },
         comments: [
           {
             time: dateFormat(),
@@ -67,11 +75,8 @@ function AdminCreateNewPermission2(props) {
         ],
       },
     };
-
-    // const type = "subCategory";
-    // AxiosPost({ jsondata, type });
-
-		
+    console.log(jsondata);
+    // AxiosPost({ jsondata, type:"subCategory"});
   };
 
   return (
@@ -98,6 +103,7 @@ function AdminCreateNewPermission2(props) {
           <CategorySec
             category={requestuserData.categoryname}
             onChange={(e) => onInputChange(e)}
+            onlyDelete={props.optionType === "Delete"}
           />
 
           <DefaultCommunicationModes
@@ -106,6 +112,7 @@ function AdminCreateNewPermission2(props) {
             call={requestuserData.call}
             sms={requestuserData.sms}
             onChecked={(e) => onInputChecked(e)}
+            onlyDelete={props.optionType === "Delete"}
           />
 
           <DateSec
@@ -113,6 +120,7 @@ function AdminCreateNewPermission2(props) {
             endDate={requestuserData.endDate}
             type={editOrDelete(props.optionType) ? datevalue : "text"}
             onChange={(e) => onInputChange(e)}
+            onlyDelete={props.optionType === "Delete"}
           />
           <CommentSec
             commentText={requestuserData.commentText}

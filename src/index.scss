@@ -215,6 +215,10 @@ $breakpoint-desktop: 992px;
             width: 531px;
             height: 80px;
           }
+
+          &:read-only {
+            background: #e9ecef;
+          }
         }
 
         &.date-wrap {

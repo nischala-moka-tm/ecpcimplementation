@@ -22,11 +22,15 @@ export const editOrDelete = (optionType) => {
 };
 
 export function dateFormat(date) {
-  return date !== "-" ? Moment(date).format("DD/MM/YYYY hh:mm:ss a") : "-";
+  return Moment(date).format("MM/DD/YYYY hh:mm A");
 }
 
 export const editcondtion = (optionType) =>
   optionType === "Edit" ? "Update Permission" : "Delete Permission";
+
+export const formatParentID = (id) => {
+  return id.trim().replace(/ /g, "_").toUpperCase();
+};
 
 export const propcondition = (category) => {
   return {
@@ -68,6 +72,7 @@ export const CategorySec = (props) => {
           required={true}
           value={props.category}
           onChange={props.onChange}
+          readOnly={props.onlyDelete}
         />
       </Col>
     </Row>
@@ -92,6 +97,7 @@ export const EnableEmailSec = (props) => {
             className="shadow-none"
             name="altEmail"
             id="altEmailYes"
+            readOnly={props.onlyDelete}
           >
             Yes
           </ToggleButton>
@@ -102,6 +108,7 @@ export const EnableEmailSec = (props) => {
             className="shadow-none"
             name="altEmail"
             id="altEmailNo"
+            readOnly={props.onlyDelete}
           >
             No
           </ToggleButton>
@@ -117,10 +124,10 @@ export const CommentSec = (props) => {
       <Row>
         <Col>
           <textarea
-            placeholder="Comments"
+            placeholder="Comments*"
             name="commentText"
             value={props.commentText}
-            readOnly={props.readOnly}
+            readOnly={props.editOrDelete}
             onChange={props.onChange}
           ></textarea>
         </Col>
@@ -129,7 +136,7 @@ export const CommentSec = (props) => {
         <Row>
           <Col>
             <textarea
-              placeholder="Comments"
+              placeholder="Comments*"
               name="editCommentText"
               value={props.editCommentText}
               onChange={props.onChange}
@@ -154,6 +161,7 @@ export const DateSec = (props) => {
           required={true}
           onChange={props.onChange}
           value={props.startDate}
+          readOnly={props.onlyDelete}
         />
       </Col>
       <Col md={5}>
@@ -166,6 +174,7 @@ export const DateSec = (props) => {
           onFocus={(e) => (e.target.type = datevalue)}
           value={props.endDate}
           onChange={props.onChange}
+          readOnly={props.onlyDelete}
         />
       </Col>
     </Row>
