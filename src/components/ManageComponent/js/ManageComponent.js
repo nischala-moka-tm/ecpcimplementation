@@ -54,6 +54,7 @@ function SelectablePopupLevel(props) {
             onClose={() => setLevelPopup(false)}
             category={category}
             optionType={optType}
+            brand={category.brand}
           />
         );
       case 2:
@@ -63,6 +64,7 @@ function SelectablePopupLevel(props) {
             onClose={() => setLevelPopup(false)}
             category={category}
             optionType={optType}
+            brand={category.brand}
           />
         );
       case 3:
@@ -72,6 +74,7 @@ function SelectablePopupLevel(props) {
             onClose={() => setLevelPopup(false)}
             category={category}
             optionType={optType}
+            brand={category.brand}
           />
         );
       default:
@@ -81,29 +84,31 @@ function SelectablePopupLevel(props) {
   const LevelCondition2 = (category, optType) => {
     console.log(category.level);
     switch (category.level) {
-			case 1:
-			case 2:
-			case 3:
-				return (
-					<AddPreferencesLevel1
-						show={showLevelPopup}
-						onClose={() => setLevelPopup(false)}
-						category={category}
-						optionType={optType}
-					/>
-				); 
-			case 4:
-				return (
-					<AddPreferencesLevel4
-						show={showLevelPopup}
-						onClose={() => setLevelPopup(false)}
-						category={category}
-						optionType={optType}
-					/>
-				);
-			default:
-				return "";
-		}
+      case 1:
+      case 2:
+      case 3:
+        return (
+          <AddPreferencesLevel1
+            show={showLevelPopup}
+            onClose={() => setLevelPopup(false)}
+            category={category}
+            optionType={optType}
+            brand={category.brand}
+          />
+        );
+      case 4:
+        return (
+          <AddPreferencesLevel4
+            show={showLevelPopup}
+            onClose={() => setLevelPopup(false)}
+            category={category}
+            optionType={optType}
+            brand={category.brand}
+          />
+        );
+      default:
+        return "";
+    }
   };
 
   return (
@@ -168,7 +173,7 @@ const SubmitApproval = (props) => {
     </Modal>
   );
 };
-function MainCategory({ category }) {
+function MainCategory({ category, brand }) {
   const [SubC1, setSubC1] = useState(false);
 
   return (
@@ -182,12 +187,14 @@ function MainCategory({ category }) {
           <Status status={category.status} />
           {category.categoryName}
         </span>
-        <SelectablePopupLevel {...category} />
+        <SelectablePopupLevel {...category} brand={brand} />
       </div>
 
       {category.subCategory &&
         category.subCategory.map((subCateogry, pos) => {
-          return SubC1 && <SubCategory key={pos} {...subCateogry} />;
+          return (
+            SubC1 && <SubCategory key={pos} {...subCateogry} brand={brand} />
+          );
         })}
     </div>
   );
@@ -238,7 +245,13 @@ function ManageComponent(props) {
         {isLoading
           ? "Loading...."
           : categorydata.map((category, index) => {
-              return <MainCategory category={category} key={index} />;
+              return (
+                <MainCategory
+                  category={category}
+                  key={index}
+                  brand={props.brand}
+                />
+              );
             })}
       </div>
 
