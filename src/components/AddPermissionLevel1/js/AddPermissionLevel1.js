@@ -97,7 +97,7 @@ function AddPermissionLevel1(props) {
 					<HelpSection />
 				</Row>
 				<CategorySec
-					category={requestData.categoryName}
+					category={requestData.categoryname}
 					onChange={(e) => handleChange(e)}
 				/>
 				<EnableEmailSec
