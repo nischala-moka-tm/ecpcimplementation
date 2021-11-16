@@ -3,7 +3,7 @@ import { Button, Modal } from "react-bootstrap";
 import "../scss/ManageComponent.scss";
 import statusDetails from "../../CategoriesData/StatusDetails.json";
 import AddNewCategory from "../../AddNewCategory/js/AddNewCategory";
-import AddPreferencesLevel1 from "../../AddPreferencesLevel1/js/AddPreferencesLevel1";
+import AddPreferenceLevels from "../../AddPreferenceLevels/js/AddPreferenceLevels";
 import DetailedViewPage from "../../DetailedViewPage/js/DetailedViewPage";
 import { AxiosGet } from "../../AxiosMethods/ApiCalls";
 import AddPermissionLevels from "../../AddPermissionLevels/js/AddPermissionLevels";
@@ -55,40 +55,16 @@ function SelectablePopupLevel(props) {
   };
   const LevelCondition2 = (category, optType) => {
     return (
-      <AddPreferencesLevel1
-        show={showLevelPopup}
-        onClose={() => setLevelPopup(false)}
-        category={category}
-        optionType={optType}
-        brand={category.brand}
-      />
-    );
-    // switch (category.level) {
-    //   case 1:
-    //   case 2:
-    //   case 3:
-    //     return (
-    //       <AddPreferencesLevel1
-    //         show={showLevelPopup}
-    //         onClose={() => setLevelPopup(false)}
-    //         category={category}
-    //         optionType={optType}
-    //         brand={category.brand}
-    //       />
-    //     );
-    //   case 4:
-    //     return (
-    //       <AddPreferencesLevel4
-    //         show={showLevelPopup}
-    //         onClose={() => setLevelPopup(false)}
-    //         category={category}
-    //         optionType={optType}
-    //         brand={category.brand}
-    //       />
-    //     );
-    //   default:
-    //     return "";
-    // }
+			<AddPreferenceLevels
+				show={showLevelPopup}
+				onClose={() => setLevelPopup(false)}
+				category={category}
+				optionType={optType}
+				brand={category.brand}
+				level={optType === "Add" ? category.level + 1 : category.level}
+			/>
+		);
+     
   };
 
   return (
