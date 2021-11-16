@@ -8,6 +8,7 @@ import {
 } from "react-bootstrap";
 import Moment from "moment";
 import { FaRegQuestionCircle } from "react-icons/fa";
+import { BsCardImage } from "react-icons/bs";
 
 import CommunicationChannel from "../../CommunicationChannel/js/CommunicationChannel";
 
@@ -22,7 +23,7 @@ export const editOrDelete = (optionType) => {
 };
 
 export function dateFormat(date) {
-  return Moment(date).format("MM/DD/YYYY hh:mm A");
+  return Moment(date).format("MM/DD/YYYY hh:mm:ss A");
 }
 
 export const editcondtion = (optionType) =>
@@ -39,10 +40,10 @@ export const propcondition = (category) => {
     createdBy: "user",
     createdDate: dateFormat(),
     startDate: editOrDelete(category.optionType)
-      ? Moment(category.category.startDate).format("YYYY-MM-DDTHH:mm")
+      ? Moment(category.category.startDate).format("YYYY-MM-DDTHH:mm:ss")
       : "",
     endDate: editOrDelete(category.optionType)
-      ? Moment(category.category.endDate).format("YYYY-MM-DDTHH:mm")
+      ? Moment(category.category.endDate).format("YYYY-MM-DDTHH:mm:ss")
       : "",
     commentText:
       editOrDelete(category.optionType) && category.category.comments
@@ -90,8 +91,8 @@ export const jsondata = (categoryData) => {
     rank: categoryData.rank,
     createdBy: "user",
     createdDate: dateFormat(),
-    startDate: dateFormat(categoryData.startDate),
-    endDate: dateFormat(categoryData.endDate),
+    startDate: dateFormat(categoryData.startDate).toString(),
+    endDate: dateFormat(categoryData.endDate).toString(),
     comments: [
       {
         time: dateFormat(),
@@ -341,6 +342,27 @@ export const DefaultCommunicationModes = (props) => {
   );
 };
 
+export const ImageSec = (props) => {
+  return (
+    <Row className="image-upload">
+      <Col md={4}>
+        <label htmlFor="car-image">
+          <BsCardImage /> Upload Image
+        </label>
+      </Col>
+      <Col md={6}>
+        <FormControl
+          type="file"
+          id="car-image"
+          name="car-image"
+          accept="image/png, image/jpeg"
+          onChange={props.fileChangedHandler}
+          readOnly={props.onlyDelete}
+        />
+      </Col>
+    </Row>
+  );
+};
 export const FinalSelection = (props) => {
   return (
     <Row className="selection">
