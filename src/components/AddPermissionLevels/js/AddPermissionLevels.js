@@ -56,8 +56,9 @@ function AddPermissionLevels(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     let finaldata = jsondata(requestData);
-    // AxiosPost({ jsondata, type: "category" });
-    console.log(finaldata);
+    let type = "category";
+    if (finaldata.level !== 1) type = "subCategory";
+    AxiosPost({ finaldata, type });
   };
 
   return (
