@@ -210,13 +210,14 @@ function ManageComponent(props) {
     setLoading(true);
     const getDataApi = AxiosGet({
       brand: props.brand,
+      type: props.type
     });
     getDataApi.then((result) => {
       console.log(result);
       setLoading(false);
       setCategoriesData(result.data.data);
     });
-  }, [props.brand]);
+  }, [props.brand, props.type]);
   return (
     <div className="manage-component" id="manage-permission">
       <div className="sub-head">

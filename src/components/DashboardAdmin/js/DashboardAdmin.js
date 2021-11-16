@@ -66,12 +66,12 @@ function DashboardAdmin(props) {
                     <Route
                       exact
                       path={`${props.match.path}/dashboard`}
-                      component={DashboardComponent}
+                      component={() => <DashboardComponent brand={brand} type={"dashboard"}/>}
                     />
                     <Route
                       exact
                       path={`${props.match.path}/manage`}
-                      render={() => <ManageComponent brand={brand} />}
+                      render={() => <ManageComponent brand={brand} type={"metaDataList"}/>}
                     />
                     <Route
                       exact

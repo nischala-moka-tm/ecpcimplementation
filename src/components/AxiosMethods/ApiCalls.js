@@ -26,6 +26,6 @@ export function AxiosPost(props) {
 }
 export function AxiosGet(props) {
   return axios.get(
-    `https://518mvqcnuc.execute-api.us-west-2.amazonaws.com/dev/admin-meta-data/${props.brand}?fetch=metaDataList`
+    `https://518mvqcnuc.execute-api.us-west-2.amazonaws.com/dev/admin-meta-data/${props.brand}?fetch=${props.type}`
   );
 }

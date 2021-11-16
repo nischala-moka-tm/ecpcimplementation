@@ -7,8 +7,22 @@ import {
   Modal,
   Container,
 } from "react-bootstrap";
+import { BsCardImage } from "react-icons/bs";
+import {
+  editOrDelete,
+  dateFormat,
+  datevalue,
+  editcondtion,
+  propcondition,
+  HelpSection,
+  FinalSelection,
+  CategorySec,
+  EnableEmailSec,
+  DateSec,
+  CommentSec
+} from "../../CommonBlocks/js/CommonBlock";
 import "../scss/AddNewPreference.scss";
-import { datevalue } from "../../CommonBlocks/js/CommonBlock";
+// import { datevalue } from "../../CommonBlocks/js/CommonBlock";
 
 export const DateBlock = () => {
   return (
@@ -48,20 +62,53 @@ function AddNewPreference(props) {
             <Col md={12}>
               <p>Level 1*</p>
             </Col>
-            <Col md={10}>
+          </Row>
+          <CategorySec />
+          <DateBlock />
+          <CommentSec
+            readonly={false}
+          />
+        </div>
+        <div className="category-level2">
+          <Row className="category-sec">
+            <Col md={12}>
+              <p>Level 2*</p>
+            </Col>
+          </Row>
+          <CategorySec />
+          <DateBlock />
+          <CommentSec
+            readonly={false}
+          />
+        </div>
+        <div className="category-level3">
+          <Row className="category-sec">
+            <Col md={12}>
+              <p>Level 3*</p>
+            </Col>
+          </Row>
+          
+          <CategorySec />
+          <Row className="image-upload">
+            <Col md={4}>
+              <label htmlFor="car-image">
+                <BsCardImage /> Upload Image
+              </label>
+            </Col>
+            <Col md={6}>
               <FormControl
-                type="text"
-                name="categoryname"
-                placeholder="Category Name*"
+                type="file"
+                id="car-image"
+                name="car-image"
+                accept="image/png, image/jpeg"
               />
             </Col>
           </Row>
           <DateBlock />
-          <Row>
-            <Col>
-              <textarea placeholder="Comments"></textarea>
-            </Col>
-          </Row>
+          <FinalSelection />
+          <CommentSec
+            readonly={false}
+          />
         </div>
       </Modal.Body>
       <Modal.Footer>
