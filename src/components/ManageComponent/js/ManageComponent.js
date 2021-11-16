@@ -191,60 +191,71 @@ function ManageComponent(props) {
     });
   }, [props.brand, props.type]);
   return (
-    <div className="manage-component" id="manage-permission">
-      <div className="sub-head">
-        <p>Permissions/Preferences</p>
-      </div>
-      <div className="manage-body">
-        <div className="status-codes">
-          <ul>
-            <li className="live">Live</li>
-            <li className="pending-approval">Pending Approval</li>
-            <li className="pending-go-live">Approved Pending Go-Live</li>
-            <li className="expiring-soon">Approved Expiring Soon</li>
-            <li className="inactive">Inactive</li>
-          </ul>
-        </div>
-        <p className="reference-guide">
-          <a href="/">Click Here</a> for reference guide
-        </p>
-        <Button variant="primary" size="sm" onClick={() => SetLevel1(true)}>
-          Create new Category
-        </Button>
-        <p className="info-text">
-          To edit/delete existing category or subcategory right click on item
-        </p>
-
-        {isLoading
-          ? "Loading...."
-          : categorydata.map((category, index) => {
+		<div className="manage-component" id="manage-permission">
+			<div className="sub-head">
+				<p>Permissions/Preferences</p>
+			</div>
+			<div className="manage-body">
+				<div className="status-codes">
+					<ul>
+						{statusDetails.map(status=>{
               return (
-                <MainCategory
-                  category={category}
-                  key={index}
-                  brand={props.brand}
-                />
-              );
+								<li>
+									<span
+										className="status-roundend"
+										style={{ backgroundColor: status.colorCode }}
+									></span>
+									{status.status}
+								</li>
+							);
             })}
-      </div>
+						{/* <li className="live">Live</li>
+						<li className="pending-approval">Pending Approval</li>
+						<li className="pending-go-live">Approved Pending Go-Live</li>
+						<li className="expiring-soon">Approved Expiring Soon</li>
+						<li className="inactive">Inactive</li> */}
+					</ul>
+				</div>
+				<p className="reference-guide">
+					<a href="/">Click Here</a> for reference guide
+				</p>
+				<Button variant="primary" size="sm" onClick={() => SetLevel1(true)}>
+					Create new Category
+				</Button>
+				<p className="info-text">
+					To edit/delete existing category or subcategory right click on item
+				</p>
 
-      <div className="button-options">
-        <Button
-          variant="secondary"
-          size="sm"
-          onClick={() => setSubmitPref(!SubmitPref)}
-        >
-          Submit
-        </Button>
-        {SubmitPref && (
-          <SubmitApproval SubmitPref={SubmitPref} handleClose={handleClose} />
-        )}
-      </div>
-      {showLevel1 && (
-        <AddNewCategory show={showLevel1} onClose={() => SetLevel1(false)} />
-      )}
-    </div>
-  );
+				{isLoading
+					? "Loading...."
+					: categorydata.map((category, index) => {
+							return (
+								<MainCategory
+									category={category}
+									key={index}
+									brand={props.brand}
+								/>
+							);
+					  })}
+			</div>
+
+			<div className="button-options">
+				<Button
+					variant="secondary"
+					size="sm"
+					onClick={() => setSubmitPref(!SubmitPref)}
+				>
+					Submit
+				</Button>
+				{SubmitPref && (
+					<SubmitApproval SubmitPref={SubmitPref} handleClose={handleClose} />
+				)}
+			</div>
+			{showLevel1 && (
+				<AddNewCategory show={showLevel1} onClose={() => SetLevel1(false)} />
+			)}
+		</div>
+	);
 }
 function Status(props) {
   let bgColor = "";

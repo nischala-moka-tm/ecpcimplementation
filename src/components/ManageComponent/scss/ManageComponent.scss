@@ -50,47 +50,15 @@
         li {
           list-style: none;
           position: relative;
-
-          &:before {
-            content: "";
-            position: absolute;
-            left: -13px;
-            width: 6px;
-            height: 6px;
-            top: 6px;
-            background: red;
-            border-radius: 50%;
-          }
-
-          &.live {
-            &:before {
-              background: #00FF00;
+          
+            .status-roundend {
+              height: 6px;
+              width: 6px;
+              display: inline-block;
+              position: static;
+              border-radius: 50%;
+              margin-right: 3px;
             }
-          }
-
-          &.pending-approval {
-            &:before {
-              background: #E86D0F;
-            }
-          }
-
-          &.pending-go-live {
-            &:before {
-              background: #0346FF;
-            }
-          }
-
-          &.expiring-soon {
-            &:before {
-              background: #FFEE03;
-            }
-          }
-
-          &.inactive {
-            &:before {
-              background: #CECECE;
-            }
-          }
         }
       }
     }

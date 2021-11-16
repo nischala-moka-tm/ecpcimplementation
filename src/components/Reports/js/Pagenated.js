@@ -2,17 +2,6 @@ import React from "react";
 import { useTable, usePagination } from "react-table";
 
 export const Paginated = ({ columns, data }) => {
-  console.log(data);
-  console.log(
-    useTable(
-      {
-        columns,
-        data,
-        initialState: { pageIndex: 2 },
-      },
-      usePagination
-    )
-  );
   const {
     getTableProps,
     getTableBodyProps,

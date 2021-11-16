@@ -1,6 +1,4 @@
-import React from "react";
-import { useState, useEffect } from "react";
-
+import React ,{ useState, useEffect }  from "react";
 import "../scss/DashboardComponent.scss";
 import { FaRegEdit, FaRegEye } from "react-icons/fa";
 import { dateFormat } from "../../CommonBlocks/js/CommonBlock"; 
@@ -37,8 +35,7 @@ function DashboardComponent(props) {
               <th>Status</th>
               <th>Modify</th>
             </tr>
-          </thead>
-          {/* <tbody>{recentActivity}</tbody> */}
+          </thead> 
           <tbody>
             {recentActivityData.slice(0,4).map((data, index) => {
               return (
