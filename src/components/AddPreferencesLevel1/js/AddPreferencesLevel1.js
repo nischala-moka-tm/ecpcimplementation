@@ -14,6 +14,7 @@ import {
   FinalSelection,
   dateFormat,
   formatParentID,
+  ImageSec,
 } from "../../CommonBlocks/js/CommonBlock";
 const iterateComments = (comment) => {
   return `${comment.user} \n ${comment.time}  \n ${comment.comment}`;
@@ -35,6 +36,10 @@ function AddPreferencesLevel1(props) {
       [e.target.name]:
         e.target.type === "checked" ? e.target.checked : e.target.value,
     });
+  };
+  const fileChangedHandler = (event) => {
+    const formData = new FormData();
+    console.log(formData);
   };
   const handleClose = () => props.onClose();
   const onSubmit = (e) => {
@@ -86,7 +91,9 @@ function AddPreferencesLevel1(props) {
             onChange={(e) => onPreferChange(e)}
             onlyDelete={props.optionType === "Delete"}
           />
-
+          {props.level === 4 && (
+            <ImageSec onChange={() => fileChangedHandler()} />
+          )}
           <DateSec
             startDate={categoryPreferData.startDate}
             endDate={categoryPreferData.endDate}
