@@ -1,408 +1,408 @@
 @import "../../../shared/scss/Common-Style.scss";
 
 .manage-component {
-  .sub-head {
-    border-bottom: 1px solid #000;
+	.sub-head {
+		border-bottom: 1px solid #000;
 
-    p {
-      background: #191717 0% 0% no-repeat padding-box;
-      border: 1px solid #ccc5c5;
-      width: 260px;
-      color: #fff;
-      padding: 10px 20px;
-      margin-bottom: -1px;
-      text-align: center;
-      border-bottom: 0;
-    }
-  }
+		p {
+			background: #191717 0% 0% no-repeat padding-box;
+			border: 1px solid #ccc5c5;
+			width: 260px;
+			color: #fff;
+			padding: 10px 20px;
+			margin-bottom: -1px;
+			text-align: center;
+			border-bottom: 0;
+		}
+	}
 
-  .manage-body {
-    min-height: 300px;
-    margin: 20px 0 10px 20px;
-    position: relative;
+	.manage-body {
+		min-height: 300px;
+		margin: 20px 0 10px 20px;
+		position: relative;
 
-    @media (min-width: $breakpoint-tablet) {
-      margin: 20px 0 10px 35px;
-    }
+		@media (min-width: $breakpoint-tablet) {
+			margin: 20px 0 10px 35px;
+		}
 
-    .reference-guide,
-    .info-text {
-      font-size: 12px;
-      line-height: 14px;
-      margin: 10px 0;
-      padding-right: 20px;
-    }
+		.reference-guide,
+		.info-text {
+			font-size: 12px;
+			line-height: 14px;
+			margin: 10px 0;
+			padding-right: 20px;
+		}
 
-    .status-codes {
-      font-size: 12px;
-      line-height: 18px;
-      padding-left: 15px;
+		.status-codes {
+			font-size: 12px;
+			line-height: 18px;
+			padding-left: 15px;
 
-      @media (min-width: $breakpoint-tablet) {
-        position: absolute;
-        top: 0;
-        right: 25px;
-      }
+			@media (min-width: $breakpoint-tablet) {
+				position: absolute;
+				top: 0;
+				right: 25px;
+			}
 
-      ul {
-        padding-left: 0;
+			ul {
+				padding-left: 0;
 
-        li {
-          list-style: none;
-          position: relative;
-          
-            .status-roundend {
-              height: 6px;
-              width: 6px;
-              display: inline-block;
-              position: static;
-              border-radius: 50%;
-              margin-right: 3px;
-            }
-        }
-      }
-    }
+				li {
+					list-style: none;
+					position: relative;
 
-    .categories-list {
-      position: relative;
-      display: block;
+					.status-roundend {
+						height: 6px;
+						width: 6px;
+						display: inline-block;
+						position: static;
+						border-radius: 50%;
+						margin: 2px 5px;
+					}
+				}
+			}
+		}
 
-      div {
-        &.heading {
-          margin-bottom: 5px;
+		.categories-list {
+			position: relative;
+			display: block;
 
-          .heading-text {
-            color: #1d1d1d;
-            font-weight: bold;
+			div {
+				&.heading {
+					margin-bottom: 5px;
 
-            .status-roundend {
-              height: 8px;
-              width: 8px;
-              display: inline-block;
-              position: static;
-              border-radius: 50%;
-              margin-right: 3px;
-            }
-          }
+					.heading-text {
+						color: #1d1d1d;
+						font-weight: bold;
 
-          button {
-            &.plusmenu-danger {
-              cursor: pointer;
-              border: none;
-              border-radius: 50%;
-              background: transparent;
+						.status-roundend {
+							height: 8px;
+							width: 8px;
+							display: inline-block;
+							position: static;
+							border-radius: 50%;
+							margin-right: 3px;
+						}
+					}
 
-              i {
-                position: relative;
+					button {
+						&.plusmenu-danger {
+							cursor: pointer;
+							border: none;
+							border-radius: 50%;
+							background: transparent;
 
-                &.minus-checked {
-                  &::after {
-                    content: "";
-                    background: url("../../../assets/Group 162.svg");
-                    width: 20px;
-                    height: 22px;
-                    position: absolute;
-                    top: -18px;
-                    left: -15px;
-                    background-repeat: no-repeat;
-                  }
-                }
+							i {
+								position: relative;
 
-                &.plus-checked {
-                  &::after {
-                    content: "";
-                    background: url("../../../assets/Group 410.svg");
-                    width: 30px;
-                    height: 30px;
-                    position: absolute;
-                    top: -18px;
-                    left: -15px;
-                    background-repeat: no-repeat;
-                  }
-                }
-              }
-            }
-          }
+								&.minus-checked {
+									&::after {
+										content: "";
+										background: url("../../../assets/Group 162.svg");
+										width: 20px;
+										height: 22px;
+										position: absolute;
+										top: -18px;
+										left: -15px;
+										background-repeat: no-repeat;
+									}
+								}
 
-          &:hover {
-            .dropdown-content {
-              display: inline-block;
-              transition: 0.3s;
-            }
-          }
+								&.plus-checked {
+									&::after {
+										content: "";
+										background: url("../../../assets/Group 410.svg");
+										width: 30px;
+										height: 30px;
+										position: absolute;
+										top: -18px;
+										left: -15px;
+										background-repeat: no-repeat;
+									}
+								}
+							}
+						}
+					}
 
-          .dropdown-content {
-            display: none;
-            position: absolute;
-            width: 100%;
-            z-index: 100;
+					&:hover {
+						.dropdown-content {
+							display: inline-block;
+							transition: 0.3s;
+						}
+					}
 
-            .selectble-popup {
-              padding: 0;
-              background-color: #fff;
-              box-sizing: border-box;
-              border: 1px solid #707070;
-              max-width: fit-content;
-              display: flex;
-              flex-direction: column;
+					.dropdown-content {
+						display: none;
+						position: absolute;
+						width: 100%;
+						z-index: 100;
 
-              li {
-                padding: 0.2em 1.25em;
-                list-style: none;
-                font-family: $toyota-book;
-                font-size: 12px;
-                justify-content: start;
-                align-items: center;
-                text-align: left;
+						.selectble-popup {
+							padding: 0;
+							background-color: #fff;
+							box-sizing: border-box;
+							border: 1px solid #707070;
+							max-width: fit-content;
+							display: flex;
+							flex-direction: column;
 
-                &:hover {
-                  background-color: #000;
-                  color: #fff;
-                  width: auto;
-                  cursor: pointer;
-                }
-              }
-            }
-          }
-        }
-      }
+							li {
+								padding: 0.2em 1.25em;
+								list-style: none;
+								font-family: $toyota-book;
+								font-size: 12px;
+								justify-content: start;
+								align-items: center;
+								text-align: left;
 
-      .sub-category {
-        position: relative;
-        display: block;
+								&:hover {
+									background-color: #000;
+									color: #fff;
+									width: auto;
+									cursor: pointer;
+								}
+							}
+						}
+					}
+				}
+			}
 
-        ul {
-          padding-left: 30px;
-          margin-bottom: 5px;
+			.sub-category {
+				position: relative;
+				display: block;
 
-          li {
-            list-style: none;
-            font-size: 14px;
-            line-height: 20px;
+				ul {
+					padding-left: 30px;
+					margin-bottom: 5px;
 
-            .status-roundend {
-              height: 8px;
-              width: 8px;
-              display: inline-block;
-              position: static;
-              border-radius: 50%;
-              margin-right: 3px;
-            }
+					li {
+						list-style: none;
+						font-size: 14px;
+						line-height: 20px;
 
-            button {
-              &.plusmenu-danger {
-                cursor: pointer;
-                border: none;
-                border-radius: 50%;
-                background: transparent;
+						.status-roundend {
+							height: 8px;
+							width: 8px;
+							display: inline-block;
+							position: static;
+							border-radius: 50%;
+							margin-right: 3px;
+						}
 
-                i {
-                  position: relative;
+						button {
+							&.plusmenu-danger {
+								cursor: pointer;
+								border: none;
+								border-radius: 50%;
+								background: transparent;
 
-                  &.minus-checked {
-                    background: transparent;
+								i {
+									position: relative;
 
-                    &::after {
-                      content: "";
-                      background: url("../../../assets/Group 162.svg");
-                      width: 20px;
-                      height: 22px;
-                      position: absolute;
-                      top: -18px;
-                      left: -15px;
-                      background-repeat: no-repeat;
-                    }
-                  }
+									&.minus-checked {
+										background: transparent;
 
-                  &.plus-checked {
-                    &::after {
-                      content: "";
-                      background: url("../../../assets/Group 410.svg");
-                      width: 30px;
-                      height: 30px;
-                      position: absolute;
-                      top: -18px;
-                      left: -15px;
-                      background-repeat: no-repeat;
-                    }
-                  }
-                }
-              }
-            }
+										&::after {
+											content: "";
+											background: url("../../../assets/Group 162.svg");
+											width: 20px;
+											height: 22px;
+											position: absolute;
+											top: -18px;
+											left: -15px;
+											background-repeat: no-repeat;
+										}
+									}
 
-            &:hover {
-              .dropdown-content {
-                display: inline-block;
-              }
-            }
+									&.plus-checked {
+										&::after {
+											content: "";
+											background: url("../../../assets/Group 410.svg");
+											width: 30px;
+											height: 30px;
+											position: absolute;
+											top: -18px;
+											left: -15px;
+											background-repeat: no-repeat;
+										}
+									}
+								}
+							}
+						}
 
-            .dropdown-content {
-              display: none;
-              position: absolute;
-              width: 100%;
-              z-index: 100;
+						&:hover {
+							.dropdown-content {
+								display: inline-block;
+							}
+						}
 
-              .selectble-popup {
-                padding: 0;
-                background-color: #fff;
-                box-sizing: border-box;
-                border: 1px solid #707070;
-                max-width: fit-content;
-                display: flex;
-                flex-direction: column;
+						.dropdown-content {
+							display: none;
+							position: absolute;
+							width: 100%;
+							z-index: 100;
 
-                li {
-                  padding: 0.2em 1.25em;
-                  list-style: none;
-                  font-family: $toyota-book;
-                  font-size: 12px;
-                  justify-content: start;
-                  align-items: center;
-                  text-align: left;
+							.selectble-popup {
+								padding: 0;
+								background-color: #fff;
+								box-sizing: border-box;
+								border: 1px solid #707070;
+								max-width: fit-content;
+								display: flex;
+								flex-direction: column;
 
-                  &:hover {
-                    background-color: #000;
-                    color: #fff;
-                    width: auto;
-                    cursor: pointer;
-                  }
-                }
-              }
-            }
-          }
+								li {
+									padding: 0.2em 1.25em;
+									list-style: none;
+									font-family: $toyota-book;
+									font-size: 12px;
+									justify-content: start;
+									align-items: center;
+									text-align: left;
 
-          p {
-            &.category-item {
-              padding-left: 50px;
-            }
-          }
-        }
+									&:hover {
+										background-color: #000;
+										color: #fff;
+										width: auto;
+										cursor: pointer;
+									}
+								}
+							}
+						}
+					}
 
-        .sub-category {
-          ul {
-            li {
-              font-size: 12px;
-              line-height: 18px;
-            }
-          }
-        }
+					p {
+						&.category-item {
+							padding-left: 50px;
+						}
+					}
+				}
 
-        .final-category {
-          ul {
-            padding-left: 38px;
-            margin-bottom: 0;
+				.sub-category {
+					ul {
+						li {
+							font-size: 12px;
+							line-height: 18px;
+						}
+					}
+				}
 
-            li {
-              font-size: 12px;
-              line-height: 18px;
-            }
-          }
-        }
-      }
-    }
+				.final-category {
+					ul {
+						padding-left: 38px;
+						margin-bottom: 0;
 
-    .btn {
-      width: 200px;
-      height: 35px;
-      font-size: 16px;
-      line-height: 16px;
+						li {
+							font-size: 12px;
+							line-height: 18px;
+						}
+					}
+				}
+			}
+		}
 
-      &:focus {
-        box-shadow: none;
-      }
+		.btn {
+			width: 200px;
+			height: 35px;
+			font-size: 16px;
+			line-height: 16px;
 
-      &.btn-primary {
-        background: #fff;
-        color: #000;
-        border: 1px solid #707070;
-        border-radius: 1px;
-        margin-right: 20px;
-      }
-    }
-  }
+			&:focus {
+				box-shadow: none;
+			}
 
-  .button-options {
-    text-align: right;
-    margin: 15px 20px 35px 0;
+			&.btn-primary {
+				background: #fff;
+				color: #000;
+				border: 1px solid #707070;
+				border-radius: 1px;
+				margin-right: 20px;
+			}
+		}
+	}
 
-    @media (min-width: $breakpoint-tablet) {
-      margin: 15px 60px 35px 0;
-    }
+	.button-options {
+		text-align: right;
+		margin: 15px 20px 35px 0;
 
-    .btn {
-      width: 110px;
-      height: 55px;
-      font-size: 16px;
-      line-height: 16px;
+		@media (min-width: $breakpoint-tablet) {
+			margin: 15px 60px 35px 0;
+		}
 
-      &:focus {
-        box-shadow: none;
-      }
+		.btn {
+			width: 110px;
+			height: 55px;
+			font-size: 16px;
+			line-height: 16px;
 
-      &.btn-primary {
-        background: #fff;
-        color: #000;
-        border: 1px solid #707070;
-        border-radius: 1px;
-        margin-right: 20px;
-      }
+			&:focus {
+				box-shadow: none;
+			}
 
-      &.btn-secondary {
-        color: #fff;
-        background: #000000 0% 0% no-repeat padding-box;
-        border-radius: 1px;
-      }
-    }
-  }
+			&.btn-primary {
+				background: #fff;
+				color: #000;
+				border: 1px solid #707070;
+				border-radius: 1px;
+				margin-right: 20px;
+			}
+
+			&.btn-secondary {
+				color: #fff;
+				background: #000000 0% 0% no-repeat padding-box;
+				border-radius: 1px;
+			}
+		}
+	}
 }
 
 // Submit for Approval Pop Up
 
 .approval-popup {
-  .modal-dialog {
-    max-width: 450px;
-    position: absolute;
-    top: 20%;
+	.modal-dialog {
+		max-width: 450px;
+		position: absolute;
+		top: 20%;
 
-    @media (min-width: $breakpoint-tablet) {
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) !important;
-    }
+		@media (min-width: $breakpoint-tablet) {
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%) !important;
+		}
 
-    .modal-content {
-      padding-bottom: 0;
-    }
+		.modal-content {
+			padding-bottom: 0;
+		}
 
-    .modal-header {
-      border-bottom: none;
-    }
+		.modal-header {
+			border-bottom: none;
+		}
 
-    .modal-body {
-      padding: 1.5rem;
-      text-align: center;
+		.modal-body {
+			padding: 1.5rem;
+			text-align: center;
 
-      @media (min-width: $breakpoint-tablet) {
-        padding: 1.5rem 2.5rem;
-      }
+			@media (min-width: $breakpoint-tablet) {
+				padding: 1.5rem 2.5rem;
+			}
 
-      p {
-        font-family: $toyota-book;
-        font-size: 20px;
-        line-height: 36px;
-        color: #000;
-      }
+			p {
+				font-family: $toyota-book;
+				font-size: 20px;
+				line-height: 36px;
+				color: #000;
+			}
 
-      .button-options {
-        justify-content: center;
+			.button-options {
+				justify-content: center;
 
-        .btn {
-          &.btn-primary {
-            margin: 10px 0;
-            width: 200px;
-          }
-        }
-      }
-    }
-  }
+				.btn {
+					&.btn-primary {
+						margin: 10px 0;
+						width: 200px;
+					}
+				}
+			}
+		}
+	}
 }

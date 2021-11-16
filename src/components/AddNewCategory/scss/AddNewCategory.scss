@@ -1,71 +1,69 @@
 @import "../../../shared/scss/Common-Style.scss";
 
 .modal-newcategory {
-  .modal-dialog {
-    .modal-body {
+	.modal-dialog {
+		.modal-body {
+			.category-level1,
+			.category-level2,
+			.category-level3,
+			.category-level4 {
+				border-bottom: 1px solid #b1b1b1;
+			}
+			.status-codes {
+				font-size: 12px;
+				line-height: 18px;
+				padding-left: 15px;
 
-      .category-level1,
-      .category-level2,
-      .category-level3,
-      .category-level4{
-        border-bottom: 1px solid #b1b1b1;
-      }
-    }
-  }
-}
+				@media (min-width: $breakpoint-tablet) {
+					position: absolute;
+					top: 75px;
+					right: 25px;
+				}
 
-.status-codes {
-  font-size: 12px;
-  line-height: 18px;
-  padding-left: 15px;
+				ul {
+					padding-left: 0;
 
-  @media (min-width: $breakpoint-tablet) {
-    position: absolute;
-    top: 75px;
-    right: 25px;
-  }
+					li {
+						list-style: none;
+						position: relative;
 
-  ul {
-    padding-left: 0;
+						&:before {
+							content: "";
+							position: absolute;
+							left: -13px;
+							width: 6px;
+							height: 6px;
+							top: 6px;
+							background: red;
+							border-radius: 50%;
+						}
 
-    li {
-      list-style: none;
-      position: relative;
+						&.live {
+							&:before {
+								background: #00ff00;
+							}
+						}
 
-      &:before {
-        content: "";
-        position: absolute;
-        left: -13px;
-        width: 6px;
-        height: 6px;
-        top: 6px;
-        background: red;
-        border-radius: 50%;
-      }
+						&.pending-approval {
+							&:before {
+								background: #e86d0f;
+							}
+						}
 
-      &.live {
-        &:before {
-          background: #00FF00;
-        }
-      }
+						&.pending-go-live {
+							&:before {
+								background: #ff0000;
+							}
+						}
 
-      &.pending-approval {
-        &:before {
-          background: #E86D0F;
-        }
-      }
-
-      &.pending-go-live {
-        &:before {
-          background: #FF0000;
-        }
-      }
-
-      &.expiring-soon {
-        &:before {
-          background: #888888;
-        }
-      }
-    }
-  }
+						&.expiring-soon {
+							&:before {
+								background: #888888;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 }
