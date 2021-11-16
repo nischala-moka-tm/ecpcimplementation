@@ -3,13 +3,11 @@ import { Button, Modal } from "react-bootstrap";
 import "../scss/ManageComponent.scss";
 import statusDetails from "../../CategoriesData/StatusDetails.json";
 import AddNewCategory from "../../AddNewCategory/js/AddNewCategory";
-import AddPermissionLevel1 from "../../AddPermissionLevel1/js/AddPermissionLevel1";
-import AddPermissionLevel2 from "../../AddPermissionLevel2/js/AddPermissionLevel2";
-import AddPermissionLevel3 from "../../AddPermissionLevel3/js/AddPermissionLevel3";
 import AddPreferencesLevel1 from "../../AddPreferencesLevel1/js/AddPreferencesLevel1";
 import AddPreferencesLevel4 from "../../AddPreferencesLevel4/js/AddPreferencesLevel4";
 import DetailedViewPage from "../../DetailedViewPage/js/DetailedViewPage";
 import { AxiosGet } from "../../AxiosMethods/ApiCalls";
+import AddPermissionLevels from "../../AddPermissionLevels/js/AddPermissionLevels";
 
 import { FaPlusCircle, FaMinusCircle } from "react-icons/fa";
 
@@ -45,44 +43,18 @@ function SelectablePopupLevel(props) {
   const [optionType, setOptionType] = useState("Add");
   const [showDetailLevel, setShowDetailLevel] = useState(false);
   const LevelCondition1 = (category, optType) => {
-    console.log(category.level);
-    switch (category.level) {
-      case 1:
-        return (
-          <AddPermissionLevel1
-            show={showLevelPopup}
-            onClose={() => setLevelPopup(false)}
-            category={category}
-            optionType={optType}
-            brand={category.brand}
-          />
-        );
-      case 2:
-        return (
-          <AddPermissionLevel2
-            show={showLevelPopup}
-            onClose={() => setLevelPopup(false)}
-            category={category}
-            optionType={optType}
-            brand={category.brand}
-          />
-        );
-      case 3:
-        return (
-          <AddPermissionLevel3
-            show={showLevelPopup}
-            onClose={() => setLevelPopup(false)}
-            category={category}
-            optionType={optType}
-            brand={category.brand}
-          />
-        );
-      default:
-        return "";
-    }
+    return (
+      <AddPermissionLevels
+        show={showLevelPopup}
+        onClose={() => setLevelPopup(false)}
+        category={category}
+        optionType={optType}
+        brand={category.brand}
+        level={optType === "Add" ? category.level + 1 : category.level}
+      />
+    );
   };
   const LevelCondition2 = (category, optType) => {
-    console.log(category.level);
     switch (category.level) {
       case 1:
       case 2:
@@ -210,7 +182,7 @@ function ManageComponent(props) {
     setLoading(true);
     const getDataApi = AxiosGet({
       brand: props.brand,
-      type: props.type
+      type: props.type,
     });
     getDataApi.then((result) => {
       console.log(result);
@@ -257,9 +229,6 @@ function ManageComponent(props) {
       </div>
 
       <div className="button-options">
-        <Button variant="primary" size="sm">
-          Cancel
-        </Button>
         <Button
           variant="secondary"
           size="sm"

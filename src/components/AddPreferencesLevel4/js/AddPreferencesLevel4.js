@@ -84,7 +84,7 @@ function AddPreferencesLevel4(props) {
       <Modal.Body>
         <Row>
           <Col md={6}>
-            <p>Level 4</p>
+            <p>Level {props.category.level}</p>
           </Col>
           <HelpSection />
         </Row>

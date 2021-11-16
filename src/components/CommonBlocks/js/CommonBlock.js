@@ -34,6 +34,10 @@ export const formatParentID = (id) => {
 
 export const propcondition = (category) => {
   return {
+    level: category.level,
+    rank: category.category.rank,
+    createdBy: "user",
+    createdDate: dateFormat(),
     startDate: editOrDelete(category.optionType)
       ? Moment(category.category.startDate).format("YYYY-MM-DDTHH:mm")
       : "",
@@ -45,6 +49,88 @@ export const propcondition = (category) => {
         ? category.category.comments.map((d) => iterateComments(d))
         : "",
     editCommentText: "",
+  };
+};
+
+export const level1props = (props) => {
+  return {
+    brand: props.brand,
+    categoryname: editOrDelete(props.optionType)
+      ? props.category.categoryName
+      : "",
+    enableAlternateEmailId: false,
+  };
+};
+
+export const level2props = (props) => {
+  return {
+    categoryname: editOrDelete(props.optionType)
+      ? props.category.subCategoryName
+      : "",
+    mail: false,
+    post: false,
+    call: false,
+    sms: false,
+    parentId: props.category.id,
+  };
+};
+
+export const levelcommonprops = (props) => {
+  return {
+    categoryname: editOrDelete(props.optionType)
+      ? props.category.subCategoryName
+      : "",
+    parentId: props.category.id,
+  };
+};
+
+export const jsondata = (categoryData) => {
+  let resData = {
+    level: categoryData.level,
+    rank: categoryData.rank,
+    createdBy: "user",
+    createdDate: dateFormat(),
+    startDate: dateFormat(categoryData.startDate),
+    endDate: dateFormat(categoryData.endDate),
+    comments: [
+      {
+        time: dateFormat(),
+        user: "abc@xyz.com",
+        comment: categoryData.commentText,
+      },
+    ],
+  };
+  if (categoryData.level === 1) {
+    resData = {
+      ...resData,
+      brand: categoryData.brand,
+      categoryName: categoryData.categoryname,
+      enableAlternateEmailId: categoryData.enableAlternateEmailId,
+    };
+  } else if (categoryData.level === 2) {
+    resData = {
+      ...resData,
+      subCategoryName: categoryData.categoryname,
+      parentId: categoryData.parentId,
+      modeOfCommunication: {
+        email: categoryData.mail,
+        mail: categoryData.post,
+        call: categoryData.call,
+        sms: categoryData.sms,
+        default: [],
+      },
+    };
+  } else {
+    resData = {
+      ...resData,
+      subCategoryName: categoryData.categoryname,
+      parentId: categoryData.parentId,
+    };
+  }
+  return {
+    adminMetaData: {
+      ...resData,
+    },
   };
 };
 

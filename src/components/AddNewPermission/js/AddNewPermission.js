@@ -21,7 +21,7 @@ import {
   CategorySec,
   EnableEmailSec,
   DateSec,
-  CommentSec
+  CommentSec,
 } from "../../CommonBlocks/js/CommonBlock";
 import CommunicationChannel from "../../CommunicationChannel/js/CommunicationChannel";
 import { FaPlus } from "react-icons/fa";
@@ -74,9 +74,7 @@ function AddNewPermission(props) {
             onChange={(e) => onChangeAltMail(e)}
           />
           <DateBlock />
-          <CommentSec
-            readonly={false}
-          />
+          <CommentSec readonly={false} />
         </div>
         <div className="category-level2">
           <Row className="category-sec">
@@ -155,9 +153,7 @@ function AddNewPermission(props) {
             </Row>
           </div>
           <DateBlock />
-          <CommentSec
-            readonly={false}
-          />
+          <CommentSec readonly={false} />
         </div>
         <div className="category-level3">
           <Row className="category-sec">
@@ -171,9 +167,7 @@ function AddNewPermission(props) {
 
           <FinalSelection />
 
-          <CommentSec
-            readonly={false}
-          />
+          <CommentSec readonly={false} />
         </div>
         <div className="category-level4">
           <Row className="category-sec">
@@ -187,9 +181,7 @@ function AddNewPermission(props) {
 
           <FinalSelection />
 
-          <CommentSec
-            readonly={false}
-          />
+          <CommentSec readonly={false} />
         </div>
         <div className="category-level5">
           <Row className="category-sec">
@@ -203,21 +195,19 @@ function AddNewPermission(props) {
 
           <FinalSelection />
 
-          <CommentSec
-            readonly={false}
-          />
+          <CommentSec readonly={false} />
         </div>
       </Modal.Body>
       <Modal.Footer>
-      <Container fluid className="button-options">
-        <Button variant="primary" size="sm" onClick={() => onResetAll()}>
-          Cancel
-        </Button>
+        <Container fluid className="button-options">
+          <Button variant="primary" size="sm" onClick={() => onResetAll()}>
+            Cancel
+          </Button>
 
-        <Button type="submit" variant="secondary" size="sm">
-          Save as Drafts
-        </Button>
-      </Container>
+          <Button type="submit" variant="secondary" size="sm">
+            Submit for Approval
+          </Button>
+        </Container>
       </Modal.Footer>
     </div>
   );

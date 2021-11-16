@@ -1,96 +1,75 @@
 import React, { useState } from "react";
 import { Button, Row, Col, Modal, Form, Container } from "react-bootstrap";
-import "../scss/AddPermissionLevel2.scss";
 import { AxiosPost } from "../../AxiosMethods/ApiCalls";
-
 import {
   editOrDelete,
-  datevalue,
-  editcondtion,
   propcondition,
   HelpSection,
   CategorySec,
-  DefaultCommunicationModes,
   DateSec,
   CommentSec,
+  datevalue,
+  FinalSelection,
   dateFormat,
   formatParentID,
 } from "../../CommonBlocks/js/CommonBlock";
-
-function AdminCreateNewPermission2(props) {
-  const requserData = {
-    brand: props.brand,
+const iterateComments = (comment) => {
+  return `${comment.user} \n ${comment.time}  \n ${comment.comment}`;
+};
+function AddPreferencesLevels(props) {
+  const PreferData1 = {
     categoryname: editOrDelete(props.optionType)
       ? props.category.subCategoryName
       : "",
     ...propcondition(props),
-    mail: false,
-    post: false,
-    call: false,
-    sms: false,
   };
-  const [requestuserData, setRequestUserData] = useState(requserData);
+  const [categoryPreferData, setcategoryPreferData] = useState(PreferData1);
   const onResetAll = () => {
     handleClose();
   };
-  const onInputChange = (e) => {
-    setRequestUserData({
-      ...requestuserData,
-      [e.target.name]: e.target.value,
-    });
-  };
-  const onInputChecked = (e) => {
-    setRequestUserData({
-      ...requestuserData,
-      [e.target.id]: e.target.checked,
+  const onPreferChange = (e) => {
+    setcategoryPreferData({
+      ...categoryPreferData,
+      [e.target.name]:
+        e.target.type === "checked" ? e.target.checked : e.target.value,
     });
   };
   const handleClose = () => props.onClose();
   const onSubmit = (e) => {
+    console.log(categoryPreferData);
     e.preventDefault();
   };
+
   const handleSubmit = (e) => {
-    console.log(requestuserData);
     const jsondata = {
       adminMetaData: {
-        subCategoryName: requestuserData.categoryname,
-        parentId: formatParentID(requestuserData.categoryname),
+        subCategoryName: categoryPreferData.categoryname,
+        parentId: formatParentID(categoryPreferData.categoryname),
         level: 2,
         rank: 2,
-        startDate: dateFormat(requestuserData.startDate),
-        endDate: dateFormat(requestuserData.endDate),
-        modeOfCommunication: {
-          email: requestuserData.mail,
-          mail: requestuserData.post,
-          call: requestuserData.call,
-          sms: requestuserData.sms,
-          default: [],
-        },
+        startDate: dateFormat(categoryPreferData.startDate),
+        endDate: dateFormat(categoryPreferData.endDate),
         comments: [
           {
             time: dateFormat(),
             user: "abc@xyz.com",
-            comment: requestuserData.commentText,
+            comment: categoryPreferData.commentText,
           },
         ],
       },
     };
     console.log(jsondata);
-    // AxiosPost({ jsondata, type:"subCategory"});
+    //AxiosPost({ jsondata, type: "subCategory" });
   };
 
   return (
     <Modal
-      className="modalpopup modal-permissionlevel2"
+      className="modalpopup modal-preferenceslevel1"
       show={props.show}
       onHide={onResetAll}
     >
       <Modal.Header closeButton>
-        <p>
-          {props.optionType === "Add"
-            ? "Add New Permission"
-            : editcondtion(props.optionType)}
-        </p>
+        <p>Add New Preference</p>
       </Modal.Header>
       <Modal.Body>
         <Row>
@@ -101,30 +80,24 @@ function AdminCreateNewPermission2(props) {
         </Row>
         <Form id="form1" onSubmit={onSubmit}>
           <CategorySec
-            category={requestuserData.categoryname}
-            onChange={(e) => onInputChange(e)}
-            onlyDelete={props.optionType === "Delete"}
-          />
-
-          <DefaultCommunicationModes
-            mail={requestuserData.mail}
-            post={requestuserData.post}
-            call={requestuserData.call}
-            sms={requestuserData.sms}
-            onChecked={(e) => onInputChecked(e)}
+            category={categoryPreferData.categoryname}
+            onChange={(e) => onPreferChange(e)}
             onlyDelete={props.optionType === "Delete"}
           />
 
           <DateSec
-            startDate={requestuserData.startDate}
-            endDate={requestuserData.endDate}
+            startDate={categoryPreferData.startDate}
+            endDate={categoryPreferData.endDate}
             type={editOrDelete(props.optionType) ? datevalue : "text"}
-            onChange={(e) => onInputChange(e)}
+            onChange={(e) => onPreferChange(e)}
             onlyDelete={props.optionType === "Delete"}
           />
+
+          <FinalSelection />
+
           <CommentSec
-            commentText={requestuserData.commentText}
-            onChange={(e) => onInputChange(e)}
+            commentText={categoryPreferData.commentText}
+            onChange={(e) => onPreferChange(e)}
             readonly={false}
             editOrDelete={editOrDelete(props.optionType)}
           />
@@ -132,7 +105,6 @@ function AdminCreateNewPermission2(props) {
             <Button variant="primary" size="sm" onClick={() => onResetAll()}>
               Cancel
             </Button>
-
             {!editOrDelete(props.optionType) && (
               <Button variant="primary" size="sm">
                 Save for Later
@@ -152,4 +124,4 @@ function AdminCreateNewPermission2(props) {
     </Modal>
   );
 }
-export default AdminCreateNewPermission2;
+export default AddPreferencesLevels;
