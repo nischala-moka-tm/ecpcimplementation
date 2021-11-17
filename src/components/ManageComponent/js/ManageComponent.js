@@ -197,7 +197,7 @@ function ManageComponent(props) {
 			getApiCall();
 		} else toast.error(res);
 	};
-  
+
 	return (
 		<div className="manage-component" id="manage-permission">
 			<div className="sub-head">
@@ -207,9 +207,9 @@ function ManageComponent(props) {
 				<ToastContainer />
 				<div className="status-codes">
 					<ul>
-						{statusDetails.map((status) => {
+						{statusDetails.map((status, index) => {
 							return (
-								<li>
+								<li key={index}>
 									<span
 										className="status-roundend"
 										style={{ backgroundColor: status.colorCode }}
