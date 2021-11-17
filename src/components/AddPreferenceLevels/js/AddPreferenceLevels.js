@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Button, Row, Col, Modal, Container, Form } from "react-bootstrap";
+
 import {
 	editOrDelete,
 	datevalue,
@@ -29,8 +30,8 @@ function AddPreferenceLevels(props) {
 		};
 
 	const [requestData, setRequestData] = useState(userData);
+
 	const handleChange = (e) => {
-		console.log(e.target);
 		setRequestData({
 			...requestData,
 			[e.target.name]:
@@ -38,7 +39,6 @@ function AddPreferenceLevels(props) {
 		});
 	};
 	const onChecked = (e) => {
-		console.log(e.target);
 		setRequestData({
 			...requestData,
 			[e.target.id]: e.currentTarget.checked,
@@ -48,9 +48,22 @@ function AddPreferenceLevels(props) {
 		e.preventDefault();
 		let finaldata = jsondataForPreference(requestData);
 		const type = "subCategory";
-		 AxiosPost({ finaldata, type });
+		apicall(finaldata, type);
 	};
-
+	const apicall = async (finaldata, type) => {
+		let resText = "";
+		const result = await AxiosPost({ finaldata, type });
+		if (result.code === "200") {
+			props.onClose();
+			resText = result.messages[0].description;
+			props.notify(resText, "success");
+		} else {
+			result.messages.map((i) => {
+				resText += `${i.description}\n`;
+			});
+			props.notify(resText, "error");
+		}
+	};
 	const fileChangedHandler = (event) => {
 		const formData = new FormData();
 		console.log(formData);

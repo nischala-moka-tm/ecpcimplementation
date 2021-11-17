@@ -14,8 +14,8 @@ function DashboardComponent(props) {
       type: props.type
     });
     getDataApi.then((result) => {
-      setRecentUpdateData(result.data.data.recentUpdate);
-      setRecentActivityData(result.data.data.recentActivity);
+     // setRecentUpdateData(result.data.data.recentUpdate);
+     // setRecentActivityData(result.data.data.recentActivity);
     });
   }, [props.brand, props.type]);
 

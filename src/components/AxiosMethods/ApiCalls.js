@@ -2,8 +2,7 @@ import React from "react";
 import axios from "axios";
 
 export const AxiosPost = async (props) => {
-	let response = [];
-	axios
+	const response = await axios
 		.post(
 			`https://518mvqcnuc.execute-api.us-west-2.amazonaws.com/dev/admin-meta-data/Toyota?action=submit&type=${props.type}`,
 			JSON.stringify(props.finaldata),
@@ -12,14 +11,8 @@ export const AxiosPost = async (props) => {
 					"Content-type": "application/json",
 				},
 			}
-		)
-		.then((res) => {
-			response = [...response, res.data.status];
-		})
-		.catch((err) => {
-			console.log(err);
-		});
-	return response;
+		) 
+	return response.data.status;
 };
 export function AxiosGet(props) {
 	return axios.get(
