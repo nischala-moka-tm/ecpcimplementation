@@ -3,12 +3,12 @@ import "../scss/Reports-PermissionAndPreference.scss";
 import { Paginated } from "./Pagenated";
 import { AxiosGet } from "../../AxiosMethods/ApiCalls";
 import Moment from "moment";
-import {dateFormat } from '../../CommonBlocks/js/CommonBlock';
+import { dateFormat } from "../../CommonBlocks/js/CommonBlock";
 import excellogo from "./../../../assets/excel-icon.svg";
 import * as FileSaver from "file-saver";
 import * as XLSX from "xlsx";
 const DateFormat = () => {
-	 return Moment().format('YYYY-MM-DD');
+	return Moment().format("YYYY-MM-DD");
 };
 
 function Filters(props) {
@@ -71,9 +71,10 @@ export function ReportsPermissionAndPreference(props) {
 	const [todate, setToDate] = useState(DateFormat());
 	const [reportData, setReportData] = useState([]);
 	const [apiData, setapiData] = useState([]);
-	const forTable = (data) => { 
+	const [isNoDataFound, setNoDataFound] = useState(false);
+	const forTable = (data) => {
 		let tempArray = [];
-		data.map((item) => { 
+		data.map((item) => {
 			let obj = {
 				Category: item.levels[0],
 				"Level 2": item.levels[1] ? item.levels[1] : "N/A",
@@ -81,28 +82,30 @@ export function ReportsPermissionAndPreference(props) {
 				"Level 4": item.levels[3] ? item.levels[3] : "N/A",
 				"Level 5": item.levels[4] ? item.levels[4] : "N/A",
 				"Created By": item.createdBy,
-				"Created Date": Moment(item.createdDate).format('MM/DD/YYYY'),
+				"Created Date": Moment(item.createdDate).format("MM/DD/YYYY"),
 				"Last Modified": dateFormat(item.modifiedDate),
 				Status: item.status,
 			};
 			tempArray = [...tempArray, obj];
-		}); 
-		setapiData(tempArray);  
+		});
+		setapiData(tempArray);
 	};
 	useEffect(() => {
 		console.log(apiData);
 		DataFetch(searchText);
-	}, [fromdate, todate, searchText, Category, Status,apiData]);
+	}, [fromdate, todate, searchText, Category, Status, apiData]);
 	useEffect(() => {
 		const getDataApi = AxiosGet({
 			brand: props.brand,
 			type: props.type,
 		});
 		getDataApi.then((result) => {
-			forTable(result.data.data.recentUpdate);
+			result.data.data
+				? forTable(result.data.data.recentUpdate)
+				: setNoDataFound(true);
 		});
 	}, [props.brand, props.type]);
-	
+
 	const onExclClick = () => {
 		let date = new Date();
 
@@ -131,7 +134,6 @@ export function ReportsPermissionAndPreference(props) {
 	};
 	const Filter = () => {
 		const res = apiData.filter((data) => {
-			
 			return (
 				data["Category"] === Category &&
 				data["Status"] === Status &&
@@ -241,6 +243,7 @@ export function ReportsPermissionAndPreference(props) {
 				onExclClick={onExclClick}
 			/>
 			<Paginated columns={testcolumns} data={reportData} />
+			{isNoDataFound && <strong>No Data Found</strong>}
 		</div>
 	);
 }
