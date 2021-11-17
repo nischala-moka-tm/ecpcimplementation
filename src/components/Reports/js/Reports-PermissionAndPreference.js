@@ -3,6 +3,7 @@ import "../scss/Reports-PermissionAndPreference.scss";
 import { Paginated } from "./Pagenated";
 import { AxiosGet } from "../../AxiosMethods/ApiCalls";
 import Moment from "moment";
+import statusDetails from "../../CategoriesData/StatusDetails.json";
 import { dateFormat } from "../../CommonBlocks/js/CommonBlock";
 import excellogo from "./../../../assets/excel-icon.svg";
 import * as FileSaver from "file-saver";
@@ -43,8 +44,13 @@ function Filters(props) {
 				value={props.Status}
 				onChange={props.onSelectable}
 			>
-				<option value="Pending Approval">Pending Approval</option>
-				<option value="Approved">Approved</option>
+				{props.statusDetails.map((st, pos) => {
+					return (
+						<option key={pos} value={st.status}>
+							{st.status}
+						</option>
+					);
+				})}
 			</select>
 			<input
 				type="search"
@@ -105,7 +111,17 @@ export function ReportsPermissionAndPreference(props) {
 				: setNoDataFound(true);
 		});
 	}, [props.brand, props.type]);
-
+	statusDetails.sort(function (a, b) {
+		var statusA = a.status.toUpperCase();
+		var statusB = b.status.toUpperCase();
+		if (statusA < statusB) {
+			return -1; //nameA comes first
+		}
+		if (statusA > statusB) {
+			return 1;
+		}
+		return 0;
+	});
 	const onExclClick = () => {
 		let date = new Date();
 
@@ -241,6 +257,7 @@ export function ReportsPermissionAndPreference(props) {
 				fromdate={fromdate}
 				todate={todate}
 				onExclClick={onExclClick}
+				statusDetails={statusDetails}
 			/>
 			<Paginated columns={testcolumns} data={reportData} />
 			{isNoDataFound && <strong>No Data Found</strong>}
