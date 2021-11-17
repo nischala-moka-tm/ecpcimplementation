@@ -67,7 +67,7 @@ $breakpoint-mobile: 414px;
 $breakpoint-tablet: 768px;
 $breakpoint-desktop: 992px;
 
-// Manage Permission Pop Up Design
+// Manage Permission/Preferences Pop Up Design
 .modalpopup {
   .modal-dialog {
     max-width: 720px;
@@ -579,6 +579,19 @@ $breakpoint-desktop: 992px;
           border-radius: 1px;
         }
       }
+    }
+  }
+}
+
+//Toastify Design
+
+.Toastify {
+  .Toastify__toast-body {
+    >div {
+      font-family: $toyota-regular;
+      text-transform: capitalize;
+      font-size: 14px;
+      color: #000;
     }
   }
 }
