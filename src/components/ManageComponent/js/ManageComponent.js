@@ -178,7 +178,6 @@ function ManageComponent(props) {
 
 	useEffect(() => {
 		getApiCall();
-    notify("test response", "success");
 	}, [props.brand, props.type]);
 	const getApiCall = () => {
 		setLoading(true);
