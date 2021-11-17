@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import {
-  FormControl,
   Button,
   Row,
   Col,
   Modal,
-  ToggleButton,
-  Form,
   ToggleButtonGroup,
   Container,
 } from "react-bootstrap";
@@ -24,7 +21,6 @@ import {
   CommentSec,
 } from "../../CommonBlocks/js/CommonBlock";
 import CommunicationChannel from "../../CommunicationChannel/js/CommunicationChannel";
-import { FaPlus } from "react-icons/fa";
 import "../scss/AddNewPermission.scss";
 
 import { DateBlock } from "../../AddNewPreference/js/AddNewPreference";
