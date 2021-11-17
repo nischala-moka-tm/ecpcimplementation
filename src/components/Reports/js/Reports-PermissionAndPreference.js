@@ -35,8 +35,13 @@ function Filters(props) {
 				value={props.Category}
 				onChange={props.onSelectable}
 			>
-				<option value="Marketing">Marketing</option>
-				<option value="Survey">Survey</option>
+				{props.categories.map((cat, pos) => {
+					return (
+						<option key={pos} value={cat}>
+							{cat}
+						</option>
+					);
+				})}
 			</select>
 			<select
 				id="Status"
@@ -72,12 +77,15 @@ function Filters(props) {
 export function ReportsPermissionAndPreference(props) {
 	const [searchText, setSearchText] = useState("");
 	const [Category, setCategory] = useState("Marketing");
-	const [Status, setStatus] = useState("Approved");
+	const [Status, setStatus] = useState("Pending Approval");
 	const [fromdate, setFromDate] = useState(DateFormat());
 	const [todate, setToDate] = useState(DateFormat());
 	const [reportData, setReportData] = useState([]);
 	const [apiData, setapiData] = useState([]);
 	const [isNoDataFound, setNoDataFound] = useState(false);
+	let [categories, setCategories] = useState([]);
+	const userRole = "ECPC_TOYOTA_ADMIN";
+	const userId = 1234567;
 	const forTable = (data) => {
 		let tempArray = [];
 		data.map((item) => {
@@ -97,20 +105,26 @@ export function ReportsPermissionAndPreference(props) {
 		setapiData(tempArray);
 	};
 	useEffect(() => {
-		console.log(apiData);
 		DataFetch(searchText);
 	}, [fromdate, todate, searchText, Category, Status, apiData]);
 	useEffect(() => {
-		const getDataApi = AxiosGet({
+		AxiosGet({
 			brand: props.brand,
-			type: props.type,
-		});
-		getDataApi.then((result) => {
-			result.data.data
-				? forTable(result.data.data.recentUpdate)
-				: setNoDataFound(true);
+			type: `${props.type}&userId=${userId}&role=${userRole}`,
+		}).then((res) => {
+			res.data.data ? Load(res.data.data.recentUpdate) : setNoDataFound(true);
 		});
 	}, [props.brand, props.type]);
+	const Load = (data) => {
+		let loaditems = [];
+		forTable(data);
+		data.map((item) => {
+			loaditems = [...loaditems, item.levels[0]];
+		});
+
+		setCategories(Array.from(new Set(loaditems)));
+	};
+
 	statusDetails.sort(function (a, b) {
 		var statusA = a.status.toUpperCase();
 		var statusB = b.status.toUpperCase();
@@ -258,6 +272,7 @@ export function ReportsPermissionAndPreference(props) {
 				todate={todate}
 				onExclClick={onExclClick}
 				statusDetails={statusDetails}
+				categories={categories}
 			/>
 			<Paginated columns={testcolumns} data={reportData} />
 			{isNoDataFound && <strong>No Data Found</strong>}

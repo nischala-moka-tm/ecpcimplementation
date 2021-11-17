@@ -8,21 +8,25 @@ function DashboardComponent(props) {
 	const [recentUpdateData, setRecentUpdateData] = useState([]);
 	const [recentActivityData, setRecentActivityData] = useState([]);
 	const [isNoDataFound, setNoDataFound] = useState(false);
+	const userRole = "ECPC_LEXUS_ADMIN";
+	const userId = 1234567;
 	useEffect(() => {
 		const getDataApi = AxiosGet({
 			brand: props.brand,
-			type: props.type,
+			type: `${props.type}&userId=${userId}&role=${userRole}`,
 		});
-		getDataApi.then((result) => {
-			result.data.data
-				? setRecentUpdateData(result.data.data.recentUpdate)
-				: setNoDataFound(true);
-			result.data.data
-				? setRecentActivityData(result.data.data.recentActivity)
-				: setNoDataFound(true);
+		getDataApi.then((result) => { 
+			result.data.data ? LoadData(result.data.data) : setNoDataFound(true);
 		});
 	}, [props.brand, props.type]);
-
+	const LoadData = (data) => {
+		let res = {
+			userId,
+			userRole,
+			data
+		}
+		console.log(res);
+	};
 	return (
 		<div className="dashboard-component" id="dashboard-page">
 			<div className="recent-activity">
@@ -41,22 +45,23 @@ function DashboardComponent(props) {
 						</tr>
 					</thead>
 					<tbody>
-						{recentActivityData.slice(0, 4).map((data, index) => {
-							return (
-								<tr key={index}>
-									<td>{data.levels[0]}</td>
-									<td>{data.levels[1]}</td>
-									<td>{data.levels[2]}</td>
-									<td>{data.levels[3]}</td>
-									<td>{dateFormat(data.createdDate)}</td>
-									<td>{dateFormat(data.modifiedDate)}</td>
-									<td>{data.status}</td>
-									<td className="edit">
-										<FaRegEdit />
-									</td>
-								</tr>
-							);
-						})}
+						{recentActivityData &&
+							recentActivityData.slice(0, 4).map((data, index) => {
+								return (
+									<tr key={index}>
+										<td>{data.levels[0]}</td>
+										<td>{data.levels[1]}</td>
+										<td>{data.levels[2]}</td>
+										<td>{data.levels[3]}</td>
+										<td>{dateFormat(data.createdDate)}</td>
+										<td>{dateFormat(data.modifiedDate)}</td>
+										<td>{data.status}</td>
+										<td className="edit">
+											<FaRegEdit />
+										</td>
+									</tr>
+								);
+							})}
 					</tbody>
 				</table>
 				{isNoDataFound && <strong>No Data Found</strong>}
@@ -83,39 +88,40 @@ function DashboardComponent(props) {
 					</thead>
 					{/* <tbody>{recentUpdates}</tbody> */}
 					<tbody>
-						{recentUpdateData.slice(0, 4).map((data, index) => {
-							return (
-								<tr key={index}>
-									<td>
-										{data.levels[0] === undefined ? "N/A" : data.levels[0]}
-									</td>
-									<td>
-										{data.levels[1] === undefined ? "N/A" : data.levels[1]}
-									</td>
-									<td>
-										{data.levels[2] === undefined ? "N/A" : data.levels[2]}
-									</td>
-									<td>
-										{data.levels[3] === undefined ? "N/A" : data.levels[3]}
-									</td>
-									<td>
-										{data.createdDate === ""
-											? "N/A"
-											: dateFormat(data.createdDate)}
-									</td>
-									<td>{data.createdBy === "" ? "N/A" : data.createdBy}</td>
-									<td>
-										{data.modifiedDate === ""
-											? "N/A"
-											: dateFormat(data.modifiedDate)}
-									</td>
-									<td>{data.status === "" ? "N/A" : data.status}</td>
-									<td className="view">
-										<FaRegEye />
-									</td>
-								</tr>
-							);
-						})}
+						{recentUpdateData &&
+							recentUpdateData.slice(0, 4).map((data, index) => {
+								return (
+									<tr key={index}>
+										<td>
+											{data.levels[0] === undefined ? "N/A" : data.levels[0]}
+										</td>
+										<td>
+											{data.levels[1] === undefined ? "N/A" : data.levels[1]}
+										</td>
+										<td>
+											{data.levels[2] === undefined ? "N/A" : data.levels[2]}
+										</td>
+										<td>
+											{data.levels[3] === undefined ? "N/A" : data.levels[3]}
+										</td>
+										<td>
+											{data.createdDate === ""
+												? "N/A"
+												: dateFormat(data.createdDate)}
+										</td>
+										<td>{data.createdBy === "" ? "N/A" : data.createdBy}</td>
+										<td>
+											{data.modifiedDate === ""
+												? "N/A"
+												: dateFormat(data.modifiedDate)}
+										</td>
+										<td>{data.status === "" ? "N/A" : data.status}</td>
+										<td className="view">
+											<FaRegEye />
+										</td>
+									</tr>
+								);
+							})}
 					</tbody>
 				</table>
 				{isNoDataFound && <strong>No Data Found</strong>}
