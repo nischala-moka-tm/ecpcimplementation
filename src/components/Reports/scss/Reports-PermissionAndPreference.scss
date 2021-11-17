@@ -52,13 +52,17 @@
     }
 
     input {
-
       &.search {
         background: url("../../../assets/search-icon.png");
-        background-size: contain;
         background-repeat: no-repeat;
         background-position: right;
+        background-size: 10% 60%;
+
+        &:focus {
+          background: none;
+        }
       }
+
     }
 
     img {
