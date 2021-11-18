@@ -135,36 +135,36 @@ export const jsondata = (categoryData) => {
   };
 };
 export const jsondataForPreference = (categoryData) => {
-	let resData = {
-		level: categoryData.level,
-		rank: categoryData.rank,
-		createdBy: "user",
-		createdDate: dateFormat(),
-		startDate: dateFormat(categoryData.startDate).toString(),
-		endDate: dateFormat(categoryData.endDate).toString(),
-		subCategoryName: categoryData.categoryname,
-		parentId: categoryData.parentId,
-		comments: [
-			{
-				time: dateFormat(),
-				user: "abc@xyz.com",
-				comment: categoryData.commentText,
-			},
-		],
-	}; 
-  if (categoryData.level===4){
+  let resData = {
+    level: categoryData.level,
+    rank: categoryData.rank,
+    createdBy: "user",
+    createdDate: dateFormat(),
+    startDate: dateFormat(categoryData.startDate).toString(),
+    endDate: dateFormat(categoryData.endDate).toString(),
+    subCategoryName: categoryData.categoryname,
+    parentId: categoryData.parentId,
+    comments: [
+      {
+        time: dateFormat(),
+        user: "abc@xyz.com",
+        comment: categoryData.commentText,
+      },
+    ],
+  };
+  if (categoryData.level === 4) {
     resData = {
-			...resData,
-			imageFlag: categoryData.imageFlag,
-			uploadImage: categoryData.uploadImage,
-			isFinalLevel:categoryData.isFinalLevel,
-		};
+      ...resData,
+      imageFlag: categoryData.imageFlag,
+      uploadImage: categoryData.uploadImage,
+      isFinalLevel: categoryData.isFinalLevel,
+    };
   }
-		return {
-			adminMetaData: {
-				...resData,
-			},
-		};
+  return {
+    adminMetaData: {
+      ...resData,
+    },
+  };
 };
 export const HelpSection = () => {
   return (
@@ -292,7 +292,6 @@ export const DateSec = (props) => {
           onFocus={(e) => (e.target.type = datevalue)}
           value={props.endDate}
           onChange={props.onChange}
-          readOnly={props.onlyDelete}
         />
       </Col>
     </Row>
@@ -396,16 +395,16 @@ export const ImageSec = (props) => {
 };
 export const FinalSelection = (props) => {
   return (
-		<Row className="selection">
-			<Col md={12}>
-				<FormControl
-					name="isFinalLevel"
-					type="checkbox"
-					id="isFinalLevel"
-					onChange={props.onChange}
-				/>
-				<label htmlFor="isFinalLevel">Is this final level</label>
-			</Col>
-		</Row>
-	);
+    <Row className="selection">
+      <Col md={12}>
+        <FormControl
+          name="isFinalLevel"
+          type="checkbox"
+          id="isFinalLevel"
+          onChange={props.onChange}
+        />
+        <label htmlFor="isFinalLevel">Is this final level</label>
+      </Col>
+    </Row>
+  );
 };

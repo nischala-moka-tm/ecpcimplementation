@@ -5,11 +5,13 @@ import {
   Modal,
   ToggleButton,
   ToggleButtonGroup,
+  Container,
+  Button,
 } from "react-bootstrap";
 import "../scss/AddNewCategory.scss";
 import { FaRegQuestionCircle } from "react-icons/fa";
-import AddNewPermission from "../../AddNewPermission/js/AddNewPermission";
-import AddNewPreference from "../../AddNewPreference/js/AddNewPreference";
+import AddNewPermissionList from "../../AddNewPermissionList/js/AddNewPermissionList";
+import AddNewPreferenceList from "../../AddNewPreferenceList/js/AddNewPreferenceList";
 
 function AddNewCategory(props) {
   const [{ Permission, Preference }, setCategory] = useState({
@@ -25,6 +27,7 @@ function AddNewCategory(props) {
     handleClose();
   };
   const handleClose = () => props.onClose();
+
   return (
     <Modal
       className="modalpopup modal-newcategory"
@@ -86,8 +89,19 @@ function AddNewCategory(props) {
             </div>
           </Col>
         </Row>
+        {Permission ? <AddNewPermissionList /> : <AddNewPreferenceList />}
       </Modal.Body>
-      {Permission ? <AddNewPermission onClose={props} /> : <AddNewPreference />}
+      <Modal.Footer>
+        <Container fluid className="button-options">
+          <Button variant="primary" size="sm" onClick={() => onResetAll()}>
+            Cancel
+          </Button>
+
+          <Button type="submit" variant="secondary" size="sm">
+            Submit for Approval
+          </Button>
+        </Container>
+      </Modal.Footer>
     </Modal>
   );
 }
