@@ -17,7 +17,7 @@ import {
   levelcommonprops,
   jsondata,
 } from "../../CommonBlocks/js/CommonBlock";
-import { AxiosPost } from "../../AxiosMethods/ApiCalls";
+import { AxiosPost, AxiosPut } from "../../AxiosMethods/ApiCalls";
 function AddPermissionLevels(props) {
   let userData = {
     ...propcondition(props),
@@ -54,13 +54,28 @@ function AddPermissionLevels(props) {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    const finaldata = jsondata(requestData);
+    const finaldata = jsondata({...requestData , comments: props.category.comments});
     const type = "subCategory";
-    apicall(finaldata, type);
+    const func = "add";
+    apicall(finaldata, type, func);
   };
-  const apicall = async (finaldata, type) => {
+  const handleEditSubmit = (e) => {
+    e.preventDefault();
+    const finaldata = jsondata(requestData);
+    let type = "subCategory";
+    props.level === 1 && (type = "category");
+    const func = "edit";
+    apicall(finaldata, type, func);
+  };
+
+  const apicall = async (finaldata, type, func) => {
     let resText = "";
-    const result = await AxiosPost({ finaldata, type });
+    console.log(AxiosPut({ finaldata, type }));
+    console.log(finaldata);
+    const result =
+      func === "add"
+        ? await AxiosPost({ finaldata, type, brand: props.brand })
+        : await AxiosPut({ finaldata, type, brand: props.brand });
     if (result.code === "200") {
       props.onClose();
       resText = result.messages[0].description;
@@ -86,7 +101,12 @@ function AddPermissionLevels(props) {
         </p>
       </Modal.Header>
       <Modal.Body>
-        <Form id="form1" onSubmit={handleSubmit}>
+        <Form
+          id="form1"
+          onSubmit={
+            props.optionType === "Add" ? handleSubmit : handleEditSubmit
+          }
+        >
           <Row>
             <Col md={12}>
               <p>Level {props.level}</p>

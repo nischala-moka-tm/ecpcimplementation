@@ -4,7 +4,7 @@ import { Button, Row, Col, Modal, Container, Form } from "react-bootstrap";
 import {
   editOrDelete,
   datevalue,
-  editcondtion,
+  editcondtionPreference,
   propcondition,
   HelpSection,
   CategorySec,
@@ -49,11 +49,12 @@ function AddPreferenceLevels(props) {
     e.preventDefault();
     let finaldata = jsondataForPreference(requestData);
     const type = "subCategory";
+    console.log(finaldata);
     apicall(finaldata, type);
   };
   const apicall = async (finaldata, type) => {
     let resText = "";
-    const result = await AxiosPost({ finaldata, type });
+    const result = await AxiosPost({ finaldata, type, brand: props.brand });
     if (result.code === "200") {
       props.onClose();
       resText = result.messages[0].description;
@@ -71,15 +72,15 @@ function AddPreferenceLevels(props) {
   };
   return (
     <Modal
-      className="modalpopup modal-permissionlevel1"
+      className="modalpopup modal-preference"
       show={props.show}
       onHide={() => props.onClose()}
     >
       <Modal.Header closeButton>
         <p>
           {props.optionType === "Add"
-            ? "Add New Permission"
-            : editcondtion(props.optionType)}
+            ? "Add New Preference"
+            : editcondtionPreference(props.optionType)}
         </p>
       </Modal.Header>
       <Modal.Body>

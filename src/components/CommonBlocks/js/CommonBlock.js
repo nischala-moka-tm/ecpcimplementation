@@ -29,10 +29,18 @@ export function dateFormat(date) {
 export const editcondtion = (optionType) =>
   optionType === "Edit" ? "Update Permission" : "Delete Permission";
 
+export const editcondtionPreference = (optionType) =>
+  optionType === "Edit" ? "Update Preference" : "Delete Preference";
+
 export const formatParentID = (id) => {
   return id.trim().replace(/ /g, "_").toUpperCase();
 };
 
+export const forEachComments = (comments) => {
+  let eachComment = "";
+  comments.map((d) => (eachComment += iterateComments(d)));
+  return eachComment;
+};
 export const propcondition = (category) => {
   return {
     level: category.level,
@@ -47,9 +55,10 @@ export const propcondition = (category) => {
       : "",
     commentText:
       editOrDelete(category.optionType) && category.category.comments
-        ? category.category.comments.map((d) => iterateComments(d))
+        ? forEachComments(category.category.comments)
         : "",
-    editCommentText: "",
+    editCommentText:
+      editOrDelete(category.optionType) && category.category.editCommentText,
   };
 };
 
@@ -88,7 +97,7 @@ export const levelcommonprops = (props) => {
 export const jsondata = (categoryData) => {
   let resData = {
     level: categoryData.level,
-    rank: categoryData.rank,
+    rank: categoryData.rank ? categoryData.rank : 1,
     createdBy: "user",
     createdDate: dateFormat(),
     startDate: dateFormat(categoryData.startDate).toString(),
@@ -137,7 +146,7 @@ export const jsondata = (categoryData) => {
 export const jsondataForPreference = (categoryData) => {
   let resData = {
     level: categoryData.level,
-    rank: categoryData.rank,
+    rank: categoryData.rank ? categoryData.rank : 1,
     createdBy: "user",
     createdDate: dateFormat(),
     startDate: dateFormat(categoryData.startDate).toString(),
