@@ -1,31 +1,50 @@
 @font-face {
   font-family: "Toyota-Bold";
-  src: local("Toyota-Bold"), url('./fonts/ToyotaType/ToyotaType-Bold.woff') format('woff'), url('./fonts/ToyotaType/ToyotaType-BoldIt.eot') format('eot'), url('./fonts/ToyotaType/ToyotaType-Book.ttf') format("truetype");
+  src: local("Toyota-Bold"), url('./fonts/ToyotaType/ToyotaType-Bold.woff') format('woff'),
+    url('./fonts/ToyotaType/ToyotaType-Bold.woff2') format('woff2'),
+    url('./fonts/ToyotaType/ToyotaType-Bold.eot') format('eot'),
+    url('./fonts/ToyotaType/ToyotaType-Bold.ttf') format("truetype"),
+    url('./fonts/ToyotaType/ToyotaType-Bold.svg') format("svg");
 }
 
 @font-face {
   font-family: "Toyota-Regular";
-  src: local("Toyota-Regular"), url('./fonts/ToyotaType/ToyotaType-Regular.woff') format('woff'), url('./fonts/ToyotaType/ToyotaType-Regular.eot') format('eot'), url('./fonts/ToyotaType/ToyotaType-Regular.ttf') format("truetype");
+  src: local("Toyota-Regular"),
+    url('./fonts/ToyotaType/ToyotaType-Regular.woff') format('woff'),
+    url('./fonts/ToyotaType/ToyotaType-Regular.woff2') format('woff2'),
+    url('./fonts/ToyotaType/ToyotaType-Regular.eot') format('eot'),
+    url('./fonts/ToyotaType/ToyotaType-Regular.svg') format('svg'),
+    url('./fonts/ToyotaType/ToyotaType-Regular.ttf') format("truetype");
 }
 
 @font-face {
   font-family: "Toyota-Book";
-  src: local("Toyota-Book"), url('./fonts/ToyotaType/ToyotaType-Book.woff') format('woff'), url('./fonts/ToyotaType/ToyotaType-Book.eot') format('eot'), url('./fonts/ToyotaType/ToyotaType-Book.ttf') format('truetype');
+  src: local("Toyota-Book"),
+    url('./fonts/ToyotaType/ToyotaType-Book.woff') format('woff'),
+    url('./fonts/ToyotaType/ToyotaType-Book.woff2') format('woff2'),
+    url('./fonts/ToyotaType/ToyotaType-Book.eot') format('eot'),
+    url('./fonts/ToyotaType/ToyotaType-Book.svg') format('svg'),
+    url('./fonts/ToyotaType/ToyotaType-Book.ttf') format('truetype');
 }
 
 @font-face {
   font-family: "Toyota-Semibold";
-  src: local("Toyota-Semibold"), url('./fonts/ToyotaType/ToyotaType-Semibold.woff') format('woff'), url('./fonts/ToyotaType/ToyotaType-Semibold.eot') format('eot'), url('./fonts/ToyotaType/ToyotaType-Semibold.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: "Toyota-Black";
-  src: local("Toyota-Black"), url('./fonts/ToyotaType/ToyotaType-Black.woff') format('woff'), url('./fonts/ToyotaType/ToyotaType-Black.eot') format('eot'), url('./fonts/ToyotaType/ToyotaType-Black.ttf') format('truetype');
+  src: local("Toyota-Semibold"),
+    url('./fonts/ToyotaType/ToyotaType-Semibold.woff') format('woff'),
+    url('./fonts/ToyotaType/ToyotaType-Semibold.woff2') format('woff2'),
+    url('./fonts/ToyotaType/ToyotaType-Semibold.eot') format('eot'),
+    url('./fonts/ToyotaType/ToyotaType-Semibold.svg') format('svg'),
+    url('./fonts/ToyotaType/ToyotaType-Semibold.ttf') format('truetype');
 }
 
 @font-face {
   font-family: "Toyota-light";
-  src: local("Toyota-light"), url('./fonts/ToyotaType/ToyotaType-Light.woff') format('woff'), url('./fonts/ToyotaType/ToyotaType-Light.eot') format('eot'), url('./fonts/ToyotaType/ToyotaType-Light.ttf') format('truetype');
+  src: local("Toyota-light"),
+    url('./fonts/ToyotaType/ToyotaType-Light.woff') format('woff'),
+    url('./fonts/ToyotaType/ToyotaType-Light.woff2') format('woff2'),
+    url('./fonts/ToyotaType/ToyotaType-Light.eot') format('eot'),
+    url('./fonts/ToyotaType/ToyotaType-Light.eot') format('svg'),
+    url('./fonts/ToyotaType/ToyotaType-Light.ttf') format('truetype');
 }
 
 body {
@@ -59,7 +78,6 @@ $toyota-regular: 'Toyota-Regular';
 $toyota-bold: 'Toyota-Bold';
 $toyota-book: 'Toyota-Book';
 $toyota-semibold: 'Toyota-Semibold';
-$toyota-black: 'Toyota-Black';
 $toyota-light: 'Toyota-light';
 
 // Breakpoints
@@ -317,7 +335,7 @@ $breakpoint-desktop: 992px;
         }
 
         .email-options {
-          &:read-only {
+          &[readonly] {
             pointer-events: none;
           }
 
@@ -365,7 +383,7 @@ $breakpoint-desktop: 992px;
               margin-top: 15px;
             }
 
-            &:read-only {
+            &[readonly] {
               pointer-events: none;
             }
 
@@ -423,7 +441,7 @@ $breakpoint-desktop: 992px;
 
         .default-mode {
 
-          &:read-only {
+          &[readonly] {
             pointer-events: none;
           }
 
