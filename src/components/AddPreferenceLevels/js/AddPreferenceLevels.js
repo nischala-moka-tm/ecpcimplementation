@@ -140,7 +140,10 @@ function AddPreferenceLevels(props) {
           />
 
           {props.level === 4 && (
-            <FinalSelection onChange={(e) => onChecked(e)} />
+            <FinalSelection
+              onChange={(e) => onChecked(e)}
+              onlyDelete={props.optionType === "Delete"}
+            />
           )}
 
           <CommentSec

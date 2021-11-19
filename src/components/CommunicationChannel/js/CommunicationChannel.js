@@ -24,6 +24,7 @@ function CommunicationChannel(props) {
               : `../assets/${props.imgSrc}`
           }
         />
+        <p className="mode-labels">{props.id}</p>
         <p>{props.CheckBoxText}</p>
       </ToggleButton>
     </OverlayTrigger>

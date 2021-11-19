@@ -46,6 +46,13 @@ function AddPermissionLevels(props) {
     });
   };
 
+  const onChecked = (e) => {
+    setRequestData({
+      ...requestData,
+      [e.target.id]: e.currentTarget.checked,
+    });
+  };
+
   const onInputChecked = (e) => {
     setRequestData({
       ...requestData,
@@ -157,7 +164,12 @@ function AddPermissionLevels(props) {
             onlyDelete={props.optionType === "Delete"}
           />
 
-          {props.level > 2 && <FinalSelection />}
+          {props.level > 2 && (
+            <FinalSelection
+              onChange={(e) => onChecked(e)}
+              onlyDelete={props.optionType === "Delete"}
+            />
+          )}
 
           <CommentSec
             commentText={requestData.commentText}

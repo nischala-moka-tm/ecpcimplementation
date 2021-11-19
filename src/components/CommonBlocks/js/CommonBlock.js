@@ -7,7 +7,7 @@ import {
   ToggleButtonGroup,
 } from "react-bootstrap";
 import Moment from "moment";
-import { FaGlasses, FaRegQuestionCircle } from "react-icons/fa";
+import { FaRegQuestionCircle } from "react-icons/fa";
 import { BsCardImage } from "react-icons/bs";
 
 import CommunicationChannel from "../../CommunicationChannel/js/CommunicationChannel";
@@ -452,7 +452,7 @@ export const ImageSec = (props) => {
   return (
     <Row className="image-upload">
       <Col md={4}>
-        <label htmlFor="car-image">
+        <label htmlFor="car-image" readOnly={props.onlyDelete}>
           <BsCardImage /> Upload Image
         </label>
       </Col>
@@ -478,6 +478,7 @@ export const FinalSelection = (props) => {
           type="checkbox"
           id="isFinalLevel"
           onChange={props.onChange}
+          readOnly={props.onlyDelete}
         />
         <label htmlFor="isFinalLevel">Is this final level</label>
       </Col>

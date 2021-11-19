@@ -261,6 +261,12 @@ $breakpoint-desktop: 992px;
             height: 0;
             width: 0;
 
+            &[readonly] {
+              +label {
+                pointer-events: none;
+              }
+            }
+
             +label {
               position: relative;
               cursor: pointer;
@@ -378,6 +384,8 @@ $breakpoint-desktop: 992px;
         }
 
         .comm-mode {
+          padding-bottom: 10px;
+
           .btn-group {
             @media (max-width: $breakpoint-tablet) {
               margin-top: 15px;
@@ -423,6 +431,11 @@ $breakpoint-desktop: 992px;
                   top: 32px;
                   margin-top: 10px;
                   font-size: 13px;
+
+                  &.mode-labels {
+                    text-transform: capitalize;
+                    top: 30px;
+                  }
                 }
 
                 &.btn-dark {
@@ -551,6 +564,10 @@ $breakpoint-desktop: 992px;
           }
         }
 
+        input[readonly] {
+          pointer-events: none;
+        }
+
         @media (max-width: $breakpoint-tablet) {
           >div {
             display: inline-block;
@@ -565,6 +582,10 @@ $breakpoint-desktop: 992px;
           font-size: 14px;
           line-height: 20px;
           font-family: $toyota-book;
+
+          &[readonly] {
+            pointer-events: none;
+          }
 
           @media (min-width: $breakpoint-tablet) {
             padding: 10px 30px;
