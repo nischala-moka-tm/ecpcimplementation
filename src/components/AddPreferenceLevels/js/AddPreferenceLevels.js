@@ -15,11 +15,13 @@ import {
   jsondataForPreference,
   ImageSec,
 } from "../../CommonBlocks/js/CommonBlock";
-import { AxiosPost } from "../../AxiosMethods/ApiCalls";
+import { AxiosPost, AxiosPut } from "../../AxiosMethods/ApiCalls";
 function AddPreferenceLevels(props) {
+  const id = props.category.id ? props.category.id : "";
   let userData = {
     ...propcondition(props),
     ...levelcommonprops(props),
+    id,
   };
   if (props.level === 4) {
     userData = {
@@ -47,14 +49,31 @@ function AddPreferenceLevels(props) {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    let finaldata = jsondataForPreference(requestData);
     const type = "subCategory";
-    console.log(finaldata);
-    apicall(finaldata, type);
+    getPars("add", type);
   };
-  const apicall = async (finaldata, type) => {
+  const handleEditSubmit = (e) => {
+    e.preventDefault();
+    let type = "subCategory";
+    props.level === 1 && (type = "Preference");
+    getPars("edit", type);
+  };
+  const getPars = (func, type) => {
+    const comments = props.category.comments;
+    const finaldata = jsondataForPreference({
+      ...requestData,
+      comments,
+      func,
+    });
+    apicall(finaldata, type, func);
+  };
+  const apicall = async (finaldata, type, func) => {
+    console.log(finaldata);
+    const brand = props.brand;
+    const postData = { finaldata, type, brand };
     let resText = "";
-    const result = await AxiosPost({ finaldata, type, brand: props.brand });
+    const result =
+      func === "add" ? await AxiosPost(postData) : await AxiosPut(postData);
     if (result.code === "200") {
       props.onClose();
       resText = result.messages[0].description;
@@ -84,9 +103,18 @@ function AddPreferenceLevels(props) {
         </p>
       </Modal.Header>
       <Modal.Body>
-        <Form id="form1" onSubmit={handleSubmit}>
+        <Form
+          id="form1"
+          onSubmit={
+            props.optionType === "Add" ? handleSubmit : handleEditSubmit
+          }
+        >
           <Row>
             <Col md={12}>
+              <p className="delete-txt">
+                {props.optionType === "Delete" &&
+                  "Deleting this item will delete from production and remove any levels under it. To proceed please enter end date, enter comments and submit delete for approval."}
+              </p>
               <p>Level {props.level}</p>
             </Col>
             <HelpSection />
@@ -132,7 +160,9 @@ function AddPreferenceLevels(props) {
               </Button>
             )}
             <Button type="submit" variant="secondary" size="sm">
-              Submit for Approval
+              {props.optionType === "Delete"
+                ? "Submit Delete for Approval"
+                : "Submit for Approval"}
             </Button>
           </Container>
         </Form>

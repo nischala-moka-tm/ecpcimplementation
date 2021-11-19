@@ -139,7 +139,15 @@ $breakpoint-desktop: 992px;
         p {
           margin-bottom: 0;
           font-family: $toyota-book;
-          color: #1d1d1d
+          color: #1d1d1d;
+
+          &.delete-txt {
+            color: #FF0000;
+            font-size: 14px;
+            line-height: 20px;
+            max-width: 540px;
+            margin: 0 0 10px 0;
+          }
         }
 
         .help-sec {
@@ -309,6 +317,10 @@ $breakpoint-desktop: 992px;
         }
 
         .email-options {
+          &:read-only {
+            pointer-events: none;
+          }
+
           @media (max-width: $breakpoint-tablet) {
             margin-top: 15px;
           }
@@ -351,6 +363,10 @@ $breakpoint-desktop: 992px;
           .btn-group {
             @media (max-width: $breakpoint-tablet) {
               margin-top: 15px;
+            }
+
+            &:read-only {
+              pointer-events: none;
             }
 
             .btn-check {
@@ -406,6 +422,11 @@ $breakpoint-desktop: 992px;
         }
 
         .default-mode {
+
+          &:read-only {
+            pointer-events: none;
+          }
+
           .row {
             padding-top: 1rem;
           }

@@ -58,12 +58,14 @@ function AddPermissionLevels(props) {
     const type = "subCategory";
     getPars("add", type);
   };
+
   const handleEditSubmit = (e) => {
     e.preventDefault();
     let type = "subCategory";
     props.level === 1 && (type = "category");
     getPars("edit", type);
   };
+
   const getPars = (func, type) => {
     const comments = props.category.comments;
     const finaldata = jsondata({
@@ -71,6 +73,7 @@ function AddPermissionLevels(props) {
       comments,
       func,
     });
+
     apicall(finaldata, type, func);
   };
   const apicall = async (finaldata, type, func) => {
@@ -112,6 +115,10 @@ function AddPermissionLevels(props) {
         >
           <Row>
             <Col md={12}>
+              <p className="delete-txt">
+                {props.optionType === "Delete" &&
+                  "Deleting this item will delete from production and remove any levels under it. To proceed please enter end date, enter comments and submit delete for approval."}
+              </p>
               <p>Level {props.level}</p>
             </Col>
             <HelpSection />
@@ -169,7 +176,9 @@ function AddPermissionLevels(props) {
               </Button>
             )}
             <Button type="submit" variant="secondary" size="sm">
-              Submit for Approval
+              {props.optionType === "Delete"
+                ? "Submit Delete for Approval"
+                : "Submit for Approval"}
             </Button>
           </Container>
         </Form>

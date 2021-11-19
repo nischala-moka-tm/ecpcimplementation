@@ -7,7 +7,7 @@ import {
   ToggleButtonGroup,
 } from "react-bootstrap";
 import Moment from "moment";
-import { FaRegQuestionCircle } from "react-icons/fa";
+import { FaGlasses, FaRegQuestionCircle } from "react-icons/fa";
 import { BsCardImage } from "react-icons/bs";
 
 import CommunicationChannel from "../../CommunicationChannel/js/CommunicationChannel";
@@ -15,7 +15,7 @@ import CommunicationChannel from "../../CommunicationChannel/js/CommunicationCha
 export const datevalue = "datetime-local";
 
 export const iterateComments = (comment) => {
-  return `${comment.user} \n ${comment.time}  \n ${comment.comment}`;
+  return `${comment.user} \n ${comment.time}  \n ${comment.comment} \n \n`;
 };
 
 export const editOrDelete = (optionType) => {
@@ -77,10 +77,18 @@ export const level2props = (props) => {
     categoryname: editOrDelete(props.optionType)
       ? props.category.subCategoryName
       : "",
-    mail: false,
-    post: false,
-    call: false,
-    sms: false,
+    mail: editOrDelete(props.optionType)
+      ? props.category.modeOfCommunication.email
+      : false,
+    post: editOrDelete(props.optionType)
+      ? props.category.modeOfCommunication.mail
+      : false,
+    call: editOrDelete(props.optionType)
+      ? props.category.modeOfCommunication.call
+      : false,
+    sms: editOrDelete(props.optionType)
+      ? props.category.modeOfCommunication.sms
+      : false,
     parentId: props.category.id,
   };
 };
@@ -128,8 +136,7 @@ export const jsondata = (categoryData) => {
       categoryName: categoryData.categoryname,
       enableAlternateEmailId: categoryData.enableAlternateEmailId,
     };
-    if (categoryData.func === "edit") {
-      console.log(categoryData);
+    if (categoryData.level === 1 && categoryData.func === "edit") {
       resData = {
         ...resData,
         id: categoryData.id,
@@ -192,14 +199,14 @@ export const jsondataForPreference = (categoryData) => {
     endDate: dateFormat(categoryData.endDate).toString(),
     subCategoryName: categoryData.categoryname,
     parentId: categoryData.parentId,
-    comments: [
-      {
-        time: dateFormat(),
-        user: "abc@xyz.com",
-        comment: categoryData.commentText,
-      },
-    ],
+    comments: getComments(categoryData),
   };
+  if (categoryData.func === "edit") {
+    resData = {
+      ...resData,
+      id: categoryData.id,
+    };
+  }
   if (categoryData.level === 4) {
     resData = {
       ...resData,
@@ -256,6 +263,7 @@ export const EnableEmailSec = (props) => {
           type="radio"
           value={props.altEmail ? "YES" : "NO"}
           onChange={props.onChange}
+          readOnly={props.onlyDelete}
         >
           <ToggleButton
             variant={props.altEmail ? "dark" : "light"}
@@ -263,7 +271,6 @@ export const EnableEmailSec = (props) => {
             className="shadow-none"
             name="altEmail"
             id="altEmailYes"
-            readOnly={props.onlyDelete}
           >
             Yes
           </ToggleButton>
@@ -274,7 +281,6 @@ export const EnableEmailSec = (props) => {
             className="shadow-none"
             name="altEmail"
             id="altEmailNo"
-            readOnly={props.onlyDelete}
           >
             No
           </ToggleButton>
@@ -295,6 +301,7 @@ export const CommentSec = (props) => {
             value={props.commentText}
             readOnly={props.editOrDelete}
             onChange={props.onChange}
+            required={true}
           ></textarea>
         </Col>
       </Row>
@@ -306,6 +313,7 @@ export const CommentSec = (props) => {
               name="editCommentText"
               value={props.editCommentText}
               onChange={props.onChange}
+              required={true}
             ></textarea>
           </Col>
         </Row>
@@ -356,7 +364,7 @@ export const DefaultCommunicationModes = (props) => {
           </p>
         </Col>
         <Col md={6}>
-          <ToggleButtonGroup type="checkbox">
+          <ToggleButtonGroup type="checkbox" readOnly={props.onlyDelete}>
             <CommunicationChannel
               id="mail"
               Checked={props.mail}
@@ -399,20 +407,40 @@ export const DefaultCommunicationModes = (props) => {
           </ToggleButtonGroup>
         </Col>
       </Row>
-      <Row className="default-mode">
+      <Row className="default-mode" readOnly={props.onlyDelete}>
         <Col md={6}>
           <p style={{ whiteSpace: "nowrap", fontSize: "13px" }}>
             Select default for new or guest customer<sup>*</sup>
           </p>
         </Col>
         <Col md={6}>
-          <input name="email" type="checkbox" id="mailselected" />
+          <input
+            name="email"
+            type="checkbox"
+            id="mailselected"
+            readOnly={props.onlyDelete}
+          />
           <label htmlFor="mailselected"></label>
-          <input name="post" type="checkbox" id="postselected" />
+          <input
+            name="post"
+            type="checkbox"
+            id="postselected"
+            readOnly={props.onlyDelete}
+          />
           <label htmlFor="postselected"></label>
-          <input name="call" type="checkbox" id="callselected" />
+          <input
+            name="call"
+            type="checkbox"
+            id="callselected"
+            readOnly={props.onlyDelete}
+          />
           <label htmlFor="callselected"></label>
-          <input name="message" type="checkbox" id="smsselected" />
+          <input
+            name="message"
+            type="checkbox"
+            id="smsselected"
+            readOnly={props.onlyDelete}
+          />
           <label htmlFor="smsselected"></label>
         </Col>
       </Row>

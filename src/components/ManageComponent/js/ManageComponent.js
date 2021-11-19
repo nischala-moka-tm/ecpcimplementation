@@ -195,7 +195,9 @@ function ManageComponent(props) {
     if (resType === "success") {
       toast.success(res);
       getApiCall();
-    } else {toast.error(res)}
+    } else {
+      toast.error(res);
+    }
   };
 
   return (

@@ -66,10 +66,13 @@
     .categories-list {
       position: relative;
       display: block;
+      max-width: max-content;
 
       div {
         &.heading {
-          margin-bottom: 5px;
+          max-width: max-content;
+          cursor: pointer;
+          margin: 0 0 5px 0;
 
           .heading-text {
             color: #1d1d1d;
@@ -127,14 +130,14 @@
           &:hover {
             .dropdown-content {
               display: inline-block;
-              transition: 0.3s;
+              transition: 0.1s;
             }
           }
 
           .dropdown-content {
             display: none;
             position: absolute;
-            width: 100%;
+            width: max-content;
             z-index: 100;
 
             .selectble-popup {
@@ -142,9 +145,6 @@
               background-color: #fff;
               box-sizing: border-box;
               border: 1px solid #707070;
-              max-width: fit-content;
-              display: flex;
-              flex-direction: column;
 
               li {
                 padding: 0.2em 1.25em;
@@ -241,15 +241,14 @@
               position: absolute;
               width: 100%;
               z-index: 100;
+              max-width: max-content;
 
               .selectble-popup {
                 padding: 0;
                 background-color: #fff;
                 box-sizing: border-box;
                 border: 1px solid #707070;
-                max-width: fit-content;
-                display: flex;
-                flex-direction: column;
+
 
                 li {
                   padding: 0.2em 1.25em;
