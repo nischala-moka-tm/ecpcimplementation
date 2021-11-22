@@ -27,17 +27,8 @@ function AddPermissionLevels(props) {
     ...propcondition(props),
   };
 
-  if (props.type === "dashboardPermission") {
-    userData = {
-      rank: props.category.rank,
-      createdBy: "user",
-      createdDate: Moment(props.category.createdDate).format("YYYY-MM-DDTHH:mm:ss"),
-      startDate: Moment(props.category.createdDate).format("YYYY-MM-DDTHH:mm:ss"),
-      endDate: Moment(props.category.modifiedDate).format("YYYY-MM-DDTHH:mm:ss"),
-    }
-  }
-
-  if (props.type == "managePermission") {
+  
+  // if (props.type == "managePermission") {
     if (props.level === 1) {
       userData = { ...level1props(props), ...userData };
     } else if (props.level === 2) {
@@ -45,15 +36,7 @@ function AddPermissionLevels(props) {
     } else {
       userData = { ...levelcommonprops(props), ...userData };
     }
-  } else {
-    if (props.level === 1) {
-      userData = { ...levelDashboardCommonprops(props), ...userData };
-    } else if (props.level === 2) {
-      userData = { ...levelDashboardCommonprops(props), ...userData };
-    } else {
-      userData = { ...userData, ...levelDashboardCommonprops(props) };
-    }
-  }
+ 
 
   const [requestData, setRequestData] = useState(userData);
   const handleChange = (e) => {
@@ -104,7 +87,6 @@ function AddPermissionLevels(props) {
       comments,
       func,
     });
-
     apicall(finaldata, type, func);
   };
   const apicall = async (finaldata, type, func) => {
@@ -124,6 +106,7 @@ function AddPermissionLevels(props) {
       props.notify(resText, "error");
     }
   };
+  
   return (
     <Modal
       className="modalpopup modal-permissionlevel1"

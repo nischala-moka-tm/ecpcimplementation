@@ -78,7 +78,7 @@ function AddNewPermissionList(props) {
         </div>
 
         {labelLayout.map((layout, index) => {
-          return (<>
+          return (<div key={index}>
             {layout.labelClicked <=2 ?  (
               <div className="category-level2">
                 <Row className="category-sec">
@@ -216,7 +216,7 @@ function AddNewPermissionList(props) {
                 />
               </div>) : ''
             }
-          </>)
+          </div>)
         })}
       </Modal.Body>
       {/* <Modal.Footer>

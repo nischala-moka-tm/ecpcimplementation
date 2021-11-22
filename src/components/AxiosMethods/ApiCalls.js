@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 
 export const AxiosPost = async (props) => {
+	console.log(props);
 	const response = await axios.post(
 		`https://518mvqcnuc.execute-api.us-west-2.amazonaws.com/dev/admin-meta-data/${props.brand}?action=submit&type=${props.type}`,
 		JSON.stringify(props.finaldata),
@@ -34,9 +35,10 @@ export const AxiosPut = async (props) => {
 };
 
 export const AxiosPostMetadata =async (props) => {
+	console.log(props);
 	const response =await axios.post(
-		`https://518mvqcnuc.execute-api.us-west-2.amazonaws.com/dev/admin-meta-data/${props.brand}?action=getMetaDataDetails`,
-
+		`https://518mvqcnuc.execute-api.us-west-2.amazonaws.com/dev/admin-meta-data/Toyota?action=getMetaDataDetails`,
+		JSON.stringify(props),
 		{
 			headers: {
 				"Content-type": "application/json",

@@ -33,48 +33,61 @@ function DashboardComponent(props) {
       userRole,
       data,
     };
-    console.log(res);
+    // console.log(res);
     setRecentUpdateData(data.recentUpdate);
     setRecentActivityData(data.recentActivity);
   };
   
-  const modifyData =async (id) =>{
-    const getMetaDataApi = await AxiosPostMetadata({
-      brand: props.brand,
-      id: id
-    })
-    getMetaDataApi.then((result) => {
-      console.log(result);
-    });
+  const modifyData =async (data, brand) =>{
+    // console.log(data.id, brand);
+    const finalData = {
+      "adminMetaData": {
+        "id": data.id,
+      }
+    }
+    const getMetaData = await AxiosPostMetadata(finalData, brand);
+    console.log(getMetaData.data.status);
+      setData(getMetaData.data.data);
+    
+    // console.log(getMetaData.data.data);
+  
+   // setData(getMetaData.data.data);
   }
 
   const LevelCondition1 = (category, optType) => {
     // console.log(category);
     return (
       <>
-        showModifyLevel?<AddPermissionLevels
+        {showModifyLevel && <AddPermissionLevels
           show={showModifyLevel}
           onClose={() => SetShowModifyLevel(false)}
           category={category}
           optionType={optType}
           brand={props.brand}
           notify={"notify"}
-          level={category.levels.length}
+          level={category.level}
           type={"dashboardPermission"}
-        />:<AddPermissionLevels
+        />}
+      </>
+    );
+  };
+  const LevelCondition2 = (category, optType) => {
+    return (
+      <>
+        {showViewLevel && <AddPermissionLevels
           show={showViewLevel}
           onClose={() => SetShowViewLevel(false)}
           category={category}
           optionType={optType}
           brand={props.brand}
           notify={"notify"}
-          level={category.levels.length}
-          type={"dashboardPermission"} 
-        />
+          level={category.level}
+          type={"dashboardPermission"}
+        />}
       </>
     );
   };
-  // console.log(recentUpdateData);
+
   return (
     <div className="dashboard-component" id="dashboard-page">
       <div className="recent-activity">
@@ -95,7 +108,6 @@ function DashboardComponent(props) {
           <tbody>
             {recentUpdateData &&
               recentUpdateData.slice(0, 4).map((data, index) => {
-                console.log(data);
                 return (
                   <tr key={index}>
                     <td>{data.levels[0]}</td>
@@ -105,10 +117,11 @@ function DashboardComponent(props) {
                     <td>{dateFormat(data.createdDate)}</td>
                     <td>{dateFormat(data.modifiedDate)}</td>
                     <td>{data.status}</td>
-                    <td className="edit" onClick={() => { 
-                      SetShowModifyLevel(true); 
-                      setData(data); 
-                      modifyData(data.id) }}>
+                    <td className="edit" onClick={(e) => { 
+                      e.preventDefault();
+                      SetShowModifyLevel(true)
+                      modifyData(data, props.brand); 
+                       }}>
                       <FaRegEdit />
                     </td>
                   </tr>
@@ -169,7 +182,7 @@ function DashboardComponent(props) {
                     </td>
                     <td>{data.status === "" ? "N/A" : data.status}</td>
                     <td className="view"
-                      onClick={() => { SetShowViewLevel(true); setRecentViewData(data) }}>
+                      onClick={() => { SetShowViewLevel(true); modifyData(data, props.brand) }}>
                       <FaRegEye />
                     </td>
                   </tr>
@@ -178,11 +191,10 @@ function DashboardComponent(props) {
           </tbody>
         </table>
         {isNoDataFound && <strong>No Data Found</strong>}
-        {/* console.log(showViewLevel); */}
-        {showViewLevel && LevelCondition1(recentViewData, "Edit")}
+        {showViewLevel && data != [] &&LevelCondition2(data, "Edit")}
       </div>
       <div className="recent-activity-list-one">
-        To See all Admin portal activities
+        To See all Admin portal activities 
         <a href="/dashboard-admin/report-perm">Click here</a>
       </div>
     </div>
