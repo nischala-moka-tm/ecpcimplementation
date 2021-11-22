@@ -15,11 +15,9 @@ import {
   level1props,
   level2props,
   levelcommonprops,
-  levelDashboardCommonprops,
   jsondata,
 } from "../../CommonBlocks/js/CommonBlock";
 import { AxiosPost, AxiosPut } from "../../AxiosMethods/ApiCalls";
-import Moment from "moment";
 
 function AddPermissionLevels(props) {
   const id = props.category.id ? props.category.id : "";
@@ -27,16 +25,13 @@ function AddPermissionLevels(props) {
     ...propcondition(props),
   };
 
-  
-  // if (props.type == "managePermission") {
-    if (props.level === 1) {
-      userData = { ...level1props(props), ...userData };
-    } else if (props.level === 2) {
-      userData = { ...level2props(props), ...userData };
-    } else {
-      userData = { ...levelcommonprops(props), ...userData };
-    }
- 
+  if (props.level === 1) {
+    userData = { ...level1props(props), ...userData, id };
+  } else if (props.level === 2) {
+    userData = { ...level2props(props), ...userData };
+  } else {
+    userData = { ...levelcommonprops(props), ...userData };
+  }
 
   const [requestData, setRequestData] = useState(userData);
   const handleChange = (e) => {
@@ -106,7 +101,7 @@ function AddPermissionLevels(props) {
       props.notify(resText, "error");
     }
   };
-  
+
   return (
     <Modal
       className="modalpopup modal-permissionlevel1"
