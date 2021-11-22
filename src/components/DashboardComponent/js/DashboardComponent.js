@@ -1,13 +1,21 @@
 import React, { useState, useEffect } from "react";
 import "../scss/DashboardComponent.scss";
 import { FaRegEdit, FaRegEye } from "react-icons/fa";
+import DetailedViewPage from "../../DetailedViewPage/js/DetailedViewPage";
 import { dateFormat } from "../../CommonBlocks/js/CommonBlock";
-import { AxiosGet } from "../../AxiosMethods/ApiCalls";
+import { AxiosGet, AxiosPostMetadata } from "../../AxiosMethods/ApiCalls";
+import axios from "axios";
+import AddPermissionLevels from "../../AddPermissionLevels/js/AddPermissionLevels";
 
 function DashboardComponent(props) {
   const [recentUpdateData, setRecentUpdateData] = useState([]);
   const [recentActivityData, setRecentActivityData] = useState([]);
   const [isNoDataFound, setNoDataFound] = useState(false);
+  const [showViewLevel, SetShowViewLevel] = useState(false);
+  const [showModifyLevel, SetShowModifyLevel] = useState(false);
+  const [data, setData] = useState([]);
+  const [recentViewData, setRecentViewData] = useState([]);
+
   const userRole = "ECPC_TOYOTA_ADMIN";
   const userId = 1234567;
   useEffect(() => {
@@ -29,6 +37,44 @@ function DashboardComponent(props) {
     setRecentUpdateData(data.recentUpdate);
     setRecentActivityData(data.recentActivity);
   };
+  
+  const modifyData =async (id) =>{
+    const getMetaDataApi = await AxiosPostMetadata({
+      brand: props.brand,
+      id: id
+    })
+    getMetaDataApi.then((result) => {
+      console.log(result);
+    });
+  }
+
+  const LevelCondition1 = (category, optType) => {
+    // console.log(category);
+    return (
+      <>
+        showModifyLevel?<AddPermissionLevels
+          show={showModifyLevel}
+          onClose={() => SetShowModifyLevel(false)}
+          category={category}
+          optionType={optType}
+          brand={props.brand}
+          notify={"notify"}
+          level={category.levels.length}
+          type={"dashboardPermission"}
+        />:<AddPermissionLevels
+          show={showViewLevel}
+          onClose={() => SetShowViewLevel(false)}
+          category={category}
+          optionType={optType}
+          brand={props.brand}
+          notify={"notify"}
+          level={category.levels.length}
+          type={"dashboardPermission"} 
+        />
+      </>
+    );
+  };
+  // console.log(recentUpdateData);
   return (
     <div className="dashboard-component" id="dashboard-page">
       <div className="recent-activity">
@@ -47,8 +93,9 @@ function DashboardComponent(props) {
             </tr>
           </thead>
           <tbody>
-            {recentActivityData &&
-              recentActivityData.slice(0, 4).map((data, index) => {
+            {recentUpdateData &&
+              recentUpdateData.slice(0, 4).map((data, index) => {
+                console.log(data);
                 return (
                   <tr key={index}>
                     <td>{data.levels[0]}</td>
@@ -58,7 +105,10 @@ function DashboardComponent(props) {
                     <td>{dateFormat(data.createdDate)}</td>
                     <td>{dateFormat(data.modifiedDate)}</td>
                     <td>{data.status}</td>
-                    <td className="edit">
+                    <td className="edit" onClick={() => { 
+                      SetShowModifyLevel(true); 
+                      setData(data); 
+                      modifyData(data.id) }}>
                       <FaRegEdit />
                     </td>
                   </tr>
@@ -67,6 +117,7 @@ function DashboardComponent(props) {
           </tbody>
         </table>
         {isNoDataFound && <strong>No Data Found</strong>}
+        {showModifyLevel && LevelCondition1(data, "Edit")}
       </div>
       <div className="recent-activity-list">
         To See all My activities
@@ -117,7 +168,8 @@ function DashboardComponent(props) {
                         : dateFormat(data.modifiedDate)}
                     </td>
                     <td>{data.status === "" ? "N/A" : data.status}</td>
-                    <td className="view">
+                    <td className="view"
+                      onClick={() => { SetShowViewLevel(true); setRecentViewData(data) }}>
                       <FaRegEye />
                     </td>
                   </tr>
@@ -126,6 +178,8 @@ function DashboardComponent(props) {
           </tbody>
         </table>
         {isNoDataFound && <strong>No Data Found</strong>}
+        {/* console.log(showViewLevel); */}
+        {showViewLevel && LevelCondition1(recentViewData, "Edit")}
       </div>
       <div className="recent-activity-list-one">
         To See all Admin portal activities

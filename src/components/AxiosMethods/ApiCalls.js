@@ -32,3 +32,16 @@ export const AxiosPut = async (props) => {
 	);
 	return response.data.status;
 };
+
+export const AxiosPostMetadata =async (props) => {
+	const response =await axios.post(
+		`https://518mvqcnuc.execute-api.us-west-2.amazonaws.com/dev/admin-meta-data/${props.brand}?action=getMetaDataDetails`,
+
+		{
+			headers: {
+				"Content-type": "application/json",
+			},
+		}
+	);
+	return response;
+};

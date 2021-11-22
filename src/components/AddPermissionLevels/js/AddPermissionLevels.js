@@ -15,20 +15,44 @@ import {
   level1props,
   level2props,
   levelcommonprops,
+  levelDashboardCommonprops,
   jsondata,
 } from "../../CommonBlocks/js/CommonBlock";
 import { AxiosPost, AxiosPut } from "../../AxiosMethods/ApiCalls";
+import Moment from "moment";
+
 function AddPermissionLevels(props) {
   const id = props.category.id ? props.category.id : "";
   let userData = {
     ...propcondition(props),
   };
-  if (props.level === 1) {
-    userData = { ...level1props(props), id, ...userData };
-  } else if (props.level === 2) {
-    userData = { ...level2props(props), ...userData };
+
+  if (props.type === "dashboardPermission") {
+    userData = {
+      rank: props.category.rank,
+      createdBy: "user",
+      createdDate: Moment(props.category.createdDate).format("YYYY-MM-DDTHH:mm:ss"),
+      startDate: Moment(props.category.createdDate).format("YYYY-MM-DDTHH:mm:ss"),
+      endDate: Moment(props.category.modifiedDate).format("YYYY-MM-DDTHH:mm:ss"),
+    }
+  }
+
+  if (props.type == "managePermission") {
+    if (props.level === 1) {
+      userData = { ...level1props(props), ...userData };
+    } else if (props.level === 2) {
+      userData = { ...level2props(props), ...userData };
+    } else {
+      userData = { ...levelcommonprops(props), ...userData };
+    }
   } else {
-    userData = { ...levelcommonprops(props), ...userData };
+    if (props.level === 1) {
+      userData = { ...levelDashboardCommonprops(props), ...userData };
+    } else if (props.level === 2) {
+      userData = { ...levelDashboardCommonprops(props), ...userData };
+    } else {
+      userData = { ...userData, ...levelDashboardCommonprops(props) };
+    }
   }
 
   const [requestData, setRequestData] = useState(userData);
