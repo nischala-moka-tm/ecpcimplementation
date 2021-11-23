@@ -7,10 +7,8 @@ import {
   ToggleButtonGroup,
 } from "react-bootstrap";
 import Moment from "moment";
-import { FaRegQuestionCircle } from "react-icons/fa";
+import { FaRegQuestionCircle, FaPlus } from "react-icons/fa";
 import { BsCardImage } from "react-icons/bs";
-import { FaPlus } from "react-icons/fa";
-
 import CommunicationChannel from "../../CommunicationChannel/js/CommunicationChannel";
 
 export const datevalue = "datetime-local";
@@ -247,9 +245,9 @@ export const HelpSection = () => {
 
 export const CategorySec = (props) => {
   function buttonCliked(e) {
-		console.log(e)
-		props.labelAdd(props.onlyAdd.labelValue)
-	}
+    console.log(e);
+    props.labelAdd(props.onlyAdd.labelValue);
+  }
   return (
     <Row className="category-sec">
       <Col md={10}>
@@ -263,17 +261,15 @@ export const CategorySec = (props) => {
           readOnly={props.onlyDelete}
         />
       </Col>
-      {props.onlyAdd?.isClicked ?
-				<Col md={2} style={{ textAlign: "right" }}>
-					<button
-						style={{ border: "none", backgroundColor: "#ffffff", position: "relative", top: "10px" }}
-						className="plusmenu-danger"
-						onClick={e => buttonCliked(e)}
-					>
-						{<FaPlus />}
-					</button>
-				</Col> : ''
-			}
+      {props.onlyAdd?.isClicked ? (
+        <Col md={2} className="add-icon">
+          <button className="plusmenu-danger" onClick={(e) => buttonCliked(e)}>
+            {<FaPlus />}
+          </button>
+        </Col>
+      ) : (
+        ""
+      )}
     </Row>
   );
 };

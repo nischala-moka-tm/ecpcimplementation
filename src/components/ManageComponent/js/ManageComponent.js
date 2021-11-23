@@ -186,7 +186,6 @@ function ManageComponent(props) {
       type: props.type,
     });
     getDataApi.then((result) => {
-      console.log(result);
       setLoading(false);
       setCategoriesData(result.data.data);
     });
@@ -234,7 +233,8 @@ function ManageComponent(props) {
 
         {isLoading
           ? "Loading...."
-          : categorydata.map((category, index) => {
+          : categorydata &&
+            categorydata.map((category, index) => {
               return (
                 <MainCategory
                   category={category}

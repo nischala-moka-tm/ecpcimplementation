@@ -3,79 +3,69 @@
 .modal-newcategory {
   .modal-dialog {
     .modal-body {
-
-      .level2,
-      .sublevel {
-        border-top: 1px solid #b1b1b1;
-
-        &:first-child {
-          border-top: none;
+      .subhead {
+        p {
+          display: inline-block;
         }
 
-        .subhead {
-          p {
-            display: inline-block;
-          }
-
-          .plusmenu-danger {
-            border: none;
-            background: none;
-            float: right;
-          }
+        .plusmenu-danger {
+          border: none;
+          background: none;
+          float: right;
         }
       }
+    }
 
-      .status-codes {
-        font-size: 12px;
-        line-height: 18px;
-        padding-left: 15px;
+    .status-codes {
+      font-size: 12px;
+      line-height: 18px;
+      padding-left: 15px;
 
-        @media (min-width: $breakpoint-tablet) {
-          position: absolute;
-          top: 75px;
-          right: 25px;
-        }
+      @media (min-width: $breakpoint-tablet) {
+        position: absolute;
+        top: 75px;
+        right: 25px;
+      }
 
-        ul {
-          padding-left: 0;
+      ul {
+        padding-left: 0;
 
-          li {
-            list-style: none;
-            position: relative;
+        li {
+          list-style: none;
+          position: relative;
 
+          &:before {
+            content: "";
+            position: absolute;
+            left: -13px;
+            width: 6px;
+            height: 6px;
+            top: 6px;
+            background: red;
+            border-radius: 50%;
+          }
+
+          &.live {
             &:before {
-              content: "";
-              position: absolute;
-              left: -13px;
-              width: 6px;
-              height: 6px;
-              top: 6px;
-              background: red;
-              border-radius: 50%;
+              background: #00ff00;
             }
+          }
 
-            &.live {
-              &:before {
-                background: #00ff00;
-              }
+          &.pending-approval {
+            &:before {
+              background: #e86d0f;
             }
+          }
 
-            &.pending-approval {
-              &:before {
-                background: #e86d0f;
-              }
+          &.pending-go-live {
+            &:before {
+              background: #ff0000;
             }
+          }
 
-            &.pending-go-live {
-              &:before {
-                background: #ff0000;
-              }
-            }
-
-            &.expiring-soon {
-              &:before {
-                background: #888888;
-              }
+          &.expiring-soon {
+            &:before {
+              background: #888888;
             }
           }
         }

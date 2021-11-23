@@ -238,7 +238,7 @@ $breakpoint-desktop: 992px;
           }
 
           @media (min-width: $breakpoint-tablet) {
-            width: 531px;
+            width: 517px;
             height: 80px;
           }
 
@@ -305,6 +305,17 @@ $breakpoint-desktop: 992px;
         &.category-sec {
           input {
             margin-top: 10px;
+          }
+
+          .add-icon {
+            text-align: right;
+
+            .plusmenu-danger {
+              border: none;
+              background-color: #ffffff;
+              position: relative;
+              top: -45px;
+            }
           }
         }
 
