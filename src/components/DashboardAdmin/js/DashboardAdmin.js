@@ -83,7 +83,6 @@ function DashboardAdmin(props) {
 											render={() => (
 												<ReportsPermissionAndPreference
 													brand={brand}
-													type={"dashboard"}
 												/>
 											)}
 										/>
@@ -93,7 +92,6 @@ function DashboardAdmin(props) {
 											render={() => (
 												<ReportsAudit
 													brand={brand}
-													type={"dashboard"}
 												/>
 											)}
 										/>
