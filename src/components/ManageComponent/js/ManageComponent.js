@@ -186,6 +186,7 @@ function ManageComponent(props) {
 			type: props.type,
 		});
 		getDataApi.then((result) => {
+			console.log(result.data.data);
 			setLoading(false);
 			setCategoriesData(result.data.data);
 		});

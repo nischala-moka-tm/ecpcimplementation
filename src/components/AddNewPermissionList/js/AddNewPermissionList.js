@@ -17,6 +17,7 @@ function AddNewPermissionList(props) {
     post: false,
     call: false,
     sms: false,
+    default:[]
   });
 
   const onInputChecked = (e) => {
@@ -25,7 +26,21 @@ function AddNewPermissionList(props) {
       [e.target.id]: e.target.checked,
     });
   };
-
+const onCommChecked = (e) => {
+	if (!e.target.checked) {
+		const index = commChannels.default.indexOf(e.target.name);
+		commChannels.default.splice(index, 1);
+		setCommChannels({
+			...commChannels,
+			default: [...Array.from(new Set(commChannels.default))],
+		});
+	} else {
+		setCommChannels({
+			...commChannels,
+			default: [...commChannels.default, e.target.name],
+		});
+	}
+};
   const onChangeAltMail = () => {
     setAltMail(!altEmail);
   };
@@ -61,88 +76,90 @@ function AddNewPermissionList(props) {
 
       {labelLayout.map((layout, index) => {
         return (
-          <div key={index}>
-            {layout.labelClicked <= 2 ? (
-              <div className="category-level2">
-                <Row className="category-sec">
-                  <Col md={12}>
-                    <p>Level 2*</p>
-                  </Col>
-                </Row>
-                <CategorySec
-                  onlyAdd={{ isClicked: true, labelValue: 2 }}
-                  labelAdd={labelAdd}
-                />
-                <DefaultCommunicationModes
-                  mail={commChannels.mail}
-                  post={commChannels.post}
-                  call={commChannels.call}
-                  sms={commChannels.sms}
-                  onChecked={(e) => onInputChecked(e)}
-                  onlyDelete={props.optionType === "Delete"}
-                />
-                <DateSec />
-                <CommentSec readonly={false} />
-              </div>
-            ) : (
-              ""
-            )}
-            {layout.labelClicked <= 3 ? (
-              <div className="category-level3">
-                <Row className="category-sec">
-                  <Col md={12}>
-                    <p>Level 3*</p>
-                  </Col>
-                </Row>
-                <CategorySec
-                  onlyAdd={{ isClicked: true, labelValue: 3 }}
-                  labelAdd={labelAdd}
-                />
-                <DateSec />
-                <FinalSelection />
-                <CommentSec readonly={false} />
-              </div>
-            ) : (
-              ""
-            )}
-            {layout.labelClicked <= 4 ? (
-              <div className="category-level4">
-                <Row className="category-sec">
-                  <Col md={12}>
-                    <p>Level 4*</p>
-                  </Col>
-                </Row>
-                <CategorySec
-                  onlyAdd={{ isClicked: true, labelValue: 4 }}
-                  labelAdd={labelAdd}
-                />
-                <DateSec />
-                <FinalSelection />
-                <CommentSec readonly={false} />
-              </div>
-            ) : (
-              ""
-            )}
-            {layout.labelClicked <= 5 ? (
-              <div className="category-level5">
-                <Row className="category-sec">
-                  <Col md={12}>
-                    <p>Level 5*</p>
-                  </Col>
-                </Row>
-                <CategorySec
-                  onlyAdd={{ isClicked: true, labelValue: 5 }}
-                  labelAdd={labelAdd}
-                />
-                <DateSec />
-                <FinalSelection />
-                <CommentSec readonly={false} />
-              </div>
-            ) : (
-              ""
-            )}
-          </div>
-        );
+					<div key={index}>
+						{layout.labelClicked <= 2 ? (
+							<div className="category-level2">
+								<Row className="category-sec">
+									<Col md={12}>
+										<p>Level 2*</p>
+									</Col>
+								</Row>
+								<CategorySec
+									onlyAdd={{ isClicked: true, labelValue: 2 }}
+									labelAdd={labelAdd}
+								/>
+								<DefaultCommunicationModes
+									mail={commChannels.mail}
+									post={commChannels.post}
+									call={commChannels.call}
+									sms={commChannels.sms}
+									default={commChannels.default}
+									onDefaultCommChecked={(e) => onCommChecked(e)}
+									onChecked={(e) => onInputChecked(e)}
+									onlyDelete={props.optionType === "Delete"}
+								/>
+								<DateSec />
+								<CommentSec readonly={false} />
+							</div>
+						) : (
+							""
+						)}
+						{layout.labelClicked <= 3 ? (
+							<div className="category-level3">
+								<Row className="category-sec">
+									<Col md={12}>
+										<p>Level 3*</p>
+									</Col>
+								</Row>
+								<CategorySec
+									onlyAdd={{ isClicked: true, labelValue: 3 }}
+									labelAdd={labelAdd}
+								/>
+								<DateSec />
+								<FinalSelection />
+								<CommentSec readonly={false} />
+							</div>
+						) : (
+							""
+						)}
+						{layout.labelClicked <= 4 ? (
+							<div className="category-level4">
+								<Row className="category-sec">
+									<Col md={12}>
+										<p>Level 4*</p>
+									</Col>
+								</Row>
+								<CategorySec
+									onlyAdd={{ isClicked: true, labelValue: 4 }}
+									labelAdd={labelAdd}
+								/>
+								<DateSec />
+								<FinalSelection />
+								<CommentSec readonly={false} />
+							</div>
+						) : (
+							""
+						)}
+						{layout.labelClicked <= 5 ? (
+							<div className="category-level5">
+								<Row className="category-sec">
+									<Col md={12}>
+										<p>Level 5*</p>
+									</Col>
+								</Row>
+								<CategorySec
+									onlyAdd={{ isClicked: true, labelValue: 5 }}
+									labelAdd={labelAdd}
+								/>
+								<DateSec />
+								<FinalSelection />
+								<CommentSec readonly={false} />
+							</div>
+						) : (
+							""
+						)}
+					</div>
+				);
       })}
     </div>
   );

@@ -20,7 +20,6 @@ import {
   apicall,
   DeleteText,
   onlyEditconditon,
-  onlyView,
   deleteOrView,
 } from "../../CommonBlocks/js/CommonBlock";
 function AddPreferenceLevels(props) {
