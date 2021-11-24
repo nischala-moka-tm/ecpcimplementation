@@ -5,6 +5,8 @@ import { dateFormat } from "../../CommonBlocks/js/CommonBlock";
 import { AxiosGet, AxiosPostMetadata } from "../../AxiosMethods/ApiCalls";
 import AddPermissionLevels from "../../AddPermissionLevels/js/AddPermissionLevels";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function DashboardComponent(props) {
   const [recentUpdateData, setRecentUpdateData] = useState([]);
   const [recentActivityData, setRecentActivityData] = useState([]);
@@ -15,20 +17,18 @@ function DashboardComponent(props) {
   const userRole = "ECPC_TOYOTA_ADMIN";
   const userId = 1234567;
   useEffect(() => {
-    const getDataApi = AxiosGet({
-      brand: props.brand,
-      type: `${props.type}&userId=${userId}&role=${userRole}`,
-    });
-    getDataApi.then((result) => {
-      result.data.data ? LoadData(result.data.data) : setNoDataFound(true);
-    });
+   getApiCall();
   }, [props.brand, props.type]);
+  const getApiCall = () => {
+		 const getDataApi = AxiosGet({
+				brand: props.brand,
+				type: `${props.type}&userId=${userId}&role=${userRole}`,
+			});
+			getDataApi.then((result) => {
+				result.data.data ? LoadData(result.data.data) : setNoDataFound(true);
+			});
+	};
   const LoadData = (data) => {
-    let res = {
-      userId,
-      userRole,
-      data,
-    };
     setRecentUpdateData(data.recentUpdate);
     setRecentActivityData(data.recentActivity);
   };
@@ -44,185 +44,191 @@ function DashboardComponent(props) {
     setData(getMetaData.data.data);
   };
 
-  const LevelCondition1 = (category, optType) => {
+  const LevelCondition1 = ({category, optType}) => {
     return (
-      <>
-        {showModifyLevel && (
-          <AddPermissionLevels
-            show={showModifyLevel}
-            onClose={() => {
-              SetShowModifyLevel(false);
-              setData([]);
-            }}
-            category={category}
-            optionType={optType}
-            brand={props.brand}
-            level={category.level}
-            type={"dashboardPermission"}
-          />
-        )}
-      </>
-    );
+			<>
+				{showModifyLevel && (
+					<AddPermissionLevels
+						show={showModifyLevel}
+						onClose={() => {
+							SetShowModifyLevel(false);
+							setData([]);
+						}}
+						category={category}
+						optionType={optType}
+						brand={props.brand}
+						level={category.level}
+						notify={notify}
+					/>
+				)}
+			</>
+		);
   };
-  const LevelCondition2 = (category, optType) => {
+  const LevelCondition2 = ({category, optType}) => {
     return (
-      <>
-        {showViewLevel && (
-          <AddPermissionLevels
-            show={showViewLevel}
-            onClose={() => {
-              SetShowViewLevel(false);
-              setData([]);
-            }}
-            category={category}
-            optionType={optType}
-            brand={props.brand}
-            level={category.level}
-            type={"dashboardPermission"}
-          />
-        )}
-      </>
-    );
+			<>
+				{showViewLevel && (
+					<AddPermissionLevels
+						show={showViewLevel}
+						onClose={() => {
+							SetShowViewLevel(false);
+							setData([]);
+						}}
+						category={category}
+						optionType={optType}
+						brand={props.brand}
+						level={category.level}
+						notify={notify}
+					/>
+				)}
+			</>
+		);
   };
-
+const notify = (res, resType) => {
+	if (resType === "success") {
+		toast.success(res);
+		getApiCall();
+	} else {
+		toast.error(res);
+	}
+};
   return (
-    <div className="dashboard-component" id="dashboard-page">
-      <div className="recent-activity">
-        <p>My Recent Activities</p>
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Category</th>
-              <th>Level 2</th>
-              <th>Level 3</th>
-              <th>Level 4</th>
-              <th>Created Date</th>
-              <th>Last Modified</th>
-              <th>Status</th>
-              <th>Modify</th>
-            </tr>
-          </thead>
-          <tbody>
-            {recentUpdateData &&
-              recentUpdateData.slice(0, 4).map((recentlist, index) => {
-                return (
-                  <tr key={index}>
-                    <td>{recentlist.levels[0]}</td>
-                    <td>{recentlist.levels[1]}</td>
-                    <td>{recentlist.levels[2]}</td>
-                    <td>{recentlist.levels[3]}</td>
-                    <td>{dateFormat(recentlist.createdDate)}</td>
-                    <td>{dateFormat(recentlist.modifiedDate)}</td>
-                    <td>{recentlist.status}</td>
-                    <td
-                      className="edit"
-                      onClick={(e) => {
-                        SetShowModifyLevel(true);
-                        modifyData(recentlist, props.brand);
-                      }}
-                    >
-                      <FaRegEdit />
-                    </td>
-                  </tr>
-                );
-              })}
-          </tbody>
-        </table>
-        {isNoDataFound && <strong>No Data Found</strong>}
-        {showModifyLevel &&
-          resposnsedata != [] &&
-          resposnsedata.level &&
-          LevelCondition1(resposnsedata, "Edit")}
-      </div>
-      <div className="recent-activity-list">
-        To See all My activities
-        <a href="/dashboard-admin/report-audit">Click here</a>
-      </div>
-      <div className="recent-updates">
-        <p>Recent Admin Portal Activities</p>
-        <table className="table">
-          <thead>
-            <tr>
-              <th>Category</th>
-              <th>Level 2</th>
-              <th>Level 3</th>
-              <th>Level 4</th>
-              <th>Created Date</th>
-              <th>Last Modified By</th>
-              <th>Last Modified</th>
-              <th>Status</th>
-              <th>View</th>
-            </tr>
-          </thead>
-          <tbody>
-            {recentUpdateData &&
-              recentUpdateData.slice(0, 4).map((activitylist, index) => {
-                return (
-                  <tr key={index}>
-                    <td>
-                      {activitylist.levels[0] === undefined
-                        ? "N/A"
-                        : activitylist.levels[0]}
-                    </td>
-                    <td>
-                      {activitylist.levels[1] === undefined
-                        ? "N/A"
-                        : activitylist.levels[1]}
-                    </td>
-                    <td>
-                      {activitylist.levels[2] === undefined
-                        ? "N/A"
-                        : activitylist.levels[2]}
-                    </td>
-                    <td>
-                      {activitylist.levels[3] === undefined
-                        ? "N/A"
-                        : activitylist.levels[3]}
-                    </td>
-                    <td>
-                      {activitylist.createdDate === ""
-                        ? "N/A"
-                        : dateFormat(activitylist.createdDate)}
-                    </td>
-                    <td>
-                      {activitylist.createdBy === ""
-                        ? "N/A"
-                        : activitylist.createdBy}
-                    </td>
-                    <td>
-                      {activitylist.modifiedDate === ""
-                        ? "N/A"
-                        : dateFormat(activitylist.modifiedDate)}
-                    </td>
-                    <td>
-                      {activitylist.status === "" ? "N/A" : activitylist.status}
-                    </td>
-                    <td
-                      className="view"
-                      onClick={() => {
-                        SetShowViewLevel(true);
-                        modifyData(activitylist, props.brand);
-                      }}
-                    >
-                      <FaRegEye />
-                    </td>
-                  </tr>
-                );
-              })}
-          </tbody>
-        </table>
-        {isNoDataFound && <strong>No Data Found</strong>}
-        {showViewLevel &&
-          resposnsedata != [] &&
-          resposnsedata.level &&
-          LevelCondition2(resposnsedata, "Edit")}
-      </div>
-      <div className="recent-activity-list-one">
-        To See all Admin portal activities
-        <a href="/dashboard-admin/report-perm">Click here</a>
-      </div>
-    </div>
-  );
+		<div className="dashboard-component" id="dashboard-page">
+			<ToastContainer />
+			<div className="recent-activity">
+				<p>My Recent Activities</p>
+				<table className="table">
+					<thead>
+						<tr>
+							<th>Category</th>
+							<th>Level 2</th>
+							<th>Level 3</th>
+							<th>Level 4</th>
+							<th>Created Date</th>
+							<th>Last Modified</th>
+							<th>Status</th>
+							<th>Modify</th>
+						</tr>
+					</thead>
+					<tbody>
+						{recentUpdateData &&
+							recentUpdateData.slice(0, 4).map((recentlist, index) => {
+								return (
+									<tr key={index}>
+										<td>{recentlist.levels[0]}</td>
+										<td>{recentlist.levels[1]}</td>
+										<td>{recentlist.levels[2]}</td>
+										<td>{recentlist.levels[3]}</td>
+										<td>{dateFormat(recentlist.createdDate)}</td>
+										<td>{dateFormat(recentlist.modifiedDate)}</td>
+										<td>{recentlist.status}</td>
+										<td
+											className="edit"
+											onClick={(e) => {
+												SetShowModifyLevel(true);
+												modifyData(recentlist, props.brand);
+											}}
+										>
+											<FaRegEdit />
+										</td>
+									</tr>
+								);
+							})}
+					</tbody>
+				</table>
+				{isNoDataFound && <strong>No Data Found</strong>}
+				{showModifyLevel && resposnsedata && resposnsedata.level && (
+					<LevelCondition1 category={resposnsedata} optType="Edit" />
+				)}
+			</div>
+			<div className="recent-activity-list">
+				To See all My activities
+				<a href="/dashboard-admin/report-audit">Click here</a>
+			</div>
+			<div className="recent-updates">
+				<p>Recent Admin Portal Activities</p>
+				<table className="table">
+					<thead>
+						<tr>
+							<th>Category</th>
+							<th>Level 2</th>
+							<th>Level 3</th>
+							<th>Level 4</th>
+							<th>Created Date</th>
+							<th>Last Modified By</th>
+							<th>Last Modified</th>
+							<th>Status</th>
+							<th>View</th>
+						</tr>
+					</thead>
+					<tbody>
+						{recentUpdateData &&
+							recentUpdateData.slice(0, 4).map((activitylist, index) => {
+								return (
+									<tr key={index}>
+										<td>
+											{activitylist.levels[0] === undefined
+												? "N/A"
+												: activitylist.levels[0]}
+										</td>
+										<td>
+											{activitylist.levels[1] === undefined
+												? "N/A"
+												: activitylist.levels[1]}
+										</td>
+										<td>
+											{activitylist.levels[2] === undefined
+												? "N/A"
+												: activitylist.levels[2]}
+										</td>
+										<td>
+											{activitylist.levels[3] === undefined
+												? "N/A"
+												: activitylist.levels[3]}
+										</td>
+										<td>
+											{activitylist.createdDate === ""
+												? "N/A"
+												: dateFormat(activitylist.createdDate)}
+										</td>
+										<td>
+											{activitylist.createdBy === ""
+												? "N/A"
+												: activitylist.createdBy}
+										</td>
+										<td>
+											{activitylist.modifiedDate === ""
+												? "N/A"
+												: dateFormat(activitylist.modifiedDate)}
+										</td>
+										<td>
+											{activitylist.status === "" ? "N/A" : activitylist.status}
+										</td>
+										<td
+											className="view"
+											onClick={() => {
+												SetShowViewLevel(true);
+												modifyData(activitylist, props.brand);
+											}}
+										>
+											<FaRegEye />
+										</td>
+									</tr>
+								);
+							})}
+					</tbody>
+				</table>
+				{isNoDataFound && <strong>No Data Found</strong>}
+				{showViewLevel && resposnsedata && resposnsedata.level && (
+					<LevelCondition2 category={resposnsedata} optType="Edit" />
+				)}
+			</div>
+			<div className="recent-activity-list-one">
+				To See all Admin portal activities
+				<a href="/dashboard-admin/report-perm">Click here</a>
+			</div>
+		</div>
+	);
 }
 
 export default DashboardComponent;
