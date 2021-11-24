@@ -12,8 +12,6 @@ function DashboardComponent(props) {
   const [showViewLevel, SetShowViewLevel] = useState(false);
   const [showModifyLevel, SetShowModifyLevel] = useState(false);
 
-  const [recentViewData, setRecentViewData] = useState([]);
-
   const userRole = "ECPC_TOYOTA_ADMIN";
   const userId = 1234567;
   useEffect(() => {
@@ -59,7 +57,6 @@ function DashboardComponent(props) {
             category={category}
             optionType={optType}
             brand={props.brand}
-            notify={"notify"}
             level={category.level}
             type={"dashboardPermission"}
           />
@@ -80,7 +77,6 @@ function DashboardComponent(props) {
             category={category}
             optionType={optType}
             brand={props.brand}
-            notify={"notify"}
             level={category.level}
             type={"dashboardPermission"}
           />
@@ -218,6 +214,7 @@ function DashboardComponent(props) {
         {isNoDataFound && <strong>No Data Found</strong>}
         {showViewLevel &&
           resposnsedata != [] &&
+          resposnsedata.level &&
           LevelCondition2(resposnsedata, "Edit")}
       </div>
       <div className="recent-activity-list-one">
