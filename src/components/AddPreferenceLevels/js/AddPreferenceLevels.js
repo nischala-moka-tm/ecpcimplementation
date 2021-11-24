@@ -54,94 +54,97 @@ function AddPreferenceLevels(props) {
       [e.target.id]: e.currentTarget.checked,
     });
   };
+  const onSaveClick = () => {
+		getPars("add", "save");
+	};
   const handlePrefrenceSubmit = (e) => {
     e.preventDefault();
-    getPars("add");
+    getPars("add", "submit");
   };
   const handlePreferenceEditSubmit = (e) => {
     e.preventDefault();
-    getPars("edit");
+    getPars("edit", "submit");
   };
-  const getPars = (func) => {
-    const comments = props.category.comments;
-    const finaldata = jsondataForPreference({
-      ...requestData,
-      comments,
-      func,
-    });
-    apicall(finaldata, func, props.onClose, props.notify, props.brand);
-  };
+  const getPars = (func, action) => {
+		const comments = props.category.comments;
+		const finaldata = jsondataForPreference({
+			...requestData,
+			comments,
+			func,
+		});
+		apicall(finaldata, func, props.onClose, props.notify, props.brand, action);
+	};
 
   const fileChangedHandler = (event) => {
     const formData = new FormData();
     console.log(formData);
   };
   return (
-    <Modal
-      className="modalpopup modal-preference"
-      show={props.show}
-      onHide={() => props.onClose()}
-    >
-      <Modal.Header closeButton>
-        <p>
-          {onlyAddconditon(props.optionType)
-            ? "Add New Preference"
-            : editcondtionPreference(props.optionType)}
-        </p>
-      </Modal.Header>
-      <Modal.Body>
-        <Form
-          id="form1"
-          onSubmit={
-            onlyAddconditon(props.optionType)
-              ? handlePrefrenceSubmit
-              : handlePreferenceEditSubmit
-          }
-        >
-          <Row>
-            <Col md={12}>
-              <DeleteText {...props} />
-              <p>Level {props.level}</p>
-            </Col>
-            <HelpSection />
-          </Row>
-          <CategorySec
-            category={requestData.categoryname}
-            onChange={(e) => handlePreferenceChange(e)}
-            onlyDelete={deleteOrView(props.optionType)}
-          />
-          {props.level === 4 && (
-            <ImageSec
-              fileChangedHandler={fileChangedHandler}
-              onlyDelete={deleteOrView(props.optionType)}
-            />
-          )}
-          <DateSec
-            startDate={requestData.startDate}
-            endDate={requestData.endDate}
-            type={editOrDelete(props.optionType) ? datevalue : "text"}
-            onChange={(e) => handlePreferenceChange(e)}
-            onlyDelete={deleteOrView(props.optionType)}
-          />
-          {props.level === 4 && (
-            <FinalSelection
-              onChange={(e) => onChecked(e)}
-              onlyDelete={deleteOrView(props.optionType)}
-            />
-          )}
-          <CommentSec
-            commentText={requestData.commentText}
-            onChange={(e) => handlePreferenceChange(e)}
-            editOrDelete={
-              onlyDeleteconditon(props.optionType) ||
-              onlyEditconditon(props.optionType)
-            }
-            onlyDelete={deleteOrView(props.optionType)}
-          />
-          <ButtonSec {...props} />
-        </Form>
-      </Modal.Body>
-    </Modal>
-  );
+		<Modal
+			className="modalpopup modal-preference"
+			show={props.show}
+			onHide={() => props.onClose()}
+		>
+			<Modal.Header closeButton>
+				<p>
+					{onlyAddconditon(props.optionType)
+						? "Add New Preference"
+						: editcondtionPreference(props.optionType)}
+				</p>
+			</Modal.Header>
+			<Modal.Body>
+				<Form
+					id="form1"
+					onSubmit={
+						onlyAddconditon(props.optionType)
+							? handlePrefrenceSubmit
+							: handlePreferenceEditSubmit
+					}
+				>
+					<Row>
+						<Col md={12}>
+							<DeleteText {...props} />
+							<p>Level {props.level}</p>
+						</Col>
+						<HelpSection />
+					</Row>
+					<CategorySec
+						category={requestData.categoryname}
+						onChange={(e) => handlePreferenceChange(e)}
+						onlyDelete={deleteOrView(props.optionType)}
+					/>
+					{props.level === 4 && (
+						<ImageSec
+							fileChangedHandler={fileChangedHandler}
+							onlyDelete={deleteOrView(props.optionType)}
+						/>
+					)}
+					<DateSec
+						startDate={requestData.startDate}
+						endDate={requestData.endDate}
+						type={editOrDelete(props.optionType) ? datevalue : "text"}
+						onChange={(e) => handlePreferenceChange(e)}
+						onlyDelete={deleteOrView(props.optionType)}
+					/>
+					{props.level === 4 && (
+						<FinalSelection
+							onChange={(e) => onChecked(e)}
+							onlyDelete={deleteOrView(props.optionType)}
+						/>
+					)}
+					<CommentSec
+						commentText={requestData.commentText}
+						onChange={(e) => handlePreferenceChange(e)}
+						editOrDelete={
+							onlyDeleteconditon(props.optionType) ||
+							onlyEditconditon(props.optionType)
+						}
+						onlyDelete={deleteOrView(props.optionType)}
+					/>
+					<ButtonSec {...props} onSaveClick={onSaveClick} />
+				</Form>
+			</Modal.Body>
+		</Modal>
+	);
 }
 export default AddPreferenceLevels;
