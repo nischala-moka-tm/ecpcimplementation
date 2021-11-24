@@ -16,6 +16,7 @@ export default function ExportDataToExcel({ data }) {
           title: i,
           width: { wpx: 150 },
           style: {
+            font: { bold: true },
             fill: { patternType: "solid", fgColor: { rgb: "e5e5e5" } },
             alignment: {
               vertical: "center",

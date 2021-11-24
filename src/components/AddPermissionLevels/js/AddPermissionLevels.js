@@ -83,7 +83,7 @@ function AddPermissionLevels(props) {
       func,
     });
     console.log(finaldata);
-    apicall(finaldata, type, func);
+    //apicall(finaldata, type, func);
   };
   const apicall = async (finaldata, type, func) => {
     const brand = props.brand;
