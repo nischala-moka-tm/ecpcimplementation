@@ -5,7 +5,7 @@ const contenttype = "application/json";
 
 export const AxiosPost = async (props) => {
   const response = await axios.post(
-    `https://518mvqcnuc.execute-api.us-west-2.amazonaws.com/dev/admin-meta-data/${props.brand}?action=submit&type=${props.type}`,
+    `https://518mvqcnuc.execute-api.us-west-2.amazonaws.com/dev/admin-meta-data/${props.brand}?action=${props.action}&type=${props.type}`,
     JSON.stringify(props.finaldata),
     {
       headers: {
