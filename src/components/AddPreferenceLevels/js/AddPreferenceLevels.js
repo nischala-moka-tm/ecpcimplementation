@@ -21,6 +21,7 @@ import {
   DeleteText,
   onlyEditconditon,
   onlyView,
+  deleteOrView,
 } from "../../CommonBlocks/js/CommonBlock";
 function AddPreferenceLevels(props) {
   const id = props.category.id;
@@ -107,9 +108,7 @@ function AddPreferenceLevels(props) {
           <CategorySec
             category={requestData.categoryname}
             onChange={(e) => handlePreferenceChange(e)}
-            onlyDelete={
-              onlyDeleteconditon(props.optionType) || onlyView(props.optionType)
-            }
+            onlyDelete={deleteOrView}
           />
           {props.level === 4 && (
             <ImageSec
@@ -125,17 +124,12 @@ function AddPreferenceLevels(props) {
             endDate={requestData.endDate}
             type={editOrDelete(props.optionType) ? datevalue : "text"}
             onChange={(e) => handlePreferenceChange(e)}
-            onlyDelete={
-              onlyDeleteconditon(props.optionType) || onlyView(props.optionType)
-            }
+            onlyDelete={deleteOrView}
           />
           {props.level === 4 && (
             <FinalSelection
               onChange={(e) => onChecked(e)}
-              onlyDelete={
-                onlyDeleteconditon(props.optionType) ||
-                onlyView(props.optionType)
-              }
+              onlyDelete={deleteOrView}
             />
           )}
           <CommentSec
@@ -145,9 +139,7 @@ function AddPreferenceLevels(props) {
               onlyDeleteconditon(props.optionType) ||
               onlyEditconditon(props.optionType)
             }
-            onlyDelete={
-              onlyDeleteconditon(props.optionType) || onlyView(props.optionType)
-            }
+            onlyDelete={deleteOrView}
           />
           <ButtonSec {...props} />
         </Form>

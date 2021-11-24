@@ -27,6 +27,10 @@ export const editOrDelete = (optionType) => {
     : false;
 };
 
+export const deleteOrView = (optionType) => {
+  return onlyDeleteconditon(optionType) || onlyView(optionType);
+};
+
 export function dateFormat(date) {
   return Moment(date).format("MM/DD/YYYY hh:mm:ss A");
 }

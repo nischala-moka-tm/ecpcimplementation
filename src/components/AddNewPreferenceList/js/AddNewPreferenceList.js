@@ -38,9 +38,9 @@ function AddNewPreferenceList(props) {
         <DateSec />
         <CommentSec readonly={false} />
       </div>
-      {labelLayout.map((layout, index) => {
+      {labelLayout.map((layout, pos) => {
         return (
-          <div key={index}>
+          <div key={pos}>
             {layout.labelClicked <= 2 ? (
               <div className="category-level2">
                 <Row className="category-sec">

@@ -76,40 +76,28 @@ function DashboardComponent(props) {
                 return (
                   <tr key={index}>
                     <td>
-                      {recentlist.levels[0] === undefined
-                        ? navalue
-                        : recentlist.levels[0]}
+                      {recentlist.levels[0] ? recentlist.levels[0] : navalue}
                     </td>
                     <td>
-                      {recentlist.levels[1] === undefined
-                        ? navalue
-                        : recentlist.levels[1]}
+                      {recentlist.levels[1] ? recentlist.levels[1] : navalue}
                     </td>
                     <td>
-                      {recentlist.levels[2] === undefined
-                        ? navalue
-                        : recentlist.levels[2]}
+                      {recentlist.levels[2] ? recentlist.levels[2] : navalue}
                     </td>
                     <td>
-                      {recentlist.levels[3] === undefined
-                        ? navalue
-                        : recentlist.levels[3]}
+                      {recentlist.levels[3] ? recentlist.levels[3] : navalue}
                     </td>
                     <td>
-                      {recentlist.createdDate === ""
-                        ? navalue
-                        : dateFormat(recentlist.createdDate)}
+                      {recentlist.createdDate
+                        ? dateFormat(recentlist.createdDate)
+                        : navalue}
                     </td>
                     <td>
-                      {recentlist.modifiedDate === ""
-                        ? navalue
-                        : dateFormat(recentlist.modifiedDate)}
+                      {recentlist.modifiedDate
+                        ? dateFormat(recentlist.modifiedDate)
+                        : navalue}
                     </td>
-                    <td>
-                      {recentlist.status === undefined
-                        ? navalue
-                        : recentlist.status}
-                    </td>
+                    <td>{recentlist.status ? recentlist.status : navalue}</td>
                     <td
                       className="edit"
                       onClick={(e) => {
@@ -166,44 +154,42 @@ function DashboardComponent(props) {
                 return (
                   <tr key={index}>
                     <td>
-                      {activitylist.levels[0] === undefined
-                        ? navalue
-                        : activitylist.levels[0]}
+                      {activitylist.levels[0]
+                        ? activitylist.levels[0]
+                        : navalue}
                     </td>
                     <td>
-                      {activitylist.levels[1] === undefined
-                        ? navalue
-                        : activitylist.levels[1]}
+                      {activitylist.levels[1]
+                        ? activitylist.levels[1]
+                        : navalue}
                     </td>
                     <td>
-                      {activitylist.levels[2] === undefined
-                        ? navalue
-                        : activitylist.levels[2]}
+                      {activitylist.levels[2]
+                        ? activitylist.levels[2]
+                        : navalue}
                     </td>
                     <td>
-                      {activitylist.levels[3] === undefined
-                        ? navalue
-                        : activitylist.levels[3]}
+                      {activitylist.levels[3]
+                        ? activitylist.levels[3]
+                        : navalue}
                     </td>
                     <td>
-                      {activitylist.createdDate === ""
-                        ? navalue
-                        : dateFormat(activitylist.createdDate)}
+                      {activitylist.createdDate
+                        ? dateFormat(activitylist.createdDate)
+                        : navalue}
                     </td>
                     <td>
-                      {activitylist.createdBy === ""
-                        ? navalue
-                        : activitylist.createdBy}
+                      {activitylist.createdBy
+                        ? activitylist.createdBy
+                        : navalue}
                     </td>
                     <td>
-                      {activitylist.modifiedDate === ""
-                        ? navalue
-                        : dateFormat(activitylist.modifiedDate)}
+                      {activitylist.modifiedDate
+                        ? dateFormat(activitylist.modifiedDate)
+                        : navalue}
                     </td>
                     <td>
-                      {activitylist.status === ""
-                        ? navalue
-                        : activitylist.status}
+                      {activitylist.status ? activitylist.status : navalue}
                     </td>
                     <td
                       className="view"

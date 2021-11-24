@@ -23,6 +23,7 @@ import {
   DeleteText,
   onlyEditconditon,
   onlyView,
+  deleteOrView,
 } from "../../CommonBlocks/js/CommonBlock";
 
 function AddPermissionLevels(props) {
@@ -119,9 +120,7 @@ function AddPermissionLevels(props) {
           <CategorySec
             category={requestData.categoryname}
             onChange={(e) => handleChange(e)}
-            onlyDelete={
-              onlyDeleteconditon(props.optionType) || onlyView(props.optionType)
-            }
+            onlyDelete={deleteOrView}
           />
 
           {props.level === 1 && (
@@ -161,10 +160,7 @@ function AddPermissionLevels(props) {
           {props.level > 2 && (
             <FinalSelection
               onChange={(e) => onChecked(e)}
-              onlyDelete={
-                onlyDeleteconditon(props.optionType) ||
-                onlyView(props.optionType)
-              }
+              onlyDelete={deleteOrView}
             />
           )}
 
@@ -175,9 +171,7 @@ function AddPermissionLevels(props) {
               onlyDeleteconditon(props.optionType) ||
               onlyEditconditon(props.optionType)
             }
-            onlyDelete={
-              onlyDeleteconditon(props.optionType) || onlyView(props.optionType)
-            }
+            onlyDelete={deleteOrView}
           />
           <ButtonSec {...props} />
         </Form>
