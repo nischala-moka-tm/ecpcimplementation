@@ -163,8 +163,12 @@ $breakpoint-desktop: 992px;
             color: #FF0000;
             font-size: 14px;
             line-height: 20px;
-            max-width: 540px;
             margin: 0 0 10px 0;
+            max-width: 250px;
+
+            @media (min-width: $breakpoint-tablet) {
+              max-width: 540px;
+            }
           }
         }
 
@@ -260,6 +264,8 @@ $breakpoint-desktop: 992px;
             visibility: hidden;
             height: 0;
             width: 0;
+            display: inline;
+            padding: 0;
 
             &[readonly] {
               +label {
@@ -308,13 +314,19 @@ $breakpoint-desktop: 992px;
           }
 
           .add-icon {
-            text-align: right;
+            position: relative;
 
             .plusmenu-danger {
               border: none;
-              background-color: #ffffff;
-              position: relative;
-              top: -45px;
+              background-color: transparent;
+              position: absolute;
+              top: -95px;
+              right: 10px;
+
+              @media (min-width: $breakpoint-tablet) {
+                top: -45px;
+                right: 30px;
+              }
             }
           }
         }

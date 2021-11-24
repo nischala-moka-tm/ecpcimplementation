@@ -40,7 +40,7 @@ function AddNewPreferenceList(props) {
       </div>
       {labelLayout.map((layout, index) => {
         return (
-          <>
+          <div key={index}>
             {layout.labelClicked <= 2 ? (
               <div className="category-level2">
                 <Row className="category-sec">
@@ -81,7 +81,7 @@ function AddNewPreferenceList(props) {
             ) : (
               ""
             )}
-          </>
+          </div>
         );
       })}
     </div>

@@ -72,7 +72,7 @@ function AddNewCategory(props) {
               </ToggleButton>
             </ToggleButtonGroup>
           </Col>
-          <Col md={6}>
+          <Col md={4}>
             <div className="help-sec">
               <span className="help-icon">
                 <FaRegQuestionCircle varient="red" />
@@ -89,7 +89,11 @@ function AddNewCategory(props) {
             </div>
           </Col>
         </Row>
-        {Permission ? <AddNewPermissionList onClose={onResetAll}/> : <AddNewPreferenceList onClose={onResetAll}/>}
+        {Permission ? (
+          <AddNewPermissionList onClose={onResetAll} />
+        ) : (
+          <AddNewPreferenceList onClose={onResetAll} />
+        )}
       </Modal.Body>
       <Modal.Footer>
         <Container fluid className="button-options">

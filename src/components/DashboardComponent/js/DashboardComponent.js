@@ -75,13 +75,41 @@ function DashboardComponent(props) {
               recentUpdateData.slice(0, 4).map((recentlist, index) => {
                 return (
                   <tr key={index}>
-                    <td>{recentlist.levels[0]}</td>
-                    <td>{recentlist.levels[1]}</td>
-                    <td>{recentlist.levels[2]}</td>
-                    <td>{recentlist.levels[3]}</td>
-                    <td>{dateFormat(recentlist.createdDate)}</td>
-                    <td>{dateFormat(recentlist.modifiedDate)}</td>
-                    <td>{recentlist.status}</td>
+                    <td>
+                      {recentlist.levels[0] === undefined
+                        ? navalue
+                        : recentlist.levels[0]}
+                    </td>
+                    <td>
+                      {recentlist.levels[1] === undefined
+                        ? navalue
+                        : recentlist.levels[1]}
+                    </td>
+                    <td>
+                      {recentlist.levels[2] === undefined
+                        ? navalue
+                        : recentlist.levels[2]}
+                    </td>
+                    <td>
+                      {recentlist.levels[3] === undefined
+                        ? navalue
+                        : recentlist.levels[3]}
+                    </td>
+                    <td>
+                      {recentlist.createdDate === ""
+                        ? navalue
+                        : dateFormat(recentlist.createdDate)}
+                    </td>
+                    <td>
+                      {recentlist.modifiedDate === ""
+                        ? navalue
+                        : dateFormat(recentlist.modifiedDate)}
+                    </td>
+                    <td>
+                      {recentlist.status === undefined
+                        ? navalue
+                        : recentlist.status}
+                    </td>
                     <td
                       className="edit"
                       onClick={(e) => {
@@ -200,7 +228,7 @@ function DashboardComponent(props) {
               setData([]);
             }}
             category={resposnsedata}
-            optionType="Edit"
+            optionType="View"
             brand={props.brand}
             level={resposnsedata.level}
             notify={notify}

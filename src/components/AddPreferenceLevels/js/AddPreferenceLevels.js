@@ -18,7 +18,9 @@ import {
   onlyDeleteconditon,
   onlyAddconditon,
   apicall,
-  deleteText,
+  DeleteText,
+  onlyEditconditon,
+  onlyView,
 } from "../../CommonBlocks/js/CommonBlock";
 function AddPreferenceLevels(props) {
   const id = props.category.id;
@@ -97,7 +99,7 @@ function AddPreferenceLevels(props) {
         >
           <Row>
             <Col md={12}>
-              <deleteText {...props} />
+              <DeleteText {...props} />
               <p>Level {props.level}</p>
             </Col>
             <HelpSection />
@@ -105,12 +107,17 @@ function AddPreferenceLevels(props) {
           <CategorySec
             category={requestData.categoryname}
             onChange={(e) => handlePreferenceChange(e)}
-            onlyDelete={onlyDeleteconditon(props.optionType)}
+            onlyDelete={
+              onlyDeleteconditon(props.optionType) || onlyView(props.optionType)
+            }
           />
           {props.level === 4 && (
             <ImageSec
               fileChangedHandler={fileChangedHandler}
-              onlyDelete={onlyDeleteconditon(props.optionType)}
+              onlyDelete={
+                onlyDeleteconditon(props.optionType) ||
+                onlyView(props.optionType)
+              }
             />
           )}
           <DateSec
@@ -118,18 +125,29 @@ function AddPreferenceLevels(props) {
             endDate={requestData.endDate}
             type={editOrDelete(props.optionType) ? datevalue : "text"}
             onChange={(e) => handlePreferenceChange(e)}
-            onlyDelete={onlyDeleteconditon(props.optionType)}
+            onlyDelete={
+              onlyDeleteconditon(props.optionType) || onlyView(props.optionType)
+            }
           />
           {props.level === 4 && (
             <FinalSelection
               onChange={(e) => onChecked(e)}
-              onlyDelete={onlyDeleteconditon(props.optionType)}
+              onlyDelete={
+                onlyDeleteconditon(props.optionType) ||
+                onlyView(props.optionType)
+              }
             />
           )}
           <CommentSec
             commentText={requestData.commentText}
             onChange={(e) => handlePreferenceChange(e)}
-            editOrDelete={editOrDelete(props.optionType)}
+            editOrDelete={
+              onlyDeleteconditon(props.optionType) ||
+              onlyEditconditon(props.optionType)
+            }
+            onlyDelete={
+              onlyDeleteconditon(props.optionType) || onlyView(props.optionType)
+            }
           />
           <ButtonSec {...props} />
         </Form>

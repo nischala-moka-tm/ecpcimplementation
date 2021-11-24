@@ -98,6 +98,7 @@
         background: #d4d2d2 0% 0% no-repeat padding-box;
         font-size: 12px;
         line-height: 16px;
+        min-width: 100px;
 
         @media (min-width: $breakpoint-tablet) {
           font-size: 15px;

@@ -20,7 +20,9 @@ import {
   onlyAddconditon,
   onlyDeleteconditon,
   apicall,
-  deleteText,
+  DeleteText,
+  onlyEditconditon,
+  onlyView,
 } from "../../CommonBlocks/js/CommonBlock";
 
 function AddPermissionLevels(props) {
@@ -108,7 +110,7 @@ function AddPermissionLevels(props) {
         >
           <Row>
             <Col md={12}>
-              <deleteText {...props} />
+              <DeleteText {...props} />
               <p>Level {props.level}</p>
             </Col>
             <HelpSection />
@@ -117,14 +119,19 @@ function AddPermissionLevels(props) {
           <CategorySec
             category={requestData.categoryname}
             onChange={(e) => handleChange(e)}
-            onlyDelete={onlyDeleteconditon(props.optionType)}
+            onlyDelete={
+              onlyDeleteconditon(props.optionType) || onlyView(props.optionType)
+            }
           />
 
           {props.level === 1 && (
             <EnableEmailSec
               altEmail={requestData.enableAlternateEmailId}
               onChange={(e) => onChangeAltMail()}
-              onlyDelete={onlyDeleteconditon(props.optionType)}
+              onlyDelete={
+                onlyDeleteconditon(props.optionType) ||
+                onlyView(props.optionType)
+              }
             />
           )}
 
@@ -135,7 +142,10 @@ function AddPermissionLevels(props) {
               call={requestData.call}
               sms={requestData.sms}
               onChecked={(e) => onInputChecked(e)}
-              onlyDelete={onlyDeleteconditon(props.optionType)}
+              onlyDelete={
+                onlyDeleteconditon(props.optionType) ||
+                onlyView(props.optionType)
+              }
             />
           )}
 
@@ -145,19 +155,29 @@ function AddPermissionLevels(props) {
             type={editOrDelete(props.optionType) ? datevalue : "text"}
             onChange={(e) => handleChange(e)}
             onlyDelete={onlyDeleteconditon(props.optionType)}
+            onlyView={onlyView(props.optionType)}
           />
 
           {props.level > 2 && (
             <FinalSelection
               onChange={(e) => onChecked(e)}
-              onlyDelete={onlyDeleteconditon(props.optionType)}
+              onlyDelete={
+                onlyDeleteconditon(props.optionType) ||
+                onlyView(props.optionType)
+              }
             />
           )}
 
           <CommentSec
             commentText={requestData.commentText}
             onChange={(e) => handleChange(e)}
-            editOrDelete={editOrDelete(props.optionType)}
+            editOrDelete={
+              onlyDeleteconditon(props.optionType) ||
+              onlyEditconditon(props.optionType)
+            }
+            onlyDelete={
+              onlyDeleteconditon(props.optionType) || onlyView(props.optionType)
+            }
           />
           <ButtonSec {...props} />
         </Form>

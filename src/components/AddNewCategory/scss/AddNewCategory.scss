@@ -7,12 +7,6 @@
         p {
           display: inline-block;
         }
-
-        .plusmenu-danger {
-          border: none;
-          background: none;
-          float: right;
-        }
       }
     }
 
@@ -20,12 +14,10 @@
       font-size: 12px;
       line-height: 18px;
       padding-left: 15px;
+      position: absolute;
+      top: 75px;
+      right: 25px;
 
-      @media (min-width: $breakpoint-tablet) {
-        position: absolute;
-        top: 75px;
-        right: 25px;
-      }
 
       ul {
         padding-left: 0;

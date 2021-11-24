@@ -22,7 +22,9 @@ export const iterateComments = (comment) => {
 };
 
 export const editOrDelete = (optionType) => {
-  return optionType ? optionType === "Edit" || optionType === "Delete" : false;
+  return optionType
+    ? optionType === "Edit" || optionType === "Delete" || optionType === "View"
+    : false;
 };
 
 export function dateFormat(date) {
@@ -41,11 +43,29 @@ export const onlyDeleteconditon = (optionType) => {
   return optionType === "Delete";
 };
 
-export const editcondtion = (optionType) =>
-  onlyEditconditon(optionType) ? "Update Permission" : "Delete Permission";
+export const onlyView = (optionType) => {
+  return optionType === "View";
+};
 
-export const editcondtionPreference = (optionType) =>
-  onlyEditconditon(optionType) ? "Update Preference" : "Delete Preference";
+export const editcondtion = (optionType) => {
+  if (onlyEditconditon(optionType)) {
+    return "Update Permission";
+  } else if (onlyView(optionType)) {
+    return "View Permission";
+  } else {
+    return "Delete Permission";
+  }
+};
+
+export const editcondtionPreference = (optionType) => {
+  if (onlyEditconditon(optionType)) {
+    return "Update Preference";
+  } else if (onlyView(optionType)) {
+    return "View Preference";
+  } else {
+    return "Delete Preference";
+  }
+};
 
 export const formatParentID = (id) => {
   return id.trim().replace(/ /g, "_").toUpperCase();
@@ -337,7 +357,7 @@ export const CommentSec = (props) => {
             placeholder="Comments*"
             name="commentText"
             value={props.commentText}
-            readOnly={props.editOrDelete}
+            readOnly={props.onlyDelete}
             onChange={props.onChange}
             required={true}
           ></textarea>
@@ -373,7 +393,7 @@ export const DateSec = (props) => {
           required={true}
           onChange={props.onChange}
           value={props.startDate}
-          readOnly={props.onlyDelete}
+          readOnly={props.onlyDelete || props.onlyView}
         />
       </Col>
       <Col md={5}>
@@ -386,6 +406,7 @@ export const DateSec = (props) => {
           onFocus={(e) => (e.target.type = datevalue)}
           value={props.endDate}
           onChange={props.onChange}
+          readOnly={props.onlyView}
         />
       </Col>
     </Row>
@@ -526,22 +547,26 @@ export const FinalSelection = (props) => {
 
 export const ButtonSec = (props) => {
   return (
-    <Container fluid className="button-options">
-      <Button variant="primary" size="sm" onClick={() => props.onClose()}>
-        Cancel
-      </Button>
+    <>
+      {props.optionType !== "View" && (
+        <Container fluid className="button-options">
+          <Button variant="primary" size="sm" onClick={() => props.onClose()}>
+            Cancel
+          </Button>
 
-      {!editOrDelete(props.optionType) && (
-        <Button variant="primary" size="sm">
-          Save for Later
-        </Button>
+          {!editOrDelete(props.optionType) && (
+            <Button variant="primary" size="sm">
+              Save for Later
+            </Button>
+          )}
+          <Button type="submit" variant="secondary" size="sm">
+            {props.optionType === "Delete"
+              ? "Submit Delete for Approval"
+              : "Submit for Approval"}
+          </Button>
+        </Container>
       )}
-      <Button type="submit" variant="secondary" size="sm">
-        {props.optionType === "Delete"
-          ? "Submit Delete for Approval"
-          : "Submit for Approval"}
-      </Button>
-    </Container>
+    </>
   );
 };
 
@@ -562,11 +587,11 @@ export const apicall = async (finaldata, func, onclose, notify, brand) => {
   }
 };
 
-export const deleteText = (props) => {
+export const DeleteText = (props) => {
   return (
     <p className="delete-txt">
       {onlyDeleteconditon(props.optionType) &&
         "Deleting this item will delete from production and remove any levels under it. To proceed please enter end date, enter comments and submit delete for approval."}
     </p>
   );
-}
+};

@@ -263,6 +263,11 @@
                   justify-content: start;
                   align-items: center;
                   text-align: left;
+                  border-bottom: 1px solid #707070;
+
+                  &:last-child {
+                    border-bottom: none;
+                  }
 
                   &:hover {
                     background-color: #000;
