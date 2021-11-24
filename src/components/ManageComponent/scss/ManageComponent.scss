@@ -176,14 +176,34 @@
         position: relative;
         display: block;
 
+        &.btn-nosub {
+          ul {
+            padding-left: 44px;
+          }
+        }
+
         ul {
           padding-left: 30px;
-          margin-bottom: 5px;
+          position: relative;
+          margin-bottom: 0;
+          padding-top: 4px;
+
+          &:before {
+            content: "";
+            position: absolute;
+            height: 100%;
+            width: 1px;
+            display: block;
+            background: #000;
+            left: 12px;
+            top: 5px;
+          }
 
           li {
             list-style: none;
             font-size: 14px;
             line-height: 20px;
+            padding-bottom: 2px;
 
             .status-roundend {
               height: 8px;
@@ -254,6 +274,10 @@
                 box-sizing: border-box;
                 border: 1px solid #707070;
 
+                &:before {
+                  content: none;
+                }
+
 
                 li {
                   padding: 0.2em 1.25em;
@@ -288,7 +312,26 @@
         }
 
         .sub-category {
+          &.btn-nosub {
+            ul {
+              padding-left: 42px;
+            }
+          }
+
           ul {
+            position: relative;
+
+            &:before {
+              content: "";
+              position: absolute;
+              height: 100%;
+              width: 1px;
+              display: block;
+              background: #000;
+              left: 12px;
+              top: 5px;
+            }
+
             li {
               font-size: 12px;
               line-height: 18px;
