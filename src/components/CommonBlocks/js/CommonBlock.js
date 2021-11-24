@@ -5,11 +5,15 @@ import {
   FormControl,
   ToggleButton,
   ToggleButtonGroup,
+  Container,
+  Button,
 } from "react-bootstrap";
+
 import Moment from "moment";
 import { FaRegQuestionCircle, FaPlus } from "react-icons/fa";
 import { BsCardImage } from "react-icons/bs";
 import CommunicationChannel from "../../CommunicationChannel/js/CommunicationChannel";
+import { AxiosPost, AxiosPut } from "../../AxiosMethods/ApiCalls";
 
 export const datevalue = "datetime-local";
 
@@ -25,11 +29,23 @@ export function dateFormat(date) {
   return Moment(date).format("MM/DD/YYYY hh:mm:ss A");
 }
 
+export const onlyAddconditon = (optionType) => {
+  return optionType === "Add";
+};
+
+export const onlyEditconditon = (optionType) => {
+  return optionType === "Edit";
+};
+
+export const onlyDeleteconditon = (optionType) => {
+  return optionType === "Delete";
+};
+
 export const editcondtion = (optionType) =>
-  optionType === "Edit" ? "Update Permission" : "Delete Permission";
+  onlyEditconditon(optionType) ? "Update Permission" : "Delete Permission";
 
 export const editcondtionPreference = (optionType) =>
-  optionType === "Edit" ? "Update Preference" : "Delete Preference";
+  onlyEditconditon(optionType) ? "Update Preference" : "Delete Preference";
 
 export const formatParentID = (id) => {
   return id.trim().replace(/ /g, "_").toUpperCase();
@@ -507,3 +523,50 @@ export const FinalSelection = (props) => {
     </Row>
   );
 };
+
+export const ButtonSec = (props) => {
+  return (
+    <Container fluid className="button-options">
+      <Button variant="primary" size="sm" onClick={() => props.onClose()}>
+        Cancel
+      </Button>
+
+      {!editOrDelete(props.optionType) && (
+        <Button variant="primary" size="sm">
+          Save for Later
+        </Button>
+      )}
+      <Button type="submit" variant="secondary" size="sm">
+        {props.optionType === "Delete"
+          ? "Submit Delete for Approval"
+          : "Submit for Approval"}
+      </Button>
+    </Container>
+  );
+};
+
+export const apicall = async (finaldata, func, onclose, notify, brand) => {
+  const postData = { finaldata, type: "subCategory", brand };
+  let resText = "";
+  const result =
+    func === "add" ? await AxiosPost(postData) : await AxiosPut(postData);
+  if (result.code === "200") {
+    onclose();
+    resText = result.messages[0].description;
+    notify(resText, "success");
+  } else {
+    result.messages.map((i) => {
+      resText += `${i.description}\n`;
+    });
+    notify(resText, "error");
+  }
+};
+
+export const deleteText = (props) => {
+  return (
+    <p className="delete-txt">
+      {onlyDeleteconditon(props.optionType) &&
+        "Deleting this item will delete from production and remove any levels under it. To proceed please enter end date, enter comments and submit delete for approval."}
+    </p>
+  );
+}

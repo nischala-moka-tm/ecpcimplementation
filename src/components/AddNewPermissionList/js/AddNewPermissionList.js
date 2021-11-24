@@ -37,7 +37,7 @@ function AddNewPermissionList(props) {
   ]);
 
   function labelAdd(e) {
-    let arr = [...labelLayout];
+    const arr = [...labelLayout];
     arr.push({ labelClicked: e });
     setLabelLayout(arr);
   }

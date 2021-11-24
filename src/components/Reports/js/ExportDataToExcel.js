@@ -9,7 +9,7 @@ export default function ExportDataToExcel({ data }) {
   let cols = [];
   let rows = [];
   const getCols = () => {
-    for (let i in data[0]) {
+    for (const i in data[0]) {
       cols = [
         ...cols,
         {
@@ -39,7 +39,7 @@ export default function ExportDataToExcel({ data }) {
   const getRows = () => {
     data.map((d) => {
       let record = [];
-      for (let i in data[0]) {
+      for (const i in data[0]) {
         record = [
           ...record,
           {

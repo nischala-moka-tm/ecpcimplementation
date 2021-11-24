@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Row, Col, Modal, Container, Form } from "react-bootstrap";
+import { Row, Col, Modal, Form } from "react-bootstrap";
 import {
   editOrDelete,
   datevalue,
@@ -16,11 +16,15 @@ import {
   level2props,
   levelcommonprops,
   jsondata,
+  ButtonSec,
+  onlyAddconditon,
+  onlyDeleteconditon,
+  apicall,
+  deleteText,
 } from "../../CommonBlocks/js/CommonBlock";
-import { AxiosPost, AxiosPut } from "../../AxiosMethods/ApiCalls";
 
 function AddPermissionLevels(props) {
-  const id = props.category.id ? props.category.id : "";
+  const id = props.category.id;
   let userData = {
     ...propcondition(props),
   };
@@ -64,42 +68,22 @@ function AddPermissionLevels(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const type = "subCategory";
-    getPars("add", type);
+    getPars("add");
   };
 
   const handleEditSubmit = (e) => {
     e.preventDefault();
-    let type = "subCategory";
-    props.level === 1 && (type = "category");
-    getPars("edit", type);
+    getPars("edit");
   };
 
-  const getPars = (func, type) => {
+  const getPars = (func) => {
     const comments = props.category.comments;
     const finaldata = jsondata({
       ...requestData,
       comments,
       func,
     });
-    apicall(finaldata, type, func);
-  };
-  const apicall = async (finaldata, type, func) => {
-    const brand = props.brand;
-    const postData = { finaldata, type, brand };
-    let resText = "";
-    const result =
-      func === "add" ? await AxiosPost(postData) : await AxiosPut(postData);
-    if (result.code === "200") {
-      props.onClose();
-      resText = result.messages[0].description;
-      props.notify(resText, "success");
-    } else {
-      result.messages.map((i) => {
-        resText += `${i.description}\n`;
-      });
-      props.notify(resText, "error");
-    }
+    apicall(finaldata, func, props.onClose, props.notify, props.brand);
   };
 
   return (
@@ -110,7 +94,7 @@ function AddPermissionLevels(props) {
     >
       <Modal.Header closeButton>
         <p>
-          {props.optionType === "Add"
+          {onlyAddconditon(props.optionType)
             ? "Add New Permission"
             : editcondtion(props.optionType)}
         </p>
@@ -119,15 +103,12 @@ function AddPermissionLevels(props) {
         <Form
           id="form1"
           onSubmit={
-            props.optionType === "Add" ? handleSubmit : handleEditSubmit
+            onlyAddconditon(props.optionType) ? handleSubmit : handleEditSubmit
           }
         >
           <Row>
             <Col md={12}>
-              <p className="delete-txt">
-                {props.optionType === "Delete" &&
-                  "Deleting this item will delete from production and remove any levels under it. To proceed please enter end date, enter comments and submit delete for approval."}
-              </p>
+              <deleteText {...props} />
               <p>Level {props.level}</p>
             </Col>
             <HelpSection />
@@ -136,14 +117,14 @@ function AddPermissionLevels(props) {
           <CategorySec
             category={requestData.categoryname}
             onChange={(e) => handleChange(e)}
-            onlyDelete={props.optionType === "Delete"}
+            onlyDelete={onlyDeleteconditon(props.optionType)}
           />
 
           {props.level === 1 && (
             <EnableEmailSec
               altEmail={requestData.enableAlternateEmailId}
               onChange={(e) => onChangeAltMail()}
-              onlyDelete={props.optionType === "Delete"}
+              onlyDelete={onlyDeleteconditon(props.optionType)}
             />
           )}
 
@@ -154,7 +135,7 @@ function AddPermissionLevels(props) {
               call={requestData.call}
               sms={requestData.sms}
               onChecked={(e) => onInputChecked(e)}
-              onlyDelete={props.optionType === "Delete"}
+              onlyDelete={onlyDeleteconditon(props.optionType)}
             />
           )}
 
@@ -163,13 +144,13 @@ function AddPermissionLevels(props) {
             endDate={requestData.endDate}
             type={editOrDelete(props.optionType) ? datevalue : "text"}
             onChange={(e) => handleChange(e)}
-            onlyDelete={props.optionType === "Delete"}
+            onlyDelete={onlyDeleteconditon(props.optionType)}
           />
 
           {props.level > 2 && (
             <FinalSelection
               onChange={(e) => onChecked(e)}
-              onlyDelete={props.optionType === "Delete"}
+              onlyDelete={onlyDeleteconditon(props.optionType)}
             />
           )}
 
@@ -178,23 +159,7 @@ function AddPermissionLevels(props) {
             onChange={(e) => handleChange(e)}
             editOrDelete={editOrDelete(props.optionType)}
           />
-
-          <Container fluid className="button-options">
-            <Button variant="primary" size="sm" onClick={() => props.onClose()}>
-              Cancel
-            </Button>
-
-            {!editOrDelete(props.optionType) && (
-              <Button variant="primary" size="sm">
-                Save for Later
-              </Button>
-            )}
-            <Button type="submit" variant="secondary" size="sm">
-              {props.optionType === "Delete"
-                ? "Submit Delete for Approval"
-                : "Submit for Approval"}
-            </Button>
-          </Container>
+          <ButtonSec {...props} />
         </Form>
       </Modal.Body>
     </Modal>

@@ -1,24 +1,25 @@
 import React from "react";
 import axios from "axios";
 
+const contenttype = "application/json";
+
 export const AxiosPost = async (props) => {
-  console.log(props);
   const response = await axios.post(
     `https://518mvqcnuc.execute-api.us-west-2.amazonaws.com/dev/admin-meta-data/${props.brand}?action=submit&type=${props.type}`,
     JSON.stringify(props.finaldata),
     {
       headers: {
-        "Content-type": "application/json",
+        "Content-type": contenttype,
       },
     }
   );
   return response.data.status;
 };
+
 export const AxiosGet = (props) => {
-  const res = axios.get(
+  return axios.get(
     `https://518mvqcnuc.execute-api.us-west-2.amazonaws.com/dev/admin-meta-data/${props.brand}?fetch=${props.type}`
   );
-  return res;
 };
 
 export const AxiosPut = async (props) => {
@@ -27,7 +28,7 @@ export const AxiosPut = async (props) => {
     JSON.stringify(props.finaldata),
     {
       headers: {
-        "Content-type": "application/json",
+        "Content-type": contenttype,
       },
     }
   );
@@ -40,9 +41,9 @@ export const AxiosPostMetadata = async (props) => {
     JSON.stringify(props),
     {
       headers: {
-        "Content-type": "application/json",
+        "Content-type": contenttype,
       },
     }
   );
-  return response;
+  return response.data;
 };
