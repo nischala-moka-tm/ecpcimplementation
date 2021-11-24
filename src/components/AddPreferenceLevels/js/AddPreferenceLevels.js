@@ -108,15 +108,12 @@ function AddPreferenceLevels(props) {
           <CategorySec
             category={requestData.categoryname}
             onChange={(e) => handlePreferenceChange(e)}
-            onlyDelete={deleteOrView}
+            onlyDelete={deleteOrView(props.optionType)}
           />
           {props.level === 4 && (
             <ImageSec
               fileChangedHandler={fileChangedHandler}
-              onlyDelete={
-                onlyDeleteconditon(props.optionType) ||
-                onlyView(props.optionType)
-              }
+              onlyDelete={deleteOrView(props.optionType)}
             />
           )}
           <DateSec
@@ -124,12 +121,12 @@ function AddPreferenceLevels(props) {
             endDate={requestData.endDate}
             type={editOrDelete(props.optionType) ? datevalue : "text"}
             onChange={(e) => handlePreferenceChange(e)}
-            onlyDelete={deleteOrView}
+            onlyDelete={deleteOrView(props.optionType)}
           />
           {props.level === 4 && (
             <FinalSelection
               onChange={(e) => onChecked(e)}
-              onlyDelete={deleteOrView}
+              onlyDelete={deleteOrView(props.optionType)}
             />
           )}
           <CommentSec
@@ -139,7 +136,7 @@ function AddPreferenceLevels(props) {
               onlyDeleteconditon(props.optionType) ||
               onlyEditconditon(props.optionType)
             }
-            onlyDelete={deleteOrView}
+            onlyDelete={deleteOrView(props.optionType)}
           />
           <ButtonSec {...props} />
         </Form>

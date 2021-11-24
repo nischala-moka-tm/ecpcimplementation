@@ -12,6 +12,13 @@ const userRole = "ECPC_TOYOTA_ADMIN";
 const userId = 1234567;
 const navalue = "N/A";
 
+const checkUndefined = (value) => {
+  return value ? value : navalue;
+};
+
+const checkDateUndefined = (datevalue) => {
+  return datevalue ? dateFormat(datevalue) : navalue;
+};
 function DashboardComponent(props) {
   const [recentUpdateData, setRecentUpdateData] = useState([]);
   const [isNoDataFound, setNoDataFound] = useState(false);
@@ -75,29 +82,13 @@ function DashboardComponent(props) {
               recentUpdateData.slice(0, 4).map((recentlist, index) => {
                 return (
                   <tr key={index}>
-                    <td>
-                      {recentlist.levels[0] ? recentlist.levels[0] : navalue}
-                    </td>
-                    <td>
-                      {recentlist.levels[1] ? recentlist.levels[1] : navalue}
-                    </td>
-                    <td>
-                      {recentlist.levels[2] ? recentlist.levels[2] : navalue}
-                    </td>
-                    <td>
-                      {recentlist.levels[3] ? recentlist.levels[3] : navalue}
-                    </td>
-                    <td>
-                      {recentlist.createdDate
-                        ? dateFormat(recentlist.createdDate)
-                        : navalue}
-                    </td>
-                    <td>
-                      {recentlist.modifiedDate
-                        ? dateFormat(recentlist.modifiedDate)
-                        : navalue}
-                    </td>
-                    <td>{recentlist.status ? recentlist.status : navalue}</td>
+                    <td>{checkUndefined(recentlist.levels[0])}</td>
+                    <td>{checkUndefined(recentlist.levels[1])}</td>
+                    <td>{checkUndefined(recentlist.levels[2])}</td>
+                    <td>{checkUndefined(recentlist.levels[3])}</td>
+                    <td>{checkDateUndefined(recentlist.createdDate)}</td>
+                    <td>{checkDateUndefined(recentlist.modifiedDate)}</td>
+                    <td>{checkUndefined(recentlist.status)}</td>
                     <td
                       className="edit"
                       onClick={(e) => {
@@ -153,44 +144,14 @@ function DashboardComponent(props) {
               recentUpdateData.slice(0, 4).map((activitylist, index) => {
                 return (
                   <tr key={index}>
-                    <td>
-                      {activitylist.levels[0]
-                        ? activitylist.levels[0]
-                        : navalue}
-                    </td>
-                    <td>
-                      {activitylist.levels[1]
-                        ? activitylist.levels[1]
-                        : navalue}
-                    </td>
-                    <td>
-                      {activitylist.levels[2]
-                        ? activitylist.levels[2]
-                        : navalue}
-                    </td>
-                    <td>
-                      {activitylist.levels[3]
-                        ? activitylist.levels[3]
-                        : navalue}
-                    </td>
-                    <td>
-                      {activitylist.createdDate
-                        ? dateFormat(activitylist.createdDate)
-                        : navalue}
-                    </td>
-                    <td>
-                      {activitylist.createdBy
-                        ? activitylist.createdBy
-                        : navalue}
-                    </td>
-                    <td>
-                      {activitylist.modifiedDate
-                        ? dateFormat(activitylist.modifiedDate)
-                        : navalue}
-                    </td>
-                    <td>
-                      {activitylist.status ? activitylist.status : navalue}
-                    </td>
+                    <td>{checkUndefined(activitylist.levels[0])}</td>
+                    <td>{checkUndefined(activitylist.levels[1])}</td>
+                    <td>{checkUndefined(activitylist.levels[2])}</td>
+                    <td>{checkUndefined(activitylist.levels[3])}</td>
+                    <td>{checkDateUndefined(activitylist.createdDate)}</td>
+                    <td>{checkUndefined(activitylist.createdBy)}</td>
+                    <td>{checkDateUndefined(activitylist.modifiedDate)}</td>
+                    <td>{checkUndefined(activitylist.status)}</td>
                     <td
                       className="view"
                       onClick={() => {

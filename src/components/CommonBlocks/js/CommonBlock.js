@@ -361,7 +361,7 @@ export const CommentSec = (props) => {
             placeholder="Comments*"
             name="commentText"
             value={props.commentText}
-            readOnly={props.onlyDelete}
+            readOnly={props.editOrDelete || props.onlyDelete}
             onChange={props.onChange}
             required={true}
           ></textarea>

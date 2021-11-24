@@ -120,17 +120,14 @@ function AddPermissionLevels(props) {
           <CategorySec
             category={requestData.categoryname}
             onChange={(e) => handleChange(e)}
-            onlyDelete={deleteOrView}
+            onlyDelete={deleteOrView(props.optionType)}
           />
 
           {props.level === 1 && (
             <EnableEmailSec
               altEmail={requestData.enableAlternateEmailId}
               onChange={(e) => onChangeAltMail()}
-              onlyDelete={
-                onlyDeleteconditon(props.optionType) ||
-                onlyView(props.optionType)
-              }
+              onlyDelete={deleteOrView(props.optionType)}
             />
           )}
 
@@ -141,10 +138,7 @@ function AddPermissionLevels(props) {
               call={requestData.call}
               sms={requestData.sms}
               onChecked={(e) => onInputChecked(e)}
-              onlyDelete={
-                onlyDeleteconditon(props.optionType) ||
-                onlyView(props.optionType)
-              }
+              onlyDelete={deleteOrView(props.optionType)}
             />
           )}
 
@@ -160,7 +154,7 @@ function AddPermissionLevels(props) {
           {props.level > 2 && (
             <FinalSelection
               onChange={(e) => onChecked(e)}
-              onlyDelete={deleteOrView}
+              onlyDelete={deleteOrView(props.optionType)}
             />
           )}
 
@@ -171,7 +165,7 @@ function AddPermissionLevels(props) {
               onlyDeleteconditon(props.optionType) ||
               onlyEditconditon(props.optionType)
             }
-            onlyDelete={deleteOrView}
+            onlyDelete={deleteOrView(props.optionType)}
           />
           <ButtonSec {...props} />
         </Form>
