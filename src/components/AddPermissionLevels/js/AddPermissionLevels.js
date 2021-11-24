@@ -97,6 +97,7 @@ function AddPermissionLevels(props) {
 			comments,
 			func,
 		});
+		console.log(finaldata);
 		apicall(finaldata, func, props.onClose, props.notify, props.brand, action);
 	};
 	return (

@@ -116,22 +116,27 @@ export const level2props = (props) => {
 		categoryname: editOrDelete(props.optionType)
 			? props.category.subCategoryName
 			: "",
-		mail: editOrDelete(props.optionType)
-			? props.category.modeOfCommunication.email
-			: false,
-		post: editOrDelete(props.optionType)
-			? props.category.modeOfCommunication.mail
-			: false,
-		call: editOrDelete(props.optionType)
-			? props.category.modeOfCommunication.call
-			: false,
-		sms: editOrDelete(props.optionType)
-			? props.category.modeOfCommunication.sms
-			: false,
+		mail:
+			editOrDelete(props.optionType) && props.category.modeOfCommunication
+				? props.category.modeOfCommunication.email
+				: false,
+		post:
+			editOrDelete(props.optionType) && props.category.modeOfCommunication
+				? props.category.modeOfCommunication.mail
+				: false,
+		call:
+			editOrDelete(props.optionType) && props.category.modeOfCommunication
+				? props.category.modeOfCommunication.call
+				: false,
+		sms:
+			editOrDelete(props.optionType) && props.category.modeOfCommunication
+				? props.category.modeOfCommunication.sms
+				: false,
 		parentId: props.category.id,
-		default: editOrDelete(props.optionType)
-			? props.category.modeOfCommunication.default
-			: [],
+		default:
+			editOrDelete(props.optionType) && props.category.modeOfCommunication
+				? props.category.modeOfCommunication.default
+				: [],
 	};
 };
 
