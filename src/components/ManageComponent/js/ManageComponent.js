@@ -109,7 +109,7 @@ function SelectablePopupLevel(props) {
         </li>
       </ul>
       {showLevelPopup &&
-        (props.id.includes("PREFERENCES")
+        (props.id.includes("PREFERENCE")
           ? LevelCondition2(props, optionType)
           : LevelCondition1(props, optionType))}
       {showDetailLevel && (

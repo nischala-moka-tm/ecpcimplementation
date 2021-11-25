@@ -107,7 +107,7 @@ export const level1props = (props) => {
     categoryname: editOrDelete(props.optionType)
       ? props.category.categoryName
       : "",
-    enableAlternateEmailId: false,
+    enableAlternateEmailId: props.category.enableAlternateEmailId,
   };
 };
 
@@ -599,9 +599,10 @@ export const apicall = async (
   onclose,
   notify,
   brand,
-  action
+  action,
+  type
 ) => {
-  const postData = { finaldata, type: "subCategory", brand, action };
+  const postData = { finaldata, type, brand, action };
   let resText = "";
   const result =
     func === "add" ? await AxiosPost(postData) : await AxiosPut(postData);
