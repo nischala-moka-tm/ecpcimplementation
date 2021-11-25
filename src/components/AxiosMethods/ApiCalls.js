@@ -5,7 +5,7 @@ const contenttype = "application/json";
 
 export const AxiosPost = async (props) => {
   const response = await axios.post(
-    `https://518mvqcnuc.execute-api.us-west-2.amazonaws.com/dev/admin-meta-data/${props.brand}?action=${props.action}&type=${props.type}`,
+    ` https://axcddc2da3.execute-api.us-west-2.amazonaws.com/dev/admin-meta-data/${props.brand}?action=${props.action}&type=${props.type}`,
     JSON.stringify(props.finaldata),
     {
       headers: {
@@ -18,13 +18,13 @@ export const AxiosPost = async (props) => {
 
 export const AxiosGet = (props) => {
   return axios.get(
-    `https://518mvqcnuc.execute-api.us-west-2.amazonaws.com/dev/admin-meta-data/${props.brand}?fetch=${props.type}`
+    ` https://axcddc2da3.execute-api.us-west-2.amazonaws.com/dev/admin-meta-data/${props.brand}?fetch=${props.type}`
   );
 };
 
 export const AxiosPut = async (props) => {
   const response = await axios.put(
-    `https://518mvqcnuc.execute-api.us-west-2.amazonaws.com/dev/admin-meta-data/${props.brand}?action=update&type=${props.type}`,
+    ` https://axcddc2da3.execute-api.us-west-2.amazonaws.com/dev/admin-meta-data/${props.brand}?action=update&type=${props.type}`,
     JSON.stringify(props.finaldata),
     {
       headers: {
@@ -37,7 +37,7 @@ export const AxiosPut = async (props) => {
 
 export const AxiosPostMetadata = async (props) => {
   const response = await axios.post(
-    `https://518mvqcnuc.execute-api.us-west-2.amazonaws.com/dev/admin-meta-data/Toyota?action=getMetaDataDetails`,
+    ` https://axcddc2da3.execute-api.us-west-2.amazonaws.com/dev/admin-meta-data/Toyota?action=getMetaDataDetails`,
     JSON.stringify(props),
     {
       headers: {
