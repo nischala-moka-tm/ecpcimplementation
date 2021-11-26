@@ -200,6 +200,10 @@ $breakpoint-desktop: 992px;
           border-radius: 0;
           font-family: $toyota-book;
 
+          &[readonly] {
+            cursor: not-allowed;
+          }
+
           &::placeholder {
             font-size: 14px;
             line-height: 20px;
@@ -248,6 +252,7 @@ $breakpoint-desktop: 992px;
 
           &:read-only {
             background: #e9ecef;
+            cursor: not-allowed;
           }
         }
 
@@ -269,7 +274,7 @@ $breakpoint-desktop: 992px;
 
             &[readonly] {
               +label {
-                pointer-events: none;
+                cursor: not-allowed;
               }
             }
 
@@ -366,6 +371,7 @@ $breakpoint-desktop: 992px;
         .email-options {
           &[readonly] {
             pointer-events: none;
+            cursor: not-allowed;
           }
 
           @media (max-width: $breakpoint-tablet) {
@@ -406,16 +412,22 @@ $breakpoint-desktop: 992px;
           padding: 10px 25px;
         }
 
+        &[readonly] {
+          cursor: not-allowed;
+
+          input {
+            +label {
+              pointer-events: none;
+            }
+          }
+        }
+
         .comm-mode {
           padding-bottom: 10px;
 
           .btn-group {
             @media (max-width: $breakpoint-tablet) {
               margin-top: 15px;
-            }
-
-            &[readonly] {
-              pointer-events: none;
             }
 
             .btn-check {
@@ -476,11 +488,6 @@ $breakpoint-desktop: 992px;
         }
 
         .default-mode {
-
-          &[readonly] {
-            pointer-events: none;
-          }
-
           .row {
             padding-top: 1rem;
           }
@@ -589,6 +596,7 @@ $breakpoint-desktop: 992px;
 
         input[readonly] {
           pointer-events: none;
+          cursor: not-allowed;
         }
 
         @media (max-width: $breakpoint-tablet) {
@@ -608,6 +616,7 @@ $breakpoint-desktop: 992px;
 
           &[readonly] {
             pointer-events: none;
+            cursor: not-allowed;
           }
 
           @media (min-width: $breakpoint-tablet) {
