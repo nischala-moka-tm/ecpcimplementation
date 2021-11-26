@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   FormControl,
   Row,
@@ -8,10 +8,13 @@ import {
   ToggleButtonGroup,
 } from "react-bootstrap";
 import "../scss/DetailedViewPage.scss";
+import { AxiosGet } from "../../AxiosMethods/ApiCalls";
 
 import CommunicationChannel from "../../CommunicationChannel/js/CommunicationChannel";
 import DetailedCategoryList from "./DetailedCategoryList";
 import { FaPlusCircle, FaMinusCircle } from "react-icons/fa";
+import { CommentSec } from "../../CommonBlocks/js/CommonBlock";
+
 const DateBlock = (props) => {
   return (
     <Row className="date-wrap">
@@ -38,6 +41,7 @@ const DateBlock = (props) => {
     </Row>
   );
 };
+
 const Level1 = (props) => {
   const [SubC1, setSubC1] = useState(false);
   return (
@@ -89,6 +93,8 @@ const Level1 = (props) => {
             </Col>
           </Row>
           <DateBlock startDate={props.startDate} endDate={props.endDate} />
+          <CommentSec commentText={props.comments[0].comment}/>
+
           {props.subCategory &&
             props.subCategory.map((subdata, key) => {
               return <Level2 key={key} {...subdata} />;
@@ -123,7 +129,7 @@ const Level2 = (props) => {
                 <Col md={6}>
                   <ToggleButtonGroup type="checkbox">
                     <CommunicationChannel
-                      id="commchannel1"
+                      id="mail"
                       Checked={props.modeOfCommunication.email}
                       value={"1"}
                       checkedimgSrc={"mail-white.svg"}
@@ -132,7 +138,7 @@ const Level2 = (props) => {
                     />
 
                     <CommunicationChannel
-                      id="commchannel2"
+                      id="post"
                       Checked={props.modeOfCommunication.mail}
                       value={"2"}
                       checkedimgSrc={"post-white.svg"}
@@ -141,7 +147,7 @@ const Level2 = (props) => {
                     />
 
                     <CommunicationChannel
-                      id="commchannel3"
+                      id="call"
                       Checked={props.modeOfCommunication.call}
                       value={"3"}
                       checkedimgSrc={"Icon feather-phone-call.png"}
@@ -150,7 +156,7 @@ const Level2 = (props) => {
                     />
 
                     <CommunicationChannel
-                      id="commchannel4"
+                      id="sms"
                       Checked={props.modeOfCommunication.sms}
                       value={"4"}
                       checkedimgSrc={"msg-icon-checked.png"}
@@ -197,6 +203,7 @@ const Level2 = (props) => {
               </Row>
             </div>
           )}
+          <CommentSec commentText={props.comments[0].comment}/>
           {props.subCategory &&
             props.subCategory.map((subdata, key) => {
               return <Level3 key={key} {...subdata} />;
@@ -243,6 +250,7 @@ const Level3 = (props) => {
               />
             </Col>
           </Row>
+          <CommentSec commentText={props.comments[0].comment}/>
           {props.subCategory &&
             props.subCategory.map((subdata, key) => {
               return <Level3 key={key} {...subdata} />;
@@ -254,11 +262,30 @@ const Level3 = (props) => {
 };
 
 function DetailedViewPage(props) {
+  console.log(props);
   const handleClose = () => props.onClose();
   const [text, setText] = useState(false);
+  const [detailedCategoryList, setDetailedCategoryList] = useState([]);
   const handleExpand = () => {
     setText(true);
   };
+  useEffect(() => {
+    getApiCall();
+  }, [props.brand, "metaDataList"]);
+  const getApiCall = () => {
+    const getDataApi = AxiosGet({
+      brand: props.brand,
+      type: "metaDataList"
+    });
+    getDataApi.then((result) => {
+      result.data.data && LoadData(result.data.data);
+      // console.log(result);
+    });
+  };
+  const LoadData = (data) => {
+    setDetailedCategoryList(data);
+  };
+  console.log(detailedCategoryList);
   return (
     <Modal
       className="modalpopup modal-detailedview"
@@ -272,10 +299,13 @@ function DetailedViewPage(props) {
         <p className="collapse-fun" onClick={() => handleExpand()}>
           {text ? "Expand All" : "Collapse All"}
         </p>
-        {DetailedCategoryList[0].metadataListExpectedResult.map((data, key) => {
-          console.log(data);
+
+        {/* {DetailedCategoryList[0].metadataListExpectedResult.map((data, key) => {
           return <Level1 key={key} {...data} />;
-        })}
+        })} */}
+        {detailedCategoryList.map((data, key) => {
+          return <Level1 key={key} {...data} />;
+        })} 
       </Modal.Body>
     </Modal>
   );

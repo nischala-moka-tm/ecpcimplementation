@@ -71,6 +71,7 @@ function DashboardComponent(props) {
               <th>Level 2</th>
               <th>Level 3</th>
               <th>Level 4</th>
+              <th>Level 5</th>
               <th>Created Date</th>
               <th>Last Modified</th>
               <th>Status</th>
@@ -86,6 +87,7 @@ function DashboardComponent(props) {
                     <td>{checkUndefined(recentlist.levels[1])}</td>
                     <td>{checkUndefined(recentlist.levels[2])}</td>
                     <td>{checkUndefined(recentlist.levels[3])}</td>
+                    <td>{checkUndefined(recentlist.levels[4])}</td>
                     <td>{checkDateUndefined(recentlist.createdDate)}</td>
                     <td>{checkDateUndefined(recentlist.modifiedDate)}</td>
                     <td>{checkUndefined(recentlist.status)}</td>
@@ -132,6 +134,7 @@ function DashboardComponent(props) {
               <th>Level 2</th>
               <th>Level 3</th>
               <th>Level 4</th>
+              <th>Level 5</th>
               <th>Created Date</th>
               <th>Last Modified By</th>
               <th>Last Modified</th>
@@ -148,6 +151,7 @@ function DashboardComponent(props) {
                     <td>{checkUndefined(activitylist.levels[1])}</td>
                     <td>{checkUndefined(activitylist.levels[2])}</td>
                     <td>{checkUndefined(activitylist.levels[3])}</td>
+                    <td>{checkUndefined(activitylist.levels[4])}</td>
                     <td>{checkDateUndefined(activitylist.createdDate)}</td>
                     <td>{checkUndefined(activitylist.createdBy)}</td>
                     <td>{checkDateUndefined(activitylist.modifiedDate)}</td>

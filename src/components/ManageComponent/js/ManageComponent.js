@@ -114,6 +114,8 @@ function SelectablePopupLevel(props) {
           : LevelCondition1(props, optionType))}
       {showDetailLevel && (
         <DetailedViewPage
+          category={props}
+          brand = {props.brand}
           show={setShowDetailLevel}
           onClose={() => setShowDetailLevel(false)}
         />
