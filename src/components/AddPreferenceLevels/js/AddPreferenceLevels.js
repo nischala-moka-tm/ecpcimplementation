@@ -78,15 +78,15 @@ function AddPreferenceLevels(props) {
 			func === "add" && finaldata.adminMetaData.level === 1
 				? "preference"
 				: "subCategory";
-		// apicall(
-		//   finaldata,
-		//   func,
-		//   props.onClose,
-		//   props.notify,
-		//   props.brand,
-		//   action,
-		//   type
-		// );
+		apicall(
+			finaldata,
+			func,
+			props.onClose,
+			props.notify,
+			props.brand,
+			action,
+			type
+		);
 	};
 
 	const fileChangedHandler = (event) => {

@@ -79,7 +79,7 @@ function AddPermissionLevels(props) {
 			});
 		}
 	};
-	const onSaveClick = (e) => {
+	const onSaveClick = () => {
 		var form = document.getElementById("form1");
 		if (form.reportValidity()) {
 			getPars("add", "save");
