@@ -88,7 +88,7 @@ function SelectablePopupLevel(props) {
           }}
         >
           Add New
-          {props.id.includes("PREFERENCES") ? " Preference" : " Permission"}
+          {props.id.includes("PREFERENCE") ? " Preference" : " Permission"}
         </li>
         <li
           onClick={() => {
@@ -115,7 +115,7 @@ function SelectablePopupLevel(props) {
       {showDetailLevel && (
         <DetailedViewPage
           category={props}
-          brand = {props.brand}
+          brand={props.brand}
           show={setShowDetailLevel}
           onClose={() => setShowDetailLevel(false)}
         />
@@ -196,7 +196,6 @@ function ManageComponent(props) {
       type: props.type,
     });
     getDataApi.then((result) => {
-      console.log(result.data.data);
       setLoading(false);
       setCategoriesData(result.data.data);
     });

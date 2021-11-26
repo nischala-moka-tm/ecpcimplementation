@@ -27,7 +27,7 @@ export const AxiosGet = (props) => {
 
 export const AxiosPut = async (props) => {
   const response = await axios.put(
-    `https://axcddc2da3.execute-api.us-west-2.amazonaws.com/dev/admin-meta-data/${props.brand}?action=update&type=${props.type}`,
+    `https://axcddc2da3.execute-api.us-west-2.amazonaws.com/dev/admin-meta-data/${props.brand}?action=${props.action}&type=${props.type}`,
     JSON.stringify(props.finaldata),
     {
       headers: {

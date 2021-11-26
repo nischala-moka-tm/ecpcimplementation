@@ -156,6 +156,10 @@
                 text-align: left;
                 border-bottom: 1px solid #707070;
 
+                &:before {
+                  content: none;
+                }
+
                 &:last-child {
                   border-bottom: none;
                 }
@@ -179,6 +183,14 @@
         &.btn-nosub {
           ul {
             padding-left: 44px;
+
+            li {
+              &:before {
+                width: 30px;
+                left: -25px;
+                top: 10px;
+              }
+            }
           }
         }
 
@@ -204,6 +216,18 @@
             font-size: 14px;
             line-height: 20px;
             padding-bottom: 2px;
+            position: relative;
+
+            &:before {
+              content: "";
+              position: absolute;
+              height: 1.4px;
+              width: 13px;
+              display: inline-block;
+              background: #000;
+              left: -11px;
+              top: 14px;
+            }
 
             .status-roundend {
               height: 8px;
@@ -289,6 +313,10 @@
                   text-align: left;
                   border-bottom: 1px solid #707070;
 
+                  &:before {
+                    content: none;
+                  }
+
                   &:last-child {
                     border-bottom: none;
                   }
@@ -315,6 +343,14 @@
           &.btn-nosub {
             ul {
               padding-left: 42px;
+
+              li {
+                &:before {
+                  width: 30px;
+                  left: -25px;
+                  top: 10px;
+                }
+              }
             }
           }
 
@@ -335,6 +371,18 @@
             li {
               font-size: 12px;
               line-height: 18px;
+              position: relative;
+
+              &:before {
+                content: "";
+                position: absolute;
+                height: 1.4px;
+                width: 13px;
+                display: inline-block;
+                background: #000;
+                left: -11px;
+                top: 14px;
+              }
             }
           }
         }
