@@ -430,7 +430,7 @@ export const DefaultCommunicationModes = (props) => {
     return props.default.some((d) => d === paramvalue);
   };
   return (
-    <div className="select-default-modes">
+    <div className="select-default-modes" readOnly={props.onlyDelete}>
       <Row className="comm-mode">
         <Col md={6}>
           <p style={{ whiteSpace: "nowrap", fontSize: "14px" }}>
@@ -438,7 +438,7 @@ export const DefaultCommunicationModes = (props) => {
           </p>
         </Col>
         <Col md={6}>
-          <ToggleButtonGroup type="checkbox" readOnly={props.onlyDelete}>
+          <ToggleButtonGroup type="checkbox">
             <CommunicationChannel
               id="mail"
               Checked={props.mail}
@@ -481,7 +481,7 @@ export const DefaultCommunicationModes = (props) => {
           </ToggleButtonGroup>
         </Col>
       </Row>
-      <Row className="default-mode" readOnly={props.onlyDelete}>
+      <Row className="default-mode">
         <Col md={6}>
           <p style={{ whiteSpace: "nowrap", fontSize: "13px" }}>
             Select default for new or guest customer<sup>*</sup>
