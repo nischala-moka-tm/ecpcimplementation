@@ -3,7 +3,9 @@
 .recent-activity,
 .recent-updates {
   overflow-x: auto;
-
+  @media (min-width: $breakpoint-tablet) {
+    overflow-x: hidden;
+  }
   @media (max-width: $breakpoint-tablet) {
     margin-top: 30px;
   }

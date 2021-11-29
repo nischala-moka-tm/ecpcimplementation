@@ -20,9 +20,16 @@
         &:last-child {
           border-bottom: none;
         }
-
-        input[readonly] {
-          background: none;
+        .comm-channels, .mode-labels, label, input{
+          cursor: not-allowed;
+        }
+        input:checked{
+          // background-color: #e9ecef;
+          cursor: not-allowed;
+        }
+        textarea{
+          background-color: #e9ecef;
+          cursor: not-allowed;
         }
 
         .sub-wrap {

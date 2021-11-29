@@ -100,8 +100,8 @@ const Level1 = (props) => {
               </ToggleButtonGroup>
             </Col>
           </Row>
-          <DateBlock startDate={props.startDate} endDate={props.endDate}/>
-          <CommentSec commentText={forEachComments(props.comments)} readOnly={true}/>
+          <DateBlock startDate={props.startDate} endDate={props.endDate} readOnly/>
+          <CommentSec commentText={forEachComments(props.comments)} readOnly/>
 
           {props.subCategory &&
             props.subCategory.map((subdata, key) => {
@@ -152,6 +152,7 @@ const Level2 = (props) => {
                       checkedimgSrc={"post-white.svg"}
                       imgSrc={"post-dark.svg"}
                       desc={"post"}
+                      readOnly
                     />
 
                     <CommunicationChannel
@@ -183,7 +184,7 @@ const Level2 = (props) => {
                     name="email"
                     type="checkbox"
                     id="email"
-                    checked={props.modeOfCommunication.email}
+                    checked={props.modeOfCommunication.email} 
                   />
                   <label htmlFor="email"></label>
                   <input
@@ -211,7 +212,7 @@ const Level2 = (props) => {
               </Row>
             </div>
           )}
-          <CommentSec commentText={forEachComments(props.comments)}/>
+          <CommentSec commentText={forEachComments(props.comments)} readOnly/>
           {props.subCategory &&
             props.subCategory.map((subdata, key) => {
               return <Level3 key={key} {...subdata} />;
@@ -258,7 +259,7 @@ const Level3 = (props) => {
               />
             </Col>
           </Row>
-          <CommentSec commentText={forEachComments(props.comments)}/>
+          <CommentSec commentText={forEachComments(props.comments)} readOnly/>
           {props.subCategory &&
             props.subCategory.map((subdata, key) => {
               return <Level3 key={key} {...subdata} />;
@@ -272,10 +273,11 @@ const Level3 = (props) => {
 function DetailedViewPage(props) {
   console.log(props);
   const handleClose = () => props.onClose();
-  const [text, setText] = useState(false);
+  const [text, setText] = useState(true);
   const [detailedCategoryList, setDetailedCategoryList] = useState([]);
   const handleExpand = () => {
-    setText(true);
+    setText(!text);
+    // setSubC1(true);
   };
   useEffect(() => {
     getApiCall();
@@ -297,7 +299,7 @@ function DetailedViewPage(props) {
   return (
     <Modal
       className="modalpopup modal-detailedview"
-      show={props.show}
+      show={props.show && detailedCategoryList}
       onHide={handleClose}
     >
       <Modal.Header closeButton>
@@ -312,11 +314,11 @@ function DetailedViewPage(props) {
           return <Level1 key={key} {...data} />;
         })} */}
         {detailedCategoryList.map((data, key) => {
-          return <Level1 key={key} {...data} />;
+          return <Level1 key={key} {...data} expandContent={text}/>;
         })} 
       </Modal.Body>
     </Modal>
-  );
+      );
 }
 
 export default DetailedViewPage;
