@@ -39,7 +39,6 @@ export const AxiosPut = async (props) => {
 };
 
 export const AxiosPostMetadata = async (props) => {
-  console.log(props.adminMetaData.brand);
   const response = await axios.post(
     `https://axcddc2da3.execute-api.us-west-2.amazonaws.com/dev/admin-meta-data/${props.adminMetaData.brand}?action=getMetaDataDetails`,
     JSON.stringify(props),

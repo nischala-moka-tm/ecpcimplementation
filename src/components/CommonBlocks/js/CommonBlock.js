@@ -170,7 +170,7 @@ export const getComments = (categoryData) => {
   return categoryData.func === "add"
     ? [
         {
-          time: dateFormat(),
+          time: cstDateFormat(),
           user: "abc@xyz.com",
           comment: categoryData.commentText,
         },
@@ -178,7 +178,7 @@ export const getComments = (categoryData) => {
     : [
         ...categoryData.comments,
         {
-          time: dateFormat(),
+          time: cstDateFormat(),
           user: "abc@xyz.com",
           comment: categoryData.editCommentText,
         },
@@ -190,8 +190,8 @@ export const jsondata = (categoryData) => {
     rank: categoryData.rank ? categoryData.rank : 1,
     createdBy: "user",
     createdDate: cstDateFormat(),
-    startDate: dateFormat(categoryData.startDate).toString(),
-    endDate: dateFormat(categoryData.endDate).toString(),
+    startDate: cstDateFormat(categoryData.startDate).toString(),
+    endDate: cstDateFormat(categoryData.endDate).toString(),
     comments: getComments(categoryData),
     description: categoryData.DescriptionText,
   };
@@ -269,8 +269,8 @@ export const jsondataForPreference = (categoryData) => {
     rank: categoryData.rank ? categoryData.rank : 1,
     createdBy: "user",
     createdDate: cstDateFormat(),
-    startDate: dateFormat(categoryData.startDate).toString(),
-    endDate: dateFormat(categoryData.endDate).toString(),
+    startDate: cstDateFormat(categoryData.startDate).toString(),
+    endDate: cstDateFormat(categoryData.endDate).toString(),
     subCategoryName: categoryData.categoryname,
     parentId: categoryData.parentId,
     comments: getComments(categoryData),
@@ -321,7 +321,6 @@ export const HelpSection = () => {
 
 export const CategorySec = (props) => {
   function buttonCliked(e) {
-    console.log(e);
     props.labelAdd(props.onlyAdd.labelValue);
   }
   return (
@@ -434,6 +433,7 @@ export const DateSec = (props) => {
           onChange={props.onChange}
           value={props.startDate}
           readOnly={props.onlyDelete || props.onlyView}
+          min={Moment()}
         />
       </Col>
       <Col md={5}>
@@ -447,6 +447,7 @@ export const DateSec = (props) => {
           value={props.endDate}
           onChange={props.onChange}
           readOnly={props.onlyView}
+          min={dateFormat()}
         />
       </Col>
     </Row>
@@ -587,7 +588,7 @@ export const FinalSelection = (props) => {
           name="isFinalLevel"
           type="checkbox"
           id="isFinalLevel"
-          onChange={props.onChange}
+          defaultChecked={props.onChecked}
           readOnly={props.onlyDelete}
         />
         <label htmlFor="isFinalLevel">Is this final level</label>
@@ -647,7 +648,6 @@ export const apicall = async (
   type
 ) => {
   const postData = { finaldata, type, brand, action };
-  console.log(postData);
   let resText = "";
   const result =
     func === "add" ? await AxiosPost(postData) : await AxiosPut(postData);

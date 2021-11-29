@@ -26,7 +26,12 @@ import {
   deleteOrView,
   DescriptionSec,
 } from "../../CommonBlocks/js/CommonBlock";
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+toast.configure();
+export const notify = () => {
+  toast.error("Atleast one mode of communication has to be selected");
+};
 function AddPermissionLevels(props) {
   const id = props.category.id;
   let userData = {
@@ -52,12 +57,6 @@ function AddPermissionLevels(props) {
     setRequestData({
       ...requestData,
       enableAlternateEmailId: !requestData.enableAlternateEmailId,
-    });
-  };
-  const onChecked = (e) => {
-    setRequestData({
-      ...requestData,
-      [e.target.id]: e.currentTarget.checked,
     });
   };
   const onInputChecked = (e) => {
@@ -91,14 +90,33 @@ function AddPermissionLevels(props) {
   const editDeleteCondition = (optionType) => {
     return onlyEditconditon(optionType) ? handleEditSubmit : handleDeleteSubmit;
   };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    getPars("add", "submit");
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    var checkedOne = Array.prototype.slice
+      .call(checkboxes)
+      .some((x) => x.checked);
+    if (checkedOne) {
+      getPars("add", "submit");
+    } else {
+      {
+        notify();
+      }
+    }
   };
   const handleEditSubmit = (e) => {
     e.preventDefault();
-    getPars("edit", "submit");
+    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    var checkedOne = Array.prototype.slice
+      .call(checkboxes)
+      .some((x) => x.checked);
+    if (checkedOne) {
+      getPars("edit", "submit");
+    } else {
+      {
+        notify();
+      }
+    }
   };
 
   const handleDeleteSubmit = (e) => {
@@ -164,7 +182,7 @@ function AddPermissionLevels(props) {
             onlyDelete={deleteOrView(props.optionType)}
           />
           <DescriptionSec
-            description={requestData.description}
+            DescriptionText={requestData.description}
             onChange={(e) => handleChange(e)}
             onlyDelete={deleteOrView(props.optionType)}
           />
@@ -200,8 +218,8 @@ function AddPermissionLevels(props) {
 
           {props.level > 2 && (
             <FinalSelection
-              onChange={(e) => onChecked(e)}
               onlyDelete={deleteOrView(props.optionType)}
+              onChecked={(e) => onInputChecked(e)}
             />
           )}
           <CommentSec
