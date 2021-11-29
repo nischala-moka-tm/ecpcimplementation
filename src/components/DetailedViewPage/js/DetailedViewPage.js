@@ -11,9 +11,9 @@ import "../scss/DetailedViewPage.scss";
 import { AxiosGet } from "../../AxiosMethods/ApiCalls";
 
 import CommunicationChannel from "../../CommunicationChannel/js/CommunicationChannel";
-import DetailedCategoryList from "./DetailedCategoryList";
 import { FaPlusCircle, FaMinusCircle } from "react-icons/fa";
 import { CommentSec } from "../../CommonBlocks/js/CommonBlock";
+import { LoadingCog } from "react-bootstrap-floating-label";
 
 const DateBlock = (props) => {
   return (
@@ -51,15 +51,23 @@ const forEachComments = (comments) => {
 };
 const Level1 = (props) => {
   const [SubC1, setSubC1] = useState(false);
-  
+  // const [isCollapse, setIsCollapse] = useState(props.expandContent);
+  // const toggle = () => {
+  //   setIsCollapse(!isCollapse);
+  // }
+  // useEffect(() => {
+  //   toggle();
+  // }, [props.expandContent]);
+
   return (
     <div className="level1">
       <Row className="category-sec">
         <Col md={12}>
-          <p className="plusmenu-danger" onClick={() => setSubC1(!SubC1)}>
+          {props.loading ? props.loading : 
+            <p className="plusmenu-danger" onClick={() => setSubC1(!SubC1)}>
             {SubC1 ? <FaMinusCircle /> : <FaPlusCircle />}
             {props.categoryName}
-          </p>
+          </p>}
         </Col>
       </Row>
       {SubC1 && (
@@ -101,7 +109,10 @@ const Level1 = (props) => {
             </Col>
           </Row>
           <DateBlock startDate={props.startDate} endDate={props.endDate} readOnly/>
-          <CommentSec commentText={forEachComments(props.comments)} readOnly/>
+          <CommentSec 
+            commentText={forEachComments(props.comments)} 
+            onChange={(e) => e.preventDefault()}
+            readOnly/>
 
           {props.subCategory &&
             props.subCategory.map((subdata, key) => {
@@ -274,6 +285,7 @@ function DetailedViewPage(props) {
   console.log(props);
   const handleClose = () => props.onClose();
   const [text, setText] = useState(true);
+  const [isLoading, setLoading] = useState(true);
   const [detailedCategoryList, setDetailedCategoryList] = useState([]);
   const handleExpand = () => {
     setText(!text);
@@ -283,23 +295,26 @@ function DetailedViewPage(props) {
     getApiCall();
   }, [props.brand, "metaDataList"]);
   const getApiCall = () => {
+    setLoading(true);
     const getDataApi = AxiosGet({
       brand: props.brand,
       type: "metaDataList"
     });
     getDataApi.then((result) => {
-      result.data.data && LoadData(result.data.data);
+      setLoading(false);
+      setDetailedCategoryList(result.data.data);
+      // result.data.data && LoadData(result.data.data);
       // console.log(result);
     });
   };
-  const LoadData = (data) => {
-    setDetailedCategoryList(data);
-  };
+  // const LoadData = (data) => {
+  //   setDetailedCategoryList(data);
+  // };
   console.log(detailedCategoryList);
   return (
     <Modal
       className="modalpopup modal-detailedview"
-      show={props.show && detailedCategoryList}
+      show={props.show}
       onHide={handleClose}
     >
       <Modal.Header closeButton>
@@ -313,7 +328,8 @@ function DetailedViewPage(props) {
         {/* {DetailedCategoryList[0].metadataListExpectedResult.map((data, key) => {
           return <Level1 key={key} {...data} />;
         })} */}
-        {detailedCategoryList.map((data, key) => {
+        {isLoading ? <Level1 loading={"Loading..."}/> 
+          : detailedCategoryList.map((data, key) => {
           return <Level1 key={key} {...data} expandContent={text}/>;
         })} 
       </Modal.Body>

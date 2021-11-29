@@ -28,6 +28,7 @@ function DashboardComponent(props) {
   useEffect(() => {
     getApiCall();
   }, [props.brand, props.type]);
+
   const getApiCall = () => {
     const getDataApi = AxiosGet({
       brand: props.brand,
@@ -46,6 +47,7 @@ function DashboardComponent(props) {
     const finalData = {
       adminMetaData: {
         id: data.id,
+        brand: brand
       },
     };
     const getMetaData = await AxiosPostMetadata(finalData, brand);
@@ -96,6 +98,7 @@ function DashboardComponent(props) {
                       onClick={(e) => {
                         SetShowModifyLevel(true);
                         modifyData(recentlist, props.brand);
+                        // console.log(props.brand);
                       }}
                     >
                       <FaRegEdit />
