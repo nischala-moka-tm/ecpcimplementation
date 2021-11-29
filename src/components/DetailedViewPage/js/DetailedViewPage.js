@@ -41,9 +41,17 @@ const DateBlock = (props) => {
     </Row>
   );
 };
-
+const iterateComments = (comment) => {
+  return `${comment.user} \n ${comment.time}  \n ${comment.comment} \n \n`;
+};
+const forEachComments = (comments) => {
+  let eachComment = "";
+  comments.map((d) => (eachComment += iterateComments(d)));
+  return eachComment;
+};
 const Level1 = (props) => {
   const [SubC1, setSubC1] = useState(false);
+  
   return (
     <div className="level1">
       <Row className="category-sec">
@@ -65,35 +73,35 @@ const Level1 = (props) => {
                 type="radio"
               >
                 <ToggleButton
-                  variant={props.alternateEmailIdFlag ? "dark" : "light"}
+                  variant={props.enableAlternateEmailId ? "dark" : "light"}
                   name="alternative-email"
                   id="altEmailYes"
-                  checked={props.alternateEmailIdFlag}
+                  checked={props.enableAlternateEmailId}
                   type="radio"
                   value="YES"
                   className="shadow-none"
-                  readOnly
+                  readOnly={true}
                 >
                   Yes
                 </ToggleButton>
 
                 <ToggleButton
-                  variant={props.alternateEmailIdFlag ? "light" : "dark"}
+                  variant={props.enableAlternateEmailId ? "light" : "dark"}
                   name="alternative-email"
                   id="altEmailNo"
                   type="radio"
-                  checked={props.alternateEmailIdFlag}
+                  checked={props.enableAlternateEmailId}
                   value="NO"
                   className="shadow-none"
-                  readOnly
+                  readOnly={true}
                 >
                   No
                 </ToggleButton>
               </ToggleButtonGroup>
             </Col>
           </Row>
-          <DateBlock startDate={props.startDate} endDate={props.endDate} />
-          <CommentSec commentText={props.comments[0].comment}/>
+          <DateBlock startDate={props.startDate} endDate={props.endDate}/>
+          <CommentSec commentText={forEachComments(props.comments)} readOnly={true}/>
 
           {props.subCategory &&
             props.subCategory.map((subdata, key) => {
@@ -203,7 +211,7 @@ const Level2 = (props) => {
               </Row>
             </div>
           )}
-          <CommentSec commentText={props.comments[0].comment}/>
+          <CommentSec commentText={forEachComments(props.comments)}/>
           {props.subCategory &&
             props.subCategory.map((subdata, key) => {
               return <Level3 key={key} {...subdata} />;
@@ -250,7 +258,7 @@ const Level3 = (props) => {
               />
             </Col>
           </Row>
-          <CommentSec commentText={props.comments[0].comment}/>
+          <CommentSec commentText={forEachComments(props.comments)}/>
           {props.subCategory &&
             props.subCategory.map((subdata, key) => {
               return <Level3 key={key} {...subdata} />;

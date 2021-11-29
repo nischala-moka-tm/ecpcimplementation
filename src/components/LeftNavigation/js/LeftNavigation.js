@@ -18,6 +18,7 @@ function LeftNavigation(props) {
       }`}
       className="flex-column"
     >
+      <div className="emptyNav"></div>
       <Nav.Item>
         <Nav.Link
           href="#dashboard"
@@ -72,6 +73,7 @@ function LeftNavigation(props) {
           </Nav.Item>
         </Nav>
       )}
+      <div className="emptySecondNav"></div>
     </Nav>
   );
 }

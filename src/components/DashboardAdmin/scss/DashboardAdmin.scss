@@ -61,10 +61,13 @@
     }
 
     .left-col {
-      margin-top: 20px;
+      margin-top: 5px;
 
-      @media (min-width: $breakpoint-tablet) {
-        margin-top: 40px;
+      @media (max-width: $breakpoint-tablet) {
+        margin-top: 25px;
+        .emptyNav{
+          display: none;
+        }
       }
     }
 
