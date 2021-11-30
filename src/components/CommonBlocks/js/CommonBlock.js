@@ -90,6 +90,7 @@ export const propcondition = (category) => {
   return {
     level: category.level,
     rank: category.category.rank,
+    brand: category.category.brand,
     createdBy: "user",
     createdDate: cstDateFormat(),
     startDate: editOrDelete(category.optionType)
@@ -105,13 +106,15 @@ export const propcondition = (category) => {
     editCommentText:
       editOrDelete(category.optionType) && category.category.editCommentText,
     status: category.category.status,
-    description: category.category.descriptionText,
+    description:
+      editOrDelete(category.optionType) && category.category.description
+        ? category.category.description
+        : "",
   };
 };
 
 export const level1props = (props) => {
   return {
-    brand: props.brand,
     categoryname: editOrDelete(props.optionType)
       ? props.category.categoryName
       : "",
@@ -193,7 +196,7 @@ export const jsondata = (categoryData) => {
     startDate: cstDateFormat(categoryData.startDate).toString(),
     endDate: cstDateFormat(categoryData.endDate).toString(),
     comments: getComments(categoryData),
-    description: categoryData.DescriptionText,
+    description: categoryData.description,
   };
   if (categoryData.level === 1) {
     resData = {
@@ -255,6 +258,7 @@ export const jsondata = (categoryData) => {
     resData = {
       ...resData,
       status: categoryData.status,
+      brand: categoryData.brand,
     };
   }
   return {
@@ -274,9 +278,9 @@ export const jsondataForPreference = (categoryData) => {
     subCategoryName: categoryData.categoryname,
     parentId: categoryData.parentId,
     comments: getComments(categoryData),
-    description: categoryData.DescriptionText,
+    description: categoryData.description,
   };
-  if (categoryData.func === "edit") {
+  if (categoryData.func === "edit" || categoryData.func === "delete") {
     resData = {
       ...resData,
       id: categoryData.id,
@@ -294,6 +298,7 @@ export const jsondataForPreference = (categoryData) => {
     resData = {
       ...resData,
       status: categoryData.status,
+      brand: categoryData.brand,
     };
   } else {
     resData = {
@@ -433,7 +438,7 @@ export const DateSec = (props) => {
           onChange={props.onChange}
           value={props.startDate}
           readOnly={props.onlyDelete || props.onlyView}
-          min={Moment()}
+          min={props.onlyAddconditon ? Moment().format("YYYY-MM-DDTHH:mm") : ""}
         />
       </Col>
       <Col md={5}>
@@ -447,7 +452,7 @@ export const DateSec = (props) => {
           value={props.endDate}
           onChange={props.onChange}
           readOnly={props.onlyView}
-          min={dateFormat()}
+          min={props.onlyDelete ? Moment().format("YYYY-MM-DDTHH:mm") : ""}
         />
       </Col>
     </Row>
@@ -603,9 +608,9 @@ export const DescriptionSec = (props) => {
       <Col>
         <textarea
           placeholder="Add the Description here.."
-          name="DescriptionText"
-          value={props.DescriptionText}
-          readOnly={props.editOrDelete || props.onlyDelete}
+          name="description"
+          defaultValue={props.description}
+          readOnly={props.onlyDelete}
           onChange={props.onChange}
         ></textarea>
       </Col>

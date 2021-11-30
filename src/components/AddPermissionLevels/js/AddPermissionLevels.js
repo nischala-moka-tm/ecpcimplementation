@@ -29,9 +29,11 @@ import {
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 toast.configure();
+
 export const notify = () => {
   toast.error("Atleast one mode of communication has to be selected");
 };
+
 function AddPermissionLevels(props) {
   const id = props.category.id;
   let userData = {
@@ -80,6 +82,7 @@ function AddPermissionLevels(props) {
       });
     }
   };
+
   const onSaveClick = () => {
     var form = document.getElementById("form1");
     if (form.reportValidity()) {
@@ -96,6 +99,7 @@ function AddPermissionLevels(props) {
     var checkedOne = Array.prototype.slice
       .call(checkboxes)
       .some((x) => x.checked);
+    checkedOne = props.level === 2 ? checkedOne : true;
     if (checkedOne) {
       getPars("add", "submit");
     } else {
@@ -110,8 +114,9 @@ function AddPermissionLevels(props) {
     var checkedOne = Array.prototype.slice
       .call(checkboxes)
       .some((x) => x.checked);
+    checkedOne = props.level === 2 ? checkedOne : true;
     if (checkedOne) {
-      getPars("edit", "submit");
+      getPars("edit", "update");
     } else {
       {
         notify();
@@ -126,11 +131,9 @@ function AddPermissionLevels(props) {
 
   const getPars = (func, action) => {
     const comments = props.category.comments;
-    const description = props.category.description;
     const finaldata = jsondata({
       ...requestData,
       comments,
-      description,
       func,
     });
     const type =
@@ -182,7 +185,7 @@ function AddPermissionLevels(props) {
             onlyDelete={deleteOrView(props.optionType)}
           />
           <DescriptionSec
-            DescriptionText={requestData.description}
+            description={requestData.description}
             onChange={(e) => handleChange(e)}
             onlyDelete={deleteOrView(props.optionType)}
           />
@@ -214,6 +217,7 @@ function AddPermissionLevels(props) {
             onChange={(e) => handleChange(e)}
             onlyDelete={onlyDeleteconditon(props.optionType)}
             onlyView={onlyView(props.optionType)}
+            onlyAddconditon={onlyAddconditon(props.optionType)}
           />
 
           {props.level > 2 && (

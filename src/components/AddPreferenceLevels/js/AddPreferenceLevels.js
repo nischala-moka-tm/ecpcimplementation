@@ -22,6 +22,7 @@ import {
   onlyEditconditon,
   deleteOrView,
   DescriptionSec,
+  onlyView,
 } from "../../CommonBlocks/js/CommonBlock";
 function AddPreferenceLevels(props) {
   const id = props.category.id;
@@ -40,7 +41,6 @@ function AddPreferenceLevels(props) {
   }
 
   const [requestData, setRequestData] = useState(userData);
-  console.log(requestData);
   const handlePreferenceChange = (e) => {
     setRequestData({
       ...requestData,
@@ -74,7 +74,7 @@ function AddPreferenceLevels(props) {
 
   const handlePreferenceEditSubmit = (e) => {
     e.preventDefault();
-    getPars("edit", "submit");
+    getPars("edit", "update");
   };
 
   const handlePreferenceDeleteSubmit = (e) => {
@@ -84,11 +84,9 @@ function AddPreferenceLevels(props) {
 
   const getPars = (func, action) => {
     const comments = props.category.comments;
-    const description = props.category.description;
     const finaldata = jsondataForPreference({
       ...requestData,
       comments,
-      description,
       func,
     });
     const type =
@@ -160,7 +158,9 @@ function AddPreferenceLevels(props) {
             endDate={requestData.endDate}
             type={editOrDelete(props.optionType) ? datevalue : "text"}
             onChange={(e) => handlePreferenceChange(e)}
-            onlyDelete={deleteOrView(props.optionType)}
+            onlyDelete={onlyDeleteconditon(props.optionType)}
+            onlyView={onlyView(props.optionType)}
+            onlyAddconditon={onlyAddconditon(props.optionType)}
           />
           {props.level === 4 && (
             <FinalSelection
