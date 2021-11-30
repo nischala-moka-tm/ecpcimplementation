@@ -69,7 +69,7 @@ function Filters(props) {
 
 export function ReportsPermissionAndPreference(props) {
   const [searchText, setSearchText] = useState("");
-  const [Category, setCategory] = useState("Marketing");
+  const [Category, setCategory] = useState("");
   const [Status, setStatus] = useState("Pending Approval");
   const [fromdate, setFromDate] = useState(DateFormat());
   const [todate, setToDate] = useState(DateFormat());
@@ -97,9 +97,11 @@ export function ReportsPermissionAndPreference(props) {
       };
       tempArray = [...tempArray, obj];
     });
+    
     setapiData(tempArray);
   };
   useEffect(() => {
+    
     DataFetch(searchText);
   }, [fromdate, todate, searchText, Category, Status, apiData]);
   useEffect(() => {
@@ -112,12 +114,13 @@ export function ReportsPermissionAndPreference(props) {
   }, [props.brand, props.type]);
   const Load = (data) => {
     let loaditems = [];
-    forTable(data);
+    
     data.map((item) => {
       loaditems = [...loaditems, item.levels[0]];
     });
-
     setCategories(Array.from(new Set(loaditems)));
+    setCategory(loaditems[0]);
+    forTable(data);
   };
 
   statusDetails.sort(function (a, b) {
