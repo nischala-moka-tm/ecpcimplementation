@@ -51,13 +51,6 @@ const forEachComments = (comments) => {
 };
 const Level1 = (props) => {
   const [SubC1, setSubC1] = useState(false);
-  // const [isCollapse, setIsCollapse] = useState(props.expandContent);
-  // const toggle = () => {
-  //   setIsCollapse(!isCollapse);
-  // }
-  // useEffect(() => {
-  //   toggle();
-  // }, [props.expandContent]);
 
   return (
     <div className="level1">
@@ -127,7 +120,6 @@ const Level1 = (props) => {
 
 const Level2 = (props) => {
   const [SubC2, setSubC2] = useState(false);
-  // console.log(props.modeOfCommunication);
   
   return (
     <div className="level2">
@@ -304,7 +296,6 @@ function DetailedViewPage(props) {
   const [detailedCategoryList, setDetailedCategoryList] = useState([]);
   const handleExpand = () => {
     setText(!text);
-    // setSubC1(true);
   };
   useEffect(() => {
     getApiCall();
@@ -318,14 +309,9 @@ function DetailedViewPage(props) {
     getDataApi.then((result) => {
       setLoading(false);
       setDetailedCategoryList(result.data.data);
-      // result.data.data && LoadData(result.data.data);
-      // console.log(result);
     });
   };
-  // const LoadData = (data) => {
-  //   setDetailedCategoryList(data);
-  // };
-  // console.log(detailedCategoryList);
+  
   return (
     <Modal
       className="modalpopup modal-detailedview"
@@ -340,9 +326,7 @@ function DetailedViewPage(props) {
           {text ? "Collapse All" : "Expand All" }
         </p>
 
-        {/* {DetailedCategoryList[0].metadataListExpectedResult.map((data, key) => {
-          return <Level1 key={key} {...data} />;
-        })} */}
+        
         {isLoading ? <Level1 loading={"Loading..."}/> 
           : detailedCategoryList.map((data, key) => {
           return <Level1 key={key} {...data} expandContent={text}/>;
