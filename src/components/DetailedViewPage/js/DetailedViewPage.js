@@ -12,7 +12,7 @@ import { AxiosGet } from "../../AxiosMethods/ApiCalls";
 
 import CommunicationChannel from "../../CommunicationChannel/js/CommunicationChannel";
 import { FaPlusCircle, FaMinusCircle } from "react-icons/fa";
-import { CommentSec } from "../../CommonBlocks/js/CommonBlock";
+import { CommentSec, DescriptionSec } from "../../CommonBlocks/js/CommonBlock";
 import { LoadingCog } from "react-bootstrap-floating-label";
 
 const DateBlock = (props) => {
@@ -65,13 +65,14 @@ const Level1 = (props) => {
         <Col md={12}>
           {props.loading ? props.loading : 
             <p className="plusmenu-danger" onClick={() => setSubC1(!SubC1)}>
-            {SubC1 ? <FaMinusCircle /> : <FaPlusCircle />}
+            {props.expandContent || SubC1 ? <FaMinusCircle /> : <FaPlusCircle />}
             {props.categoryName}
           </p>}
         </Col>
       </Row>
-      {SubC1 && (
+      {(props.expandContent || SubC1) && (
         <div className="sub-wrap">
+          <DescriptionSec DescriptionText={props.description}/>
           <Row>
             <Col md={5}>Enable alternate email address</Col>
             <Col md={5}>
@@ -116,7 +117,7 @@ const Level1 = (props) => {
 
           {props.subCategory &&
             props.subCategory.map((subdata, key) => {
-              return <Level2 key={key} {...subdata} />;
+              return <Level2 key={key} {...subdata} expandContent={props.expandContent}/>;
             })}
         </div>
       )}
@@ -126,18 +127,21 @@ const Level1 = (props) => {
 
 const Level2 = (props) => {
   const [SubC2, setSubC2] = useState(false);
+  // console.log(props.modeOfCommunication);
+  
   return (
     <div className="level2">
       <Row className="category-sec">
         <Col md={12}>
           <p className="plusmenu-danger" onClick={() => setSubC2(!SubC2)}>
-            {SubC2 ? <FaMinusCircle /> : <FaPlusCircle />}
+            {props.expandContent || SubC2 ? <FaMinusCircle /> : <FaPlusCircle />}
             {props.subCategoryName}
           </p>
         </Col>
       </Row>
-      {SubC2 && (
+      {(props.expandContent || SubC2) && (
         <div className="sub-wrap">
+          <DescriptionSec DescriptionText={props.description}/>
           <DateBlock startDate={props.startDate} endDate={props.endDate} />
           {props.subCategoryName !== "Preferences" && (
             <div className="select-default-modes">
@@ -149,39 +153,46 @@ const Level2 = (props) => {
                   <ToggleButtonGroup type="checkbox">
                     <CommunicationChannel
                       id="mail"
-                      Checked={props.modeOfCommunication.email}
+                      Checked=
+                      {props.modeOfCommunication === undefined ? false : props.modeOfCommunication.email}
                       value={"1"}
                       checkedimgSrc={"mail-white.svg"}
                       imgSrc={"mail-dark.svg"}
                       desc={"email"}
+                      readOnly={true}
                     />
 
                     <CommunicationChannel
                       id="post"
-                      Checked={props.modeOfCommunication.mail}
+                      Checked=
+                      {props.modeOfCommunication === undefined ? false : props.modeOfCommunication.mail}
                       value={"2"}
                       checkedimgSrc={"post-white.svg"}
                       imgSrc={"post-dark.svg"}
                       desc={"post"}
-                      readOnly
+                      readOnly={true}
                     />
 
                     <CommunicationChannel
                       id="call"
-                      Checked={props.modeOfCommunication.call}
+                      Checked=
+                      {props.modeOfCommunication === undefined ? false : props.modeOfCommunication.call}
                       value={"3"}
                       checkedimgSrc={"Icon feather-phone-call.png"}
                       imgSrc={"Icon feather-phone-call-unchecked.png"}
                       desc={"call"}
+                      readOnly={true}
                     />
 
                     <CommunicationChannel
                       id="sms"
-                      Checked={props.modeOfCommunication.sms}
+                      Checked=
+                      {props.modeOfCommunication === undefined ? false : props.modeOfCommunication.sms}
                       value={"4"}
                       checkedimgSrc={"msg-icon-checked.png"}
                       imgSrc={"Icon material-textsms.png"}
                       desc={"SMS"}
+                      readOnly={true}
                     />
                   </ToggleButtonGroup>
                 </Col>
@@ -195,28 +206,32 @@ const Level2 = (props) => {
                     name="email"
                     type="checkbox"
                     id="email"
-                    checked={props.modeOfCommunication.email} 
+                    checked={props.modeOfCommunication === undefined ? false : props.modeOfCommunication.email}
+                    readOnly="View"
                   />
                   <label htmlFor="email"></label>
                   <input
                     name="post"
                     type="checkbox"
                     id="post"
-                    checked={props.modeOfCommunication.mail}
+                    checked={props.modeOfCommunication === undefined ? false : props.modeOfCommunication.mail}
+                    readOnly="View"
                   />
                   <label htmlFor="post"></label>
                   <input
                     name="call"
                     type="checkbox"
                     id="call"
-                    checked={props.modeOfCommunication.call}
+                    checked={props.modeOfCommunication === undefined ? false : props.modeOfCommunication.call}
+                    readOnly="View"
                   />
                   <label htmlFor="call"></label>
                   <input
                     name="message"
                     type="checkbox"
                     id="message"
-                    checked={props.modeOfCommunication.sms}
+                    checked={props.modeOfCommunication === undefined ? false : props.modeOfCommunication.sms}
+                    readOnly="View"
                   />
                   <label htmlFor="message"></label>
                 </Col>
@@ -226,7 +241,7 @@ const Level2 = (props) => {
           <CommentSec commentText={forEachComments(props.comments)} readOnly/>
           {props.subCategory &&
             props.subCategory.map((subdata, key) => {
-              return <Level3 key={key} {...subdata} />;
+              return <Level3 key={key} {...subdata} expandContent={props.expandContent}/>;
             })}
         </div>
       )}
@@ -241,13 +256,14 @@ const Level3 = (props) => {
       <Row className="category-sec">
         <Col md={12}>
           <p className="plusmenu-danger" onClick={() => setSubC3(!SubC3)}>
-            {SubC3 ? <FaMinusCircle /> : <FaPlusCircle />}
+            {props.expandContent || SubC3 ? <FaMinusCircle /> : <FaPlusCircle />}
             {props.subCategoryName}
           </p>
         </Col>
       </Row>
-      {SubC3 && (
+      {(props.expandContent || SubC3) && (
         <div className="sub-wrap">
+          <DescriptionSec DescriptionText={props.description}/>
           <Row className="date-wrap">
             <Col md={5}>
               <FormControl
@@ -273,7 +289,7 @@ const Level3 = (props) => {
           <CommentSec commentText={forEachComments(props.comments)} readOnly/>
           {props.subCategory &&
             props.subCategory.map((subdata, key) => {
-              return <Level3 key={key} {...subdata} />;
+              return <Level3 key={key} {...subdata} expandContent={props.expandContent}/>;
             })}
         </div>
       )}
@@ -282,9 +298,8 @@ const Level3 = (props) => {
 };
 
 function DetailedViewPage(props) {
-  console.log(props);
   const handleClose = () => props.onClose();
-  const [text, setText] = useState(true);
+  const [text, setText] = useState(false);
   const [isLoading, setLoading] = useState(true);
   const [detailedCategoryList, setDetailedCategoryList] = useState([]);
   const handleExpand = () => {
@@ -310,7 +325,7 @@ function DetailedViewPage(props) {
   // const LoadData = (data) => {
   //   setDetailedCategoryList(data);
   // };
-  console.log(detailedCategoryList);
+  // console.log(detailedCategoryList);
   return (
     <Modal
       className="modalpopup modal-detailedview"
@@ -322,7 +337,7 @@ function DetailedViewPage(props) {
       </Modal.Header>
       <Modal.Body>
         <p className="collapse-fun" onClick={() => handleExpand()}>
-          {text ? "Expand All" : "Collapse All"}
+          {text ? "Collapse All" : "Expand All" }
         </p>
 
         {/* {DetailedCategoryList[0].metadataListExpectedResult.map((data, key) => {
