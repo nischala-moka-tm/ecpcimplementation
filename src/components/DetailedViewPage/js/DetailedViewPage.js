@@ -56,63 +56,65 @@ const Level1 = (props) => {
     <div className="level1">
       <Row className="category-sec">
         <Col md={12}>
-          {props.loading ? props.loading : 
+          {props.loading ? props.loading :
             <p className="plusmenu-danger" onClick={() => setSubC1(!SubC1)}>
-            {props.expandContent || SubC1 ? <FaMinusCircle /> : <FaPlusCircle />}
-            {props.categoryName}
-          </p>}
+              {props.expandContent || SubC1 ? <FaMinusCircle /> : <FaPlusCircle />}
+              {props.categoryName}
+            </p>}
         </Col>
       </Row>
       {(props.expandContent || SubC1) && (
         <div className="sub-wrap">
-          <DescriptionSec DescriptionText={props.description}/>
-          <Row>
-            <Col md={5}>Enable alternate email address</Col>
-            <Col md={5}>
-              <ToggleButtonGroup
-                className="email-options"
-                name="alternative-email-toggle"
-                type="radio"
-              >
-                <ToggleButton
-                  variant={props.enableAlternateEmailId ? "dark" : "light"}
-                  name="alternative-email"
-                  id="altEmailYes"
-                  checked={props.enableAlternateEmailId}
+          <div className="demoBoarder">
+            <DescriptionSec DescriptionText={props.description} />
+            <Row>
+              <Col md={5}>Enable alternate email address</Col>
+              <Col md={5}>
+                <ToggleButtonGroup
+                  className="email-options"
+                  name="alternative-email-toggle"
                   type="radio"
-                  value="YES"
-                  className="shadow-none"
-                  readOnly={true}
                 >
-                  Yes
-                </ToggleButton>
+                  <ToggleButton
+                    variant={props.enableAlternateEmailId ? "dark" : "light"}
+                    name="alternative-email"
+                    id="altEmailYes"
+                    checked={props.enableAlternateEmailId}
+                    type="radio"
+                    value="YES"
+                    className="shadow-none"
+                    readOnly={true}
+                  >
+                    Yes
+                  </ToggleButton>
 
-                <ToggleButton
-                  variant={props.enableAlternateEmailId ? "light" : "dark"}
-                  name="alternative-email"
-                  id="altEmailNo"
-                  type="radio"
-                  checked={props.enableAlternateEmailId}
-                  value="NO"
-                  className="shadow-none"
-                  readOnly={true}
-                >
-                  No
-                </ToggleButton>
-              </ToggleButtonGroup>
-            </Col>
-          </Row>
-          <DateBlock startDate={props.startDate} endDate={props.endDate} readOnly/>
-          <CommentSec 
-            commentText={forEachComments(props.comments)} 
-            onChange={(e) => e.preventDefault()}
-            readOnly/>
-
+                  <ToggleButton
+                    variant={props.enableAlternateEmailId ? "light" : "dark"}
+                    name="alternative-email"
+                    id="altEmailNo"
+                    type="radio"
+                    checked={props.enableAlternateEmailId}
+                    value="NO"
+                    className="shadow-none"
+                    readOnly={true}
+                  >
+                    No
+                  </ToggleButton>
+                </ToggleButtonGroup>
+              </Col>
+            </Row>
+            <DateBlock startDate={props.startDate} endDate={props.endDate} readOnly />
+            <CommentSec
+              commentText={forEachComments(props.comments)}
+              onChange={(e) => e.preventDefault()}
+              readOnly />
+          </div>
           {props.subCategory &&
             props.subCategory.map((subdata, key) => {
-              return <Level2 key={key} {...subdata} expandContent={props.expandContent}/>;
+              return <Level2 key={key} {...subdata} expandContent={props.expandContent} />;
             })}
         </div>
+
       )}
     </div>
   );
@@ -120,7 +122,7 @@ const Level1 = (props) => {
 
 const Level2 = (props) => {
   const [SubC2, setSubC2] = useState(false);
-  
+
   return (
     <div className="level2">
       <Row className="category-sec">
@@ -133,7 +135,8 @@ const Level2 = (props) => {
       </Row>
       {(props.expandContent || SubC2) && (
         <div className="sub-wrap">
-          <DescriptionSec DescriptionText={props.description}/>
+          <div className="demoBoarder">
+          <DescriptionSec DescriptionText={props.description} />
           <DateBlock startDate={props.startDate} endDate={props.endDate} />
           {props.subCategoryName !== "Preferences" && (
             <div className="select-default-modes">
@@ -147,44 +150,44 @@ const Level2 = (props) => {
                       id="mail"
                       Checked=
                       {props.modeOfCommunication === undefined ? false : props.modeOfCommunication.email}
-                      value={"1"}
+                      value={"Email"}
                       checkedimgSrc={"mail-white.svg"}
                       imgSrc={"mail-dark.svg"}
                       desc={"email"}
-                      readOnly={true}
+                      readOnly
                     />
 
                     <CommunicationChannel
                       id="post"
                       Checked=
                       {props.modeOfCommunication === undefined ? false : props.modeOfCommunication.mail}
-                      value={"2"}
+                      value={"Post"}
                       checkedimgSrc={"post-white.svg"}
                       imgSrc={"post-dark.svg"}
                       desc={"post"}
-                      readOnly={true}
+                      readOnly
                     />
 
                     <CommunicationChannel
                       id="call"
                       Checked=
                       {props.modeOfCommunication === undefined ? false : props.modeOfCommunication.call}
-                      value={"3"}
+                      value={"Call"}
                       checkedimgSrc={"Icon feather-phone-call.png"}
                       imgSrc={"Icon feather-phone-call-unchecked.png"}
                       desc={"call"}
-                      readOnly={true}
+                      readOnly
                     />
 
                     <CommunicationChannel
                       id="sms"
                       Checked=
                       {props.modeOfCommunication === undefined ? false : props.modeOfCommunication.sms}
-                      value={"4"}
+                      value={"SMS"}
                       checkedimgSrc={"msg-icon-checked.png"}
                       imgSrc={"Icon material-textsms.png"}
                       desc={"SMS"}
-                      readOnly={true}
+                      readOnly
                     />
                   </ToggleButtonGroup>
                 </Col>
@@ -199,7 +202,7 @@ const Level2 = (props) => {
                     type="checkbox"
                     id="email"
                     checked={props.modeOfCommunication === undefined ? false : props.modeOfCommunication.email}
-                    readOnly="View"
+                    readOnly={true}
                   />
                   <label htmlFor="email"></label>
                   <input
@@ -207,7 +210,7 @@ const Level2 = (props) => {
                     type="checkbox"
                     id="post"
                     checked={props.modeOfCommunication === undefined ? false : props.modeOfCommunication.mail}
-                    readOnly="View"
+                    readOnly={true}
                   />
                   <label htmlFor="post"></label>
                   <input
@@ -215,7 +218,7 @@ const Level2 = (props) => {
                     type="checkbox"
                     id="call"
                     checked={props.modeOfCommunication === undefined ? false : props.modeOfCommunication.call}
-                    readOnly="View"
+                    readOnly={true}
                   />
                   <label htmlFor="call"></label>
                   <input
@@ -223,19 +226,24 @@ const Level2 = (props) => {
                     type="checkbox"
                     id="message"
                     checked={props.modeOfCommunication === undefined ? false : props.modeOfCommunication.sms}
-                    readOnly="View"
+                    readOnly={true}
                   />
                   <label htmlFor="message"></label>
                 </Col>
               </Row>
             </div>
           )}
-          <CommentSec commentText={forEachComments(props.comments)} readOnly/>
+          <CommentSec 
+          commentText={forEachComments(props.comments)}
+          onChange={(e) => e.preventDefault()}
+          readOnly={true} />
+          </div>
           {props.subCategory &&
             props.subCategory.map((subdata, key) => {
-              return <Level3 key={key} {...subdata} expandContent={props.expandContent}/>;
+              return <Level3 key={key} {...subdata} expandContent={props.expandContent} />;
             })}
         </div>
+        
       )}
     </div>
   );
@@ -255,7 +263,8 @@ const Level3 = (props) => {
       </Row>
       {(props.expandContent || SubC3) && (
         <div className="sub-wrap">
-          <DescriptionSec DescriptionText={props.description}/>
+          <div className="demoBoarder">
+          <DescriptionSec DescriptionText={props.description} />
           <Row className="date-wrap">
             <Col md={5}>
               <FormControl
@@ -278,10 +287,14 @@ const Level3 = (props) => {
               />
             </Col>
           </Row>
-          <CommentSec commentText={forEachComments(props.comments)} readOnly/>
+          <CommentSec 
+            commentText={forEachComments(props.comments)}
+            onChange={(e) => e.preventDefault()}
+            readOnly />
+          </div>
           {props.subCategory &&
             props.subCategory.map((subdata, key) => {
-              return <Level3 key={key} {...subdata} expandContent={props.expandContent}/>;
+              return <Level3 key={key} {...subdata} expandContent={props.expandContent} />;
             })}
         </div>
       )}
@@ -311,7 +324,7 @@ function DetailedViewPage(props) {
       setDetailedCategoryList(result.data.data);
     });
   };
-  
+
   return (
     <Modal
       className="modalpopup modal-detailedview"
@@ -323,17 +336,17 @@ function DetailedViewPage(props) {
       </Modal.Header>
       <Modal.Body>
         <p className="collapse-fun" onClick={() => handleExpand()}>
-          {text ? "Collapse All" : "Expand All" }
+          {text ? "Collapse All" : "Expand All"}
         </p>
 
-        
-        {isLoading ? <Level1 loading={"Loading..."}/> 
+
+        {isLoading ? <Level1 loading={"Loading..."} />
           : detailedCategoryList.map((data, key) => {
-          return <Level1 key={key} {...data} expandContent={text}/>;
-        })} 
+            return props.category.categoryName==data.categoryName && <Level1 key={key} {...data} expandContent={text}/>;
+          })}
       </Modal.Body>
     </Modal>
-      );
+  );
 }
 
 export default DetailedViewPage;
