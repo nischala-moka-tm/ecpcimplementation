@@ -109,6 +109,7 @@ export function ReportsPermissionAndPreference(props) {
       brand: props.brand,
       type: props.type,
     }).then((res) => {
+      console.log(res.data);
       res.data.data ? Load(res.data.data) : setNoDataFound(true);
     });
   }, [props.brand, props.type]);
