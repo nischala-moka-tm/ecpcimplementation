@@ -11,22 +11,21 @@
     }
 
     .modal-body {
+      padding: 0;
+      margin: 0;
 
       .level1,
       .level2,
-      .level3 {
+      .level3, .demoBoarder {
         border-bottom: 1px solid #6C757D3B;
 
         &:last-child {
           border-bottom: none;
         }
-        .comm-channels, .mode-labels, label, input{
+        .comm-channels, .mode-labels, label{
           cursor: not-allowed;
         }
-        input:checked{
-          // background-color: #e9ecef;
-          cursor: not-allowed;
-        }
+        
         textarea{
           background-color: #e9ecef;
           cursor: not-allowed;
@@ -39,6 +38,11 @@
 
           @media (min-width: $breakpoint-tablet) {
             margin-left: 30px;
+          }
+        }
+        .date-wrap{
+          @media (min-width: $breakpoint-tablet) {
+            width: 646px;
           }
         }
       }
