@@ -119,14 +119,6 @@ export const level1props = (props) => {
       ? props.category.categoryName
       : "",
     enableAlternateEmailId: props.category.enableAlternateEmailId,
-  };
-};
-
-export const level2props = (props) => {
-  return {
-    categoryname: editOrDelete(props.optionType)
-      ? props.category.subCategoryName
-      : "",
     mail:
       editOrDelete(props.optionType) && props.category.modeOfCommunication
         ? props.category.modeOfCommunication.email
@@ -143,7 +135,6 @@ export const level2props = (props) => {
       editOrDelete(props.optionType) && props.category.modeOfCommunication
         ? props.category.modeOfCommunication.sms
         : false,
-    parentId: props.category.id,
     default:
       editOrDelete(props.optionType) && props.category.modeOfCommunication
         ? props.category.modeOfCommunication.default
@@ -175,7 +166,7 @@ export const getComments = (categoryData) => {
         {
           time: cstDateFormat(),
           user: "abc@xyz.com",
-          comment: categoryData.commentText,
+          comment: categoryData.commentText ? categoryData.commentText : "",
         },
       ]
     : [
@@ -183,7 +174,9 @@ export const getComments = (categoryData) => {
         {
           time: cstDateFormat(),
           user: "abc@xyz.com",
-          comment: categoryData.editCommentText,
+          comment: categoryData.editCommentText
+            ? categoryData.editCommentText
+            : "",
         },
       ];
 };
@@ -653,6 +646,7 @@ export const apicall = async (
   type
 ) => {
   const postData = { finaldata, type, brand, action };
+  console.log(postData);
   let resText = "";
   const result =
     func === "add" ? await AxiosPost(postData) : await AxiosPut(postData);
@@ -660,6 +654,11 @@ export const apicall = async (
     onclose();
     resText = result.messages[0].description;
     notify(resText, "success");
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
   } else {
     result.messages.map((i) => {
       resText += `${i.description}\n`;

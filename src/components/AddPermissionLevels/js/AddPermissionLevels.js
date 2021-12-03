@@ -13,7 +13,6 @@ import {
   FinalSelection,
   DefaultCommunicationModes,
   level1props,
-  level2props,
   levelcommonprops,
   jsondata,
   ButtonSec,
@@ -41,8 +40,6 @@ function AddPermissionLevels(props) {
   };
   if (props.level === 1) {
     userData = { ...level1props(props), ...userData, id };
-  } else if (props.level === 2) {
-    userData = { ...level2props(props), ...userData };
   } else {
     userData = { ...levelcommonprops(props), ...userData };
   }
@@ -99,7 +96,7 @@ function AddPermissionLevels(props) {
     var checkedOne = Array.prototype.slice
       .call(checkboxes)
       .some((x) => x.checked);
-    checkedOne = props.level === 2 ? checkedOne : true;
+    checkedOne = props.level === 1 ? checkedOne : true;
     if (checkedOne) {
       getPars("add", "submit");
     } else {
@@ -197,7 +194,7 @@ function AddPermissionLevels(props) {
             />
           )}
 
-          {props.level === 2 && (
+          {props.level === 1 && (
             <DefaultCommunicationModes
               mail={requestData.mail}
               post={requestData.post}
