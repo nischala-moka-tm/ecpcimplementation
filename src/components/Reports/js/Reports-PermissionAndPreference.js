@@ -72,7 +72,9 @@ function Filters(props) {
 				value={props.Category}
 				onChange={props.onSelectable}
 			>
-				<option value="">All Categories</option>
+				<option value="" selected="selected">
+					All Categories
+				</option>
 				{props.categories.map((cat, pos) => {
 					return (
 						<option key={pos} value={cat}>
@@ -87,7 +89,9 @@ function Filters(props) {
 				value={props.Status}
 				onChange={props.onSelectable}
 			>
-				<option value="">All Status</option>
+				<option value="" selected="selected">
+					All Status
+				</option>
 				{props.statusDetails.map((st, pos) => {
 					return (
 						<option key={pos} value={st.status}>
@@ -150,7 +154,7 @@ const gridcolumns = [
 export function ReportsPermissionAndPreference(props) {
 	const [searchText, setSearchText] = useState("");
 	const [Category, setCategory] = useState("");
-	const [Status, setStatus] = useState("Pending Approval");
+	const [Status, setStatus] = useState("");
 	const [fromdate, setFromDate] = useState(DateFormat());
 	const [todate, setToDate] = useState(DateFormat());
 	const [reportData, setReportData] = useState([]);
