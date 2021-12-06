@@ -44,8 +44,7 @@ function AddPreferenceLevels(props) {
   const handlePreferenceChange = (e) => {
     setRequestData({
       ...requestData,
-      [e.target.name]:
-        e.target.type === "checked" ? e.currentTarget.checked : e.target.value,
+      [e.target.name]: e.target.value,
     });
   };
   const onChecked = (e) => {
@@ -84,15 +83,13 @@ function AddPreferenceLevels(props) {
 
   const getPars = (func, action) => {
     const comments = props.category.comments;
+    const leveltype = "preference";
     const finaldata = jsondataForPreference({
       ...requestData,
       comments,
       func,
     });
-    const type =
-      func === "add" && finaldata.adminMetaData.level === 1
-        ? "preference"
-        : "subCategory";
+
     apicall(
       finaldata,
       func,
@@ -100,7 +97,7 @@ function AddPreferenceLevels(props) {
       props.notify,
       props.brand,
       action,
-      type
+      leveltype
     );
   };
 

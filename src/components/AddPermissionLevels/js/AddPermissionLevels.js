@@ -56,8 +56,7 @@ function AddPermissionLevels(props) {
   const handleChange = (e) => {
     setRequestData({
       ...requestData,
-      [e.target.name]:
-        e.target.type === "checked" ? e.target.checked : e.target.value,
+      [e.target.name]: e.target.value,
     });
   };
   const onChangeAltMail = () => {
@@ -99,17 +98,18 @@ function AddPermissionLevels(props) {
     return onlyEditconditon(optionType) ? handleEditSubmit : handleDeleteSubmit;
   };
 
+  const checkValidity = (level, func, type) => {
+    checkAtleastOneCommunicationMode(level) ? getPars(func, type) : notify();
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    checkAtleastOneCommunicationMode(props.level)
-      ? getPars("add", "submit")
-      : notify();
+    checkValidity(props.level, "add", "submit");
   };
+
   const handleEditSubmit = (e) => {
     e.preventDefault();
-    checkAtleastOneCommunicationMode(props.level)
-      ? getPars("edit", "update")
-      : notify();
+    checkValidity(props.level, "edit", "update");
   };
 
   const handleDeleteSubmit = (e) => {
@@ -119,13 +119,12 @@ function AddPermissionLevels(props) {
 
   const getPars = (func, action) => {
     const comments = props.category.comments;
+    const leveltype = "category";
     const finaldata = jsondata({
       ...requestData,
       comments,
       func,
     });
-    const type =
-      finaldata.adminMetaData.level === 1 ? "category" : "subCategory";
     apicall(
       finaldata,
       func,
@@ -133,7 +132,7 @@ function AddPermissionLevels(props) {
       props.notify,
       props.brand,
       action,
-      type
+      leveltype
     );
   };
 

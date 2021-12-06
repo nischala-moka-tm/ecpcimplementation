@@ -640,8 +640,9 @@ export const apicall = async (
   notify,
   brand,
   action,
-  type
+  leveltype
 ) => {
+  const type = finaldata.adminMetaData.level === 1 ? leveltype : "subCategory";
   const postData = { finaldata, type, brand, action };
   console.log(postData);
   let resText = "";
