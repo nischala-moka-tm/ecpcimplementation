@@ -13,7 +13,6 @@ import { AxiosGet } from "../../AxiosMethods/ApiCalls";
 import CommunicationChannel from "../../CommunicationChannel/js/CommunicationChannel";
 import { FaPlusCircle, FaMinusCircle } from "react-icons/fa";
 import { CommentSec, DescriptionSec } from "../../CommonBlocks/js/CommonBlock";
-import { LoadingCog } from "react-bootstrap-floating-label";
 
 const DateBlock = (props) => {
   return (
@@ -44,11 +43,17 @@ const DateBlock = (props) => {
 const iterateComments = (comment) => {
   return `${comment.user} \n ${comment.time}  \n ${comment.comment} \n \n`;
 };
+
 const forEachComments = (comments) => {
   let eachComment = "";
   comments.map((d) => (eachComment += iterateComments(d)));
   return eachComment;
 };
+
+const plusMinus = (istrue) => {
+  return istrue ? <FaMinusCircle /> : <FaPlusCircle />;
+};
+
 const Level1 = (props) => {
   const [SubC1, setSubC1] = useState(false);
 
@@ -56,11 +61,14 @@ const Level1 = (props) => {
     <div className="level1">
       <Row className="category-sec">
         <Col md={12}>
-          {props.loading ? props.loading :
+          {props.loading ? (
+            props.loading
+          ) : (
             <p className="plusmenu-danger" onClick={() => setSubC1(!SubC1)}>
-              {props.expandContent || SubC1 ? <FaMinusCircle /> : <FaPlusCircle />}
+              {plusMinus(props.expandContent || SubC1)}
               {props.categoryName}
-            </p>}
+            </p>
+          )}
         </Col>
       </Row>
       {(props.expandContent || SubC1) && (
@@ -103,42 +111,7 @@ const Level1 = (props) => {
                 </ToggleButtonGroup>
               </Col>
             </Row>
-            <DateBlock startDate={props.startDate} endDate={props.endDate} readOnly />
-            <CommentSec
-              commentText={forEachComments(props.comments)}
-              onChange={(e) => e.preventDefault()}
-              readOnly />
-          </div>
-          {props.subCategory &&
-            props.subCategory.map((subdata, key) => {
-              return <Level2 key={key} {...subdata} expandContent={props.expandContent} />;
-            })}
-        </div>
 
-      )}
-    </div>
-  );
-};
-
-const Level2 = (props) => {
-  const [SubC2, setSubC2] = useState(false);
-
-  return (
-    <div className="level2">
-      <Row className="category-sec">
-        <Col md={12}>
-          <p className="plusmenu-danger" onClick={() => setSubC2(!SubC2)}>
-            {props.expandContent || SubC2 ? <FaMinusCircle /> : <FaPlusCircle />}
-            {props.subCategoryName}
-          </p>
-        </Col>
-      </Row>
-      {(props.expandContent || SubC2) && (
-        <div className="sub-wrap">
-          <div className="demoBoarder">
-          <DescriptionSec DescriptionText={props.description} />
-          <DateBlock startDate={props.startDate} endDate={props.endDate} />
-          {props.subCategoryName !== "Preferences" && (
             <div className="select-default-modes">
               <Row className="comm-mode">
                 <Col md={6}>
@@ -148,8 +121,11 @@ const Level2 = (props) => {
                   <ToggleButtonGroup type="checkbox">
                     <CommunicationChannel
                       id="mail"
-                      Checked=
-                      {props.modeOfCommunication === undefined ? false : props.modeOfCommunication.email}
+                      Checked={
+                        props.modeOfCommunication === undefined
+                          ? false
+                          : props.modeOfCommunication.email
+                      }
                       value={"Email"}
                       checkedimgSrc={"mail-white.svg"}
                       imgSrc={"mail-dark.svg"}
@@ -159,8 +135,11 @@ const Level2 = (props) => {
 
                     <CommunicationChannel
                       id="post"
-                      Checked=
-                      {props.modeOfCommunication === undefined ? false : props.modeOfCommunication.mail}
+                      Checked={
+                        props.modeOfCommunication === undefined
+                          ? false
+                          : props.modeOfCommunication.mail
+                      }
                       value={"Post"}
                       checkedimgSrc={"post-white.svg"}
                       imgSrc={"post-dark.svg"}
@@ -170,8 +149,11 @@ const Level2 = (props) => {
 
                     <CommunicationChannel
                       id="call"
-                      Checked=
-                      {props.modeOfCommunication === undefined ? false : props.modeOfCommunication.call}
+                      Checked={
+                        props.modeOfCommunication === undefined
+                          ? false
+                          : props.modeOfCommunication.call
+                      }
                       value={"Call"}
                       checkedimgSrc={"Icon feather-phone-call.png"}
                       imgSrc={"Icon feather-phone-call-unchecked.png"}
@@ -181,8 +163,11 @@ const Level2 = (props) => {
 
                     <CommunicationChannel
                       id="sms"
-                      Checked=
-                      {props.modeOfCommunication === undefined ? false : props.modeOfCommunication.sms}
+                      Checked={
+                        props.modeOfCommunication === undefined
+                          ? false
+                          : props.modeOfCommunication.sms
+                      }
                       value={"SMS"}
                       checkedimgSrc={"msg-icon-checked.png"}
                       imgSrc={"Icon material-textsms.png"}
@@ -201,7 +186,11 @@ const Level2 = (props) => {
                     name="email"
                     type="checkbox"
                     id="email"
-                    checked={props.modeOfCommunication === undefined ? false : props.modeOfCommunication.email}
+                    checked={
+                      props.modeOfCommunication === undefined
+                        ? false
+                        : props.modeOfCommunication.email
+                    }
                     readOnly={true}
                   />
                   <label htmlFor="email"></label>
@@ -209,7 +198,11 @@ const Level2 = (props) => {
                     name="post"
                     type="checkbox"
                     id="post"
-                    checked={props.modeOfCommunication === undefined ? false : props.modeOfCommunication.mail}
+                    checked={
+                      props.modeOfCommunication === undefined
+                        ? false
+                        : props.modeOfCommunication.mail
+                    }
                     readOnly={true}
                   />
                   <label htmlFor="post"></label>
@@ -217,7 +210,11 @@ const Level2 = (props) => {
                     name="call"
                     type="checkbox"
                     id="call"
-                    checked={props.modeOfCommunication === undefined ? false : props.modeOfCommunication.call}
+                    checked={
+                      props.modeOfCommunication === undefined
+                        ? false
+                        : props.modeOfCommunication.call
+                    }
                     readOnly={true}
                   />
                   <label htmlFor="call"></label>
@@ -225,76 +222,77 @@ const Level2 = (props) => {
                     name="message"
                     type="checkbox"
                     id="message"
-                    checked={props.modeOfCommunication === undefined ? false : props.modeOfCommunication.sms}
+                    checked={
+                      props.modeOfCommunication === undefined
+                        ? false
+                        : props.modeOfCommunication.sms
+                    }
                     readOnly={true}
                   />
                   <label htmlFor="message"></label>
                 </Col>
               </Row>
             </div>
-          )}
-          <CommentSec 
-          commentText={forEachComments(props.comments)}
-          onChange={(e) => e.preventDefault()}
-          readOnly={true} />
+
+            <DateBlock
+              startDate={props.startDate}
+              endDate={props.endDate}
+              readOnly
+            />
+            <CommentSec
+              commentText={forEachComments(props.comments)}
+              onChange={(e) => e.preventDefault()}
+              readOnly
+            />
           </div>
           {props.subCategory &&
             props.subCategory.map((subdata, key) => {
-              return <Level3 key={key} {...subdata} expandContent={props.expandContent} />;
+              return (
+                <LevelCommon
+                  key={key}
+                  {...subdata}
+                  expandContent={props.expandContent}
+                />
+              );
             })}
         </div>
-        
       )}
     </div>
   );
 };
 
-const Level3 = (props) => {
-  const [SubC3, setSubC3] = useState(false);
+const LevelCommon = (props) => {
+  const [SubC2, setSubC2] = useState(false);
   return (
-    <div className="level3">
+    <div className="level2">
       <Row className="category-sec">
         <Col md={12}>
-          <p className="plusmenu-danger" onClick={() => setSubC3(!SubC3)}>
-            {props.expandContent || SubC3 ? <FaMinusCircle /> : <FaPlusCircle />}
+          <p className="plusmenu-danger" onClick={() => setSubC2(!SubC2)}>
+            {plusMinus(props.expandContent || SubC2)}
             {props.subCategoryName}
           </p>
         </Col>
       </Row>
-      {(props.expandContent || SubC3) && (
+      {(props.expandContent || SubC2) && (
         <div className="sub-wrap">
           <div className="demoBoarder">
-          <DescriptionSec DescriptionText={props.description} />
-          <Row className="date-wrap">
-            <Col md={5}>
-              <FormControl
-                type="text"
-                name="fromdate"
-                id="fromdate"
-                placeholder="Start date & Time*"
-                value={props.startDate}
-                readOnly
-              />
-            </Col>
-            <Col md={5}>
-              <FormControl
-                type="text"
-                name="todate"
-                id="todate"
-                placeholder="End Date & Time*"
-                value={props.endDate}
-                readOnly
-              />
-            </Col>
-          </Row>
-          <CommentSec 
-            commentText={forEachComments(props.comments)}
-            onChange={(e) => e.preventDefault()}
-            readOnly />
+            <DescriptionSec DescriptionText={props.description} />
+            <DateBlock startDate={props.startDate} endDate={props.endDate} />
+            <CommentSec
+              commentText={forEachComments(props.comments)}
+              onChange={(e) => e.preventDefault()}
+              readOnly={true}
+            />
           </div>
           {props.subCategory &&
-            props.subCategory.map((subdata, key) => {
-              return <Level3 key={key} {...subdata} expandContent={props.expandContent} />;
+            props.subCategory.map((subdata, pos) => {
+              return (
+                <LevelCommon
+                  key={pos}
+                  {...subdata}
+                  expandContent={props.expandContent}
+                />
+              );
             })}
         </div>
       )}
@@ -317,7 +315,7 @@ function DetailedViewPage(props) {
     setLoading(true);
     const getDataApi = AxiosGet({
       brand: props.brand,
-      type: "metaDataList"
+      type: "metaDataList",
     });
     getDataApi.then((result) => {
       setLoading(false);
@@ -339,11 +337,17 @@ function DetailedViewPage(props) {
           {text ? "Collapse All" : "Expand All"}
         </p>
 
-
-        {isLoading ? <Level1 loading={"Loading..."} />
-          : detailedCategoryList.map((data, key) => {
-            return props.category.categoryName==data.categoryName && <Level1 key={key} {...data} expandContent={text}/>;
-          })}
+        {isLoading ? (
+          <Level1 loading={"Loading..."} />
+        ) : (
+          detailedCategoryList.map((data, key) => {
+            return (
+              props.category.categoryName === data.categoryName && (
+                <Level1 key={key} {...data} expandContent={text} />
+              )
+            );
+          })
+        )}
       </Modal.Body>
     </Modal>
   );

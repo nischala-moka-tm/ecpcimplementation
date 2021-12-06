@@ -197,20 +197,6 @@ export const jsondata = (categoryData) => {
       brand: categoryData.brand,
       categoryName: categoryData.categoryname,
       enableAlternateEmailId: categoryData.enableAlternateEmailId,
-    };
-    if (
-      categoryData.level === 1 &&
-      (categoryData.func === "edit" || categoryData.func === "delete")
-    ) {
-      resData = {
-        ...resData,
-        id: categoryData.id,
-      };
-    }
-  } else if (categoryData.level === 2) {
-    resData = {
-      ...resData,
-      subCategoryName: categoryData.categoryname,
       modeOfCommunication: {
         email: categoryData.mail,
         mail: categoryData.post,
@@ -219,15 +205,13 @@ export const jsondata = (categoryData) => {
         default: categoryData.default,
       },
     };
-    if (categoryData.func === "add") {
+    if (
+      categoryData.level === 1 &&
+      (categoryData.func === "edit" || categoryData.func === "delete")
+    ) {
       resData = {
         ...resData,
-        parentId: categoryData.parentId,
-      };
-    } else {
-      resData = {
-        ...resData,
-        id: categoryData.parentId,
+        id: categoryData.id,
       };
     }
   } else {
@@ -456,6 +440,27 @@ export const DefaultCommunicationModes = (props) => {
   const checkDefaultComm = (paramvalue) => {
     return props.default.some((d) => d === paramvalue);
   };
+  const InputCheckbox = ({
+    name,
+    id,
+    onDefaultCommChecked,
+    onlyDelete,
+    defaultChecked,
+  }) => {
+    return (
+      <>
+        <input
+          name={name}
+          type="checkbox"
+          id={id}
+          readOnly={onlyDelete}
+          onChange={onDefaultCommChecked}
+          defaultChecked={defaultChecked}
+        />
+        <label htmlFor={id}></label>
+      </>
+    );
+  };
   return (
     <div className="select-default-modes" readOnly={props.onlyDelete}>
       <Row className="comm-mode">
@@ -515,42 +520,34 @@ export const DefaultCommunicationModes = (props) => {
           </p>
         </Col>
         <Col md={6}>
-          <input
+          <InputCheckbox
             name="email"
-            type="checkbox"
             id="mailselected"
-            readOnly={props.onlyDelete}
-            onChange={props.onDefaultCommChecked}
+            onlyDelete={props.onlyDelete}
+            onDefaultCommChecked={props.onDefaultCommChecked}
             defaultChecked={checkDefaultComm("email")}
           />
-          <label htmlFor="mailselected"></label>
-          <input
+          <InputCheckbox
             name="post"
-            type="checkbox"
             id="postselected"
-            readOnly={props.onlyDelete}
-            onChange={props.onDefaultCommChecked}
+            onlyDelete={props.onlyDelete}
+            onDefaultCommChecked={props.onDefaultCommChecked}
             defaultChecked={checkDefaultComm("post")}
           />
-          <label htmlFor="postselected"></label>
-          <input
+          <InputCheckbox
             name="call"
-            type="checkbox"
             id="callselected"
-            readOnly={props.onlyDelete}
-            onChange={props.onDefaultCommChecked}
+            onlyDelete={props.onlyDelete}
+            onDefaultCommChecked={props.onDefaultCommChecked}
             defaultChecked={checkDefaultComm("call")}
           />
-          <label htmlFor="callselected"></label>
-          <input
+          <InputCheckbox
             name="sms"
-            type="checkbox"
             id="smsselected"
-            readOnly={props.onlyDelete}
-            onChange={props.onDefaultCommChecked}
+            onlyDelete={props.onlyDelete}
+            onDefaultCommChecked={props.onDefaultCommChecked}
             defaultChecked={checkDefaultComm("sms")}
           />
-          <label htmlFor="smsselected"></label>
         </Col>
       </Row>
     </div>

@@ -33,6 +33,14 @@ export const notify = () => {
   toast.error("Atleast one mode of communication has to be selected");
 };
 
+const checkAtleastOneCommunicationMode = (level) => {
+  var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  var checkedOne = Array.prototype.slice
+    .call(checkboxes)
+    .some((x) => x.checked);
+  return level === 1 ? checkedOne : true;
+};
+
 function AddPermissionLevels(props) {
   const id = props.category.id;
   let userData = {
@@ -90,35 +98,18 @@ function AddPermissionLevels(props) {
   const editDeleteCondition = (optionType) => {
     return onlyEditconditon(optionType) ? handleEditSubmit : handleDeleteSubmit;
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    var checkedOne = Array.prototype.slice
-      .call(checkboxes)
-      .some((x) => x.checked);
-    checkedOne = props.level === 1 ? checkedOne : true;
-    if (checkedOne) {
-      getPars("add", "submit");
-    } else {
-      {
-        notify();
-      }
-    }
+    checkAtleastOneCommunicationMode(props.level)
+      ? getPars("add", "submit")
+      : notify();
   };
   const handleEditSubmit = (e) => {
     e.preventDefault();
-    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    var checkedOne = Array.prototype.slice
-      .call(checkboxes)
-      .some((x) => x.checked);
-    checkedOne = props.level === 2 ? checkedOne : true;
-    if (checkedOne) {
-      getPars("edit", "update");
-    } else {
-      {
-        notify();
-      }
-    }
+    checkAtleastOneCommunicationMode(props.level)
+      ? getPars("edit", "update")
+      : notify();
   };
 
   const handleDeleteSubmit = (e) => {

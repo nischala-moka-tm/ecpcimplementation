@@ -1,14 +1,14 @@
 import React from "react";
 import ReactExport from "react-data-export";
 import excellogo from "./../../../assets/excel-icon.svg";
-import Moment from 'moment';
+import Moment from "moment";
 const ExcelFile = ReactExport.ExcelFile;
 const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
 
 export default function ExportDataToExcel({ data }) {
   let cols = [];
   let rows = [];
-  const todayDate = Moment().format('MM/DD/YYYY');
+  const todayDate = Moment().format("MM/DD/YYYY");
   const getCols = () => {
     for (const i in data[0]) {
       cols = [
@@ -72,11 +72,11 @@ export default function ExportDataToExcel({ data }) {
     },
   ];
   return (
-		<ExcelFile
-			filename={"ECPCAdmin-Report-" + todayDate}
-			element={<img src={excellogo} alt="excel-img" className="excel-icon" />}
-		>
-			<ExcelSheet dataSet={DataSet} name="Permission Or Preference" />
-		</ExcelFile>
-	);
+    <ExcelFile
+      filename={`ECPCAdmin-Report-${todayDate}`}
+      element={<img src={excellogo} alt="excel-img" className="excel-icon" />}
+    >
+      <ExcelSheet dataSet={DataSet} name="Permission Or Preference" />
+    </ExcelFile>
+  );
 }
