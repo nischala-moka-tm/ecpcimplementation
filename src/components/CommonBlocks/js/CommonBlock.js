@@ -440,7 +440,7 @@ export const DefaultCommunicationModes = (props) => {
   const checkDefaultComm = (paramvalue) => {
     return props.default.some((d) => d === paramvalue);
   };
-  const InputCheckbox = ({
+  const DefaultCommunications = ({
     name,
     id,
     onDefaultCommChecked,
@@ -520,28 +520,28 @@ export const DefaultCommunicationModes = (props) => {
           </p>
         </Col>
         <Col md={6}>
-          <InputCheckbox
+          <DefaultCommunications
             name="email"
             id="mailselected"
             onlyDelete={props.onlyDelete}
             onDefaultCommChecked={props.onDefaultCommChecked}
             defaultChecked={checkDefaultComm("email")}
           />
-          <InputCheckbox
+          <DefaultCommunications
             name="post"
             id="postselected"
             onlyDelete={props.onlyDelete}
             onDefaultCommChecked={props.onDefaultCommChecked}
             defaultChecked={checkDefaultComm("post")}
           />
-          <InputCheckbox
+          <DefaultCommunications
             name="call"
             id="callselected"
             onlyDelete={props.onlyDelete}
             onDefaultCommChecked={props.onDefaultCommChecked}
             defaultChecked={checkDefaultComm("call")}
           />
-          <InputCheckbox
+          <DefaultCommunications
             name="sms"
             id="smsselected"
             onlyDelete={props.onlyDelete}

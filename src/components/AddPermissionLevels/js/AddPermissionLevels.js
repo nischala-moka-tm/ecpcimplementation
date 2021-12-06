@@ -88,10 +88,7 @@ function AddPermissionLevels(props) {
   };
 
   const onSaveClick = () => {
-    var form = document.getElementById("form1");
-    if (form.reportValidity()) {
-      getPars("add", "save");
-    }
+    getPars("add", "save");
   };
 
   const editDeleteCondition = (optionType) => {
@@ -216,10 +213,7 @@ function AddPermissionLevels(props) {
           <CommentSec
             commentText={requestData.commentText}
             onChange={(e) => handleChange(e)}
-            editOrDelete={
-              onlyDeleteconditon(props.optionType) ||
-              onlyEditconditon(props.optionType)
-            }
+            editOrDelete={editOrDelete(props.optionType)}
             onlyDelete={deleteOrView(props.optionType)}
           />
           <ButtonSec {...props} onSaveClick={onSaveClick} />
