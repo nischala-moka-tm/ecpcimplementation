@@ -6,6 +6,10 @@ import Moment from "moment";
 import statusDetails from "../../CategoriesData/StatusDetails.json";
 import { dateFormat } from "../../CommonBlocks/js/CommonBlock";
 import ExportDataToExcel from "./ExportDataToExcel";
+const createdDateString = "Created Date";
+const lastModifiedString = "Last Modified";
+const createdByString = "Created By";
+const naString = "N/A";
 const DateFormat = () => {
 	return Moment().format("YYYY-MM-DD");
 };
@@ -22,7 +26,8 @@ const isCategoryAll = (cateogory, status) => {
 const isStatusAll = (cateogory, status) => {
 	return cateogory !== "" && status === "";
 };
-const searchFilter = (data, searchtxt, lastModifiedString, createdByString) => {
+const searchFilter = (data, searchtxt) => {
+	console.log(data, searchtxt);
 	return (
 		data["Category"].toString().toLowerCase().indexOf(searchtxt.toLowerCase()) >
 			-1 ||
@@ -102,7 +107,46 @@ function Filters(props) {
 		</div>
 	);
 }
+const gridcolumns = [
+	{
+		Header: "Category",
+		accessor: "Category",
+	},
+	{
+		Header: "Level 2",
+		accessor: "Level 2",
+	},
+	{
+		Header: "Level 3",
+		accessor: "Level 3",
+	},
 
+	{
+		Header: "Level 4",
+		accessor: "Level 4",
+	},
+	{
+		Header: "Level 5",
+		accessor: "Level 5",
+	},
+	{
+		Header: createdByString,
+		accessor: createdByString,
+	},
+
+	{
+		Header: createdDateString,
+		accessor: createdDateString,
+	},
+	{
+		Header: lastModifiedString,
+		accessor: lastModifiedString,
+	},
+	{
+		Header: "Status",
+		accessor: "Status",
+	},
+];
 export function ReportsPermissionAndPreference(props) {
 	const [searchText, setSearchText] = useState("");
 	const [Category, setCategory] = useState("");
@@ -113,10 +157,7 @@ export function ReportsPermissionAndPreference(props) {
 	const [apiData, setapiData] = useState([]);
 	const [isNoDataFound, setNoDataFound] = useState(false);
 	const [categories, setCategories] = useState([]);
-	const createdDateString = "Created Date";
-	const lastModifiedString = "Last Modified";
-	const createdByString = "Created By";
-	const naString = "N/A";
+
 	const forTable = (data) => {
 		let tempArray = [];
 		data.map((item) => {
@@ -129,7 +170,7 @@ export function ReportsPermissionAndPreference(props) {
 				"Created By": item.createdBy,
 				"Created Date": Moment(item.createdDate).format("MM/DD/YYYY"),
 				"Last Modified": dateFormat(item.modifiedDate),
-				Status: item.status,
+				Status: item.status ? item.status :"" ,
 			};
 			tempArray = [...tempArray, obj];
 		});
@@ -211,32 +252,36 @@ export function ReportsPermissionAndPreference(props) {
 		if (isNotBothAll(Category, Status)) {
 			results = apiData.filter((data) => {
 				return (
-					searchFilter(data, searchtxt, lastModifiedString, createdByString) &&
-					(data["Category"] === Category && data["Status"] === Status)
+					searchFilter(data, searchtxt) &&
+					data["Category"] === Category &&
+					data["Status"] === Status
 				);
 			});
 			setReportData(results);
 		} else if (isBothAll(Category, Status)) {
 			results = apiData.filter((data) => {
 				return (
-					searchFilter(data, searchtxt, lastModifiedString, createdByString) &&
-					(data["Category"] !== Category && data["Status"] !== Status)
+					searchFilter(data, searchtxt) &&
+					data["Category"] !== Category &&
+					data["Status"] !== Status
 				);
 			});
 			setReportData(results);
 		} else if (isCategoryAll(Category, Status)) {
 			results = apiData.filter((data) => {
 				return (
-					searchFilter(data, searchtxt, lastModifiedString, createdByString) &&
-					(data["Category"] !== Category && data["Status"] === Status)
+					searchFilter(data, searchtxt) &&
+					data["Category"] !== Category &&
+					data["Status"] === Status
 				);
 			});
 			setReportData(results);
 		} else if (isStatusAll(Category, Status)) {
 			results = apiData.filter((data) => {
 				return (
-					searchFilter(data, searchtxt, lastModifiedString, createdByString) &&
-					(data["Category"] === Category && data["Status"] !== Status)
+					searchFilter(data, searchtxt) &&
+					data["Category"] === Category &&
+					data["Status"] !== Status
 				);
 			});
 			setReportData(results);
@@ -250,46 +295,7 @@ export function ReportsPermissionAndPreference(props) {
 		}
 		setSearchText(searchtxt);
 	};
-	const gridcolumns = [
-		{
-			Header: "Category",
-			accessor: "Category",
-		},
-		{
-			Header: "Level 2",
-			accessor: "Level 2",
-		},
-		{
-			Header: "Level 3",
-			accessor: "Level 3",
-		},
 
-		{
-			Header: "Level 4",
-			accessor: "Level 4",
-		},
-		{
-			Header: "Level 5",
-			accessor: "Level 5",
-		},
-		{
-			Header: createdByString,
-			accessor: createdByString,
-		},
-
-		{
-			Header: createdDateString,
-			accessor: createdDateString,
-		},
-		{
-			Header: lastModifiedString,
-			accessor: lastModifiedString,
-		},
-		{
-			Header: "Status",
-			accessor: "Status",
-		},
-	];
 	return (
 		<div className="report-permpref">
 			<Filters
