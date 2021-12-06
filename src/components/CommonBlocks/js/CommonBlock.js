@@ -436,31 +436,33 @@ export const DateSec = (props) => {
   );
 };
 
+export const DefaultCommunications = ({
+  name,
+  id,
+  onDefaultCommChecked,
+  onlyDelete,
+  defaultChecked,
+}) => {
+  return (
+    <>
+      <input
+        name={name}
+        type="checkbox"
+        id={id}
+        readOnly={onlyDelete}
+        onChange={onDefaultCommChecked}
+        defaultChecked={defaultChecked}
+      />
+      <label htmlFor={id}></label>
+    </>
+  );
+};
+
 export const DefaultCommunicationModes = (props) => {
   const checkDefaultComm = (paramvalue) => {
     return props.default.some((d) => d === paramvalue);
   };
-  const DefaultCommunications = ({
-    name,
-    id,
-    onDefaultCommChecked,
-    onlyDelete,
-    defaultChecked,
-  }) => {
-    return (
-      <>
-        <input
-          name={name}
-          type="checkbox"
-          id={id}
-          readOnly={onlyDelete}
-          onChange={onDefaultCommChecked}
-          defaultChecked={defaultChecked}
-        />
-        <label htmlFor={id}></label>
-      </>
-    );
-  };
+
   return (
     <div className="select-default-modes" readOnly={props.onlyDelete}>
       <Row className="comm-mode">
