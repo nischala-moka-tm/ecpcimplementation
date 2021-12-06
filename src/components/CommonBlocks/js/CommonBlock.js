@@ -646,7 +646,6 @@ export const apicall = async (
 ) => {
   const type = finaldata.adminMetaData.level === 1 ? leveltype : "subCategory";
   const postData = { finaldata, type, brand, action };
-  console.log(postData);
   let resText = "";
   const result =
     func === "add" ? await AxiosPost(postData) : await AxiosPut(postData);

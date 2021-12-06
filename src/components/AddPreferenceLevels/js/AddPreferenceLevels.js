@@ -102,8 +102,7 @@ function AddPreferenceLevels(props) {
   };
 
   const fileChangedHandler = (event) => {
-    const formData = new FormData();
-    console.log(formData);
+    console.log(event);
   };
   return (
     <Modal

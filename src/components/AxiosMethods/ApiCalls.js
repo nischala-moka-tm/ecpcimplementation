@@ -3,8 +3,6 @@ import axios from "axios";
 
 const contenttype = "application/json";
 const { REACT_APP_API_URL } = process.env;
-console.log(REACT_APP_API_URL);
-console.log(process.env);
 
 export const AxiosPost = async (props) => {
   const response = await axios.post(

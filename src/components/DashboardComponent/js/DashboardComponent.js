@@ -50,7 +50,7 @@ function DashboardComponent(props) {
         brand: brand,
       },
     };
-    const getMetaData = await AxiosPostMetadata(finalData, brand);
+    const getMetaData = await AxiosPostMetadata(finalData);
     setData(getMetaData.data);
   };
   const notify = (res, resType) => {

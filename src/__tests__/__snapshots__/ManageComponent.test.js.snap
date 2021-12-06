@@ -1,0 +1,133 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders <DashboardComponent /> should pass mount snapshot test 1`] = `ReactWrapper {}`;
+
+exports[`renders correctly when there are no items 1`] = `
+<div
+  className="manage-component"
+  id="manage-permission"
+>
+  <div
+    className="sub-head"
+  >
+    <p>
+      Permissions/Preferences
+    </p>
+  </div>
+  <div
+    className="manage-body"
+  >
+    <div
+      className="Toastify"
+    />
+    <div
+      className="status-codes"
+    >
+      <ul>
+        <li>
+          <span
+            className="status-roundend"
+            style={
+              Object {
+                "backgroundColor": "#E86D0F",
+              }
+            }
+          />
+          Pending Approval
+        </li>
+        <li>
+          <span
+            className="status-roundend"
+            style={
+              Object {
+                "backgroundColor": "#00FF00",
+              }
+            }
+          />
+          Live
+        </li>
+        <li>
+          <span
+            className="status-roundend"
+            style={
+              Object {
+                "backgroundColor": "#0346FF",
+              }
+            }
+          />
+          Approved Pending Go-Live
+        </li>
+        <li>
+          <span
+            className="status-roundend"
+            style={
+              Object {
+                "backgroundColor": "#FFEE03",
+              }
+            }
+          />
+          Approved Expiring Soon
+        </li>
+        <li>
+          <span
+            className="status-roundend"
+            style={
+              Object {
+                "backgroundColor": "#CECECE",
+              }
+            }
+          />
+          Inactive
+        </li>
+        <li>
+          <span
+            className="status-roundend"
+            style={
+              Object {
+                "backgroundColor": "#0099ff",
+              }
+            }
+          />
+          Draft
+        </li>
+      </ul>
+    </div>
+    <p
+      className="reference-guide"
+    >
+      <a
+        href="/"
+      >
+        Click Here
+      </a>
+       for reference guide
+    </p>
+    <button
+      className="btn btn-primary btn-sm"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      Create new Category
+    </button>
+    <p
+      className="info-text"
+    >
+      To edit/delete existing category or subcategory right click on item
+    </p>
+    Loading....
+  </div>
+  <div
+    className="button-options"
+  >
+    <button
+      className="btn btn-secondary btn-sm"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      Submit for Approval
+    </button>
+  </div>
+</div>
+`;

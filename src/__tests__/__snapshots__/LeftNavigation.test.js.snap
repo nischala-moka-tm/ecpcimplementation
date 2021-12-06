@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders <LeftNavigation /> should pass mount snapshot test 1`] = `ReactWrapper {}`;
+
+exports[`renders correctly when there are no items 1`] = `
+<div
+  className="flex-column nav"
+  onKeyDown={[Function]}
+>
+  <div
+    className="emptyNav"
+  />
+  <div
+    className="nav-item"
+  >
+    <a
+      className="nav-link active"
+      data-rr-ui-event-key="#dashboard"
+      disabled={false}
+      href="#dashboard"
+      onClick={[Function]}
+    >
+      Dashboard
+    </a>
+  </div>
+  <div
+    className="nav-item"
+  >
+    <a
+      className="nav-link"
+      data-rr-ui-event-key="#manage"
+      disabled={false}
+      href="#manage"
+      onClick={[Function]}
+    >
+      Manage Permissions/Preferences
+    </a>
+  </div>
+  <div
+    className="nav-item"
+  >
+    <a
+      className="right-arrow nav-link"
+      data-rr-ui-event-key={null}
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      role="button"
+      tabIndex={0}
+    >
+      Reports
+    </a>
+  </div>
+  <div
+    className="emptySecondNav"
+  />
+</div>
+`;
