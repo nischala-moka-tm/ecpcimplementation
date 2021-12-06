@@ -12,7 +12,6 @@ import "../scss/AddNewCategory.scss";
 import { FaRegQuestionCircle } from "react-icons/fa";
 import AddNewPermissionList from "../../AddNewPermissionList/js/AddNewPermissionList";
 import AddNewPreferenceList from "../../AddNewPreferenceList/js/AddNewPreferenceList";
-import { ButtonSec } from "../../CommonBlocks/js/CommonBlock";
 
 function AddNewCategory(props) {
   const [{ Permission, Preference }, setCategory] = useState({
