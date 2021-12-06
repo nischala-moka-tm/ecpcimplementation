@@ -1,6 +1,6 @@
 import React from "react";
 import Enzyme from "enzyme";
-import { render } from "@testing-library/react";
+import { render, fireEvent } from "@testing-library/react";
 import Adapter from "@wojtekmaj/enzyme-adapter-react-17";
 import AddPermissionLevels from "../components/AddPermissionLevels/js/AddPermissionLevels";
 
@@ -10,6 +10,7 @@ const descPlace = "Add the Description here..";
 const category = "Catergory Name*";
 const startdate = "Start date & Time*";
 const enddate = "End Date & Time*";
+const textype = "text";
 const sampledata = {
 	brand: "Toyota",
 	startDate: "11/23/2021 02:32:00 AM",
@@ -57,4 +58,28 @@ it("Edit Sub Permission Levels renders properly", () => {
 	);
 	expect(wrapper.getByPlaceholderText(startdate).type).toBe(datetype);
 	expect(wrapper.getByPlaceholderText(enddate).type).toBe(datetype);
+	fireEvent.click(wrapper.getByText("Submit for Approval"));
+});
+
+it("Add Sub Permission Levels renders properly", () => {
+	const wrapper = render(
+		<AddPermissionLevels
+			show={true}
+			onClose={() => {
+				console.log("Closed");
+			}}
+			category={sampledata}
+			optionType={"Add"}
+			brand={"Toyota"}
+			notify={() => {
+				console.log("Notify");
+			}}
+			level={2}
+		/>
+	);
+	expect(wrapper.getByPlaceholderText(category).value).toBe("");
+	expect(wrapper.getByPlaceholderText(descPlace).value).toBe("");
+	expect(wrapper.getByPlaceholderText(startdate).type).toBe(textype);
+	expect(wrapper.getByPlaceholderText(enddate).type).toBe(textype);
+	fireEvent.click(wrapper.getByText("Save for Later"));
 });
