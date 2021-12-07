@@ -124,8 +124,10 @@ function DashboardComponent(props) {
         )}
       </div>
       <div className="recent-activity-list">
-        To See all My activities
-        <a href="/dashboard-admin/report-audit">Click here</a>
+        <p>
+          To See all My activities
+          <a href="/dashboard-admin/report-audit">Click here</a>
+        </p>
       </div>
       <div className="recent-updates">
         <p>Recent Admin Portal Activities</p>
@@ -189,8 +191,10 @@ function DashboardComponent(props) {
         )}
       </div>
       <div className="recent-activity-list-one">
-        To See all Admin portal activities
-        <a href="/dashboard-admin/report-perm">Click here</a>
+        <p>
+          To See all Admin portal activities
+          <a href="/dashboard-admin/report-perm">Click here</a>
+        </p>
       </div>
     </div>
   );

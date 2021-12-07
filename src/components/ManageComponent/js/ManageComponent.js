@@ -198,6 +198,7 @@ function ManageComponent(props) {
     getDataApi.then((result) => {
       setLoading(false);
       setCategoriesData(result.data.data);
+      console.log(result.data.data);
     });
   };
   const notify = (res, resType) => {
@@ -269,7 +270,11 @@ function ManageComponent(props) {
         )}
       </div>
       {showLevel1 && (
-        <AddNewCategory show={showLevel1} onClose={() => SetLevel1(false)} brand={props.brand}/>
+        <AddNewCategory
+          show={showLevel1}
+          onClose={() => SetLevel1(false)}
+          brand={props.brand}
+        />
       )}
     </div>
   );

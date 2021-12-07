@@ -222,8 +222,13 @@ export const jsondata = (categoryData) => {
     if (categoryData.func === "add") {
       resData = {
         ...resData,
-        parentId: categoryData.parentId,
       };
+      if (categoryData.parentId) {
+        resData = {
+          ...resData,
+          parentId: categoryData.parentId,
+        };
+      }
     } else {
       resData = {
         ...resData,

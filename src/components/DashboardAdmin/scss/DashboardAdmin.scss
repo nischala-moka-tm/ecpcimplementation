@@ -33,23 +33,42 @@
         flex-direction: row;
         display: contents;
 
-        .nav-link {
-          display: inline-flex;
-          width: 50%;
-          margin: 0;
-          padding: 0.5em 1em;
-          font-size: 18px;
-          line-height: 26px;
+        a {
 
-          @media (min-width: $breakpoint-tablet) {
-            font-size: 24px;
-            line-height: 30px;
+          &.nav-link {
+            display: inline-flex;
+            width: 50%;
+            margin: 0;
+            padding: 0.5em 1em;
+            font-size: 18px;
+            line-height: 26px;
+
+            @media (min-width: $breakpoint-tablet) {
+              font-size: 24px;
+              line-height: 30px;
+            }
+
+            &.active {
+              background-color: #e5e5e5;
+              border-bottom: 2px solid #000;
+            }
+
+            &:hover {
+              color: #FF0000;
+            }
           }
 
-          &.active {
-            background-color: #e5e5e5;
-            border-bottom: 2px solid #000;
+          &:first-child {
+            &.active {
+              color: #FF0000;
+              border-bottom: 2px solid #FF0000;
+            }
+
+            &:hover {
+              color: #FF0000;
+            }
           }
+
         }
       }
     }
@@ -65,10 +84,12 @@
 
       @media (max-width: $breakpoint-tablet) {
         margin-top: 25px;
-        .emptyNav{
+
+        .emptyNav {
           display: none;
         }
-        .emptySecondNav{
+
+        .emptySecondNav {
           display: none;
         }
       }

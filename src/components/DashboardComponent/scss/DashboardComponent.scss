@@ -3,9 +3,11 @@
 .recent-activity,
 .recent-updates {
   overflow-x: auto;
+
   @media (min-width: $breakpoint-tablet) {
     overflow-x: hidden;
   }
+
   @media (max-width: $breakpoint-tablet) {
     margin-top: 30px;
   }
@@ -53,7 +55,11 @@
       &.view {
         cursor: pointer;
         color: #2a79fd;
-      }
+
+        &:hover {
+          color: #FF0000;
+        }
+        }
     }
 
     tr {
@@ -76,6 +82,10 @@
 
   a {
     margin-left: 5px;
+
+    &:hover {
+      color: #FF0000;
+    }
   }
 }
 
@@ -87,5 +97,9 @@
 
   a {
     margin-left: 5px;
+
+    &:hover {
+      color: #FF0000;
+    }
   }
 }
