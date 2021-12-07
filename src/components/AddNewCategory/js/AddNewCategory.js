@@ -26,7 +26,6 @@ import {
   jsondata,
   DescriptionSec,
 } from "../../CommonBlocks/js/CommonBlock";
-import axios from "axios";
 
 const fileChangedHandler = (event) => {
   const formData = new FormData();
@@ -255,12 +254,6 @@ function AddNewCategory(props) {
     arr.push({ labelClicked: e });
     setLabelLayout(arr);
   };
-  const preferencelabelAdd = (e) => {
-    const arr = [...preferencelabelLayout];
-    arr.push({ labelClicked: e });
-    setPreferenceLabelLayout(arr);
-  };
-
   const handleChange = (e, level) => {
     if (Permission) {
       if (level === 1) {
@@ -316,7 +309,6 @@ function AddNewCategory(props) {
         setPreferenceLevelOneData({
           ...preferencelevelOneData,
           level: level,
-
           [e.target.name]:
             e.target.type === "checked" ? e.target.checked : e.target.value,
         });
@@ -408,22 +400,25 @@ function AddNewCategory(props) {
       adminMetaData: level1,
     };
     console.log(finalData.adminMetaData);
-    const getMetaData = await AxiosCreateNewPost({finalData,brand:props.brand});
+    const getMetaData = await AxiosCreateNewPost({
+      finalData,
+      brand: props.brand,
+    });
     if (getMetaData.code === "200") {
-			props.onclose();
-			resText = getMetaData.messages[0].description;
-			props.notify(resText, "success");
-			window.scrollTo({
-				top: 0,
-				left: 0,
-				behavior: "smooth",
-			});
-		} else {
-			getMetaData.messages.map((i) => {
-				resText += `${i.description}\n`;
-			});
-			props.notify(resText, "error");
-		}
+      props.onClose();
+      resText = getMetaData.messages[0].description;
+      props.notify(resText, "success");
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+    } else {
+      getMetaData.messages.map((i) => {
+        resText += `${i.description}\n`;
+      });
+      props.notify(resText, "error");
+    }
   };
 
   return (
@@ -477,14 +472,6 @@ function AddNewCategory(props) {
               </span>
               <p>Help</p>
             </div>
-            <div className="status-codes">
-              <ul>
-                <li className="live">Completed</li>
-                <li className="pending-approval">In Progress</li>
-                <li className="pending-go-live">In Complete</li>
-                <li className="expiring-soon">Yet to Start</li>
-              </ul>
-            </div>
           </Col>
         </Row>
         {Permission && (
@@ -511,7 +498,7 @@ function AddNewCategory(props) {
             type="submit"
             variant="secondary"
             size="sm"
-            onClick={(e) => onFormSubmit(e)}
+            onClick={(e) => onFormSubmit( )}
           >
             Submit for Approval
           </Button>

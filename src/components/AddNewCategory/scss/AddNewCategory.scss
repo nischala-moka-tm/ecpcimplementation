@@ -9,59 +9,5 @@
         }
       }
     }
-
-    .status-codes {
-      font-size: 12px;
-      line-height: 18px;
-      padding-left: 15px;
-      position: absolute;
-      top: 75px;
-      right: 25px;
-
-
-      ul {
-        padding-left: 0;
-
-        li {
-          list-style: none;
-          position: relative;
-
-          &:before {
-            content: "";
-            position: absolute;
-            left: -13px;
-            width: 6px;
-            height: 6px;
-            top: 6px;
-            background: red;
-            border-radius: 50%;
-          }
-
-          &.live {
-            &:before {
-              background: #00ff00;
-            }
-          }
-
-          &.pending-approval {
-            &:before {
-              background: #e86d0f;
-            }
-          }
-
-          &.pending-go-live {
-            &:before {
-              background: #ff0000;
-            }
-          }
-
-          &.expiring-soon {
-            &:before {
-              background: #888888;
-            }
-          }
-        }
-      }
-    }
   }
 }
