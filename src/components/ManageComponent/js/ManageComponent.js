@@ -274,6 +274,7 @@ function ManageComponent(props) {
           show={showLevel1}
           onClose={() => SetLevel1(false)}
           brand={props.brand}
+          notify={notify}
         />
       )}
     </div>

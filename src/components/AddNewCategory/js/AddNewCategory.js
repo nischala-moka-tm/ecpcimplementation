@@ -378,6 +378,7 @@ function AddNewCategory(props) {
   };
   const handleClose = () => props.onClose();
   const onFormSubmit = async () => {
+    let resText = "";
     const comments = [];
     levelOneData.startDate = dateFormat(levelOneData.startDate);
     levelTwoData.startDate = dateFormat(levelTwoData.startDate);
@@ -407,8 +408,22 @@ function AddNewCategory(props) {
       adminMetaData: level1,
     };
     console.log(finalData.adminMetaData);
-    const getMetaData = await AxiosCreateNewPost(finalData);
-    console.log(getMetaData);
+    const getMetaData = await AxiosCreateNewPost({finalData,brand:props.brand});
+    if (getMetaData.code === "200") {
+			props.onclose();
+			resText = getMetaData.messages[0].description;
+			props.notify(resText, "success");
+			window.scrollTo({
+				top: 0,
+				left: 0,
+				behavior: "smooth",
+			});
+		} else {
+			getMetaData.messages.map((i) => {
+				resText += `${i.description}\n`;
+			});
+			props.notify(resText, "error");
+		}
   };
 
   return (
