@@ -269,7 +269,7 @@ function ManageComponent(props) {
         )}
       </div>
       {showLevel1 && (
-        <AddNewCategory show={showLevel1} onClose={() => SetLevel1(false)} />
+        <AddNewCategory show={showLevel1} onClose={() => SetLevel1(false)} brand={props.brand}/>
       )}
     </div>
   );

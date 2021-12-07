@@ -48,3 +48,17 @@ export const AxiosPostMetadata = async (props) => {
   );
   return response.data;
 };
+
+
+export const AxiosCreateNewPost = async (props) => {
+  const response = await axios.post(
+    `https://axcddc2da3.execute-api.us-west-2.amazonaws.com/dev/admin-meta-data/${props.brand}?action=saveAll`,
+    JSON.stringify(props.finaldata),
+    {
+      headers: {
+        "Content-type": contenttype,
+      },
+    }
+  );
+  return response.data.status;
+};

@@ -25,7 +25,7 @@ function AddNewPreferenceList(props) {
     arr.push({ labelClicked: e });
     setLabelLayout(arr);
   }
-
+  console.log(labelLayout);
   return (
     <div>
       <div className="category-level1">
