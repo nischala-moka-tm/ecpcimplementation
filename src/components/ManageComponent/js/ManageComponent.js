@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Modal } from "react-bootstrap";
 import "../scss/ManageComponent.scss";
 import statusDetails from "../../CategoriesData/StatusDetails.json";
-import AddNewCategory from "../../AddNewCategory/js/AddNewCategory";
+import AddNewCategoryMultiple from "../../AddNewCategoryMultiple/js/AddNewCategoryMultiple";
 import AddPreferenceLevels from "../../AddPreferenceLevels/js/AddPreferenceLevels";
 import DetailedViewPage from "../../DetailedViewPage/js/DetailedViewPage";
 import { AxiosGet } from "../../AxiosMethods/ApiCalls";
@@ -211,74 +211,74 @@ function ManageComponent(props) {
   };
 
   return (
-    <div className="manage-component" id="manage-permission">
-      <div className="sub-head">
-        <p>Permissions/Preferences</p>
-      </div>
-      <div className="manage-body">
-        <ToastContainer />
-        <div className="status-codes">
-          <ul>
-            {statusDetails.map((status, index) => {
-              return (
-                <li key={index}>
-                  <span
-                    className="status-roundend"
-                    style={{ backgroundColor: status.colorCode }}
-                  ></span>
-                  {status.status}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-        <p className="reference-guide">
-          <a href="/">Click Here</a> for reference guide
-        </p>
-        <Button variant="primary" size="sm" onClick={() => SetLevel1(true)}>
-          Create new Category
-        </Button>
-        <p className="info-text">
-          To edit/delete existing category or subcategory right click on item
-        </p>
+		<div className="manage-component" id="manage-permission">
+			<div className="sub-head">
+				<p>Permissions/Preferences</p>
+			</div>
+			<div className="manage-body">
+				<ToastContainer />
+				<div className="status-codes">
+					<ul>
+						{statusDetails.map((status, index) => {
+							return (
+								<li key={index}>
+									<span
+										className="status-roundend"
+										style={{ backgroundColor: status.colorCode }}
+									></span>
+									{status.status}
+								</li>
+							);
+						})}
+					</ul>
+				</div>
+				<p className="reference-guide">
+					<a href="/">Click Here</a> for reference guide
+				</p>
+				<Button variant="primary" size="sm" onClick={() => SetLevel1(true)}>
+					Create new Category
+				</Button>
+				<p className="info-text">
+					To edit/delete existing category or subcategory right click on item
+				</p>
 
-        {isLoading
-          ? "Loading...."
-          : categorydata &&
-            categorydata.map((category, index) => {
-              return (
-                <MainCategory
-                  category={category}
-                  key={index}
-                  brand={props.brand}
-                  notify={notify}
-                />
-              );
-            })}
-      </div>
+				{isLoading
+					? "Loading...."
+					: categorydata &&
+					  categorydata.map((category, index) => {
+							return (
+								<MainCategory
+									category={category}
+									key={index}
+									brand={props.brand}
+									notify={notify}
+								/>
+							);
+					  })}
+			</div>
 
-      <div className="button-options">
-        <Button
-          variant="secondary"
-          size="sm"
-          onClick={() => setSubmitPref(!SubmitPref)}
-        >
-          Submit for Approval
-        </Button>
-        {SubmitPref && (
-          <SubmitApproval SubmitPref={SubmitPref} handleClose={handleClose} />
-        )}
-      </div>
-      {showLevel1 && (
-        <AddNewCategory
-          show={showLevel1}
-          onClose={() => SetLevel1(false)}
-          brand={props.brand}
-          notify={notify}
-        />
-      )}
-    </div>
-  );
+			<div className="button-options">
+				<Button
+					variant="secondary"
+					size="sm"
+					onClick={() => setSubmitPref(!SubmitPref)}
+				>
+					Submit for Approval
+				</Button>
+				{SubmitPref && (
+					<SubmitApproval SubmitPref={SubmitPref} handleClose={handleClose} />
+				)}
+			</div>
+			{showLevel1 && (
+				<AddNewCategoryMultiple
+					show={showLevel1}
+					onClose={() => SetLevel1(false)}
+					brand={props.brand}
+					notify={notify}
+				/>
+			)}
+		</div>
+	);
 }
 function Status(props) {
   let bgColor = "";
