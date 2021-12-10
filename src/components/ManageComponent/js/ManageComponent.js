@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Modal } from "react-bootstrap";
 import "../scss/ManageComponent.scss";
 import statusDetails from "../../CategoriesData/StatusDetails.json";
-import AddNewCategoryMultiple from "../../AddNewCategoryMultiple/js/AddNewCategoryMultiple";
+import AddNewLevels from "../../AddNewLevels/js/AddNewLevels";
 import AddPreferenceLevels from "../../AddPreferenceLevels/js/AddPreferenceLevels";
 import DetailedViewPage from "../../DetailedViewPage/js/DetailedViewPage";
 import { AxiosGet } from "../../AxiosMethods/ApiCalls";
@@ -270,7 +270,7 @@ function ManageComponent(props) {
 				)}
 			</div>
 			{showLevel1 && (
-				<AddNewCategoryMultiple
+				<AddNewLevels
 					show={showLevel1}
 					onClose={() => SetLevel1(false)}
 					brand={props.brand}
