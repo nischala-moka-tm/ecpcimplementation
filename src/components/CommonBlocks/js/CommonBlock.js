@@ -181,6 +181,7 @@ export const getComments = (categoryData) => {
       ];
 };
 export const jsondata = (categoryData) => {
+  console.log(categoryData);
   let resData = {
     level: categoryData.level,
     rank: categoryData.rank ? categoryData.rank : 1,

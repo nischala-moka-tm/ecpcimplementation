@@ -16,6 +16,8 @@ import {
     CategorySec,
     EnableEmailSec,
     CommentSec,
+    FinalSelection,
+    ImageSec,
     DefaultCommunicationModes,
     DateSec,
     onlyAddconditon,
@@ -24,6 +26,10 @@ import {
     DescriptionSec,
 } from "../../CommonBlocks/js/CommonBlock";
 
+const fileChangedHandler = (event) => {
+    const formData = new FormData();
+    console.log(formData);
+};
 
 const Levels = ({ level, handleChange, onFinalChangeCategory, onAddBtnClick, onRemoveBtnClick, index, levelValue }) => {
     return (
@@ -35,16 +41,16 @@ const Levels = ({ level, handleChange, onFinalChangeCategory, onAddBtnClick, onR
                     </Col>
                     <Col md={6}>
                         <p className="plusmenu-danger">
-                            {level === 4 && levelValue.length === 1 && 
+                            {level === 4 && levelValue.length === 1 &&
                                 <span>
-                                    <span 
-                                        style={{marginRight: "5px"}}
+                                    <span
+                                        style={{ marginRight: "5px" }}
                                         onClick={() => onAddBtnClick(level)}
-                                        ><FaPlusCircle /></span>
+                                    ><FaPlusCircle /></span>
                                     <span onClick={() => onRemoveBtnClick(index)}><FaMinusCircle /> </span>
                                 </span>
                             }
-                            {level === 5 && 
+                            {level === 5 &&
                                 <span onClick={() => onRemoveBtnClick(index)}><FaMinusCircle /> </span>
                             }
                         </p>
@@ -55,17 +61,11 @@ const Levels = ({ level, handleChange, onFinalChangeCategory, onAddBtnClick, onR
                 />
                 <DescriptionSec onChange={(e) => handleChange(e, level)} />
                 <DateSec onChange={(e) => handleChange(e, level)} />
-                <Row className="selection">
-                    <Col md={12}>
-                        <FormControl
-                            name="isFinalLevel"
-                            type="checkbox"
-                            id="isFinalLevel"
-                            onChange={(e) => onFinalChangeCategory(e, level)}
-                        />
-                        <label htmlFor="isFinalLevel">Is this final level</label>
-                    </Col>
-                </Row>
+                <FinalSelection 
+                    onChange={(e) => onFinalChangeCategory(e, level)} 
+                    name={`isFinalLevel${level}`}
+                    id={`isFinalLevel${level}`}
+                />
                 <CommentSec
                     readonly={false}
                     onChange={(e) => handleChange(e, level)}
@@ -180,7 +180,7 @@ const ForPermission = ({
                     onChange={(e) => handleChange(e, 3)}
                 />
             </div>
-            {(levelValue.sort(function(a, b){return a-b})).map((level, index) => (
+            {(levelValue.sort(function (a, b) { return a - b })).map((level, index) => (
                 <Levels
                     key={index}
                     index={index}
@@ -195,6 +195,65 @@ const ForPermission = ({
         </div>
     );
 };
+
+const ForPreference = ({
+    handleChange,
+}) => {
+    return (
+        <div className="create-levels">
+            <div className="category-level1">
+                <Row className="category-sec">
+                    <Col md={12}>
+                        <p>Level 1*</p>
+                    </Col>
+                </Row>
+                <CategorySec
+                    onChange={(e) => handleChange(e, 1)}
+                />
+                <DescriptionSec onChange={(e) => handleChange(e, 1)} />
+                <DateSec onChange={(e) => handleChange(e, 1)} />
+                <CommentSec
+                    readonly={false}
+                    onChange={(e) => handleChange(e, 1)}
+                />
+            </div>
+            <div className="category-level2">
+                <Row className="category-sec">
+                    <Col md={12}>
+                        <p>Level 2*</p>
+                    </Col>
+                </Row>
+                <CategorySec
+                    onChange={(e) => handleChange(e, 2)}
+                />
+                <DescriptionSec onChange={(e) => handleChange(e, 2)} />
+                <DateSec onChange={(e) => handleChange(e, 2)} />
+                <CommentSec
+                    readonly={false}
+                    onChange={(e) => handleChange(e, 2)}
+                />
+            </div>
+            <div className="category-level3">
+                <Row className="category-sec">
+                    <Col md={12}>
+                        <p>Level 3*</p>
+                    </Col>
+                </Row>
+                <CategorySec
+                    onChange={(e) => handleChange(e, 3)}
+                />
+                <ImageSec
+                    fileChangedHandler={fileChangedHandler}
+                />
+                <DateSec onChange={(e) => handleChange(e, 3)} />
+                <CommentSec
+                    readonly={false}
+                    onChange={(e) => handleChange(e, 3)}
+                />
+            </div>
+        </div>
+    )
+}
 
 const getResponse = (res, notify, onClose) => {
     let resText = "";
@@ -236,7 +295,10 @@ function AddNewLevels(props) {
         sms: false,
         default: [],
     });
-    const [Permission, setCategory] = useState(true);
+    const [{ Permission, Preference }, setCategory] = useState({
+        Permission: true,
+        Preference: false,
+    });
     const [labelLayout, setLabelLayout] = useState([
         {
             labelClicked: 3,
@@ -346,10 +408,10 @@ function AddNewLevels(props) {
             comments: [],
             func: "add",
         });
-        if(levelFourData.level === 4){
+        if (levelFourData.level === 4) {
             level3 = { ...level3, subCategory: [level4] };
         }
-        if(levelFiveData.level === 5){
+        if (levelFiveData.level === 5) {
             level4 = { ...level4, subCategory: [level5] };
         }
         level2 = { ...level2, subCategory: [level3] };
@@ -420,6 +482,19 @@ function AddNewLevels(props) {
                 </Row>
                 {Permission && (
                     <ForPermission
+                        handleChange={handleChange}
+                        altEmail={altEmail}
+                        onChangeAltMail={onChangeAltMail}
+                        labelLayout={labelLayout}
+                        commChannels={commChannels}
+                        onInputChecked={onInputChecked}
+                        labelAdd={labelAdd}
+                        onCommChecked={onCommChecked}
+                        optionType={props.optionType}
+                    />
+                )}
+                {Preference && (
+                    <ForPreference
                         handleChange={handleChange}
                         altEmail={altEmail}
                         onChangeAltMail={onChangeAltMail}
