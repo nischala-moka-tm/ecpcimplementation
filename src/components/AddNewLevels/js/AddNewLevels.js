@@ -96,7 +96,7 @@ const ForPermission = ({
         setLevelValue(values);
     }
     const onFinalChangeCategory = (e, level) => {
-        console.log(e, level);
+        console.log(checked, e, level);
     };
     return (
         <div className="create-levels">
@@ -408,11 +408,12 @@ function AddNewLevels(props) {
             comments: [],
             func: "add",
         });
-        if (levelFourData.level === 4) {
-            level3 = { ...level3, subCategory: [level4] };
-        }
+        
         if (levelFiveData.level === 5) {
             level4 = { ...level4, subCategory: [level5] };
+        }
+        if (levelFourData.level === 4) {
+            level3 = { ...level3, subCategory: [level4] };
         }
         level2 = { ...level2, subCategory: [level3] };
         level1 = { ...level1, subCategory: [level2] };
