@@ -61,11 +61,16 @@ const Levels = ({ level, handleChange, onFinalChangeCategory, onAddBtnClick, onR
                 />
                 <DescriptionSec onChange={(e) => handleChange(e, level)} />
                 <DateSec onChange={(e) => handleChange(e, level)} />
-                <FinalSelection 
-                    onChange={(e) => onFinalChangeCategory(e, level)} 
-                    name={`isFinalLevel${level}`}
-                    id={`isFinalLevel${level}`}
-                />
+                <Row className="selection">
+                    <Col md={12}>
+                        <FormControl
+                            name={`isFinalLevel${level}`}
+                            type="checkbox"
+                            id={`isFinalLevel${level}`}
+                        />
+                        <label htmlFor={`isFinalLevel${level}`}>Is this final level</label>
+                    </Col>
+                </Row>
                 <CommentSec
                     readonly={false}
                     onChange={(e) => handleChange(e, level)}
@@ -88,16 +93,19 @@ const ForPermission = ({
     const [levelValue, setLevelValue] = useState([]);
 
     const onAddBtnClick = (level) => {
-        setLevelValue([...levelValue, level + 1]);
+        if(checked === false){
+            setLevelValue([...levelValue, level + 1]);
+        }
     };
     const onRemoveBtnClick = (index) => {
         const values = [...levelValue];
         values.splice(index, 1);
         setLevelValue(values);
     }
-    const onFinalChangeCategory = (e, level) => {
-        console.log(checked, e, level);
+    const onFinalChangeCategory = (e) => {
+        setChecked(e.target.checked);
     };
+    console.log(checked);
     return (
         <div className="create-levels">
             <div className="category-level1">
@@ -163,7 +171,6 @@ const ForPermission = ({
                 />
                 <DescriptionSec onChange={(e) => handleChange(e, 3)} />
                 <DateSec onChange={(e) => handleChange(e, 3)} />
-                {/* <FinalSelection onChecked={checked} onChange={(e) => onFinalChangeCategory(e)} /> */}
                 <Row className="selection">
                     <Col md={12}>
                         <FormControl
@@ -180,7 +187,7 @@ const ForPermission = ({
                     onChange={(e) => handleChange(e, 3)}
                 />
             </div>
-            {(levelValue.sort(function (a, b) { return a - b })).map((level, index) => (
+            {!checked && (levelValue.sort(function (a, b) { return a - b })).map((level, index) => (
                 <Levels
                     key={index}
                     index={index}
