@@ -87,7 +87,8 @@ function AddPermissionLevels(props) {
     }
   };
 
-  const onSaveClick = () => {
+  const onSaveClick = (e) => {
+    e.preventDefault();
     getPars("add", "save");
   };
 
@@ -121,16 +122,32 @@ function AddPermissionLevels(props) {
       ...requestData,
       comments,
       func,
-    });
-    apicall(
-      finaldata,
-      func,
-      props.onClose,
-      props.notify,
-      props.brand,
       action,
-      leveltype
-    );
+    });
+
+    console.log(finaldata);
+    if (action === "save" && finaldata.adminMetaData.subCategoryName === "") {
+      props.notify("Please Enter Category Name", "error");
+    } else {
+      apicall(
+        finaldata,
+        func,
+        props.onClose,
+        props.notify,
+        props.brand,
+        action,
+        leveltype
+      );
+    }
+    // apicall(
+    //   finaldata,
+    //   func,
+    //   props.onClose,
+    //   props.notify,
+    //   props.brand,
+    //   action,
+    //   leveltype
+    // );
   };
 
   return (

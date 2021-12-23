@@ -181,14 +181,19 @@ export const getComments = (categoryData) => {
       ];
 };
 export const jsondata = (categoryData) => {
-  console.log(categoryData);
   let resData = {
     level: categoryData.level,
     rank: categoryData.rank ? categoryData.rank : 1,
     createdBy: "user",
     createdDate: cstDateFormat(),
-    startDate: cstDateFormat(categoryData.startDate).toString(),
-    endDate: cstDateFormat(categoryData.endDate).toString(),
+    startDate:
+      categoryData.action === "save" && categoryData.startDate === ""
+        ? ""
+        : cstDateFormat(categoryData.startDate).toString(),
+    endDate:
+      categoryData.action === "save" && categoryData.endDate === ""
+        ? ""
+        : cstDateFormat(categoryData.endDate).toString(),
     comments: getComments(categoryData),
     description: categoryData.description,
   };
@@ -244,6 +249,7 @@ export const jsondata = (categoryData) => {
       brand: categoryData.brand,
     };
   }
+
   return {
     adminMetaData: {
       ...resData,
