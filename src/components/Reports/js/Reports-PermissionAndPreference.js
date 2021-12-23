@@ -214,7 +214,7 @@ export function ReportsPermissionAndPreference(props) {
     return 0;
   });
   const onSelectable = (e) => {
-    let { name, value } = e.target;
+    const { name, value } = e.target;
     if (name === "Category") {
       setCategory(value);
     } else if (name === "Status") {

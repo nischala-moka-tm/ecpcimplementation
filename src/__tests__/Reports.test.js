@@ -8,17 +8,16 @@ Enzyme.configure({ adapter: new Adapter() });
 const brand = "Toyota";
 const type = "dashboard";
 const permissionId = "report-permpref";
-const filterId = "report-filters"; 
+const filterId = "report-filters";
 it("Searching rendering reports-permission and preferences correctly", () => {
-	
-	const wrapper = mount(
-		<ReportsPermissionPreference brand={brand} type={type} />
-	);
-	expect(wrapper.find(permissionId)).toBeDefined();
-	expect(wrapper.find(filterId)).toBeDefined();
+  const wrapper = mount(
+    <ReportsPermissionPreference brand={brand} type={type} />
+  );
+  expect(wrapper.find(permissionId)).toBeDefined();
+  expect(wrapper.find(filterId)).toBeDefined();
 });
 it("Searching rendering reports- audit trail correctly", () => {
-	const wrapper = mount(<ReportsAudit brand={brand} type={type} />);
-	expect(wrapper.find(permissionId)).toBeDefined();
-	expect(wrapper.find(filterId)).toBeDefined();
+  const wrapper = mount(<ReportsAudit brand={brand} type={type} />);
+  expect(wrapper.find(permissionId)).toBeDefined();
+  expect(wrapper.find(filterId)).toBeDefined();
 });

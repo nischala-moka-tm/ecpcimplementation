@@ -9,7 +9,6 @@ import {
 } from "react-bootstrap";
 import "../scss/DetailedViewPage.scss";
 import { AxiosGet } from "../../AxiosMethods/ApiCalls";
-
 import CommunicationChannel from "../../CommunicationChannel/js/CommunicationChannel";
 import { FaPlusCircle, FaMinusCircle } from "react-icons/fa";
 import { CommentSec, DescriptionSec } from "../../CommonBlocks/js/CommonBlock";
@@ -74,7 +73,7 @@ const Level1 = (props) => {
       {(props.expandContent || SubC1) && (
         <div className="sub-wrap">
           <div className="demoBoarder">
-            <DescriptionSec DescriptionText={props.description} />
+            <DescriptionSec description={props.description} />
             <Row>
               <Col md={5}>Enable alternate email address</Col>
               <Col md={5}>
@@ -276,7 +275,7 @@ const LevelCommon = (props) => {
       {(props.expandContent || SubC2) && (
         <div className="sub-wrap">
           <div className="demoBoarder">
-            <DescriptionSec DescriptionText={props.description} />
+            <DescriptionSec description={props.description} />
             <DateBlock startDate={props.startDate} endDate={props.endDate} />
             <CommentSec
               commentText={forEachComments(props.comments)}
@@ -319,6 +318,7 @@ function DetailedViewPage(props) {
     });
     getDataApi.then((result) => {
       setLoading(false);
+      console.log(result.data.data);
       setDetailedCategoryList(result.data.data);
     });
   };

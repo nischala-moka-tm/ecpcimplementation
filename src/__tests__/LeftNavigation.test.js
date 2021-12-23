@@ -10,7 +10,7 @@ Enzyme.configure({ adapter: new Adapter() });
 const onClickTab = (childPath) => {
   console.log("path");
 };
-let path = "/dashboard-admin";
+const path = "/dashboard-admin";
 it("Rendering Left Navigation", () => {
   const wrapper = mount(<LeftNavigation path={path} onClickTab={onClickTab} />);
   expect(wrapper.find(".flex-column")).toBeDefined();

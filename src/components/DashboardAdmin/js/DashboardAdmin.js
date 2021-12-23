@@ -16,7 +16,7 @@ import ManageComponent from "../../ManageComponent/js/ManageComponent";
 import ReportsPermissionAndPreference from "../../Reports/js/Reports-PermissionAndPreference";
 import ReportsAudit from "../../Reports/js/Reports-Audit";
 function DashboardAdmin(props) {
-  let history = useHistory();
+  const history = useHistory();
   const [brand, setBrand] = useState("Toyota");
   const onClickTab = (childPath) => {
     history.push(childPath);

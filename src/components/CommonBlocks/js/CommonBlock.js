@@ -415,13 +415,13 @@ export const DateSec = (props) => {
           type={props.type}
           name="startDate"
           id="startDate"
-          placeholder="Start date & Time*"
+          placeholder="Start Date & Time*"
           onFocus={(e) => (e.target.type = datevalue)}
           required={true}
           onChange={props.onChange}
           value={props.startDate}
           readOnly={props.onlyDelete || props.onlyView}
-          min={props.onlyAddconditon ? Moment().format("YYYY-MM-DDTHH:mm") : ""}
+          min={Moment().format("YYYY-MM-DDTHH:mm")}
         />
       </Col>
       <Col md={5}>
@@ -435,7 +435,7 @@ export const DateSec = (props) => {
           value={props.endDate}
           onChange={props.onChange}
           readOnly={props.onlyView}
-          min={props.onlyDelete ? Moment().format("YYYY-MM-DDTHH:mm") : ""}
+          min={Moment().format("YYYY-MM-DDTHH:mm")}
         />
       </Col>
     </Row>
