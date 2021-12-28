@@ -15,6 +15,7 @@ function CommunicationChannel(props) {
 				checked={props.Checked}
 				value={props.value}
 				onChange={props.onChecked}
+				name="commchannel"
 			>
 				<img
 					className="comm-channels"
